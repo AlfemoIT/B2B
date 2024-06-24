@@ -1,0 +1,109 @@
+﻿@{
+    ViewBag.Title = "Görseller";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="jCrumbs" class="breadCrumb module">
+    <ul>
+        <li>
+            <a href="#">
+                <i class="glyphicon glyphicon-home"></i>
+            </a>
+        </li>
+        <li style="background: none;">
+            <span style="width: 50px;"><a href="#" style="width: 83px;">İşlemler</a></span>
+            <div class="chevronOverlay" style="display: block;"></div>
+        </li>
+        <li>
+            Görseller
+        </li>
+    </ul>
+</div>
+
+<div class="row">
+    <div class="col-sm-12 col-md-12">
+        <h3 class="heading">
+            Görseller
+            <a id="btn-download" class="btn btn-default btn-etiket" style="display:none">
+                <i class="fa fa-download"></i>
+                İndir
+            </a>
+        </h3>
+    </div>
+
+    <div class="col-sm-12 col-md-12">
+        <div class="col-sm-6 col-md-6 col-lg-6">
+            <div id="tree"></div>
+        </div>
+
+        <div class="col-sm-6 col-md-6 col-lg-6">
+            <div id="pdf-container" style="display:none">
+                <img id="img-iframe" class="active float-right">
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+        $(document).ready(function() {
+             $.ajax({
+                    url: '@Url.Action("GetFileNames", "Picture")',
+                    type: 'POST',
+                    contentType: 'application/json',
+                    success: function(response) {
+                       $('#tree')
+                        .on("changed.jstree", function (e, data) {
+                            if (data && data.selected && data.selected.length) {
+                                var selectedNode = data.node;
+                                var nodeText = selectedNode.text;
+                                var extension = nodeText.substring(nodeText.lastIndexOf('.') + 1);
+                                console.log(selectedNode);
+                                if (selectedNode.parent != "#" && selectedNode.icon !=true) {
+                                    var dirNames = "";
+                                    var parentNodes = getAllParentNodes(selectedNode);
+                                    var reversedParents = parentNodes.reverse();
+                                    $.each(reversedParents, function (index, parent) {
+                                        dirNames += parent.text + '/';
+                                    });
+
+                                    $('#btn-download').attr('href', '/Picture/DownloadFile?folderNames=' + dirNames + '&fileName=' + selectedNode.text);
+                                    $('#btn-download').show();
+
+                                    if (extension =="tif") {
+                                        var myLink = document.getElementById('btn-download');
+                                        myLink.click();
+                                    }
+                                    else {
+                                        $('#img-iframe').attr('src', 'https://b2b.alfemo.com.tr/pazarlama/gorseller/' + dirNames + selectedNode.text);
+                                        $('#pdf-container').show();
+                                    }
+                                }
+                            }
+                        })
+                        .jstree({
+                            'core': {
+                                'data': response.data
+                            }
+                        });
+                    },
+                    error: function(xhr, status, error) {
+                        alert('Error: ' + error);
+                    }
+             });
+
+            function getAllParentNodes(node) {
+                var parents = [];
+                var parent = $('#tree').jstree().get_parent(node);
+
+                while (parent && parent !== "#") {
+                    parent = $('#tree').jstree().get_node(parent);
+                    parents.push(parent);
+                    parent = $('#tree').jstree().get_parent(parent);
+                }
+
+                return parents;
+            }
+        });
+    </script>
+}

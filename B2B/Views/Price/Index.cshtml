@@ -1,0 +1,244 @@
+﻿@{
+    ViewBag.Title = "Fiyat Listesi";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model B2B.Models.KNA1
+
+<div id="jCrumbs" class="breadCrumb module">
+    <ul>
+        <li>
+            <a href="#">
+                <i class="glyphicon glyphicon-home"></i>
+            </a>
+        </li>
+        <li style="background: none;">
+            <span style="width: 50px;"><a href="#" style="width: 83px;">İşlemler</a></span>
+            <div class="chevronOverlay" style="display: block;"></div>
+        </li>
+        <li>
+            Fiyat Listesi
+        </li>
+    </ul>
+</div>
+
+<div class="row">
+    <div class="col-sm-12 col-md-12">
+        <h3 class="heading">
+            Fiyatlar
+            <a id="download-xlsx" class="btn btn-default btn-etiket" href="#">
+                <img src="~/img/xls.png" />
+                <span class="font-size-13">Excel'e Aktar</span>
+            </a>
+        </h3>
+    </div>
+</div>
+
+<input type="hidden" id="kna1-sortl" name="kna1-sortl" value="@Model.SORTL" />
+
+@if (Model.SORTL.Equals("BAYI"))
+{
+    <div class="row heading margin-top-5 margin-left-0">
+        <div class="col-sm-12 col-md-12 padding-left-0">
+            <form class="form-horizontal" role="form">
+                <div class="form-group margin-left-0">
+                    <label for="input-campaign" class="col-lg-1 control-label lbl-campaign">Satış Kampanyası :</label>
+                    <div class="col-lg-3">
+                        <input type="text" class="form-control txt-bold font-size-13" id="input-campaign" disabled>
+                    </div>
+                    <label for="input-start-date" class="col-lg-2 control-label">Başlangıç / Bitiş Tarihi :</label>
+                    <div class="col-lg-2">
+                        <input type="text" class="form-control txt-bold font-size-13" id="input-start-date" disabled>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+}
+
+<div id="example-table"></div>
+
+@section Scripts{
+    <script type="text/javascript">
+        $(function () {
+            var turkishLang = {
+                "ajax": {
+                    "loading": "Yükleniyor",
+                    "error": "Hata",
+                },
+                "data": {
+                    "loading": "Yükleniyor",
+                    "error": "Hata",
+                },
+                "pagination": {
+                    "page_size": "Sayfa Boyutu",
+                    "page_title": "Sayfa",
+                    "first": "İlk",
+                    "first_title": "İlk Sayfa",
+                    "last": "Son",
+                    "last_title": "Son Sayfa",
+                    "prev": "Önceki",
+                    "prev_title": "Önceki Sayfa",
+                    "next": "Sonraki",
+                    "next_title": "Sonraki Sayfa",
+                    "all": "Tümü",
+                    "counter": {
+                        "showing": "",
+                        "of": "kayıttan",
+                        "rows": "kayıt gösteriliyor",
+                        "pages": "kayıtlar",
+                    }
+                }
+            };
+
+            var table = new Tabulator("#example-table", {
+                ajaxURL: '@Url.Action("GetData")',
+                ajaxConfig: {
+                    method: "POST",
+                    headers: {
+                        "Content-type": 'application/json; charset=utf-8',
+                    },
+                },
+                ajaxResponse: function (url, params, response) {
+                    $("#input-campaign").val(response.campaign.KNUMA + "  /  " + response.campaign.BOTEXT);
+                    $("#input-start-date").val(response.campaign.CMPT_DATAB + "  /  " + response.campaign.CMPT_DATBI);
+                    return response.tableData;
+                },
+                layout: "fitColumns",
+                renderHorizontal: "virtual",
+                pagination: "local",
+                paginationSize: 18,
+                paginationCounter: "rows",
+                locale: true,
+                langs: {
+                    "tr": turkishLang
+                },
+                dataTree: true,
+                dataTreeStartExpanded: false,
+                movableColumns: true,
+                columnDefaults: { tooltip: true},
+                columns: [
+                    { title: "MALZEME KISA METNİ", field: "MAKTX",  headerFilter: "input", width: 350},
+                    { title: "MARKA",              field: "BEZEI",  headerFilter: "input", width: 180},
+                    { title: "KOLEKSİYON",         field: "BEZEI2", headerFilter: "input", width: 130},
+                    { title: "ANA GRUP",           field: "BEZEI3", headerFilter: "input", width: 150},
+                    { title: "ÜRÜN TİPİ",          field: "BEZEI4", headerFilter: "input", width: 150},
+                    { title: "ÜRÜN BİÇİMİ",        field: "BEZEI5", headerFilter: "input", width: 150},
+
+                    { title: "", field: "CMPT_FIYAT1", headerFilter: "input", width: 210, hozAlign: "right", cssClass: "title-align-right" },
+                    { title: "", field: "CMPT_FIYAT2", headerFilter: "input", width: 210, hozAlign: "right", cssClass: "title-align-right"},
+                    { title: "", field: "CMPT_FIYAT3", headerFilter: "input", width: 210, hozAlign: "right", cssClass: "title-align-right"},
+                    { title: "", field: "CMPT_FIYAT4", headerFilter: "input", width: 210, hozAlign: "right", cssClass: "title-align-right" },
+                    { title: "", field: "CMPT_FIYAT5", headerFilter: "input", width: 120, hozAlign: "right", cssClass: "title-align-right"},
+
+                    { title: "", field: "CMPT_Z001", headerFilter: "input", width: 180, hozAlign: "right", cssClass: "title-align-right"},
+                    { title: "", field: "CMPT_Z015", headerFilter: "input", width: 180, hozAlign: "right", cssClass: "title-align-right"},
+                    { title: "", field: "CMPT_Z022", headerFilter: "input", width: 180, hozAlign: "right", cssClass: "title-align-right"},
+
+                    { title: "PB", field: "PARA_BIRIMI", headerFilter: "input", width: 60, hozAlign: "center", cssClass: "title-align-right" },
+
+                    { title: "MALZEME",field: "MATNR", headerFilter: "input", width: 180 },
+                    { title: "MALZEME UZUN METNİ",field: "ZCL_MAKTX", headerFilter: "input", width: 210 },
+                ]
+            });
+
+            setTimeout(function () {
+                $.ajax({
+                    type: 'POST',
+                    url: '@Url.Action("GetColumnNames")',
+                    contentType: 'application/json',
+                    success: function (response) {
+                        var columns = response.tableColumns;
+
+                        var fiyat1 = $(columns).filter(function () {
+                            return this.SUTUN === 'FIYAT1';
+                        }).get(0);
+                        table.updateColumnDefinition("CMPT_FIYAT1", { title: fiyat1.GORUNUR_AD});
+                        if (fiyat1.GORUNUM=='H') {
+                            table.deleteColumn("CMPT_FIYAT1");
+                        }
+
+                        var fiyat2 = $(columns).filter(function () {
+                            return this.SUTUN === 'FIYAT2';
+                        }).get(0);
+                        table.updateColumnDefinition("CMPT_FIYAT2", { title: fiyat2.GORUNUR_AD });
+                        if (fiyat2.GORUNUM == 'H') {
+                            table.deleteColumn("CMPT_FIYAT2");
+                        }
+
+                        var fiyat3 = $(columns).filter(function () {
+                            return this.SUTUN === 'FIYAT3';
+                        }).get(0);
+                        table.updateColumnDefinition("CMPT_FIYAT3", { title: fiyat3.GORUNUR_AD });
+                        if (fiyat3.GORUNUM == 'H') {
+                            table.deleteColumn("CMPT_FIYAT3");
+                        }
+
+                        var fiyat4 = $(columns).filter(function () {
+                            return this.SUTUN === 'FIYAT4';
+                        }).get(0);
+                        table.updateColumnDefinition("CMPT_FIYAT4", { title: fiyat4.GORUNUR_AD });
+                        if (fiyat4.GORUNUM == 'H') {
+                            table.deleteColumn("CMPT_FIYAT4");
+                        }
+
+                        var fiyat5 = $(columns).filter(function () {
+                            return this.SUTUN === 'FIYAT5';
+                        }).get(0);
+                        table.updateColumnDefinition("CMPT_FIYAT5", { title: fiyat5.GORUNUR_AD });
+                        if (fiyat5.GORUNUM == 'H') {
+                            table.deleteColumn("CMPT_FIYAT5");
+                        }
+
+                        var z001 = $(columns).filter(function () {
+                            return this.SUTUN === 'Z001';
+                        }).get(0);
+                        table.updateColumnDefinition("CMPT_Z001", { title: z001.GORUNUR_AD });
+                        if (z001.GORUNUM == 'H') {
+                            table.deleteColumn("CMPT_Z001");
+                        }
+
+                        var z015 = $(columns).filter(function () {
+                            return this.SUTUN === 'Z015';
+                        }).get(0);
+                        table.updateColumnDefinition("CMPT_Z015", { title: z015.GORUNUR_AD });
+                        if (z015.GORUNUM == 'H') {
+                            table.deleteColumn("CMPT_Z015");
+                        }
+
+                        var z022 = $(columns).filter(function () {
+                            return this.SUTUN === 'Z022';
+                        }).get(0);
+                        table.updateColumnDefinition("CMPT_Z022", { title: z022.GORUNUR_AD });
+                        if (z022.GORUNUM == 'H') {
+                            table.deleteColumn("CMPT_Z022");
+                        }
+
+                        if ($('#kna1-sortl').val() == "PERAKENDE") {
+                            table.deleteColumn("CMPT_Z001");
+                            table.deleteColumn("CMPT_Z015");
+                            table.deleteColumn("CMPT_Z022");
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        console.error('Request failed with status:', status);
+                    }
+                });
+            }, 200);
+
+            document.getElementById("download-xlsx").addEventListener("click", function () {
+                var now = new Date();
+                var day = now.getDate();
+                var month = now.getMonth() + 1;
+                var year = now.getFullYear();
+
+                day = day < 10 ? '0' + day : day;
+                month = month < 10 ? '0' + month : month;
+
+                var currentDate = day + month + year;
+
+                table.download("xlsx", "alfemo_fiyat_listesi_" + currentDate+".xlsx", { sheetName: "fiyat_listesi" });
+            });
+        });
+    </script>
+}

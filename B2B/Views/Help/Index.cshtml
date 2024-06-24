@@ -1,0 +1,95 @@
+﻿@{
+    ViewBag.Title = "Yardım";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .jstree-icon.pdf-icon {
+        background-image: url('/img/pdf-icon.png');
+        background-size: 21px 21px;
+    }
+</style>
+
+<div id="jCrumbs" class="breadCrumb module">
+    <ul>
+        <li>
+            <a href="#">
+                <i class="glyphicon glyphicon-home"></i>
+            </a>
+        </li>
+        <li>
+            Yardım
+        </li>
+    </ul>
+</div>
+
+<div class="row">
+    <div class="col-sm-12 col-md-12">
+        <h3 class="heading">
+        </h3>
+    </div>
+
+    <div class="col-sm-12 col-md-12">
+        <div class="col-sm-4 col-md-4 col-lg-4">
+            <div id="tree"></div>
+        </div>
+
+        <div class="col-sm-8 col-md-8 col-lg-8">
+            <div id="pdf-container" style="display:none">
+                <iframe id="pdf-iframe" class="active float-right"></iframe>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script type="text/javascript">
+        $.ajax({
+            type: 'POST',
+            url: '@Url.Action("GetFileNames")',
+            contentType: 'application/json',
+            success: function (response) {
+                $('#tree')
+                .on("changed.jstree", function (e, data) {
+                    if (data && data.selected && data.selected.length) {
+                        var selectedNode = data.node;
+                        if (selectedNode.parent != "#" && selectedNode.icon != true) {
+                            var dirNames = "";
+                            var parentNodes = getAllParentNodes(selectedNode);
+                            var reversedParents = parentNodes.reverse();
+                            $.each(reversedParents, function (index, parent) {
+                                dirNames += parent.text + '/';
+                            });
+
+                            $('#pdf-iframe').attr('src', 'https://b2b.alfemo.com.tr/B2B/' + dirNames + selectedNode.text);
+                            $('#pdf-container').show();
+                        }
+                    }
+                })
+                .jstree({
+                    'core': {
+                        'data': response.data
+                    }
+                });
+            },
+            error: function (xhr, status, error) {
+              console.error('Request failed with status:', status);
+            }
+        });
+
+        function getAllParentNodes(node) {
+            var parents = [];
+            var parent = $('#tree').jstree().get_parent(node);
+
+            while (parent && parent !== "#") {
+                parent = $('#tree').jstree().get_node(parent);
+                parents.push(parent);
+                parent = $('#tree').jstree().get_parent(parent);
+            }
+
+            return parents;
+        }
+    </script>
+}
+
+

@@ -1,0 +1,848 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{AAB3B1EE-8EAD-4FAD-A804-579437A7476F}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>B2B</RootNamespace>
+    <AssemblyName>B2B</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort>44330</IISExpressSSLPort>
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="BouncyCastle.Crypto, Version=1.8.9.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
+      <HintPath>..\packages\BouncyCastle.1.8.9\lib\BouncyCastle.Crypto.dll</HintPath>
+    </Reference>
+    <Reference Include="itextsharp, Version=5.5.13.3, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\iTextSharp.5.5.13.3\lib\itextsharp.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.8.0.0\lib\net462\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Extensions.Configuration, Version=8.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Configuration.8.0.0\lib\net462\Microsoft.Extensions.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Configuration.Abstractions, Version=8.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Configuration.Abstractions.8.0.0\lib\net462\Microsoft.Extensions.Configuration.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Configuration.Binder, Version=8.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Configuration.Binder.8.0.0\lib\net462\Microsoft.Extensions.Configuration.Binder.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Configuration.CommandLine, Version=8.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Configuration.CommandLine.8.0.0\lib\net462\Microsoft.Extensions.Configuration.CommandLine.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Configuration.EnvironmentVariables, Version=8.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Configuration.EnvironmentVariables.8.0.0\lib\net462\Microsoft.Extensions.Configuration.EnvironmentVariables.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Configuration.FileExtensions, Version=8.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Configuration.FileExtensions.8.0.0\lib\net462\Microsoft.Extensions.Configuration.FileExtensions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Configuration.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Configuration.Json.8.0.0\lib\net462\Microsoft.Extensions.Configuration.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Configuration.UserSecrets, Version=8.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Configuration.UserSecrets.8.0.0\lib\net462\Microsoft.Extensions.Configuration.UserSecrets.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.DependencyInjection, Version=8.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.DependencyInjection.8.0.0\lib\net462\Microsoft.Extensions.DependencyInjection.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions, Version=8.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.DependencyInjection.Abstractions.8.0.0\lib\net462\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Diagnostics, Version=8.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Diagnostics.8.0.0\lib\net462\Microsoft.Extensions.Diagnostics.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Diagnostics.Abstractions, Version=8.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Diagnostics.Abstractions.8.0.0\lib\net462\Microsoft.Extensions.Diagnostics.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.FileProviders.Abstractions, Version=8.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.FileProviders.Abstractions.8.0.0\lib\net462\Microsoft.Extensions.FileProviders.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.FileProviders.Physical, Version=8.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.FileProviders.Physical.8.0.0\lib\net462\Microsoft.Extensions.FileProviders.Physical.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.FileSystemGlobbing, Version=8.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.FileSystemGlobbing.8.0.0\lib\net462\Microsoft.Extensions.FileSystemGlobbing.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Hosting, Version=8.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Hosting.8.0.0\lib\net462\Microsoft.Extensions.Hosting.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Hosting.Abstractions, Version=8.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Hosting.Abstractions.8.0.0\lib\net462\Microsoft.Extensions.Hosting.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Logging, Version=8.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Logging.8.0.0\lib\net462\Microsoft.Extensions.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Logging.Abstractions, Version=8.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Logging.Abstractions.8.0.0\lib\net462\Microsoft.Extensions.Logging.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Logging.Configuration, Version=8.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Logging.Configuration.8.0.0\lib\net462\Microsoft.Extensions.Logging.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Logging.Console, Version=8.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Logging.Console.8.0.0\lib\net462\Microsoft.Extensions.Logging.Console.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Logging.Debug, Version=8.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Logging.Debug.8.0.0\lib\net462\Microsoft.Extensions.Logging.Debug.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Logging.EventLog, Version=8.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Logging.EventLog.8.0.0\lib\net462\Microsoft.Extensions.Logging.EventLog.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Logging.EventSource, Version=8.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Logging.EventSource.8.0.0\lib\net462\Microsoft.Extensions.Logging.EventSource.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Options, Version=8.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Options.8.0.0\lib\net462\Microsoft.Extensions.Options.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Options.ConfigurationExtensions, Version=8.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Options.ConfigurationExtensions.8.0.0\lib\net462\Microsoft.Extensions.Options.ConfigurationExtensions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Primitives, Version=8.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Primitives.8.0.0\lib\net462\Microsoft.Extensions.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Diagnostics.DiagnosticSource, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Diagnostics.DiagnosticSource.8.0.0\lib\net462\System.Diagnostics.DiagnosticSource.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Memory, Version=4.0.1.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.5\lib\net461\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime" />
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.6.0.0\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Text.Encodings.Web, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Encodings.Web.8.0.0\lib\net462\System.Text.Encodings.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Text.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Json.8.0.0\lib\net462\System.Text.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.7\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.7\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <Private>True</Private>
+      <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Connected Services\ServiceAuth\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Connected Services\ServiceColumn\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Connected Services\ServiceMalzeme\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Connected Services\ServicePrice\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Connected Services\ServiceQdms\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Connected Services\ServiceSalesOrder\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Connected Services\ServiceTicket\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\AuthController.cs" />
+    <Compile Include="Controllers\DocumentController.cs" />
+    <Compile Include="Controllers\HelpController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LayoutController.cs" />
+    <Compile Include="Controllers\PictureController.cs" />
+    <Compile Include="Controllers\PriceController.cs" />
+    <Compile Include="Controllers\PriceTicketController.cs" />
+    <Compile Include="Controllers\ProductCardController.cs" />
+    <Compile Include="Controllers\SalesOrderController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\FIY_TICKET.cs" />
+    <Compile Include="Models\KNA1.cs" />
+    <Compile Include="Models\KONA.cs" />
+    <Compile Include="Models\MARA.cs" />
+    <Compile Include="Models\PRODUCT_PRICE.cs" />
+    <Compile Include="Models\Tree\Child.cs" />
+    <Compile Include="Models\Tree\Root.cs" />
+    <Compile Include="Models\Tree\State.cs" />
+    <Compile Include="Models\VBAP.cs" />
+    <Compile Include="Models\ZALF_SUTUNAD_T.cs" />
+    <Compile Include="Models\ZALF_S_FIYAT_LIST.cs" />
+    <Compile Include="Models\ZSD_S_FIY_TICKET.cs" />
+    <Compile Include="Models\Z_FILE.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Resource.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resource.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="alfemo-icon.jpeg" />
+    <Content Include="alfemo.png" />
+    <Content Include="Connected Services\ServiceAuth\B2B.ServiceAuth.AuthUserResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <None Include="Connected Services\ServiceAuth\configuration91.svcinfo" />
+    <None Include="Connected Services\ServiceAuth\configuration.svcinfo" />
+    <None Include="Connected Services\ServiceAuth\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Connected Services\ServiceAuth\WebServiceAuth.disco" />
+    <Content Include="Connected Services\ServiceColumn\B2B.ServiceColumn.GetColumnNameResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <None Include="Connected Services\ServiceAuth\WebServiceAuth.wsdl" />
+    <None Include="Connected Services\ServiceColumn\configuration91.svcinfo" />
+    <None Include="Connected Services\ServiceColumn\configuration.svcinfo" />
+    <None Include="Connected Services\ServiceColumn\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Connected Services\ServiceColumn\WebServiceColumn1.disco" />
+    <Content Include="Connected Services\ServiceMalzeme\B2B.ServiceMalzeme.GelMaterialResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <None Include="Connected Services\ServiceColumn\WebServiceColumn1.wsdl" />
+    <None Include="Connected Services\ServiceMalzeme\configuration91.svcinfo" />
+    <None Include="Connected Services\ServiceMalzeme\configuration.svcinfo" />
+    <None Include="Connected Services\ServiceMalzeme\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Connected Services\ServiceMalzeme\WebServiceMalzeme1.disco" />
+    <Content Include="Connected Services\ServicePrice\B2B.ServicePrice.GetProductPriceResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <None Include="Connected Services\ServiceMalzeme\WebServiceMalzeme1.wsdl" />
+    <None Include="Connected Services\ServicePrice\WebServicePrice1.wsdl" />
+    <None Include="Connected Services\ServiceQdms\AlfemoWebSiteService1.disco" />
+    <None Include="Connected Services\ServicePrice\configuration91.svcinfo" />
+    <None Include="Connected Services\ServicePrice\configuration.svcinfo" />
+    <None Include="Connected Services\ServicePrice\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Connected Services\ServicePrice\WebServicePrice1.disco" />
+    <Content Include="Connected Services\ServiceQdms\B2B.ServiceQdms.AlfemoAcikSiparisJSONResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\ServiceQdms\B2B.ServiceQdms.AlfemoDepoStokJSONResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\ServiceQdms\B2B.ServiceQdms.AlfemoFiyatListesiJSONResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\ServiceQdms\B2B.ServiceQdms.AlfemoIletisimResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\ServiceQdms\B2B.ServiceQdms.AlfemoSiparisSorgulamaJSONResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\ServiceQdms\B2B.ServiceQdms.AlfemoUrunJSONResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\ServiceQdms\B2B.ServiceQdms.AlfemoUrunMontajPdfResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\ServiceQdms\B2B.ServiceQdms.AlfemoUrunPdfResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <None Include="Connected Services\ServiceQdms\AlfemoWebSiteService1.wsdl" />
+    <None Include="Connected Services\ServiceQdms\configuration91.svcinfo" />
+    <None Include="Connected Services\ServiceQdms\configuration.svcinfo" />
+    <None Include="Connected Services\ServiceQdms\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <Content Include="Connected Services\ServiceSalesOrder\B2B.ServiceSalesOrder.GetSalesOrderResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <None Include="Connected Services\ServiceSalesOrder\configuration91.svcinfo" />
+    <None Include="Connected Services\ServiceSalesOrder\configuration.svcinfo" />
+    <None Include="Connected Services\ServiceSalesOrder\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Connected Services\ServiceSalesOrder\WebServiceSalesOrder1.disco" />
+    <Content Include="Connected Services\ServiceTicket\B2B.ServiceTicket.GetPriceTicketResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <None Include="Connected Services\ServiceSalesOrder\WebServiceSalesOrder1.wsdl" />
+    <None Include="Connected Services\ServiceTicket\configuration91.svcinfo" />
+    <None Include="Connected Services\ServiceTicket\configuration.svcinfo" />
+    <None Include="Connected Services\ServiceTicket\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Connected Services\ServiceTicket\WebServiceTicket1.disco" />
+    <Content Include="Content\blitzer-jquery-ui.css" />
+    <Content Include="Content\blue.css" />
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\bootstrap2.min.css" />
+    <Content Include="Content\custom.css" />
+    <Content Include="Content\colorbox\colorbox.css" />
+    <Content Include="Content\colorbox\images\controls.png" />
+    <Content Include="Content\colorbox\images\loading.gif" />
+    <Content Include="Content\dataTables.css" />
+    <Content Include="Content\datatables\extras\TableTools\media\css\TableTools.css" />
+    <Content Include="Content\datatables\extras\TableTools\media\images\background.png" />
+    <Content Include="Content\datatables\extras\TableTools\media\images\collection.png" />
+    <Content Include="Content\datatables\extras\TableTools\media\images\collection_hover.png" />
+    <Content Include="Content\datatables\extras\TableTools\media\images\copy.png" />
+    <Content Include="Content\datatables\extras\TableTools\media\images\copy_hover.png" />
+    <Content Include="Content\datatables\extras\TableTools\media\images\csv.png" />
+    <Content Include="Content\datatables\extras\TableTools\media\images\csv_hover.png" />
+    <Content Include="Content\datatables\extras\TableTools\media\images\pdf.png" />
+    <Content Include="Content\datatables\extras\TableTools\media\images\pdf_hover.png" />
+    <Content Include="Content\datatables\extras\TableTools\media\images\print.png" />
+    <Content Include="Content\datatables\extras\TableTools\media\images\print_hover.png" />
+    <Content Include="Content\datatables\extras\TableTools\media\images\xls.png" />
+    <Content Include="Content\datatables\extras\TableTools\media\images\xls_hover.png" />
+    <Content Include="Content\datatables\images\sort_asc.png" />
+    <Content Include="Content\datatables\images\sort_asc_disabled.png" />
+    <Content Include="Content\datatables\images\sort_both.png" />
+    <Content Include="Content\datatables\images\sort_desc.png" />
+    <Content Include="Content\datatables\images\sort_desc_disabled.png" />
+    <Content Include="Content\dynatree\dist\jquery.dynatree.min.js" />
+    <Content Include="Content\dynatree\src\skin\icons.gif" />
+    <Content Include="Content\dynatree\src\skin\icons_96x256.gif" />
+    <Content Include="Content\dynatree\src\skin\loading.gif" />
+    <Content Include="Content\dynatree\src\skin\ltError.gif" />
+    <Content Include="Content\dynatree\src\skin\ui.dynatree.css" />
+    <Content Include="Content\dynatree\src\skin\vline.gif" />
+    <Content Include="Content\font-awesome.min.css" />
+    <Content Include="Content\google-code-prettify\prettify.css" />
+    <Content Include="Content\gtip2\jquery.qtip.min.css" />
+    <Content Include="Content\Images\ChevronOverlay.png" />
+    <Content Include="Content\jBreadcrumbs\BreadCrumb.css" />
+    <Content Include="Content\jBreadcrumbs\Images\ChevronOverlay.png" />
+    <Content Include="Content\jquery-ui\Aristo\Aristo.css" />
+    <Content Include="Content\jquery-ui\Aristo\images\bg_fallback.png" />
+    <Content Include="Content\jquery-ui\Aristo\images\icon_sprite.png" />
+    <Content Include="Content\jquery-ui\Aristo\images\progress_bar.gif" />
+    <Content Include="Content\jquery-ui\Aristo\images\slider_handles.png" />
+    <Content Include="Content\jquery-ui\Aristo\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\jquery-ui\Aristo\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\jquery-ui\external\globalize.js" />
+    <Content Include="Content\jquery-ui\jquery-ui-1.10.0.custom.min.js" />
+    <Content Include="Content\sticky\sticky.css" />
+    <Content Include="Content\style.css" />
+    <Content Include="Content\tabular\tabulator.css" />
+    <Content Include="Content\tabular\tabulator.min.css" />
+    <Content Include="Content\tabular\tabulator_bootstrap3.css" />
+    <Content Include="Content\tabular\tabulator_bootstrap3.min.css" />
+    <Content Include="Content\tabular\tabulator_bootstrap4.css" />
+    <Content Include="Content\tabular\tabulator_bootstrap4.min.css" />
+    <Content Include="Content\tabular\tabulator_bootstrap5.css" />
+    <Content Include="Content\tabular\tabulator_bootstrap5.min.css" />
+    <Content Include="Content\tabular\tabulator_bulma.css" />
+    <Content Include="Content\tabular\tabulator_bulma.min.css" />
+    <Content Include="Content\tabular\tabulator_materialize.css" />
+    <Content Include="Content\tabular\tabulator_materialize.min.css" />
+    <Content Include="Content\tabular\tabulator_midnight.css" />
+    <Content Include="Content\tabular\tabulator_midnight.min.css" />
+    <Content Include="Content\tabular\tabulator_modern.css" />
+    <Content Include="Content\tabular\tabulator_modern.min.css" />
+    <Content Include="Content\tabular\tabulator_semanticui.css" />
+    <Content Include="Content\tabular\tabulator_semanticui.min.css" />
+    <Content Include="Content\tabular\tabulator_simple.css" />
+    <Content Include="Content\tabular\tabulator_simple.min.css" />
+    <Content Include="Content\tabular\tabulator_site.css" />
+    <Content Include="Content\tabular\tabulator_site.min.css" />
+    <Content Include="Content\tabular\tabulator_site_dark.css" />
+    <Content Include="Content\tabular\tabulator_site_dark.min.css" />
+    <Content Include="favicon.ico" />
+    <Content Include="favicon.png" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Global.asax" />
+    <Content Include="Content\Site.css" />
+    <Content Include="img\pdf-icon.png" />
+    <Content Include="img\xls.png" />
+    <Content Include="img\acc_icons.png" />
+    <Content Include="img\adt-icons.png" />
+    <Content Include="img\alfemo\penta-koltuk-tkm.jpg" />
+    <Content Include="img\alfemo\tiamo-koltuk-tkm.jpg" />
+    <Content Include="img\bg_a.png" />
+    <Content Include="img\bg_b.png" />
+    <Content Include="img\bg_c.png" />
+    <Content Include="img\bg_d.png" />
+    <Content Include="img\bg_e.png" />
+    <Content Include="img\bullet_blue.png" />
+    <Content Include="img\bullet_green.png" />
+    <Content Include="img\bullet_orange.png" />
+    <Content Include="img\bullet_red.png" />
+    <Content Include="img\error_big.png" />
+    <Content Include="img\external_link.png" />
+    <Content Include="img\flags\flags.css" />
+    <Content Include="img\flags\flags.png" />
+    <Content Include="img\font-awesome\css\font-awesome.min.css" />
+    <Content Include="img\font-awesome\font\fontawesome-webfont.svg" />
+    <Content Include="img\gCons\add-item.png" />
+    <Content Include="img\gCons\addressbook.png" />
+    <Content Include="img\gCons\agent.png" />
+    <Content Include="img\gCons\apple.png" />
+    <Content Include="img\gCons\arrow-round.png" />
+    <Content Include="img\gCons\badge.png" />
+    <Content Include="img\gCons\bar-chart-02.png" />
+    <Content Include="img\gCons\bar-chart.png" />
+    <Content Include="img\gCons\battery-full.png" />
+    <Content Include="img\gCons\bird.png" />
+    <Content Include="img\gCons\boat.png" />
+    <Content Include="img\gCons\bookmark.png" />
+    <Content Include="img\gCons\briefcase.png" />
+    <Content Include="img\gCons\calculator.png" />
+    <Content Include="img\gCons\calendar.png" />
+    <Content Include="img\gCons\cassette.png" />
+    <Content Include="img\gCons\chain.png" />
+    <Content Include="img\gCons\chat-.png" />
+    <Content Include="img\gCons\chat-02.png" />
+    <Content Include="img\gCons\cloud-filled.png" />
+    <Content Include="img\gCons\cloud-outline.png" />
+    <Content Include="img\gCons\computer.png" />
+    <Content Include="img\gCons\configuration.png" />
+    <Content Include="img\gCons\configuration02.png" />
+    <Content Include="img\gCons\connected.png" />
+    <Content Include="img\gCons\connections.png" />
+    <Content Include="img\gCons\container.png" />
+    <Content Include="img\gCons\copy-item.png" />
+    <Content Include="img\gCons\database.png" />
+    <Content Include="img\gCons\delete-item.png" />
+    <Content Include="img\gCons\disc.png" />
+    <Content Include="img\gCons\dollar.png" />
+    <Content Include="img\gCons\download.png" />
+    <Content Include="img\gCons\edit.png" />
+    <Content Include="img\gCons\email.png" />
+    <Content Include="img\gCons\fan.png" />
+    <Content Include="img\gCons\fancy-globe.png" />
+    <Content Include="img\gCons\female-user.png" />
+    <Content Include="img\gCons\fire.png" />
+    <Content Include="img\gCons\first-aid.png" />
+    <Content Include="img\gCons\flag.png" />
+    <Content Include="img\gCons\flower.png" />
+    <Content Include="img\gCons\full-screen.png" />
+    <Content Include="img\gCons\glasses.png" />
+    <Content Include="img\gCons\globe.png" />
+    <Content Include="img\gCons\happy-face.png" />
+    <Content Include="img\gCons\headphone.png" />
+    <Content Include="img\gCons\heart.png" />
+    <Content Include="img\gCons\home.png" />
+    <Content Include="img\gCons\ID.png" />
+    <Content Include="img\gCons\ipod.png" />
+    <Content Include="img\gCons\lab.png" />
+    <Content Include="img\gCons\lady.png" />
+    <Content Include="img\gCons\lamp.png" />
+    <Content Include="img\gCons\leaves.png" />
+    <Content Include="img\gCons\light.png" />
+    <Content Include="img\gCons\line-globe.png" />
+    <Content Include="img\gCons\lock.png" />
+    <Content Include="img\gCons\lookup.png" />
+    <Content Include="img\gCons\male-user.png" />
+    <Content Include="img\gCons\microphone.png" />
+    <Content Include="img\gCons\mobile.png" />
+    <Content Include="img\gCons\mobile2.png" />
+    <Content Include="img\gCons\mouse.png" />
+    <Content Include="img\gCons\multi-agents.png" />
+    <Content Include="img\gCons\music-node.png" />
+    <Content Include="img\gCons\network-pc.png" />
+    <Content Include="img\gCons\network.png" />
+    <Content Include="img\gCons\next-item.png" />
+    <Content Include="img\gCons\phone.png" />
+    <Content Include="img\gCons\pie-chart.png" />
+    <Content Include="img\gCons\pin.png" />
+    <Content Include="img\gCons\plane.png" />
+    <Content Include="img\gCons\print.png" />
+    <Content Include="img\gCons\processing-02.png" />
+    <Content Include="img\gCons\processing.png" />
+    <Content Include="img\gCons\push-pin.png" />
+    <Content Include="img\gCons\recycle-empty.png" />
+    <Content Include="img\gCons\recycle-full.png" />
+    <Content Include="img\gCons\reload.png" />
+    <Content Include="img\gCons\rss.png" />
+    <Content Include="img\gCons\satellite.png" />
+    <Content Include="img\gCons\save.png" />
+    <Content Include="img\gCons\scale.png" />
+    <Content Include="img\gCons\Scissors.png" />
+    <Content Include="img\gCons\screen.png" />
+    <Content Include="img\gCons\search.png" />
+    <Content Include="img\gCons\server.png" />
+    <Content Include="img\gCons\shield.png" />
+    <Content Include="img\gCons\shut-down.png" />
+    <Content Include="img\gCons\star.png" />
+    <Content Include="img\gCons\tag.png" />
+    <Content Include="img\gCons\tap.png" />
+    <Content Include="img\gCons\tree.png" />
+    <Content Include="img\gCons\umbrella.png" />
+    <Content Include="img\gCons\unlock.png" />
+    <Content Include="img\gCons\usb.png" />
+    <Content Include="img\gCons\van.png" />
+    <Content Include="img\gCons\wifi.png" />
+    <Content Include="img\gCons\world.png" />
+    <Content Include="img\sidebar_switch.png" />
+    <Content Include="img\spinner_arrows.gif" />
+    <Content Include="img\splashy\splashy.css" />
+    <Content Include="img\splashy\splashy.png" />
+    <Content Include="img\ui.totop.png" />
+    <Content Include="img\user_avatar.png" />
+    <Content Include="img\vid_local.png" />
+    <Content Include="img\vid_vimeo.png" />
+    <Content Include="img\vid_yt.png" />
+    <Content Include="lib\datatables\extras\Scroller\media\js\dataTables.scroller.min.js" />
+    <Content Include="lib\datatables\extras\TableTools\media\css\TableTools.css" />
+    <Content Include="lib\datatables\extras\TableTools\media\images\background.png" />
+    <Content Include="lib\datatables\extras\TableTools\media\images\collection.png" />
+    <Content Include="lib\datatables\extras\TableTools\media\images\collection_hover.png" />
+    <Content Include="lib\datatables\extras\TableTools\media\images\copy.png" />
+    <Content Include="lib\datatables\extras\TableTools\media\images\copy_hover.png" />
+    <Content Include="lib\datatables\extras\TableTools\media\images\csv.png" />
+    <Content Include="lib\datatables\extras\TableTools\media\images\csv_hover.png" />
+    <Content Include="lib\datatables\extras\TableTools\media\images\pdf.png" />
+    <Content Include="lib\datatables\extras\TableTools\media\images\pdf_hover.png" />
+    <Content Include="lib\datatables\extras\TableTools\media\images\print.png" />
+    <Content Include="lib\datatables\extras\TableTools\media\images\print_hover.png" />
+    <Content Include="lib\datatables\extras\TableTools\media\images\xls.png" />
+    <Content Include="lib\datatables\extras\TableTools\media\images\xls_hover.png" />
+    <Content Include="lib\datatables\extras\TableTools\media\js\media\swf\copy_csv_xls_pdf.swf" />
+    <Content Include="lib\datatables\extras\TableTools\media\js\TableTools.min.js" />
+    <Content Include="lib\datatables\extras\TableTools\media\js\ZeroClipboard.js" />
+    <Content Include="lib\datatables\images\sort_asc.png" />
+    <Content Include="lib\datatables\images\sort_asc_disabled.png" />
+    <Content Include="lib\datatables\images\sort_both.png" />
+    <Content Include="lib\datatables\images\sort_desc.png" />
+    <Content Include="lib\datatables\images\sort_desc_disabled.png" />
+    <Content Include="lib\datatables\jquery.dataTables.bootstrap.min.js" />
+    <Content Include="lib\datatables\jquery.dataTables.min.js" />
+    <Content Include="lib\datatables\jquery.dataTables.sorting.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="img\font-awesome\font\fontawesome-webfont.eot" />
+    <Content Include="img\font-awesome\font\fontawesome-webfont.eot縱=3.2.1.eot" />
+    <Content Include="img\font-awesome\font\fontawesome-webfont.ttf縱=3.2.1.ttf" />
+    <Content Include="img\font-awesome\font\fontawesome-webfont.woff縱=3.2.1.woff" />
+    <Content Include="fonts\fontawesome-webfont.ttf" />
+    <Content Include="fonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\fontawesome-webfont.woff2" />
+    <Content Include="fonts\FontAwesome.otf" />
+    <None Include="Connected Services\ServiceTicket\WebServiceTicket1.wsdl" />
+    <None Include="Scripts\jquery-3.4.1.intellisense.js" />
+    <Content Include="Scripts\bootstrap.plugins.min.js" />
+    <Content Include="Scripts\dataTables.js" />
+    <Content Include="Scripts\datatables\extras\Scroller\media\js\dataTables.scroller.min.js" />
+    <Content Include="Scripts\datatables\extras\TableTools\media\js\media\swf\copy_csv_xls_pdf.swf" />
+    <Content Include="Scripts\datatables\extras\TableTools\media\js\TableTools.min.js" />
+    <Content Include="Scripts\datatables\extras\TableTools\media\js\ZeroClipboard.js" />
+    <Content Include="Scripts\datatables\jquery.dataTables.bootstrap.min.js" />
+    <Content Include="Scripts\datatables\jquery.dataTables.min.js" />
+    <Content Include="Scripts\datatables\jquery.dataTables.sorting.js" />
+    <Content Include="Scripts\dynatree\dist\jquery.dynatree.min.js" />
+    <Content Include="Scripts\forms\jquery.autosize.min.js" />
+    <Content Include="Scripts\forms\jquery.counter.min.js" />
+    <Content Include="Scripts\forms\jquery.inputmask.min.js" />
+    <Content Include="Scripts\forms\jquery.progressbar.anim.js" />
+    <Content Include="Scripts\forms\jquery.ui.touch-punch.min.js" />
+    <Content Include="Scripts\gebo_calendar.js" />
+    <Content Include="Scripts\gebo_charts.js" />
+    <Content Include="Scripts\gebo_chat.js" />
+    <Content Include="Scripts\gebo_common.js" />
+    <Content Include="Scripts\gebo_dashboard.js" />
+    <Content Include="Scripts\gebo_datatables.js" />
+    <Content Include="Scripts\gebo_dynamic_tree.js" />
+    <Content Include="Scripts\gebo_editable_elements.js" />
+    <Content Include="Scripts\gebo_explorer.js" />
+    <Content Include="Scripts\gebo_floating_header.js" />
+    <Content Include="Scripts\gebo_forms.js" />
+    <Content Include="Scripts\gebo_gallery.js" />
+    <Content Include="Scripts\gebo_icons.js" />
+    <Content Include="Scripts\gebo_mailbox.js" />
+    <Content Include="Scripts\gebo_maps.js" />
+    <Content Include="Scripts\gebo_notifications.js" />
+    <Content Include="Scripts\gebo_search.js" />
+    <Content Include="Scripts\gebo_tables.js" />
+    <Content Include="Scripts\gebo_user_profile.js" />
+    <Content Include="Scripts\gebo_user_static.js" />
+    <Content Include="Scripts\gebo_validation.js" />
+    <Content Include="Scripts\gebo_widgets.js" />
+    <Content Include="Scripts\gebo_wizard.js" />
+    <Content Include="Scripts\gmap3.min.js" />
+    <Content Include="Scripts\ios-orientationchange-fix.js" />
+    <Content Include="Scripts\jquery-3.4.1.js" />
+    <Content Include="Scripts\jquery-3.4.1.min.js" />
+    <Content Include="Scripts\jquery-3.4.1.slim.js" />
+    <Content Include="Scripts\jquery-3.4.1.slim.min.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery-input-mask-phone-number.js" />
+    <Content Include="Scripts\jquery-input-mask-phone-number.min.js" />
+    <Content Include="Scripts\jquery-migrate.min.js" />
+    <Content Include="Scripts\jquery-ui\external\globalize.js" />
+    <Content Include="Scripts\jquery-ui\jquery-ui-1.10.0.custom.min.js" />
+    <Content Include="Scripts\jquery-ui\jquery-ui.js" />
+    <Content Include="Scripts\jquery.actual.min.js" />
+    <Content Include="Scripts\jquery.debouncedresize.min.js" />
+    <Content Include="Scripts\jquery.easing.1.3.min.js" />
+    <Content Include="Scripts\jquery.imagesloaded.min.js" />
+    <Content Include="Scripts\jquery.mediaTable.min.js" />
+    <Content Include="Scripts\jquery.min.js" />
+    <Content Include="Scripts\jquery.mockjax.js" />
+    <Content Include="Scripts\jquery.peity.min.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\colorbox\jquery.colorbox.min.js" />
+    <Content Include="Scripts\google-code-prettify\prettify.min.js" />
+    <Content Include="Scripts\gtip2\jquery.qtip.min.js" />
+    <Content Include="Scripts\jBreadcrumbs\jquery.jBreadCrumb.1.1.min.js" />
+    <Content Include="Scripts\jquery.wookmark.js" />
+    <Content Include="Scripts\jquery_cookie_min.js" />
+    <Content Include="Scripts\selectNav.js" />
+    <Content Include="Scripts\slimScroll\jquery.slimscroll.js" />
+    <Content Include="Scripts\sticky\sticky.min.js" />
+    <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\tabular\jquery_wrapper.js" />
+    <Content Include="Scripts\tabular\tabulator.js" />
+    <Content Include="Scripts\tabular\tabulator.min.js" />
+    <Content Include="Scripts\tabular\tabulator_esm.js" />
+    <Content Include="Scripts\tabular\tabulator_esm.min.js" />
+    <Content Include="Scripts\typeahead\typeahead.min.js" />
+    <Content Include="Scripts\UItoTop\jquery.ui.totop.min.js" />
+    <Content Include="Web.config" />
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Auth\Login.cshtml" />
+    <Content Include="Views\Shared\_Style.cshtml" />
+    <Content Include="Views\Shared\_Script.cshtml" />
+    <Content Include="Views\Shared\_NavBar.cshtml" />
+    <Content Include="Views\SalesOrder\Index.cshtml" />
+    <Content Include="Views\Shared\_Sidebar.cshtml" />
+    <Content Include="Views\Document\Index.cshtml" />
+    <Content Include="Views\PriceTicket\Index.cshtml" />
+    <Content Include="Views\Price\Index.cshtml" />
+    <Content Include="Scripts\tabular\tabulator.js.map" />
+    <Content Include="Scripts\tabular\tabulator.min.js.map" />
+    <Content Include="Scripts\tabular\tabulator_esm.js.map" />
+    <Content Include="Scripts\tabular\tabulator_esm.min.js.map" />
+    <Content Include="Views\ProductCard\Index.cshtml" />
+    <Content Include="Views\Picture\Index.cshtml" />
+    <Content Include="Views\Help\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap-theme.min.css.map" />
+    <Content Include="Content\bootstrap-theme.css.map" />
+    <None Include="packages.config" />
+    <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
+    <Content Include="Scripts\jquery-3.4.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Connected Services\ServiceAuth\" />
+    <WCFMetadataStorage Include="Connected Services\ServiceColumn\" />
+    <WCFMetadataStorage Include="Connected Services\ServiceMalzeme\" />
+    <WCFMetadataStorage Include="Connected Services\ServicePrice\" />
+    <WCFMetadataStorage Include="Connected Services\ServiceQdms\" />
+    <WCFMetadataStorage Include="Connected Services\ServiceSalesOrder\" />
+    <WCFMetadataStorage Include="Connected Services\ServiceTicket\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resource.en-US.resx" />
+    <EmbeddedResource Include="Resource.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resource.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>50422</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>https://localhost:44330/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

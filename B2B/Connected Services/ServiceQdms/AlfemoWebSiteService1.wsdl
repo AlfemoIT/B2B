@@ -1,0 +1,418 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="https://services.alfemo.com.tr/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="https://services.alfemo.com.tr/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="https://services.alfemo.com.tr/">
+      <s:element name="AlfemoFiyatListesiJSON">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UrunKodu" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AlfemoFiyatListesiJSONResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AlfemoFiyatListesiJSONResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AuthHeader" type="tns:AuthHeader" />
+      <s:complexType name="AuthHeader">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Username" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+        </s:sequence>
+        <s:anyAttribute />
+      </s:complexType>
+      <s:element name="AlfemoDepoStokJSON">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UrunKodu" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AlfemoDepoStokJSONResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AlfemoDepoStokJSONResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AlfemoAcikSiparisJSON">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SiparisNo" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AlfemoAcikSiparisJSONResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AlfemoAcikSiparisJSONResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AlfemoSiparisSorgulamaJSON">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SiparisNo" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AlfemoSiparisSorgulamaJSONResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AlfemoSiparisSorgulamaJSONResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AlfemoUrunJSON">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UrunKodu" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AlfemoUrunJSONResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AlfemoUrunJSONResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AlfemoIletisim">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Konu" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="AltKonu" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Ad" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Soyad" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Eposta" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Telefon" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Adres" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="SehirKodu" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Sehir" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="IlceKodu" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Ilce" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Mesaj" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AlfemoIletisimResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AlfemoIletisimResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AlfemoUrunMontajPdf">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UrunKodu" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AlfemoUrunMontajPdfResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AlfemoUrunMontajPdfResult" type="s:base64Binary" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AlfemoUrunPdf">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="urunKodu" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AlfemoUrunPdfResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AlfemoUrunPdfResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="AlfemoFiyatListesiJSONSoapIn">
+    <wsdl:part name="parameters" element="tns:AlfemoFiyatListesiJSON" />
+  </wsdl:message>
+  <wsdl:message name="AlfemoFiyatListesiJSONSoapOut">
+    <wsdl:part name="parameters" element="tns:AlfemoFiyatListesiJSONResponse" />
+  </wsdl:message>
+  <wsdl:message name="AlfemoFiyatListesiJSONAuthHeader">
+    <wsdl:part name="AuthHeader" element="tns:AuthHeader" />
+  </wsdl:message>
+  <wsdl:message name="AlfemoDepoStokJSONSoapIn">
+    <wsdl:part name="parameters" element="tns:AlfemoDepoStokJSON" />
+  </wsdl:message>
+  <wsdl:message name="AlfemoDepoStokJSONSoapOut">
+    <wsdl:part name="parameters" element="tns:AlfemoDepoStokJSONResponse" />
+  </wsdl:message>
+  <wsdl:message name="AlfemoDepoStokJSONAuthHeader">
+    <wsdl:part name="AuthHeader" element="tns:AuthHeader" />
+  </wsdl:message>
+  <wsdl:message name="AlfemoAcikSiparisJSONSoapIn">
+    <wsdl:part name="parameters" element="tns:AlfemoAcikSiparisJSON" />
+  </wsdl:message>
+  <wsdl:message name="AlfemoAcikSiparisJSONSoapOut">
+    <wsdl:part name="parameters" element="tns:AlfemoAcikSiparisJSONResponse" />
+  </wsdl:message>
+  <wsdl:message name="AlfemoAcikSiparisJSONAuthHeader">
+    <wsdl:part name="AuthHeader" element="tns:AuthHeader" />
+  </wsdl:message>
+  <wsdl:message name="AlfemoSiparisSorgulamaJSONSoapIn">
+    <wsdl:part name="parameters" element="tns:AlfemoSiparisSorgulamaJSON" />
+  </wsdl:message>
+  <wsdl:message name="AlfemoSiparisSorgulamaJSONSoapOut">
+    <wsdl:part name="parameters" element="tns:AlfemoSiparisSorgulamaJSONResponse" />
+  </wsdl:message>
+  <wsdl:message name="AlfemoSiparisSorgulamaJSONAuthHeader">
+    <wsdl:part name="AuthHeader" element="tns:AuthHeader" />
+  </wsdl:message>
+  <wsdl:message name="AlfemoUrunJSONSoapIn">
+    <wsdl:part name="parameters" element="tns:AlfemoUrunJSON" />
+  </wsdl:message>
+  <wsdl:message name="AlfemoUrunJSONSoapOut">
+    <wsdl:part name="parameters" element="tns:AlfemoUrunJSONResponse" />
+  </wsdl:message>
+  <wsdl:message name="AlfemoUrunJSONAuthHeader">
+    <wsdl:part name="AuthHeader" element="tns:AuthHeader" />
+  </wsdl:message>
+  <wsdl:message name="AlfemoIletisimSoapIn">
+    <wsdl:part name="parameters" element="tns:AlfemoIletisim" />
+  </wsdl:message>
+  <wsdl:message name="AlfemoIletisimSoapOut">
+    <wsdl:part name="parameters" element="tns:AlfemoIletisimResponse" />
+  </wsdl:message>
+  <wsdl:message name="AlfemoIletisimAuthHeader">
+    <wsdl:part name="AuthHeader" element="tns:AuthHeader" />
+  </wsdl:message>
+  <wsdl:message name="AlfemoUrunMontajPdfSoapIn">
+    <wsdl:part name="parameters" element="tns:AlfemoUrunMontajPdf" />
+  </wsdl:message>
+  <wsdl:message name="AlfemoUrunMontajPdfSoapOut">
+    <wsdl:part name="parameters" element="tns:AlfemoUrunMontajPdfResponse" />
+  </wsdl:message>
+  <wsdl:message name="AlfemoUrunMontajPdfAuthHeader">
+    <wsdl:part name="AuthHeader" element="tns:AuthHeader" />
+  </wsdl:message>
+  <wsdl:message name="AlfemoUrunPdfSoapIn">
+    <wsdl:part name="parameters" element="tns:AlfemoUrunPdf" />
+  </wsdl:message>
+  <wsdl:message name="AlfemoUrunPdfSoapOut">
+    <wsdl:part name="parameters" element="tns:AlfemoUrunPdfResponse" />
+  </wsdl:message>
+  <wsdl:message name="AlfemoUrunPdfAuthHeader">
+    <wsdl:part name="AuthHeader" element="tns:AuthHeader" />
+  </wsdl:message>
+  <wsdl:portType name="AlfemoWebSiteServiceSoap">
+    <wsdl:operation name="AlfemoFiyatListesiJSON">
+      <wsdl:input message="tns:AlfemoFiyatListesiJSONSoapIn" />
+      <wsdl:output message="tns:AlfemoFiyatListesiJSONSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AlfemoDepoStokJSON">
+      <wsdl:input message="tns:AlfemoDepoStokJSONSoapIn" />
+      <wsdl:output message="tns:AlfemoDepoStokJSONSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AlfemoAcikSiparisJSON">
+      <wsdl:input message="tns:AlfemoAcikSiparisJSONSoapIn" />
+      <wsdl:output message="tns:AlfemoAcikSiparisJSONSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AlfemoSiparisSorgulamaJSON">
+      <wsdl:input message="tns:AlfemoSiparisSorgulamaJSONSoapIn" />
+      <wsdl:output message="tns:AlfemoSiparisSorgulamaJSONSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AlfemoUrunJSON">
+      <wsdl:input message="tns:AlfemoUrunJSONSoapIn" />
+      <wsdl:output message="tns:AlfemoUrunJSONSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AlfemoIletisim">
+      <wsdl:input message="tns:AlfemoIletisimSoapIn" />
+      <wsdl:output message="tns:AlfemoIletisimSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AlfemoUrunMontajPdf">
+      <wsdl:input message="tns:AlfemoUrunMontajPdfSoapIn" />
+      <wsdl:output message="tns:AlfemoUrunMontajPdfSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AlfemoUrunPdf">
+      <wsdl:input message="tns:AlfemoUrunPdfSoapIn" />
+      <wsdl:output message="tns:AlfemoUrunPdfSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="AlfemoWebSiteServiceSoap" type="tns:AlfemoWebSiteServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="AlfemoFiyatListesiJSON">
+      <soap:operation soapAction="https://services.alfemo.com.tr/AlfemoFiyatListesiJSON" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:AlfemoFiyatListesiJSONAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AlfemoDepoStokJSON">
+      <soap:operation soapAction="https://services.alfemo.com.tr/AlfemoDepoStokJSON" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:AlfemoDepoStokJSONAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AlfemoAcikSiparisJSON">
+      <soap:operation soapAction="https://services.alfemo.com.tr/AlfemoAcikSiparisJSON" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:AlfemoAcikSiparisJSONAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AlfemoSiparisSorgulamaJSON">
+      <soap:operation soapAction="https://services.alfemo.com.tr/AlfemoSiparisSorgulamaJSON" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:AlfemoSiparisSorgulamaJSONAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AlfemoUrunJSON">
+      <soap:operation soapAction="https://services.alfemo.com.tr/AlfemoUrunJSON" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:AlfemoUrunJSONAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AlfemoIletisim">
+      <soap:operation soapAction="https://services.alfemo.com.tr/AlfemoIletisim" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:AlfemoIletisimAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AlfemoUrunMontajPdf">
+      <soap:operation soapAction="https://services.alfemo.com.tr/AlfemoUrunMontajPdf" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:AlfemoUrunMontajPdfAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AlfemoUrunPdf">
+      <soap:operation soapAction="https://services.alfemo.com.tr/AlfemoUrunPdf" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:AlfemoUrunPdfAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="AlfemoWebSiteServiceSoap12" type="tns:AlfemoWebSiteServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="AlfemoFiyatListesiJSON">
+      <soap12:operation soapAction="https://services.alfemo.com.tr/AlfemoFiyatListesiJSON" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:AlfemoFiyatListesiJSONAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AlfemoDepoStokJSON">
+      <soap12:operation soapAction="https://services.alfemo.com.tr/AlfemoDepoStokJSON" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:AlfemoDepoStokJSONAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AlfemoAcikSiparisJSON">
+      <soap12:operation soapAction="https://services.alfemo.com.tr/AlfemoAcikSiparisJSON" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:AlfemoAcikSiparisJSONAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AlfemoSiparisSorgulamaJSON">
+      <soap12:operation soapAction="https://services.alfemo.com.tr/AlfemoSiparisSorgulamaJSON" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:AlfemoSiparisSorgulamaJSONAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AlfemoUrunJSON">
+      <soap12:operation soapAction="https://services.alfemo.com.tr/AlfemoUrunJSON" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:AlfemoUrunJSONAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AlfemoIletisim">
+      <soap12:operation soapAction="https://services.alfemo.com.tr/AlfemoIletisim" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:AlfemoIletisimAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AlfemoUrunMontajPdf">
+      <soap12:operation soapAction="https://services.alfemo.com.tr/AlfemoUrunMontajPdf" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:AlfemoUrunMontajPdfAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AlfemoUrunPdf">
+      <soap12:operation soapAction="https://services.alfemo.com.tr/AlfemoUrunPdf" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:AlfemoUrunPdfAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="AlfemoWebSiteService">
+    <wsdl:port name="AlfemoWebSiteServiceSoap" binding="tns:AlfemoWebSiteServiceSoap">
+      <soap:address location="https://services.alfemo.com.tr:9095/WebSite/AlfemoWebSiteService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="AlfemoWebSiteServiceSoap12" binding="tns:AlfemoWebSiteServiceSoap12">
+      <soap12:address location="https://services.alfemo.com.tr:9095/WebSite/AlfemoWebSiteService.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

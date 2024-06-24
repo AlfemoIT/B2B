@@ -1,0 +1,97 @@
+﻿@model B2B.Models.KNA1
+
+<a href="javascript:void(0)" class="sidebar_switch on_switch ttip_r" title="Hide Sidebar">Sidebar switch</a>
+
+<div class="sidebar">
+    <div class="sidebar_inner_scroll">
+        <div class="sidebar_inner">
+            <form action="#" class="input-group input-group-sm">
+                <input autocomplete="off" name="query" class="search_query form-control input-sm" size="16"
+                       placeholder="Search..." type="text">
+                <span class="input-group-btn">
+                    <button type="submit" class="btn btn-default">
+                        <i class="glyphicon glyphicon-search"></i>
+                    </button>
+                </span>
+            </form>
+
+            <div id="side_accordion" class="panel-group">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <a href="/" data-parent="#side_accordion"
+                           class="accordion-toggle">
+                            <i class="glyphicon glyphicon-home"></i> Anasayfa
+                        </a>
+                    </div>
+                </div>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <a href="#collapseOne" data-parent="#side_accordion" data-toggle="collapse"
+                           class="accordion-toggle">
+                            <i class="glyphicon glyphicon-check"></i> Siparişler
+                        </a>
+                    </div>
+                    <div class="accordion-body collapse" id="collapseOne">
+                        <div class="panel-body">
+                            <ul class="nav nav-pills nav-stacked">
+                                <li><a href="sales-order">Satış</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                @if (!Model.SORTL.Equals("MUSTERI"))
+                {
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <a href="#collapseTwo" data-parent="#side_accordion" data-toggle="collapse"
+                               class="accordion-toggle">
+                                <i class="glyphicon glyphicon-folder-open"></i>  İşlemler
+                            </a>
+                        </div>
+
+                        <div class="accordion-body collapse" id="collapseTwo">
+                            <div class="panel-body">
+                                <ul class="nav nav-pills nav-stacked">
+                                    <li><a href="search-document">Montaj Kılavuz Arama</a></li>
+                                    <li><a href="product-card">Ürün Tanıtım Kartı</a></li>
+                                    <li><a href="price-ticket">Fiyat Etiketi</a></li>
+                                    <li><a href="price-list">Fiyat Listesi</a></li>
+                                    <li><a href="pictures">Görseller</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                }
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <a href="help" class="accordion-toggle">
+                            <i class="glyphicon glyphicon-question-sign"></i> Yardım
+                        </a>
+                    </div>
+                </div>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <a href="Auth/Logout" class="accordion-toggle">
+                            <i class="glyphicon glyphicon-log-out"></i> Çıkış
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="push"></div>
+        </div>
+
+        <div class="sidebar_info" style="display:none">
+            <ul class="list-unstyled">
+                <li>
+                    <span class="act act-warning">65</span>
+                    <strong>New comments</strong>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

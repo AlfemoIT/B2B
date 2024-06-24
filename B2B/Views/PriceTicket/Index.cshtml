@@ -1,0 +1,142 @@
+﻿@{
+    ViewBag.Title = "Fiyat Etiketi";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="jCrumbs" class="breadCrumb module">
+    <ul>
+        <li>
+            <a href="#">
+                <i class="glyphicon glyphicon-home"></i>
+            </a>
+        </li>
+        <li style="background: none;">
+            <span style="width: 50px;"><a href="#" style="width: 83px;">İşlemler</a></span>
+            <div class="chevronOverlay" style="display: block;"></div>
+        </li>
+        <li>
+            Fiyat Etiketi
+        </li>
+    </ul>
+</div>
+
+<div class="row">
+    <div class="col-sm-12 col-md-12">
+        <div class="tabbable">
+            <ul class="nav nav-tabs">
+                <li class="active"><a href="#tab1" data-toggle="tab">Fiyatlar</a></li>
+                <li><a href="#tab2" data-toggle="tab">Etiket İndir</a></li>
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane active" id="tab1">
+                    <table class="table table-striped table-bordered dTableR" id="tblPriceTicket" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>Ürün Grubu</th>
+                                <th>Ürün</th>
+                                <th>Malzeme No</th>
+                                <th>Etiket Tanımı</th>
+                                <th>Peşin Fiyat</th>
+                                <th>Taksitli Fiyat</th>
+                                <th>18 Taksit</th>
+                                <th>24 Taksit</th>
+                                <th>36 Taksit</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="tab-pane" id="tab2">
+                    <table class="table table-striped table-bordered dTableR" id="tblPriceFile" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>Dosya Adı</th>
+                                <th>Yüklenme Tarihi</th>
+                                <th>İndir</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script type="text/javascript">
+        $(function () {
+            $('#tblPriceTicket').DataTable({
+                language: {
+                    url: "//cdn.datatables.net/plug-ins/1.11.3/i18n/tr.json"
+                },
+                ajax:
+                {
+                    url: '@Url.Action("GetData")',
+                    type: "POST",
+                    dataType: 'json',
+                    dataSrc: function (json) {
+                        return json.data;
+                    }
+                },
+                autoWidth: false,
+                displayLength: 20,
+                columns: [
+                    { data: 'URUN_GRUBU' },
+                    { data: 'URUN' },
+                    { data: 'MALZEME_NO' },
+                    { data: 'ETIKET_TANIM' },
+                    { data: 'CMPT_PESIN_FIYAT' },
+                    { data: 'CMPT_TAKSIT_9' },
+                    { data: 'TAKSIT_18' , visible:false},
+                    { data: 'TAKSIT_24' ,visible: false},
+                    { data: 'TAKSIT_36', visible: false}
+                ]
+            });
+
+            $('#tblPriceFile').DataTable({
+                language: {
+                    url: "//cdn.datatables.net/plug-ins/1.11.3/i18n/tr.json"
+                },
+                ajax:
+                {
+                    url: '@Url.Action("GetFileNames")',
+                    type: "POST",
+                    dataType: 'json',
+                    dataSrc: function (json) {
+                        return json.data;
+                    }
+                },
+                autoWidth: false,
+                displayLength: 14,
+                paging: false,
+                searching: false,
+                columns: [
+                    { data: 'NAME' },
+                    { data: 'CMPT_CREATION_TIME'},
+                    {
+                        "mData": null,
+                        "bSortable": false,
+                        "mRender": function (data, type) {
+                            return '<a href="/PriceTicket/GetPricePdf?file=' + data.NAME + '" class="btn back-color-theme btn-grid">' +
+                                '<i class="fa fa-download btn-middle-icon"></i>' +
+                                '</a > ';
+                        }
+                    }
+                ],
+                columnDefs: [
+                    { className: 'dt-center', targets: [1] }
+                ]
+            });
+        });
+    </script>
+}
+
+
+
+
+
+

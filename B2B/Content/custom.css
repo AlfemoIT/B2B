@@ -1,0 +1,179 @@
+﻿.login_page .login_box {
+    top: 25%;
+}
+
+.dt-center {
+    text-align: center !important;
+}
+
+.cursor-default {
+    cursor: default;
+}
+
+.back-color-theme {
+    background-color: #248ab5;
+}
+
+.btn-middle-icon {
+    font-size: 14px;
+    color: white;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.ptrn_e .main_content {
+    background-image: url(../img/bg_c.png);
+}
+
+.opacity-30 {
+    opacity: 30%;
+}
+
+.dt-search label {
+    display: none;
+}
+
+.table thead > tr > th, .table tbody > tr > th, .table tfoot > tr > th, .table thead > tr > td, .table tbody > tr > td, .table tfoot > tr > td {
+    padding: 6px;
+    vertical-align: middle;
+}
+
+table.dataTable > tbody > tr > th, table.dataTable > tbody > tr > td {
+    padding: 5px 6px;
+}
+
+.login_page .top_b {
+    height: 46px;
+    padding: 0px 20px;
+}
+
+.btn-etiket {
+    float: right;
+    position: relative;
+    bottom: 9px;
+    background: #f9f9f9;
+}
+
+.float-right {
+    float: right;
+}
+
+/*tabulator*/
+.tabulator .tabulator-alert {
+    background: transparent;
+}
+
+.tabulator .tabulator-header {
+    font-weight: 600;
+}
+
+    .tabulator .tabulator-header .tabulator-col {
+        background: #ebf2f6;
+        border-right: 1px solid #ddd;
+    }
+
+.tabulator .tabulator-header {
+    background-color: #ebf2f6;
+    border-bottom: 1px solid #ddd;
+}
+
+    .tabulator .tabulator-header .tabulator-col.tabulator-sortable.tabulator-col-sorter-element:hover {
+        background-color: #ebf2f6;
+        cursor: pointer;
+    }
+
+    .tabulator .tabulator-header .tabulator-col {
+        background: #ebf2f6;
+        border-right: 1px solid rgba(0, 0, 0, 0.3);
+    }
+
+.tabulator .tabulator-header {
+    background-color: #ebf2f6;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+}
+
+    .tabulator .tabulator-header .tabulator-col.tabulator-sortable.tabulator-col-sorter-element:hover {
+        background-color: #ebf2f6;
+        cursor: pointer;
+    }
+
+.tabulator-header-filter input {
+    border: 1px solid #222222;
+}
+
+.tabulator .tabulator-tableholder {
+    background: #efefef;
+}
+
+.tabulator .tabulator-header {
+    color: #222;
+    font-size: 13.4px;
+    text-shadow: 1px 1px 0 #fff;
+}
+
+.tabulator .tabulator-alert .tabulator-alert-msg.tabulator-alert-state-msg {
+    border: 2px solid #333;
+    color: #333;
+    font-weight: 600;
+}
+/*tabulator*/
+
+.margin-top-5 {
+    margin-top: 5px !important;
+}
+
+.txt-bold-red {
+    font-weight: 600;
+    color: #c51d2e;
+}
+
+.txt-bold {
+    font-weight: 600;
+}
+
+.padding-left-0 {
+    padding-left: 0px;
+}
+
+.text-align-unset {
+    text-align: left !important;
+}
+
+.title-align-right {
+    text-align: right !important;
+}
+
+.margin-left-0 {
+    margin-left: 0px !important;
+}
+
+.lbl-campaign {
+    text-align: left !important;
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.font-size-13 {
+    font-size: 13px;
+}
+
+.btn-grid {
+    padding: 3px 12px;
+}
+
+#pdf-iframe {
+    width: 100%;
+    height: 65vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#img-iframe {
+    width: 75%;
+    border: 1px solid gainsboro;
+    text-align: center;
+    padding: 10px;
+}

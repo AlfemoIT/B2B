@@ -1,0 +1,30 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    <link rel="shortcut icon" href="~/alfemo-icon.jpeg">
+    @Html.Partial("_Style")
+</head>
+
+<body class="full_width">
+    <div id="maincontainer" class="clearfix">
+        <header>
+            @Html.Action("_NavBar", "Layout")
+        </header>
+
+        <div id="contentwrapper">
+            <div class="main_content">
+                @RenderBody()
+            </div>
+        </div>
+
+        @Html.Action("_SideBar", "Layout")
+
+        @Html.Partial("_Script")
+    </div>
+
+    @RenderSection("scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="GetPriceTicket">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetPriceTicketResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetPriceTicketResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AuthHeader" type="tns:AuthHeader" />
+      <s:complexType name="AuthHeader">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Username" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+        </s:sequence>
+        <s:anyAttribute />
+      </s:complexType>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GetPriceTicketSoapIn">
+    <wsdl:part name="parameters" element="tns:GetPriceTicket" />
+  </wsdl:message>
+  <wsdl:message name="GetPriceTicketSoapOut">
+    <wsdl:part name="parameters" element="tns:GetPriceTicketResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetPriceTicketAuthHeader">
+    <wsdl:part name="AuthHeader" element="tns:AuthHeader" />
+  </wsdl:message>
+  <wsdl:portType name="WebServiceTicketSoap">
+    <wsdl:operation name="GetPriceTicket">
+      <wsdl:input message="tns:GetPriceTicketSoapIn" />
+      <wsdl:output message="tns:GetPriceTicketSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="WebServiceTicketSoap" type="tns:WebServiceTicketSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetPriceTicket">
+      <soap:operation soapAction="http://tempuri.org/GetPriceTicket" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:GetPriceTicketAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="WebServiceTicketSoap12" type="tns:WebServiceTicketSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetPriceTicket">
+      <soap12:operation soapAction="http://tempuri.org/GetPriceTicket" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:GetPriceTicketAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="WebServiceTicket">
+    <wsdl:port name="WebServiceTicketSoap" binding="tns:WebServiceTicketSoap">
+      <soap:address location="https://services.alfemo.com.tr:9095/B2B/WebServiceTicket.asmx" />
+    </wsdl:port>
+    <wsdl:port name="WebServiceTicketSoap12" binding="tns:WebServiceTicketSoap12">
+      <soap12:address location="https://services.alfemo.com.tr:9095/B2B/WebServiceTicket.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

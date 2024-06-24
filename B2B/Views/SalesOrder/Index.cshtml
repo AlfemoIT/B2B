@@ -1,0 +1,94 @@
+﻿@{
+    ViewBag.Title = "Satış Siparişleri";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model B2B.Models.KNA1
+
+<div id="jCrumbs" class="breadCrumb module">
+    <ul>
+        <li>
+            <a href="#">
+                <i class="glyphicon glyphicon-home"></i>
+            </a>
+        </li>
+        <li style="background: none;">
+            <span style="width: 40px;"><a href="#" style="width: 83px;">Sipariş</a></span>
+            <div class="chevronOverlay" style="display: block;"></div>
+        </li>
+        <li>
+            Satış
+        </li>
+    </ul>
+</div>
+
+<div class="row">
+    <div class="col-sm-12 col-md-12">
+        <h3 class="heading">@Model.SORTL Siparişleri</h3>
+        <table class="table table-striped table-bordered dTableR" id="tblSales" style="width:100%">
+            <thead>
+                <tr>
+                    <th>Sipariş Tarihi</th>
+                    <th style="text-align:center">Sipariş No</th>
+                    <th>Müşteri</th>
+                    <th>Ürün</th>
+                    <th>Ürün Tanımı</th>
+                    <th>Ürün Uzun Tanımı</th>
+                    <th>Miktar</th>
+                    <th>Birim</th>
+                    <th>Teslimat Tarihi</th>
+                    <th>Garanti/Montaj Kılavuzu</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@section Scripts{
+    <script type="text/javascript">
+        $(function () {
+            $('#tblSales').DataTable({
+                language: {
+                    url: "//cdn.datatables.net/plug-ins/1.11.3/i18n/tr.json"
+                },
+                ajax:
+                {
+                    url: '@Url.Action("GetData")',
+                    type: "POST",
+                    dataType: 'json',
+                    dataSrc: function (json) {
+                        return json.data;
+                    }
+                },
+                autoWidth: false,
+                displayLength: 12,
+                columns: [
+                    { data: 'CMPT_AUDAT' }, //order date
+                    { data: 'CMPT_VBELN' },
+                    { data:'ZZMUSTERI_AD'},
+                    { data: 'MATNR' },
+                    { data: 'ARKTX' },
+                    { data: 'ZCL_MAKTX' },
+                    { data: 'CMPT_KWMENG'},
+                    { data: 'VRKME' },
+                    { data: 'CMPT_CMTD_DELIV_DATE' },
+                    {
+                        "mData": null,
+                        "bSortable": false,
+                        "mRender": function (data, type) {
+                            return '<a href="/SalesOrder/GetMontagePdf?matnr=' + data.MATNR +'" class="btn back-color-theme btn-grid">' +
+                                      '<i class="fa fa-download btn-middle-icon"></i>' +
+                                   '</a > ';
+                        }
+                    }
+                ],
+                columnDefs: [
+                    { className: 'dt-center', targets: [0,1, 7, 8, 9] }
+                ]
+            });
+        });
+    </script>
+}
+

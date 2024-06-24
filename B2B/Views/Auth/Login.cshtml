@@ -1,0 +1,111 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en" class="login_page">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Alfemo</title>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/blue.css" rel="stylesheet" />
+    <link href="~/Content/gtip2/jquery.qtip.min.css" rel="stylesheet" />
+    <link href="~/Content/style.css" rel="stylesheet" />
+    <link href="~/Content/custom.css" rel="stylesheet" />
+    <link rel="shortcut icon" href="~/alfemo-icon.jpeg">
+    <style>
+        body::after {
+            content: "";
+            background: url(/img/alfemo/penta-koltuk-tkm.jpg);
+            background-repeat: no-repeat;
+            background-size: 100% 100%;
+            opacity: 0.3;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            position: absolute;
+            z-index: -1;
+        }
+    </style>
+</head>
+<body>
+    <div class="login_box">
+        <div class="top_b">
+            <img src="~/alfemo.png" alt="logo.svg (43 KB)" width="160" style="border-radius:1px">
+        </div>
+
+        @Html.Raw(ViewBag.Message)
+
+        @using (Html.BeginForm("Login", "Auth", FormMethod.Post))
+        {
+            <div class="cnt_b">
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon input-sm">
+                            <i class="glyphicon glyphicon-user"></i>
+                        </span>
+                        <input class="form-control input-sm"
+                               type="text"
+                               id="STCD2"
+                               name="STCD2"
+                               maxlength="11"
+                               placeholder="TC/Mağaza No"
+                               onkeypress='validate(event)' />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon input-sm">
+                            <i class="glyphicon glyphicon-phone-alt"></i>
+                        </span>
+                        <input class="form-control input-sm"
+                               type="text"
+                               id="TELF1" name="TELF1"
+                               placeholder="(xxx) xxx-xxxx"
+                               autocomplete="off" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="btm_b clearfix">
+                <button class="btn btn-default btn-sm pull-right" type="submit">
+                    Giriş
+                </button>
+            </div>
+        }
+    </div>
+
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="~/Scripts/jquery.actual.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/jquery-input-mask-phone-number.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#TELF1').usPhoneFormat({
+                format: '(xxx) xxx-xxxx',
+            });
+        });
+
+        function validate(evt) {
+            var theEvent = evt || window.event;
+
+            // Handle paste
+            if (theEvent.type === 'paste') {
+                key = event.clipboardData.getData('text/plain');
+            } else {
+                // Handle key press
+                var key = theEvent.keyCode || theEvent.which;
+                key = String.fromCharCode(key);
+            }
+            var regex = /[0-9]|\./;
+            if (!regex.test(key)) {
+                theEvent.returnValue = false;
+                if (theEvent.preventDefault) theEvent.preventDefault();
+            }
+        }
+    </script>
+</body>
+</html>

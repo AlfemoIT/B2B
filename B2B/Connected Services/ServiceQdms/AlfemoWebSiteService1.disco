@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<discovery xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.xmlsoap.org/disco/">
+  <contractRef ref="https://services.alfemo.com.tr:9095/WebSite/AlfemoWebSiteService.asmx?wsdl" docRef="https://services.alfemo.com.tr:9095/WebSite/AlfemoWebSiteService.asmx" xmlns="http://schemas.xmlsoap.org/disco/scl/" />
+  <soap address="https://services.alfemo.com.tr:9095/WebSite/AlfemoWebSiteService.asmx" xmlns:q1="https://services.alfemo.com.tr/" binding="q1:AlfemoWebSiteServiceSoap" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
+  <soap address="https://services.alfemo.com.tr:9095/WebSite/AlfemoWebSiteService.asmx" xmlns:q2="https://services.alfemo.com.tr/" binding="q2:AlfemoWebSiteServiceSoap12" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
+</discovery>
