@@ -22,6 +22,14 @@ namespace B2B.ServiceMalzeme {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GelMaterial", ReplyAction="*")]
         System.Threading.Tasks.Task<B2B.ServiceMalzeme.GelMaterialResponse> GelMaterialAsync(B2B.ServiceMalzeme.GelMaterialRequest request);
+        
+        // CODEGEN: Generating message contract since message GetMaterialGrubRequest has headers
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetMaterialGrub", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        B2B.ServiceMalzeme.GetMaterialGrubResponse GetMaterialGrub(B2B.ServiceMalzeme.GetMaterialGrubRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetMaterialGrub", ReplyAction="*")]
+        System.Threading.Tasks.Task<B2B.ServiceMalzeme.GetMaterialGrubResponse> GetMaterialGrubAsync(B2B.ServiceMalzeme.GetMaterialGrubRequest request);
     }
     
     /// <remarks/>
@@ -118,6 +126,40 @@ namespace B2B.ServiceMalzeme {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="GetMaterialGrub", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
+    public partial class GetMaterialGrubRequest {
+        
+        [System.ServiceModel.MessageHeaderAttribute(Namespace="http://tempuri.org/")]
+        public B2B.ServiceMalzeme.AuthHeader AuthHeader;
+        
+        public GetMaterialGrubRequest() {
+        }
+        
+        public GetMaterialGrubRequest(B2B.ServiceMalzeme.AuthHeader AuthHeader) {
+            this.AuthHeader = AuthHeader;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="GetMaterialGrubResponse", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
+    public partial class GetMaterialGrubResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
+        public string GetMaterialGrubResult;
+        
+        public GetMaterialGrubResponse() {
+        }
+        
+        public GetMaterialGrubResponse(string GetMaterialGrubResult) {
+            this.GetMaterialGrubResult = GetMaterialGrubResult;
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public interface WebServiceMalzemeSoapChannel : B2B.ServiceMalzeme.WebServiceMalzemeSoap, System.ServiceModel.IClientChannel {
     }
@@ -166,6 +208,29 @@ namespace B2B.ServiceMalzeme {
             B2B.ServiceMalzeme.GelMaterialRequest inValue = new B2B.ServiceMalzeme.GelMaterialRequest();
             inValue.AuthHeader = AuthHeader;
             return ((B2B.ServiceMalzeme.WebServiceMalzemeSoap)(this)).GelMaterialAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        B2B.ServiceMalzeme.GetMaterialGrubResponse B2B.ServiceMalzeme.WebServiceMalzemeSoap.GetMaterialGrub(B2B.ServiceMalzeme.GetMaterialGrubRequest request) {
+            return base.Channel.GetMaterialGrub(request);
+        }
+        
+        public string GetMaterialGrub(B2B.ServiceMalzeme.AuthHeader AuthHeader) {
+            B2B.ServiceMalzeme.GetMaterialGrubRequest inValue = new B2B.ServiceMalzeme.GetMaterialGrubRequest();
+            inValue.AuthHeader = AuthHeader;
+            B2B.ServiceMalzeme.GetMaterialGrubResponse retVal = ((B2B.ServiceMalzeme.WebServiceMalzemeSoap)(this)).GetMaterialGrub(inValue);
+            return retVal.GetMaterialGrubResult;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<B2B.ServiceMalzeme.GetMaterialGrubResponse> B2B.ServiceMalzeme.WebServiceMalzemeSoap.GetMaterialGrubAsync(B2B.ServiceMalzeme.GetMaterialGrubRequest request) {
+            return base.Channel.GetMaterialGrubAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<B2B.ServiceMalzeme.GetMaterialGrubResponse> GetMaterialGrubAsync(B2B.ServiceMalzeme.AuthHeader AuthHeader) {
+            B2B.ServiceMalzeme.GetMaterialGrubRequest inValue = new B2B.ServiceMalzeme.GetMaterialGrubRequest();
+            inValue.AuthHeader = AuthHeader;
+            return ((B2B.ServiceMalzeme.WebServiceMalzemeSoap)(this)).GetMaterialGrubAsync(inValue);
         }
     }
 }

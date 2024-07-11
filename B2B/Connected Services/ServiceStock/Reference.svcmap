@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="8e09161e-622f-4b5d-9bea-e8d7a48d1e85" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="ca65cf80-274b-489e-bbd2-be54786e7122" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
   <ClientOptions>
     <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
     <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
@@ -19,11 +19,11 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://192.168.90.12:85/B2B/WebServiceMalzeme.asmx" Protocol="http" SourceId="1" />
+    <MetadataSource Address="http://192.168.90.12:85/B2B/WebServiceStock.asmx" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="WebServiceMalzeme.disco" MetadataType="Disco" ID="fab8f1a2-3f77-4869-979f-84707e5e3ffb" SourceId="1" SourceUrl="http://192.168.90.12:85/B2B/WebServiceMalzeme.asmx?disco" />
-    <MetadataFile FileName="WebServiceMalzeme.wsdl" MetadataType="Wsdl" ID="3f208325-1389-4e8e-bfa1-733a4afbc47f" SourceId="1" SourceUrl="http://192.168.90.12:85/B2B/WebServiceMalzeme.asmx?wsdl" />
+    <MetadataFile FileName="WebServiceStock.wsdl" MetadataType="Wsdl" ID="4dd16a35-6c0d-434f-949b-e23898f98289" SourceId="1" SourceUrl="http://192.168.90.12:85/B2B/WebServiceStock.asmx?wsdl" />
+    <MetadataFile FileName="WebServiceStock.disco" MetadataType="Disco" ID="18459934-011b-40a4-ac59-d9e7cfcbcf03" SourceId="1" SourceUrl="http://192.168.90.12:85/B2B/WebServiceStock.asmx?disco" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
