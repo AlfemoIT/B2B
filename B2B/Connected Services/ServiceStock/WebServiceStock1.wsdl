@@ -72,10 +72,10 @@
   </wsdl:binding>
   <wsdl:service name="WebServiceStock">
     <wsdl:port name="WebServiceStockSoap" binding="tns:WebServiceStockSoap">
-      <soap:address location="http://192.168.90.12:85/B2B/WebServiceStock.asmx" />
+      <soap:address location="https://services.alfemo.com.tr:9095/B2B/WebServiceStock.asmx" />
     </wsdl:port>
     <wsdl:port name="WebServiceStockSoap12" binding="tns:WebServiceStockSoap12">
-      <soap12:address location="http://192.168.90.12:85/B2B/WebServiceStock.asmx" />
+      <soap12:address location="https://services.alfemo.com.tr:9095/B2B/WebServiceStock.asmx" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

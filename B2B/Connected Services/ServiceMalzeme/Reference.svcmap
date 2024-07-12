@@ -19,11 +19,11 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://192.168.90.12:85/B2B/WebServiceMalzeme.asmx" Protocol="http" SourceId="1" />
+    <MetadataSource Address="https://services.alfemo.com.tr:9095/B2B/WebServiceMalzeme.asmx" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="WebServiceMalzeme.disco" MetadataType="Disco" ID="fab8f1a2-3f77-4869-979f-84707e5e3ffb" SourceId="1" SourceUrl="http://192.168.90.12:85/B2B/WebServiceMalzeme.asmx?disco" />
-    <MetadataFile FileName="WebServiceMalzeme.wsdl" MetadataType="Wsdl" ID="3f208325-1389-4e8e-bfa1-733a4afbc47f" SourceId="1" SourceUrl="http://192.168.90.12:85/B2B/WebServiceMalzeme.asmx?wsdl" />
+    <MetadataFile FileName="WebServiceMalzeme1.wsdl" MetadataType="Wsdl" ID="5d7f3c2b-3628-4468-8159-984c3e246210" SourceId="1" SourceUrl="https://services.alfemo.com.tr:9095/B2B/WebServiceMalzeme.asmx?wsdl" />
+    <MetadataFile FileName="WebServiceMalzeme1.disco" MetadataType="Disco" ID="4c93d43a-15f1-4524-8add-744f4b3b257f" SourceId="1" SourceUrl="https://services.alfemo.com.tr:9095/B2B/WebServiceMalzeme.asmx?disco" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

@@ -108,10 +108,10 @@
   </wsdl:binding>
   <wsdl:service name="WebServiceMalzeme">
     <wsdl:port name="WebServiceMalzemeSoap" binding="tns:WebServiceMalzemeSoap">
-      <soap:address location="http://192.168.90.12:85/B2B/WebServiceMalzeme.asmx" />
+      <soap:address location="https://services.alfemo.com.tr:9095/B2B/WebServiceMalzeme.asmx" />
     </wsdl:port>
     <wsdl:port name="WebServiceMalzemeSoap12" binding="tns:WebServiceMalzemeSoap12">
-      <soap12:address location="http://192.168.90.12:85/B2B/WebServiceMalzeme.asmx" />
+      <soap12:address location="https://services.alfemo.com.tr:9095/B2B/WebServiceMalzeme.asmx" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

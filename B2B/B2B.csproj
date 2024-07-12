@@ -359,11 +359,11 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-    <None Include="Connected Services\ServiceMalzeme\WebServiceMalzeme.disco" />
+    <None Include="Connected Services\ServiceMalzeme\WebServiceMalzeme1.disco" />
     <Content Include="Connected Services\ServicePrice\B2B.ServicePrice.GetProductPriceResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
-    <None Include="Connected Services\ServiceMalzeme\WebServiceMalzeme.wsdl" />
+    <None Include="Connected Services\ServiceMalzeme\WebServiceMalzeme1.wsdl" />
     <None Include="Connected Services\ServicePrice\WebServicePrice1.wsdl" />
     <None Include="Connected Services\ServiceQdms\AlfemoWebSiteService1.disco" />
     <None Include="Connected Services\ServicePrice\configuration91.svcinfo" />
@@ -417,18 +417,18 @@
     <Content Include="Connected Services\ServiceStock\B2B.ServiceStock.GetObservedStockResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
-    <None Include="Connected Services\ServiceStock\WebServiceStock.disco" />
     <None Include="Connected Services\ServiceStock\configuration91.svcinfo" />
     <None Include="Connected Services\ServiceStock\configuration.svcinfo" />
     <None Include="Connected Services\ServiceStock\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+    <None Include="Connected Services\ServiceStock\WebServiceStock1.disco" />
     <Content Include="Connected Services\ServiceTicket\B2B.ServiceTicket.GetPriceTicketResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <None Include="Connected Services\ServiceSalesOrder\WebServiceSalesOrder1.wsdl" />
-    <None Include="Connected Services\ServiceStock\WebServiceStock.wsdl" />
+    <None Include="Connected Services\ServiceStock\WebServiceStock1.wsdl" />
     <None Include="Connected Services\ServiceTicket\configuration91.svcinfo" />
     <None Include="Connected Services\ServiceTicket\configuration.svcinfo" />
     <None Include="Connected Services\ServiceTicket\Reference.svcmap">
