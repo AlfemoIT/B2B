@@ -181,3 +181,12 @@ table.dataTable > tbody > tr > th, table.dataTable > tbody > tr > td {
 .float-left {
     float: left;
 }
+
+#div-selection {
+    text-align: center;
+    position: absolute;
+    top: 7px;
+    font-weight: 700;
+    font-size: 16px;
+    color: #3993ba;
+}

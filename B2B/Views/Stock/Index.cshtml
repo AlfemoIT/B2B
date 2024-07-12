@@ -31,13 +31,17 @@
 </div>
 
 <div class="row">
-    <a id="btn-execute" class="btn btn-default btn-etiket float-left heading" style="position: relative; left: 13px;font-size:12px;">
+    <a id="btn-execute" class="btn btn-default btn-etiket float-left heading" style="position: relative; left: 13px;">
         <i class="fa fa-check"></i>
         Yürüt
     </a>
 
     <div class="col-sm-12 col-md-12" style="margin-top:30px">
         <h3 class="heading">
+            <a id="download-xlsx" class="btn btn-default btn-etiket" href="#" style="position: relative; bottom: 41px;">
+                <img src="~/img/xls.png" />
+                <span class="font-size-13">Excel'e Aktar</span>
+            </a>
         </h3>
     </div>
 
@@ -78,15 +82,22 @@
                 Ana Grup, Koleksiyon veya Ürün Tipi alanlarından birinin seçilmesi zorunludur.
             </div>
         </div>
+
+        <div id="div-message-excel" class="col-sm-3" style="display:none">
+            <div class='alert alert-warning alert-dismissable'>
+                Tabloda veri bulunmamaktadır.
+            </div>
+        </div>
     </div>
 
     <div class="col-sm-12 col-md-12 heading" style="margin-top:135px">
-        <button id="export-excel" class="btn-default float-right" style="margin-top: 12px;">
-            Excel
-        </button>
     </div>
 
     <div class="col-sm-12 col-md-12">
+        <div id="div-selection" class="col-sm-12">
+            <p id="p-selection"></p>
+        </div>
+
         <table class="table table-striped table-bordered dTableR" id="tblStock">
         </table>
     </div>
@@ -98,7 +109,7 @@
             $('.js-example-basic-single').select2();
 
             const optionSelection = document.createElement('option');
-            optionSelection.value = '';
+            optionSelection.value = 0;
             optionSelection.textContent = 'Seçiniz';
 
             $.ajax({
@@ -179,21 +190,63 @@
 
             $("#btn-execute").click(function () {
                 document.getElementById("div-message").style.display = "none";
+                document.getElementById("div-message-excel").style.display = "none";
+
+                $("#p-selection").html('');
+
+                var mvgr3 = $('#drpMvgr3').val();
+                var bezei3 = $('#drpMvgr3 option:selected').text();
+                if (bezei3 == "Seçiniz") {
+                    bezei3 = "";
+                }
 
                 var mvgr2 = $('#drpMvgr2').val();
-                var mvgr3 = $('#drpMvgr3').val();
-                var mvgr4 = $('#drpMvgr4').val();
+                var bezei2 = $('#drpMvgr2 option:selected').text();
+                if (bezei2 == "Seçiniz") {
+                    bezei2 = "";
+                }
+                else if (bezei3 != ""){
+                    bezei2 = ' / ' + bezei2;
+                }
 
-                if (mvgr2 == "" && mvgr3 == "" && mvgr4 == "") {
+                var mvgr4 = $('#drpMvgr4').val();
+                var bezei4 = $('#drpMvgr4 option:selected').text();
+                if (bezei4 == "Seçiniz") {
+                    bezei4 = "";
+                }
+                else if (bezei3 != "" || bezei2!=""){
+                    bezei4 = ' / ' + bezei4;
+                }
+
+                if (mvgr2 == 0 && mvgr3 == 0 && mvgr4 == 0) {
                     document.getElementById("div-message").style.display = "block";
                     return;
                 }
 
-                table.ajax.url('/Stock/GetData?sortl=' + $("#kna1-sortl").val() + '&mvgr2=' + mvgr2 +'&mvgr3=' + mvgr3 + '&mvgr4=' + mvgr4).load();
+                $("#p-selection").html(bezei3 + bezei2 + bezei4+' listesi');
+
+                table.ajax.url('/Stock/GetData?sortl=' + $("#kna1-sortl").val() + '&mvgr2=' + mvgr2 + '&mvgr3=' + mvgr3 + '&mvgr4=' + mvgr4).load();
+
+                $('#drpMvgr2 option:first').prop('selected', true);
+                $('#drpMvgr2').trigger('change');
+
+                $('#drpMvgr3 option:first').prop('selected', true);
+                $('#drpMvgr3').trigger('change');
+
+                $('#drpMvgr4 option:first').prop('selected', true);
+                $('#drpMvgr4').trigger('change');
             });
 
-            $('#export-excel').click(function () {
-                exportTableToExcel('tblStock');
+            $('#download-xlsx').click(function () {
+                document.getElementById("div-message-excel").style.display = "none";
+                var count = table.data().count();
+                if (count > 0) {
+                    var filename = $("#p-selection").html() + '.xlsx';
+                    exportTableToExcel('tblStock', filename);
+                }
+                else {
+                    document.getElementById("div-message-excel").style.display = "block";
+                }
             });
 
             function exportTableToExcel(tableID, filename = '') {
@@ -202,7 +255,7 @@
                 var tableSelect = document.getElementById(tableID);
                 var tableHTML = tableSelect.outerHTML.replace(/ /g, '%20');
 
-                filename = filename ? filename + '.xlsx' : 'excel_data.xlsx';
+                filename = filename ? filename + '.xlsx' : 'stok_listesi.xlsx';
 
                 downloadLink = document.createElement("a");
                 document.body.appendChild(downloadLink);
