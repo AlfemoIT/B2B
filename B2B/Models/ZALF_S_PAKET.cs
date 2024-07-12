@@ -29,7 +29,7 @@ namespace B2B.Models
             get
             {
                 CultureInfo info = new CultureInfo("tr-TR");
-                info.NumberFormat.NumberDecimalSeparator = ",";
+                info.NumberFormat.NumberDecimalSeparator = ".";
 
                 double amount = 0;
                 if (!string.IsNullOrEmpty(ANPD))
@@ -47,7 +47,7 @@ namespace B2B.Models
             get
             {
                 CultureInfo info = new CultureInfo("tr-TR");
-                info.NumberFormat.NumberDecimalSeparator = ",";
+                info.NumberFormat.NumberDecimalSeparator = ".";
 
                 double amount = 0;
                 if (!string.IsNullOrEmpty(MRSN))
@@ -65,7 +65,7 @@ namespace B2B.Models
             get
             {
                 CultureInfo info = new CultureInfo("tr-TR");
-                info.NumberFormat.NumberDecimalSeparator = ",";
+                info.NumberFormat.NumberDecimalSeparator = ".";
 
                 double amount = 0;
                 if (!string.IsNullOrEmpty(A049))
@@ -83,7 +83,7 @@ namespace B2B.Models
             get
             {
                 CultureInfo info = new CultureInfo("tr-TR");
-                info.NumberFormat.NumberDecimalSeparator = ",";
+                info.NumberFormat.NumberDecimalSeparator = ".";
 
                 double amount = 0;
                 if (!string.IsNullOrEmpty(SEVK))
