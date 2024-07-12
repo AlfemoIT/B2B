@@ -489,6 +489,7 @@
     <Content Include="Content\jquery-ui\Aristo\images\ui-icons_454545_256x240.png" />
     <Content Include="Content\jquery-ui\external\globalize.js" />
     <Content Include="Content\jquery-ui\jquery-ui-1.10.0.custom.min.js" />
+    <Content Include="Content\select2.min.css" />
     <Content Include="Content\sticky\sticky.css" />
     <Content Include="Content\style.css" />
     <Content Include="Content\tabular\tabulator.css" />
@@ -757,6 +758,7 @@
     <Content Include="Scripts\jBreadcrumbs\jquery.jBreadCrumb.1.1.min.js" />
     <Content Include="Scripts\jquery.wookmark.js" />
     <Content Include="Scripts\jquery_cookie_min.js" />
+    <Content Include="Scripts\select2.min.js" />
     <Content Include="Scripts\selectNav.js" />
     <Content Include="Scripts\slimScroll\jquery.slimscroll.js" />
     <Content Include="Scripts\sticky\sticky.min.js" />

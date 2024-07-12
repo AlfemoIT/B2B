@@ -61,21 +61,6 @@ namespace B2B.Controllers
                 Password = "Alfemo!2024_!"
             };
 
-            if (mvgr2 == "null")
-            {
-                mvgr2 = string.Empty;
-            }
-
-            if (mvgr3 == "null")
-            {
-                mvgr3 = string.Empty;
-            }
-
-            if (mvgr4 == "null")
-            {
-                mvgr4 = string.Empty;
-            }
-
             var sonuc = client.GetObservedStock(hd, sortl, mvgr2, mvgr3, mvgr4);
             if (!string.IsNullOrEmpty(sonuc))
             {
@@ -90,7 +75,7 @@ namespace B2B.Controllers
             else if (sortl.Equals("PERAKENDE"))
             {
                 pakets = pakets.Where(x => int.Parse(x.CMPT_SEVK + x.CMPT_MRSN + x.CMPT_A049 + x.CMPT_ANPD) > 0)
-                              .ToList();
+                               .ToList();
             }
 
             return Json(new { data = pakets }, JsonRequestBehavior.AllowGet);

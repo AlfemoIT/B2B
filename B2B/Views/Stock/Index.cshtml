@@ -42,7 +42,7 @@
     </div>
 
     <div class="col-sm-12 col-md-12">
-        <div class="col-sm-10">
+        <div class="col-sm-9">
             <form>
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Ana Grup :</label>
@@ -73,7 +73,7 @@
             </form>
         </div>
 
-        <div id="div-message" class="col-sm-2" style="display:none">
+        <div id="div-message" class="col-sm-3" style="display:none">
             <div class='alert alert-danger alert-dismissable'>
                 Ana Grup, Koleksiyon veya Ürün Tipi alanlarından birinin seçilmesi zorunludur.
             </div>
@@ -81,6 +81,9 @@
     </div>
 
     <div class="col-sm-12 col-md-12 heading" style="margin-top:135px">
+        <button id="export-excel" class="btn-default float-right" style="margin-top: 12px;">
+            Excel
+        </button>
     </div>
 
     <div class="col-sm-12 col-md-12">
@@ -90,23 +93,18 @@
 </div>
 
 @section Scripts{
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-
     <script type="text/javascript">
         $(document).ready(function () {
-            $('.js-example-basic-single').select2({
-                allowClear: true
-            });
+            $('.js-example-basic-single').select2();
 
             const optionSelection = document.createElement('option');
             optionSelection.value = '';
             optionSelection.textContent = 'Seçiniz';
 
             $.ajax({
-                  url: '@Url.Action("GetMaterialGrub", "Stock")',
-                  type: 'POST',
-                  contentType: 'application/json',
+                url: '@Url.Action("GetMaterialGrub", "Stock")',
+                type: 'POST',
+                contentType: 'application/json',
                 success: function (response) {
                     const drpMvgr3 = document.getElementById('drpMvgr3');
                     $.each(response.data.tvm3ts, function (index, mvm3t) {
@@ -122,11 +120,11 @@
                     $.each(response.data.tvm2ts, function (index, mvm2t) {
                         const optionElement = document.createElement('option');
 
-                          optionElement.value = mvm2t.MVGR2;
-                          optionElement.textContent = mvm2t.BEZEI;
+                            optionElement.value = mvm2t.MVGR2;
+                            optionElement.textContent = mvm2t.BEZEI;
 
-                          drpMvgr2.appendChild(optionElement);
-                      });
+                            drpMvgr2.appendChild(optionElement);
+                        });
 
                     const drpMvgr4 = document.getElementById('drpMvgr4');
                     $.each(response.data.tvm4ts, function (index, mvm4t) {
@@ -136,11 +134,11 @@
                         optionElement.textContent = mvm4t.BEZEI;
 
                         drpMvgr4.appendChild(optionElement);
-                      });
-                  },
-                  error: function () {
+                    });
+                },
+                error: function () {
                     alert('Error: ' + error);
-                  }
+                }
             });
 
             var table = $('#tblStock').DataTable({
@@ -148,9 +146,8 @@
                     url: "//cdn.datatables.net/plug-ins/1.11.3/i18n/tr.json",
                    'processing': '<i class="fa fa-spinner fa-spin fa-3x fa-fw"></i><span class="sr-only">Loading...</span>'
                 },
-                processing: true, // for show progress bar,
+                processing: true,
                 retrieve: true,
-               /* buttons: [ 'excel'],*/
                 columns: [
                     { "title": "Malzeme","data": "MATNR"  },
                     { "title": "Malzeme Kısa Metni", "data": "MAKTX" },
@@ -194,6 +191,40 @@
 
                 table.ajax.url('/Stock/GetData?sortl=' + $("#kna1-sortl").val() + '&mvgr2=' + mvgr2 +'&mvgr3=' + mvgr3 + '&mvgr4=' + mvgr4).load();
             });
+
+            $('#export-excel').click(function () {
+                exportTableToExcel('tblStock');
+            });
+
+            function exportTableToExcel(tableID, filename = '') {
+                var downloadLink;
+                var dataType = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
+                var tableSelect = document.getElementById(tableID);
+                var tableHTML = tableSelect.outerHTML.replace(/ /g, '%20');
+
+                filename = filename ? filename + '.xlsx' : 'excel_data.xlsx';
+
+                downloadLink = document.createElement("a");
+                document.body.appendChild(downloadLink);
+
+                var wb = XLSX.utils.table_to_book(tableSelect, { sheet: "Sheet1" });
+                var wbout = XLSX.write(wb, { bookType: 'xlsx', type: 'binary' });
+
+                function s2ab(s) {
+                    var buf = new ArrayBuffer(s.length);
+                    var view = new Uint8Array(buf);
+                    for (var i = 0; i < s.length; i++) view[i] = s.charCodeAt(i) & 0xFF;
+                    return buf;
+                }
+
+                var blob = new Blob([s2ab(wbout)], { type: dataType });
+
+                var url = URL.createObjectURL(blob);
+                downloadLink.href = url;
+                downloadLink.download = filename;
+                downloadLink.click();
+                document.body.removeChild(downloadLink);
+            }
         });
     </script>
 }
