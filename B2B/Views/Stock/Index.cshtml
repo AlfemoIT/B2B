@@ -108,10 +108,6 @@
         $(document).ready(function () {
             $('.js-example-basic-single').select2();
 
-            const optionSelection = document.createElement('option');
-            optionSelection.value = 0;
-            optionSelection.textContent = 'Seçiniz';
-
             $.ajax({
                 url: '@Url.Action("GetMaterialGrub", "Stock")',
                 type: 'POST',
@@ -135,7 +131,7 @@
                             optionElement.textContent = mvm2t.BEZEI;
 
                             drpMvgr2.appendChild(optionElement);
-                        });
+                     });
 
                     const drpMvgr4 = document.getElementById('drpMvgr4');
                     $.each(response.data.tvm4ts, function (index, mvm4t) {
@@ -249,34 +245,58 @@
                 }
             });
 
-            function exportTableToExcel(tableID, filename = '') {
-                var downloadLink;
-                var dataType = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
-                var tableSelect = document.getElementById(tableID);
-                var tableHTML = tableSelect.outerHTML.replace(/ /g, '%20');
+            var headers;
+            function exportTableToExcel(tableID, filename) {
+                switch ($("#kna1-sortl").val()) {
+                    case 'BAYI':
+                        headers = ['MATNR', 'MAKTX', 'LONG_MAKTX', 'BEZEI2', 'BEZEI3', 'BEZEI4', 'BEZEI5','CMPT_SEVK'];
+                        break;
+                    default:
+                        headers = ['MATNR', 'MAKTX', 'LONG_MAKTX', 'BEZEI2', 'BEZEI3', 'BEZEI4', 'BEZEI5',
+                                   'CMPT_ANPD', 'CMPT_MRSN', 'CMPT_A049', 'CMPT_SEVK'];
+                        break;
+                }
 
-                filename = filename ? filename + '.xlsx' : 'stok_listesi.xlsx';
+                var exportTable = $('<table>');
+                var thead = $('<thead>');
+                var tbody = $('<tbody>');
 
-                downloadLink = document.createElement("a");
-                document.body.appendChild(downloadLink);
+                // Append header row
+                $('#tblStock thead tr').clone().appendTo(thead);
+                thead.appendTo(exportTable);
 
-                var wb = XLSX.utils.table_to_book(tableSelect, { sheet: "Sheet1" });
+                // Append data rows
+                var data = table.rows().data().toArray();
+                data.forEach(function (row) {
+                    var tr = $('<tr>');
+                    headers.forEach(function (header) {
+                        $('<td>').text(row[header]).appendTo(tr);
+                    });
+                    tr.appendTo(tbody);
+                });
+                tbody.appendTo(exportTable);
+
+                // Convert the export table to an Excel file
+                var wb = XLSX.utils.table_to_book(exportTable[0], { sheet: "Sheet1" });
                 var wbout = XLSX.write(wb, { bookType: 'xlsx', type: 'binary' });
 
                 function s2ab(s) {
                     var buf = new ArrayBuffer(s.length);
                     var view = new Uint8Array(buf);
-                    for (var i = 0; i < s.length; i++) view[i] = s.charCodeAt(i) & 0xFF;
+                    for (var i = 0; i < s.length; i++) {
+                        view[i] = s.charCodeAt(i) & 0xFF;
+                    }
                     return buf;
                 }
 
-                var blob = new Blob([s2ab(wbout)], { type: dataType });
-
-                var url = URL.createObjectURL(blob);
-                downloadLink.href = url;
-                downloadLink.download = filename;
-                downloadLink.click();
-                document.body.removeChild(downloadLink);
+                var blob = new Blob([s2ab(wbout)], { type: "application/octet-stream" });
+                var link = document.createElement('a');
+                link.href = URL.createObjectURL(blob);
+                link.download = 'table_export.xlsx';
+                link.download = filename;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
             }
         });
     </script>
