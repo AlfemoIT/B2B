@@ -94,7 +94,10 @@ namespace B2B.Models
                 return amount.ToString();
             }
         }
-
         public string VRKME { get; set; }
+        public string LVORM { get; set; } //silme isareti
+        public string VMSTA { get; set; } //blokaj
+        public string IS_EXIST_PRICE { get; set; } //fiyat durumu
+
     }
 }

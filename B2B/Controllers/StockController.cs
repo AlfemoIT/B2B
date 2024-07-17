@@ -45,6 +45,14 @@ namespace B2B.Controllers
                 grub = JsonConvert.DeserializeObject<MATERIAL_GRUB>(sonuc);
             }
 
+            try
+            {
+                grub.tvm3ts = grub.tvm3ts.OrderBy(x => x.BEZEI).ToList();
+                grub.tvm2ts = grub.tvm2ts.OrderBy(x => x.BEZEI).ToList();
+                grub.tvm4ts = grub.tvm4ts.OrderBy(x => x.BEZEI).ToList();
+            }
+            catch (Exception) { }
+
             var jsonResult = Json(new { data = grub }, JsonRequestBehavior.AllowGet);
             jsonResult.MaxJsonLength = int.MaxValue;
             return jsonResult;

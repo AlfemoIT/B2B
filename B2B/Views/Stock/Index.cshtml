@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Stok Listesi";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -31,17 +31,17 @@
 </div>
 
 <div class="row">
-    <a id="btn-execute" class="btn btn-default btn-etiket float-left heading" style="position: relative; left: 13px;">
+    <button id="btn-execute" class="btn btn-default btn-etiket float-left heading" style="position: relative; left: 13px;">
         <i class="fa fa-check"></i>
         Yürüt
-    </a>
+    </button>
 
     <div class="col-sm-12 col-md-12" style="margin-top:30px">
         <h3 class="heading">
-            <a id="download-xlsx" class="btn btn-default btn-etiket" href="#" style="position: relative; bottom: 41px;">
+            <button id="download-xlsx" class="btn btn-default btn-etiket" href="#" style="position: relative; bottom: 41px;">
                 <img src="~/img/xls.png" />
                 <span class="font-size-13">Excel'e Aktar</span>
-            </a>
+            </button>
         </h3>
     </div>
 
@@ -104,9 +104,12 @@
 </div>
 
 @section Scripts{
+    @*<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>*@
     <script type="text/javascript">
         $(document).ready(function () {
             $('.js-example-basic-single').select2();
+
+            $("#download-xlsx").prop("disabled", true);
 
             $.ajax({
                 url: '@Url.Action("GetMaterialGrub", "Stock")',
@@ -168,12 +171,27 @@
                     { "title": "İstanbul Stok", "data": "CMPT_A049" },
                     { "title": "Fabrika Stok", "data": "CMPT_SEVK" }
                 ],
-                columnDefs: [
-                    {
-                        targets: '_all',
-                        className: 'dt-left'
-                    }
-                ]
+                initComplete: function (settings, json) {
+                    $("#btn-execute").prop("disabled", false);
+                }
+            });
+
+            table.on('xhr', function (e, settings, json, xhr) {
+                $("#btn-execute").prop("disabled", false);
+                $("#download-xlsx").prop("disabled", false);
+
+                $('#drpMvgr2 option:first').prop('selected', true);
+                $('#drpMvgr2').trigger('change');
+
+                $('#drpMvgr3 option:first').prop('selected', true);
+                $('#drpMvgr3').trigger('change');
+
+                $('#drpMvgr4 option:first').prop('selected', true);
+                $('#drpMvgr4').trigger('change');
+
+                $('#drpMvgr2').prop('disabled', false).trigger('change.select2');
+                $('#drpMvgr3').prop('disabled', false).trigger('change.select2');
+                $('#drpMvgr4').prop('disabled', false).trigger('change.select2');
             });
 
             setTimeout(function () {
@@ -189,6 +207,9 @@
                 document.getElementById("div-message-excel").style.display = "none";
 
                 $("#p-selection").html('');
+                table.clear().draw();
+
+                disableElements();
 
                 var mvgr3 = $('#drpMvgr3').val();
                 var bezei3 = $('#drpMvgr3 option:selected').text();
@@ -216,21 +237,13 @@
 
                 if (mvgr2 == 0 && mvgr3 == 0 && mvgr4 == 0) {
                     document.getElementById("div-message").style.display = "block";
+                    $("#btn-execute").prop('disabled', false);
                     return;
                 }
 
                 $("#p-selection").html(bezei3 + bezei2 + bezei4+' listesi');
 
                 table.ajax.url('/Stock/GetData?sortl=' + $("#kna1-sortl").val() + '&mvgr2=' + mvgr2 + '&mvgr3=' + mvgr3 + '&mvgr4=' + mvgr4).load();
-
-                $('#drpMvgr2 option:first').prop('selected', true);
-                $('#drpMvgr2').trigger('change');
-
-                $('#drpMvgr3 option:first').prop('selected', true);
-                $('#drpMvgr3').trigger('change');
-
-                $('#drpMvgr4 option:first').prop('selected', true);
-                $('#drpMvgr4').trigger('change');
             });
 
             $('#download-xlsx').click(function () {
@@ -297,6 +310,14 @@
                 document.body.appendChild(link);
                 link.click();
                 document.body.removeChild(link);
+            }
+
+            function disableElements() {
+                $("#btn-execute").prop("disabled", true);
+                $("#download-xlsx").prop("disabled", true);
+                $('#drpMvgr2').prop('disabled', true).trigger('change.select2');
+                $('#drpMvgr3').prop('disabled', true).trigger('change.select2');
+                $('#drpMvgr4').prop('disabled', true).trigger('change.select2');
             }
         });
     </script>
