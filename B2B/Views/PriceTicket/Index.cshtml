@@ -71,7 +71,7 @@
         $(function () {
             $('#tblPriceTicket').DataTable({
                 language: {
-                    url: "//cdn.datatables.net/plug-ins/1.11.3/i18n/tr.json"
+                    url: "@Url.Content("~/Content/tr.json")",
                 },
                 ajax:
                 {
@@ -99,7 +99,7 @@
 
             $('#tblPriceFile').DataTable({
                 language: {
-                    url: "//cdn.datatables.net/plug-ins/1.11.3/i18n/tr.json"
+                    url: "@Url.Content("~/Content/tr.json")",
                 },
                 ajax:
                 {

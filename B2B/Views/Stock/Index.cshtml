@@ -1,0 +1,334 @@
+﻿@{
+    ViewBag.Title = "Stok Listesi";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model B2B.Models.KNA1
+
+<style>
+    div.dt-processing > div:last-child {
+        display: none;
+    }
+
+    .fa-3x {
+        font-size: 4.5em;
+    }
+</style>
+
+<input type="hidden" id="kna1-sortl" name="kna1-sortl" value="@Model.SORTL" />
+
+<div id="jCrumbs" class="breadCrumb module">
+    <ul>
+        <li>
+            <a href="#">
+                <i class="glyphicon glyphicon-home"></i>
+            </a>
+        </li>
+        <li style="background: none;">
+            <span style="width: 50px;"><a href="#" style="width: 83px;">Satış</a></span>
+            <div class="chevronOverlay" style="display: block;"></div>
+        </li>
+        <li>
+            Stok Listesi
+        </li>
+    </ul>
+</div>
+
+<div class="row">
+    <button id="btn-execute" class="btn btn-default btn-etiket float-left heading" style="position: relative; left: 13px;">
+        <i class="fa fa-check"></i>
+        Yürüt
+    </button>
+
+    <div class="col-sm-12 col-md-12" style="margin-top:30px">
+        <h3 class="heading">
+            <button id="download-xlsx" class="btn btn-default btn-etiket" href="#" style="position: relative; bottom: 41px;">
+                <img src="~/img/xls.png" />
+                <span class="font-size-13">Excel'e Aktar</span>
+            </button>
+        </h3>
+    </div>
+
+    <div class="col-sm-12 col-md-12">
+        <div class="col-sm-9">
+            <form>
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Ana Grup :</label>
+                    <div class="col-sm-3">
+                        <select id="drpMvgr3" class="form-control js-example-basic-single">
+                            <option value="">Seçiniz</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Koleksiyon :</label>
+                    <div class="col-sm-3">
+                        <select id="drpMvgr2" class="form-control js-example-basic-single">
+                            <option value="">Seçiniz</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label" style="margin-bottom:18px">Ürün Tipi :</label>
+                    <div class="col-sm-3">
+                        <select id="drpMvgr4" class="form-control js-example-basic-single">
+                            <option value="">Seçiniz</option>
+                        </select>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div id="div-message" class="col-sm-3" style="display:none">
+            <div class='alert alert-danger alert-dismissable'>
+                Ana Grup, Koleksiyon veya Ürün Tipi alanlarından birinin seçilmesi zorunludur.
+            </div>
+        </div>
+
+        <div id="div-message-excel" class="col-sm-3" style="display:none">
+            <div class='alert alert-warning alert-dismissable'>
+                Tabloda veri bulunmamaktadır.
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-12 col-md-12 heading" style="margin-top:135px">
+    </div>
+
+    <div class="col-sm-12 col-md-12">
+        <div id="div-selection" class="col-sm-12">
+            <p id="p-selection"></p>
+        </div>
+
+        <table class="table table-striped table-bordered dTableR" id="tblStock">
+        </table>
+    </div>
+
+    <div id="freezeOverlay"></div>
+</div>
+
+@section Scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.js-example-basic-single').select2();
+
+            $("#download-xlsx").prop("disabled", true);
+
+            $.ajax({
+                url: '@Url.Action("GetMaterialGrub", "Stock")',
+                type: 'POST',
+                contentType: 'application/json',
+                success: function (response) {
+                    const drpMvgr3 = document.getElementById('drpMvgr3');
+                    $.each(response.data.tvm3ts, function (index, mvm3t) {
+                        const optionElement = document.createElement('option');
+
+                        optionElement.value = mvm3t.MVGR3;
+                        optionElement.textContent = mvm3t.BEZEI;
+
+                        drpMvgr3.appendChild(optionElement);
+                    });
+
+                    const drpMvgr2 = document.getElementById('drpMvgr2');
+                    $.each(response.data.tvm2ts, function (index, mvm2t) {
+                        const optionElement = document.createElement('option');
+
+                            optionElement.value = mvm2t.MVGR2;
+                            optionElement.textContent = mvm2t.BEZEI;
+
+                            drpMvgr2.appendChild(optionElement);
+                     });
+
+                    const drpMvgr4 = document.getElementById('drpMvgr4');
+                    $.each(response.data.tvm4ts, function (index, mvm4t) {
+                        const optionElement = document.createElement('option');
+
+                        optionElement.value = mvm4t.MVGR4;
+                        optionElement.textContent = mvm4t.BEZEI;
+
+                        drpMvgr4.appendChild(optionElement);
+                    });
+                },
+                error: function () {
+                    alert('Error: ' + error);
+                }
+            });
+
+            var table = $('#tblStock').DataTable({
+                language: {
+                    url: "@Url.Content("~/Content/tr.json")",
+                   'processing': '<i class="fa fa-spinner fa-spin fa-3x fa-fw"></i><span class="sr-only">Loading...</span>'
+                },
+                processing: true,
+                retrieve: true,
+                columns: [
+                    { "title": "Malzeme","data": "MATNR"  },
+                    { "title": "Malzeme Kısa Metni", "data": "MAKTX" },
+                    { "title": "Malzeme Uzun Metni","data": "LONG_MAKTX" },
+                    { "title": "Koleksiyon","data": "BEZEI2" },
+                    { "title": "Ana Grup","data": "BEZEI3" },
+                    { "title":"Ürün Tipi","data": "BEZEI4" },
+                    { "title": "Ürün Biçimi","data": "BEZEI5" },
+                    { "title": "Ankara Stok", "data": "CMPT_ANPD" },
+                    { "title": "Mersin Stok", "data": "CMPT_MRSN" },
+                    { "title": "İstanbul Stok", "data": "CMPT_A049" },
+                    { "title": "Fabrika Stok", "data": "CMPT_SEVK" }
+                ],
+                initComplete: function (settings, json) {
+                    $("#btn-execute").prop("disabled", false);
+                }
+            });
+
+            table.on('xhr', function (e, settings, json, xhr) {
+                $('#freezeOverlay').hide();
+
+                $("#btn-execute").prop("disabled", false);
+                $("#download-xlsx").prop("disabled", false);
+
+                $('#drpMvgr2 option:first').prop('selected', true);
+                $('#drpMvgr2').trigger('change');
+
+                $('#drpMvgr3 option:first').prop('selected', true);
+                $('#drpMvgr3').trigger('change');
+
+                $('#drpMvgr4 option:first').prop('selected', true);
+                $('#drpMvgr4').trigger('change');
+
+                $('#drpMvgr2').prop('disabled', false).trigger('change.select2');
+                $('#drpMvgr3').prop('disabled', false).trigger('change.select2');
+                $('#drpMvgr4').prop('disabled', false).trigger('change.select2');
+            });
+
+            setTimeout(function () {
+                if ($("#kna1-sortl").val() == 'BAYI') {
+                    table.column(7).visible(false);
+                    table.column(8).visible(false);
+                    table.column(9).visible(false);
+                }
+            }, 200);
+
+            $("#btn-execute").click(function () {
+                document.getElementById("div-message").style.display = "none";
+                document.getElementById("div-message-excel").style.display = "none";
+
+                $("#p-selection").html('');
+                table.clear().draw();
+
+                disableElements();
+
+                var mvgr3 = $('#drpMvgr3').val();
+                var bezei3 = $('#drpMvgr3 option:selected').text();
+                if (bezei3 == "Seçiniz") {
+                    bezei3 = "";
+                }
+
+                var mvgr2 = $('#drpMvgr2').val();
+                var bezei2 = $('#drpMvgr2 option:selected').text();
+                if (bezei2 == "Seçiniz") {
+                    bezei2 = "";
+                }
+                else if (bezei3 != ""){
+                    bezei2 = ' / ' + bezei2;
+                }
+
+                var mvgr4 = $('#drpMvgr4').val();
+                var bezei4 = $('#drpMvgr4 option:selected').text();
+                if (bezei4 == "Seçiniz") {
+                    bezei4 = "";
+                }
+                else if (bezei3 != "" || bezei2!=""){
+                    bezei4 = ' / ' + bezei4;
+                }
+
+                if (mvgr2 == 0 && mvgr3 == 0 && mvgr4 == 0) {
+                    document.getElementById("div-message").style.display = "block";
+                    $("#btn-execute").prop('disabled', false);
+                    return;
+                }
+
+                $("#p-selection").html(bezei3 + bezei2 + bezei4+' Listesi');
+
+                table.ajax.url('/Stock/GetData?sortl=' + $("#kna1-sortl").val() + '&mvgr2=' + mvgr2 + '&mvgr3=' + mvgr3 + '&mvgr4=' + mvgr4).load();
+            });
+
+            $('#download-xlsx').click(function () {
+                document.getElementById("div-message-excel").style.display = "none";
+                var count = table.data().count();
+                if (count > 0) {
+                    var filename = $("#p-selection").html() + '.xlsx';
+                    exportTableToExcel('tblStock', filename);
+                }
+                else {
+                    document.getElementById("div-message-excel").style.display = "block";
+                }
+            });
+
+            var headers;
+            function exportTableToExcel(tableID, filename) {
+                switch ($("#kna1-sortl").val()) {
+                    case 'BAYI':
+                        headers = ['MATNR', 'MAKTX', 'LONG_MAKTX', 'BEZEI2', 'BEZEI3', 'BEZEI4', 'BEZEI5','CMPT_SEVK'];
+                        break;
+                    default:
+                        headers = ['MATNR', 'MAKTX', 'LONG_MAKTX', 'BEZEI2', 'BEZEI3', 'BEZEI4', 'BEZEI5',
+                                   'CMPT_ANPD', 'CMPT_MRSN', 'CMPT_A049', 'CMPT_SEVK'];
+                        break;
+                }
+
+                var exportTable = $('<table>');
+                var thead = $('<thead>');
+                var tbody = $('<tbody>');
+
+                // Append header row
+                $('#tblStock thead tr').clone().appendTo(thead);
+                thead.appendTo(exportTable);
+
+                // Append data rows
+                var data = table.rows().data().toArray();
+                data.forEach(function (row) {
+                    var tr = $('<tr>');
+                    headers.forEach(function (header) {
+                        $('<td>').text(row[header]).appendTo(tr);
+                    });
+                    tr.appendTo(tbody);
+                });
+                tbody.appendTo(exportTable);
+
+                // Convert the export table to an Excel file
+                var wb = XLSX.utils.table_to_book(exportTable[0], { sheet: "Sheet1" });
+                var wbout = XLSX.write(wb, { bookType: 'xlsx', type: 'binary' });
+
+                function s2ab(s) {
+                    var buf = new ArrayBuffer(s.length);
+                    var view = new Uint8Array(buf);
+                    for (var i = 0; i < s.length; i++) {
+                        view[i] = s.charCodeAt(i) & 0xFF;
+                    }
+                    return buf;
+                }
+
+                var blob = new Blob([s2ab(wbout)], { type: "application/octet-stream" });
+                var link = document.createElement('a');
+                link.href = URL.createObjectURL(blob);
+                link.download = 'table_export.xlsx';
+                link.download = filename;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            }
+
+            function disableElements() {
+                $("#btn-execute").prop("disabled", true);
+                $("#download-xlsx").prop("disabled", true);
+                $('#drpMvgr2').prop('disabled', true).trigger('change.select2');
+                $('#drpMvgr3').prop('disabled', true).trigger('change.select2');
+                $('#drpMvgr4').prop('disabled', true).trigger('change.select2');
+                $('#freezeOverlay').show();
+            }
+        });
+    </script>
+}
+
+
