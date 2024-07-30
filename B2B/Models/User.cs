@@ -9,7 +9,7 @@ namespace B2B.Models
     {
         public User()
         {
-            CompanyAssignments = new List<CompanyAssignment>();
+            CustomerAssignment = new List<CustomerAssignment>();
         }
         public int ID { get; set; }
         public int UserGroupID { get; set; }
@@ -21,6 +21,6 @@ namespace B2B.Models
 
         public virtual Role Role { get; set; }
         public virtual UserGroup UserGroup { get; set; }
-        public ICollection<CompanyAssignment> CompanyAssignments { get; set; }
+        public ICollection<CustomerAssignment> CustomerAssignment { get; set; }
     }
 }

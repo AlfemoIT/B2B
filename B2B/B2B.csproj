@@ -319,9 +319,18 @@
     <Compile Include="Migrations\202407291451542_SalesOffice.designer.cs">
       <DependentUpon>202407291451542_SalesOffice.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202407300613026_RemoveColumnDesc.cs" />
+    <Compile Include="Migrations\202407300613026_RemoveColumnDesc.designer.cs">
+      <DependentUpon>202407300613026_RemoveColumnDesc.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202407300713382_ChangeTableCompany.cs" />
+    <Compile Include="Migrations\202407300713382_ChangeTableCompany.designer.cs">
+      <DependentUpon>202407300713382_ChangeTableCompany.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\Company.cs" />
-    <Compile Include="Models\CompanyAssignment.cs" />
+    <Compile Include="Models\Customer.cs" />
+    <Compile Include="Models\CustomerAssignment.cs" />
+    <Compile Include="Models\CustomerGroup.cs" />
     <Compile Include="Models\FIY_TICKET.cs" />
     <Compile Include="Models\KNA1.cs" />
     <Compile Include="Models\KONA.cs" />
@@ -873,6 +882,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202407291451542_SalesOffice.resx">
       <DependentUpon>202407291451542_SalesOffice.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202407300613026_RemoveColumnDesc.resx">
+      <DependentUpon>202407300613026_RemoveColumnDesc.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202407300713382_ChangeTableCompany.resx">
+      <DependentUpon>202407300713382_ChangeTableCompany.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Resource.en-US.resx" />
     <EmbeddedResource Include="Resource.resx">

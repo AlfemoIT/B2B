@@ -5,9 +5,9 @@ using System.Web;
 
 namespace B2B.Models
 {
-    public class SalesOffice
+    public class CustomerGroup
     {
-        public SalesOffice() //bolgeler
+        public CustomerGroup()
         {
             Customers = new List<Customer>();
         }
