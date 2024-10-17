@@ -8,7 +8,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Alfemo</title>
-    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link href="~/Content/blue.css" rel="stylesheet" />
     <link href="~/Content/gtip2/jquery.qtip.min.css" rel="stylesheet" />
     <link href="~/Content/style.css" rel="stylesheet" />
@@ -20,7 +20,7 @@
             background: url(/img/alfemo/penta-koltuk-tkm.jpg);
             background-repeat: no-repeat;
             background-size: 100% 100%;
-            opacity: 0.3;
+            opacity: 0.5;
             top: 0;
             left: 0;
             bottom: 0;
@@ -33,7 +33,7 @@
 <body>
     <div class="login_box">
         <div class="top_b">
-            <img src="~/alfemo.png" alt="logo.svg (43 KB)" width="160" style="border-radius:1px">
+            <img src="~/alfemo.png" alt="logo.svg (43 KB)" width="170" height="26" style="border-radius:1px">
         </div>
 
         @Html.Raw(ViewBag.Message)
@@ -48,25 +48,29 @@
                         </span>
                         <input class="form-control input-sm"
                                type="text"
-                               id="STCD2"
-                               name="STCD2"
-                               maxlength="11"
-                               placeholder="TC/Mağaza No"
-                               onkeypress='validate(event)' />
+                               id="RegistrationNo"
+                               name="RegistrationNo"
+                               placeholder="Kullanıcı" />
                     </div>
                 </div>
 
                 <div class="form-group">
                     <div class="input-group">
                         <span class="input-group-addon input-sm">
-                            <i class="glyphicon glyphicon-phone-alt"></i>
+                            <i class="glyphicon glyphicon-lock"></i>
                         </span>
                         <input class="form-control input-sm"
-                               type="text"
-                               id="TELF1" name="TELF1"
-                               placeholder="(xxx) xxx-xxxx"
+                               type="password"
+                               id="Password" name="Password"
+                               placeholder="********"
                                autocomplete="off" />
                     </div>
+                </div>
+
+                <div class="form-group">
+                    <span class="linkform">
+                        <a href="#pass_form">Şifremi unutttum</a>
+                    </span>
                 </div>
             </div>
 
@@ -91,12 +95,9 @@
 
         function validate(evt) {
             var theEvent = evt || window.event;
-
-            // Handle paste
             if (theEvent.type === 'paste') {
                 key = event.clipboardData.getData('text/plain');
             } else {
-                // Handle key press
                 var key = theEvent.keyCode || theEvent.which;
                 key = String.fromCharCode(key);
             }

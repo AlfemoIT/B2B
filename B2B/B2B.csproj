@@ -327,6 +327,10 @@
     <Compile Include="Migrations\202407300713382_ChangeTableCompany.designer.cs">
       <DependentUpon>202407300713382_ChangeTableCompany.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202407301153028_AddColumnRegistration.cs" />
+    <Compile Include="Migrations\202407301153028_AddColumnRegistration.designer.cs">
+      <DependentUpon>202407301153028_AddColumnRegistration.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\CustomerAssignment.cs" />
@@ -561,6 +565,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="img\alfemo\tiamo-small-koltuk-tkm.jpg" />
     <Content Include="img\pdf-icon.png" />
     <Content Include="img\xls.png" />
     <Content Include="img\acc_icons.png" />
@@ -888,6 +893,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202407300713382_ChangeTableCompany.resx">
       <DependentUpon>202407300713382_ChangeTableCompany.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202407301153028_AddColumnRegistration.resx">
+      <DependentUpon>202407301153028_AddColumnRegistration.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Resource.en-US.resx" />
     <EmbeddedResource Include="Resource.resx">

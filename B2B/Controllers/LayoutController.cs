@@ -23,14 +23,14 @@ namespace B2B.Controllers
         {
             return PartialView(GetUser());
         }
-        public KNA1 GetUser()
+        public User GetUser()
         {
             var formsIdentity = HttpContext.User.Identity as FormsIdentity;
             if (formsIdentity == null) { return null; }
 
             var ticket = formsIdentity.Ticket;
             var userData = ticket.UserData;
-            var user = JsonConvert.DeserializeObject<KNA1>(userData);
+            var user = JsonConvert.DeserializeObject<User>(userData);
             return user;
         }
     }
