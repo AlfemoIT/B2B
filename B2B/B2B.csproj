@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\EntityFramework.6.5.1\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.5.1\build\EntityFramework.props')" />
   <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -47,6 +48,12 @@
   <ItemGroup>
     <Reference Include="BouncyCastle.Crypto, Version=1.8.9.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
       <HintPath>..\packages\BouncyCastle.1.8.9\lib\BouncyCastle.Crypto.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.5.1\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.5.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="itextsharp, Version=5.5.13.3, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
       <HintPath>..\packages\iTextSharp.5.5.13.3\lib\itextsharp.dll</HintPath>
@@ -161,8 +168,8 @@
     <Reference Include="System.Text.Encodings.Web, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Text.Encodings.Web.8.0.0\lib\net462\System.Text.Encodings.Web.dll</HintPath>
     </Reference>
-    <Reference Include="System.Text.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Text.Json.8.0.0\lib\net462\System.Text.Json.dll</HintPath>
+    <Reference Include="System.Text.Json, Version=8.0.0.5, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Json.8.0.5\lib\net462\System.Text.Json.dll</HintPath>
     </Reference>
     <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
@@ -292,15 +299,50 @@
     <Compile Include="Controllers\ProductCardController.cs" />
     <Compile Include="Controllers\SalesOrderController.cs" />
     <Compile Include="Controllers\StockController.cs" />
+    <Compile Include="Dal\B2bContext.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202407291242126_InitialCreate.cs" />
+    <Compile Include="Migrations\202407291242126_InitialCreate.designer.cs">
+      <DependentUpon>202407291242126_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202407291434444_RemoveSubRole.cs" />
+    <Compile Include="Migrations\202407291434444_RemoveSubRole.designer.cs">
+      <DependentUpon>202407291434444_RemoveSubRole.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202407291442177_UserGroup.cs" />
+    <Compile Include="Migrations\202407291442177_UserGroup.designer.cs">
+      <DependentUpon>202407291442177_UserGroup.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202407291451542_SalesOffice.cs" />
+    <Compile Include="Migrations\202407291451542_SalesOffice.designer.cs">
+      <DependentUpon>202407291451542_SalesOffice.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202407300613026_RemoveColumnDesc.cs" />
+    <Compile Include="Migrations\202407300613026_RemoveColumnDesc.designer.cs">
+      <DependentUpon>202407300613026_RemoveColumnDesc.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202407300713382_ChangeTableCompany.cs" />
+    <Compile Include="Migrations\202407300713382_ChangeTableCompany.designer.cs">
+      <DependentUpon>202407300713382_ChangeTableCompany.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202407301153028_AddColumnRegistration.cs" />
+    <Compile Include="Migrations\202407301153028_AddColumnRegistration.designer.cs">
+      <DependentUpon>202407301153028_AddColumnRegistration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Customer.cs" />
+    <Compile Include="Models\CustomerAssignment.cs" />
+    <Compile Include="Models\CustomerGroup.cs" />
     <Compile Include="Models\FIY_TICKET.cs" />
     <Compile Include="Models\KNA1.cs" />
     <Compile Include="Models\KONA.cs" />
     <Compile Include="Models\MARA.cs" />
     <Compile Include="Models\MATERIAL_GRUB.cs" />
     <Compile Include="Models\PRODUCT_PRICE.cs" />
+    <Compile Include="Models\Role.cs" />
+    <Compile Include="Models\SalesOffice.cs" />
     <Compile Include="Models\Tree\Child.cs" />
     <Compile Include="Models\Tree\Root.cs" />
     <Compile Include="Models\Tree\State.cs" />
@@ -309,6 +351,8 @@
     <Compile Include="Models\TVM3T.cs" />
     <Compile Include="Models\TVM4T.cs" />
     <Compile Include="Models\TVM5T.cs" />
+    <Compile Include="Models\User.cs" />
+    <Compile Include="Models\UserGroup.cs" />
     <Compile Include="Models\VBAP.cs" />
     <Compile Include="Models\ZALF_SUTUNAD_T.cs" />
     <Compile Include="Models\ZALF_S_FIYAT_LIST.cs" />
@@ -521,6 +565,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="img\alfemo\tiamo-small-koltuk-tkm.jpg" />
     <Content Include="img\pdf-icon.png" />
     <Content Include="img\xls.png" />
     <Content Include="img\acc_icons.png" />
@@ -831,6 +876,27 @@
     <WCFMetadataStorage Include="Connected Services\ServiceTicket\" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Migrations\202407291242126_InitialCreate.resx">
+      <DependentUpon>202407291242126_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202407291434444_RemoveSubRole.resx">
+      <DependentUpon>202407291434444_RemoveSubRole.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202407291442177_UserGroup.resx">
+      <DependentUpon>202407291442177_UserGroup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202407291451542_SalesOffice.resx">
+      <DependentUpon>202407291451542_SalesOffice.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202407300613026_RemoveColumnDesc.resx">
+      <DependentUpon>202407300613026_RemoveColumnDesc.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202407300713382_ChangeTableCompany.resx">
+      <DependentUpon>202407300713382_ChangeTableCompany.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202407301153028_AddColumnRegistration.resx">
+      <DependentUpon>202407301153028_AddColumnRegistration.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resource.en-US.resx" />
     <EmbeddedResource Include="Resource.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -870,7 +936,10 @@
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.5.1\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.5.1\build\EntityFramework.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.5.1\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.5.1\build\EntityFramework.targets'))" />
   </Target>
+  <Import Project="..\packages\EntityFramework.6.5.1\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.5.1\build\EntityFramework.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
