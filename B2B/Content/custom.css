@@ -217,3 +217,44 @@ div.dt-processing {
 div.dt-container .dt-processing {
     color: #3993ba;
 }
+
+/*main content set full*/
+.main_content {
+    padding: 55px 30px 30px;
+    background: #fff;
+    border-left: 1px solid transparent;
+    margin-left: 240px;
+}
+
+#maincontainer {
+    border-right: 1px solid #ccc;
+    border-left: 1px solid #ccc;
+}
+
+.full_width .container {
+    max-width: 100%;
+}
+
+@media (min-width: 1681px) {
+    body {
+        max-width: 100%;
+        margin: 0 auto !important;
+    }
+
+    .sidebar {
+        left: 50%;
+        margin-left: -959px;
+    }
+
+
+    .sidebar_switch {
+        left: 50%;
+        margin-left: -739px;
+    }
+
+    .sidebar_hidden .sidebar_switch {
+        margin-left: -950px;
+        left: 50%;
+    }
+}
+/*main content set full*/

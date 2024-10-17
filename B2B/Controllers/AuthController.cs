@@ -1,4 +1,5 @@
-﻿using B2B.Models;
+﻿using B2B.Dal;
+using B2B.Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -18,10 +19,10 @@ namespace B2B.Controllers
         }
 
         [HttpPost]
-        public ActionResult Login(KNA1 kna1)
+        public ActionResult Login(User user)
         {
-            if (string.IsNullOrEmpty(kna1.STCD2) ||
-                string.IsNullOrEmpty(kna1.TELF1))
+            if (string.IsNullOrEmpty(user.RegistrationNo) ||
+                string.IsNullOrEmpty(user.Password))
             {
                 ViewBag.Message = String
                     .Concat("<div class='alert alert-warning alert-dismissable'>",
@@ -30,32 +31,29 @@ namespace B2B.Controllers
                 return View();
             }
 
-            var client = new ServiceAuth.WebServiceAuthSoapClient();
-            var hd = new ServiceAuth.AuthHeader()
+            using (var context = new B2bContext())
             {
-                Username = "AlfemoUB2B_ServiceUser",
-                Password = "Alfemo!2024_!"
-            };
+                var _user = context.Users.FirstOrDefault(x => x.RegistrationNo.Equals(user.RegistrationNo) &&
+                                                              x.Password.Equals(user.Password));
+                if (_user == null)
+                {
+                    ViewBag.Message = String
+                        .Concat("<div class='alert alert-danger alert-dismissable'>",
+                                "Giriş bilgilerinizi kontrol ediniz.",
+                                "</div>");
+                    return View();
+                }
 
-            var sonuc = client.AuthUser(hd, kna1.STCD2, kna1.TELF1);
-            if (sonuc.Contains("-111"))
-            {
-                ViewBag.Message = String
-                         .Concat("<div class='alert alert-danger alert-dismissable'>",
-                                  sonuc.Replace("-111-", string.Empty),
-                                 "</div>");
-                return View();
+                SetAuthCookie(_user);
+                return RedirectToAction("Index", "Home");
             }
-
-            SetAuthCookie(JsonConvert.DeserializeObject<KNA1>(sonuc));
-            return RedirectToAction("Index", "Home");
         }
-        private void SetAuthCookie(KNA1 user)
+        private void SetAuthCookie(User user)
         {
             var userData = JsonConvert.SerializeObject(user);
             var authTicket = new FormsAuthenticationTicket(
                   1,
-                  user.NAME1,
+                  user.NameSurname,
                   DateTime.Now,
                   DateTime.Now.AddMinutes(20),
                   false,

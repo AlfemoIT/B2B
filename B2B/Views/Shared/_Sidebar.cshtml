@@ -1,4 +1,4 @@
-﻿@model B2B.Models.KNA1
+﻿@model B2B.Models.User
 
 <a href="javascript:void(0)" class="sidebar_switch on_switch ttip_r" title="Hide Sidebar">Sidebar switch</a>
 
@@ -42,29 +42,28 @@
                     </div>
                 </div>
 
-                @if (!Model.SORTL.Equals("MUSTERI"))
-                {
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <a href="#collapseTwo" data-parent="#side_accordion" data-toggle="collapse"
-                               class="accordion-toggle">
-                                <i class="glyphicon glyphicon-folder-open"></i>  İşlemler
-                            </a>
-                        </div>
 
-                        <div class="accordion-body collapse" id="collapseTwo">
-                            <div class="panel-body">
-                                <ul class="nav nav-pills nav-stacked">
-                                    <li><a href="search-document">Montaj Kılavuz Arama</a></li>
-                                    <li><a href="product-card">Ürün Tanıtım Kartı</a></li>
-                                    <li><a href="price-ticket">Fiyat Etiketi</a></li>
-                                    <li><a href="price-list">Fiyat Listesi</a></li>
-                                    <li><a href="pictures">Görseller</a></li>
-                                </ul>
-                            </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <a href="#collapseTwo" data-parent="#side_accordion" data-toggle="collapse"
+                           class="accordion-toggle">
+                            <i class="glyphicon glyphicon-folder-open"></i>  İşlemler
+                        </a>
+                    </div>
+
+                    <div class="accordion-body collapse" id="collapseTwo">
+                        <div class="panel-body">
+                            <ul class="nav nav-pills nav-stacked">
+                                <li><a href="search-document">Montaj Kılavuz Arama</a></li>
+                                <li><a href="product-card">Ürün Tanıtım Kartı</a></li>
+                                <li><a href="price-ticket">Fiyat Etiketi</a></li>
+                                <li><a href="price-list">Fiyat Listesi</a></li>
+                                <li><a href="pictures">Görseller</a></li>
+                            </ul>
                         </div>
                     </div>
-                }
+                </div>
+
 
                 <div class="panel panel-default">
                     <div class="panel-heading">
