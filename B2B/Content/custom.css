@@ -1,5 +1,6 @@
 ﻿.login_page .login_box {
     top: 25%;
+    box-shadow: 0 0 3px rgb(0 0 0 / 70%);
 }
 
 .dt-center {
@@ -258,3 +259,59 @@ div.dt-container .dt-processing {
     }
 }
 /*main content set full*/
+
+.forget-password a {
+    color: #d55c66;
+    text-decoration: none;
+}
+
+    .forget-password a : hover {
+        color: #d55c66;
+        text-decoration: none;
+    }
+
+/*navbar*/
+.navbar-default .navbar-nav > .dropdown > a .caret {
+    border-top-color: white;
+    border-bottom-color: white;
+}
+
+.navbar-default .navbar-nav > .dropdown > a .caret {
+    border-top-color: white;
+    border-bottom-color: white;
+}
+
+.navbar-default .navbar-nav > .open > a .caret,
+.navbar-default .navbar-nav > .open > a:hover .caret,
+.navbar-default .navbar-nav > .open > a:focus .caret {
+    border-top-color: white !important;
+    border-bottom-color: white !important;
+}
+
+.navbar-default .navbar-nav > .dropdown > a:hover .caret,
+.navbar-default .navbar-nav > .dropdown > a:focus .caret {
+    border-top-color: #fff !important;
+    border-bottom-color: #fff !important;
+}
+
+.navbar .divider-vertical {
+    margin: 0 5px;
+}
+
+.dropdown-menu li a {
+    border-radius: 1px;
+}
+
+.dropdown-menu li a {
+    padding: 3px 8px 3px 8px;
+    position: relative;
+    font-size: 12px;
+}
+
+.dropdown-menu .divider {
+    height: 1px;
+    margin: 2px 0;
+    overflow: hidden;
+    background-color: #e5e5e5;
+}
+/*navbar*/

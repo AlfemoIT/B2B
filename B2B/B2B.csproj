@@ -331,6 +331,10 @@
     <Compile Include="Migrations\202407301153028_AddColumnRegistration.designer.cs">
       <DependentUpon>202407301153028_AddColumnRegistration.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202410301049478_AddSalesOfficeIDToUser.cs" />
+    <Compile Include="Migrations\202410301049478_AddSalesOfficeIDToUser.designer.cs">
+      <DependentUpon>202410301049478_AddSalesOfficeIDToUser.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\CustomerAssignment.cs" />
@@ -354,6 +358,7 @@
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\UserGroup.cs" />
     <Compile Include="Models\VBAP.cs" />
+    <Compile Include="Models\ViewModels\CustomerViewModel.cs" />
     <Compile Include="Models\ZALF_SUTUNAD_T.cs" />
     <Compile Include="Models\ZALF_S_FIYAT_LIST.cs" />
     <Compile Include="Models\ZALF_S_PAKET.cs" />
@@ -896,6 +901,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202407301153028_AddColumnRegistration.resx">
       <DependentUpon>202407301153028_AddColumnRegistration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202410301049478_AddSalesOfficeIDToUser.resx">
+      <DependentUpon>202410301049478_AddSalesOfficeIDToUser.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Resource.en-US.resx" />
     <EmbeddedResource Include="Resource.resx">

@@ -1,4 +1,6 @@
-﻿using B2B.Models;
+﻿using B2B.Dal;
+using B2B.Models;
+using B2B.Models.ViewModels;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -21,7 +23,40 @@ namespace B2B.Controllers
         }
         public PartialViewResult _NavBar()
         {
-            return PartialView(GetUser());
+            var user = GetUser();
+            using (var context = new B2bContext())
+            {
+                if (user.RoleID == 6) //bolge muduru
+                {
+                    var customers = (from customer in context.Customers
+                                     where customer.SalesOfficeID == user.SalesOfficeID
+                                     select new
+                                     {
+                                         customer.Name
+                                     }).ToList();
+
+                    return PartialView(new CustomerViewModel
+                    {
+                        UserName = user.NameSurname,
+                        Customers = customers.ConvertAll(x => x.Name)
+                    });
+                }
+                else
+                {
+                    var customers = (from customera in context.CustomerAssignments.Where(x => x.UserID == user.ID)
+                                     join customer in context.Customers on customera.CustomerID equals customer.ID
+                                     select new
+                                     {
+                                         customer.Name
+                                     }).ToList();
+
+                    return PartialView(new CustomerViewModel
+                    {
+                        UserName = user.NameSurname,
+                        Customers = customers.ConvertAll(x => x.Name)
+                    });
+                }
+            }
         }
         public User GetUser()
         {
