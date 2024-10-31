@@ -8,6 +8,13 @@ namespace B2B.Models.ViewModels
     public class CustomerViewModel
     {
         public string UserName { get; set; }
-        public List<string> Customers { get; set; }
+        public List<CustomerDto> Customers { get; set; }
+    }
+
+    public class CustomerDto
+    {
+        public int ID { get; set; }
+        public string Name { get; set; }
+        public string SapCode { get; set; }
     }
 }

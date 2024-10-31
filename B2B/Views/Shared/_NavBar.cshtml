@@ -1,4 +1,6 @@
-﻿@model B2B.Models.ViewModels.CustomerViewModel
+﻿@using Newtonsoft.Json;
+
+@model B2B.Models.ViewModels.CustomerViewModel
 
 <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
     <div class="navbar-inner">
@@ -11,16 +13,20 @@
                 <li class="divider-vertical hidden-sm hidden-xs"></li>
                 <li class="dropdown">
                     <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                        <span class="glyphicon glyphicon-th"></span> Firmalar
+                        <span class="glyphicon glyphicon-map-marker"></span>
+                        <span id="customer_name"></span>
                         <b class="caret"></b>
                     </a>
-                    <ul class="dropdown-menu">
-                        @foreach (var customer in Model.Customers)
-                        {
-                            <li><a href="#"> @customer </a></li>
-                            <li class="divider"></li>
-                        }
-                    </ul>
+                    @if (Model.Customers.Count > 1)
+                    {
+                        <ul class="dropdown-menu">
+                            @foreach (var customer in Model.Customers)
+                            {
+                                <li><a href="#" onclick="changeCustomer('@customer.SapCode','@customer.Name')"> @customer.Name </a></li>
+                                <li class="divider"></li>
+                            }
+                        </ul>
+                    }
                 </li>
                 <li class="divider-vertical hidden-sm hidden-xs"></li>
                 <li class="dropdown">
@@ -32,11 +38,37 @@
                     <ul class="dropdown-menu" style="left:-7px">
                         <li><a href="#">Hesabım</a></li>
                         <li class="divider"></li>
-                        <li><a href="Auth/Logout">Çıkış</a></li>
+                        <li><a href="#" onclick="logout()">Çıkış</a></li>
                     </ul>
                 </li>
             </ul>
         </div>
     </div>
 </nav>
+
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script>
+    $(document).ready(function () {
+        if (sessionStorage.getItem("Customer") != null) {
+            var customer = JSON.parse(sessionStorage.getItem("Customer"));
+            $("#customer_name").html(customer.Name);
+        }
+        else {
+            var modelData = @Html.Raw(JsonConvert.SerializeObject(Model));
+            $("#customer_name").html(modelData.Customers[0].Name)
+            sessionStorage.setItem("Customer", JSON.stringify(modelData.Customers[0]));
+        }
+    });
+
+    function changeCustomer(cSapCode, cName) {
+        var customer = {
+            ID : 1,
+            SapCode : cSapCode,
+            Name: cName
+        }
+        $("#customer_name").html(customer.Name);
+        sessionStorage.setItem("Customer", JSON.stringify(customer));
+    }
+</script>
+
 

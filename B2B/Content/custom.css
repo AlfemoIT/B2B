@@ -315,3 +315,7 @@ div.dt-container .dt-processing {
     background-color: #e5e5e5;
 }
 /*navbar*/
+
+.btn {
+    font-size: 12px;
+}

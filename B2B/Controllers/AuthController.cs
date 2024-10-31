@@ -64,6 +64,7 @@ namespace B2B.Controllers
                                         FormsAuthentication.Encrypt(authTicket));
             Response.Cookies.Add(cookie);
         }
+
         public ActionResult Logout()
         {
             FormsAuthentication.SignOut();
@@ -80,7 +81,8 @@ namespace B2B.Controllers
             rSessionCookie.Expires = DateTime.Now.AddYears(-1);
             Response.Cookies.Add(rSessionCookie);
 
-            return RedirectToAction("Login");
+            //return RedirectToAction("Login");
+            return Json(new { success = true }, JsonRequestBehavior.AllowGet);
         }
     }
 }

@@ -78,7 +78,6 @@
 
 <!-- select2 -->
 <script src="~/Scripts/select2.min.js"></script>
-
 <script>
     $(document).ready(function () {
         //* jQuery.browser.mobile (http://detectmobilebrowser.com/)
@@ -101,4 +100,17 @@
         ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
         var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
     })();
+
+    function logout() {
+        const logoutUrl = '/Auth/Logout';
+        sessionStorage.clear();
+
+        $.get(logoutUrl)
+            .done(response => {
+                if (response.success) {
+                    window.location.href = '/Auth/Login';
+                }
+            })
+            .fail(() => console.error("Logout failed."));
+    }
 </script>

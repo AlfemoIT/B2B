@@ -30,30 +30,34 @@ namespace B2B.Controllers
                 {
                     var customers = (from customer in context.Customers
                                      where customer.SalesOfficeID == user.SalesOfficeID
-                                     select new
+                                     select new CustomerDto
                                      {
-                                         customer.Name
+                                         ID = customer.ID,
+                                         Name = customer.Name,
+                                         SapCode = customer.SapCode
                                      }).ToList();
 
                     return PartialView(new CustomerViewModel
                     {
                         UserName = user.NameSurname,
-                        Customers = customers.ConvertAll(x => x.Name)
+                        Customers = customers
                     });
                 }
                 else
                 {
                     var customers = (from customera in context.CustomerAssignments.Where(x => x.UserID == user.ID)
                                      join customer in context.Customers on customera.CustomerID equals customer.ID
-                                     select new
+                                     select new CustomerDto
                                      {
-                                         customer.Name
+                                         ID = customer.ID,
+                                         Name = customer.Name,
+                                         SapCode = customer.SapCode
                                      }).ToList();
 
                     return PartialView(new CustomerViewModel
                     {
                         UserName = user.NameSurname,
-                        Customers = customers.ConvertAll(x => x.Name)
+                        Customers = customers
                     });
                 }
             }
