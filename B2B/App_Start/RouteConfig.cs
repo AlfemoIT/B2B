@@ -20,6 +20,12 @@ namespace B2B
             );
 
             routes.MapRoute(
+                name: "Shipment",
+                url: "shipment/{id}",
+                defaults: new { controller = "Shipment", action = "Index", id = UrlParameter.Optional }
+            );
+
+            routes.MapRoute(
                 name: "Document",
                 url: "search-document/{id}",
                 defaults: new { controller = "Document", action = "Index", id = UrlParameter.Optional }

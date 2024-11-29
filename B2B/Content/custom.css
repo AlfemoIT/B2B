@@ -319,3 +319,15 @@ div.dt-container .dt-processing {
 .btn {
     font-size: 12px;
 }
+
+h3 {
+    font-size: 17px;
+}
+
+.no-wrap {
+    white-space: nowrap;
+}
+
+.center {
+    text-align: center !important;
+}

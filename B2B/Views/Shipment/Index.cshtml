@@ -1,0 +1,112 @@
+﻿
+@{
+    ViewBag.Title = "Nakliye";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="jCrumbs" class="breadCrumb module">
+    <ul>
+        <li>
+            <a href="#">
+                <i class="glyphicon glyphicon-home"></i>
+            </a>
+        </li>
+        <li style="background: none;">
+            <span style="width: 40px;"><a href="#" style="width: 83px;">Satış</a></span>
+            <div class="chevronOverlay" style="display: block;"></div>
+        </li>
+        <li>
+            Nakliye
+        </li>
+    </ul>
+</div>
+
+<div class="row">
+    <button id="btn-execute" class="btn btn-default btn-etiket float-left heading" style="position: relative; left: 13px;">
+        <i class="fa fa-check"></i>
+        Yürüt
+    </button>
+
+    <div class="col-sm-12 col-md-12" style="margin-top:30px">
+        <h3 class="heading">
+            <button id="download-xlsx" class="btn btn-default btn-etiket" href="#" style="position: relative; bottom: 41px;">
+                <img src="~/img/xls.png" />
+                <span class="font-size-13">Excel'e Aktar</span>
+            </button>
+        </h3>
+    </div>
+
+    <div class="col-sm-12 col-md-12">
+        <div class="col-sm-6">
+            <form>
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Nakliye Durumu :</label>
+                    <div class="col-sm-3">
+                        <select id="drpOrderState" class="form-control js-example-basic-single">
+                            <option value="ACIK">ACIK</option>
+                            <option value="KAPALI">KAPALI</option>
+                            <option value="TUMU">TUMU</option>
+                        </select>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="col-sm-12" style="margin-top:40px">
+        <div class="heading">
+        </div>
+    </div>
+
+    <div class="col-sm-12 col-md-12">
+        <div class="pane">
+            <table class="table table-striped table-bordered dTableR" id="tblSales" style="width:100%">
+                <thead>
+                    <tr>
+                        <th class="center">Nakliye Durumu</th>
+                        <th class="center">Nakliye Durumu</th>
+                        <th class="center">Nakliye No</th>
+                        <th class="center">Cari</th>
+                        <th class="center">Sürücü</th>
+                        <th class="center">Telefon</th>
+                        <th class="center">Araç Plakası</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="pane" style="margin-top:20px">
+            <table class="table table-striped table-bordered dTableR" id="tblSaleRows" style="width:100%">
+                <thead>
+                    <tr>
+                        <th class="center">Nakliye No</th>
+                        <th class="center">İrsaliye Tarihi</th>
+                        <th class="center">İrsaliye No</th>
+                        <th class="center">İrsaliye Kalemi</th>
+                        <th class="center">Sipariş No/Kalem</th>
+                        <th class="center">Malzeme</th>
+                        <th class="center">Tanım</th>
+                        <th class="center">Uzun Tanım</th>
+                        <th class="center">Miktar</th>
+                        <th class="center">Müşteri</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts{
+    <script type="text/javascript">
+        $(function () {
+            $("#tblSales").DataTable();
+            $('#tblSaleRows').DataTable();
+        });
+    </script>
+}
+

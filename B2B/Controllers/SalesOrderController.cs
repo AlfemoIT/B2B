@@ -18,15 +18,14 @@ namespace B2B.Controllers
         [Authorize]
         public ActionResult Index()
         {
-            return View(GetUser());
+            return View();
         }
 
         [HttpPost]
-        public JsonResult GetData()
+        public JsonResult GetData(string iv_kunnr, string iv_cmpt_abgru)
         {
-            List<VBAP> vbaps = new List<VBAP>();
-            var kna1 = GetUser();
-            if (!string.IsNullOrEmpty(kna1.KUNNR))
+            List<ZAL_S_SIPARIS_ROW> orders = new List<ZAL_S_SIPARIS_ROW>();
+            if (!string.IsNullOrEmpty(iv_kunnr))
             {
                 var client = new ServiceSalesOrder.WebServiceSalesOrderSoapClient();
                 var hd = new ServiceSalesOrder.AuthHeader()
@@ -34,48 +33,76 @@ namespace B2B.Controllers
                     Username = "AlfemoUB2B_ServiceUser",
                     Password = "Alfemo!2024_!"
                 };
-                var sonuc = client.GetSalesOrder(hd, string.Empty, kna1.KUNNR);
+                var sonuc = client.GetOpenOrders(hd, iv_kunnr, iv_cmpt_abgru);
                 if (!sonuc.Contains("-111"))
                 {
-                    vbaps = JsonConvert.DeserializeObject<List<VBAP>>(sonuc);
+                    orders = JsonConvert.DeserializeObject<List<ZAL_S_SIPARIS_ROW>>(sonuc);
+                    TempData["Orders"] = orders;
                 }
             }
 
-            var jsonResult = Json(new { data = vbaps }, JsonRequestBehavior.AllowGet);
+            var headers = (from order in orders
+                           group order by new
+                           {
+                               order.CMPT_ABGRU,
+                               order.AUDAT,
+                               order.VBELN,
+                               order.CMTD_DELIV_DATE,
+                               order.KUNAGTANIM,
+                               order.ZZMUSTERI_AD,
+                               order.WAERK
+                           }
+                           into grouped
+                           select new ZAL_S_SIPARIS_HEADER
+                           {
+                               CMPT_ABGRU = grouped.Key.CMPT_ABGRU,
+                               AUDAT = grouped.Key.AUDAT,
+                               VBELN = grouped.Key.VBELN,
+                               CMTD_DELIV_DATE = grouped.Key.CMTD_DELIV_DATE,
+                               KUNAGTANIM = grouped.Key.KUNAGTANIM,
+                               ZZMUSTERI_AD = grouped.Key.ZZMUSTERI_AD,
+                               WAERK = grouped.Key.WAERK == "TRY" ? "TL" : grouped.Key.WAERK,
+                               TOTAL_ORDER_PRICE = grouped.Sum(x => x.CMPT_TOTAL_ORDER_PRICE).ToString()
+                           }).Where(x => x.CMPT_TOTAL_ORDER_PRICE > 0)
+                             .ToList();
+
+            var jsonResult = Json(new { data = headers }, JsonRequestBehavior.AllowGet);
             jsonResult.MaxJsonLength = int.MaxValue;
             return jsonResult;
         }
 
         [HttpGet]
-        public ActionResult GetMontagePdf(string matnr)
+        public JsonResult GetDataRow(string siparis)
         {
-            var client = new ServiceQdms.AlfemoWebSiteServiceSoapClient();
-            var hd = new ServiceQdms.AuthHeader()
+            List<ZAL_S_SIPARIS_ROW> orders = new List<ZAL_S_SIPARIS_ROW>();
+            if (TempData["Orders"] != null)
             {
-                Username = "Alf_mntj_user",
-                Password = "ALF6G#_@09yUr#s!"
-            };
+                TempData.Keep("Orders");
 
-            var sonuc = client.AlfemoUrunPdf(hd, string.Join("-", "M", matnr));
-            if (sonuc.Contains("404 Hata: Malzemenin teknik resmi yok."))
-            {
-                sonuc = client.AlfemoUrunPdf(hd, GUARANTI_KEY);
+                orders = (List<ZAL_S_SIPARIS_ROW>)TempData["Orders"];
+                orders = (from order in orders
+                          where order.VBELN == siparis
+                          select new ZAL_S_SIPARIS_ROW
+                          {
+                              VBELN = order.VBELN,
+                              POSNR = order.POSNR,
+                              MATNR = order.MATNR,
+                              MAKTX = order.MAKTX,
+                              LONG_MAKTX = order.LONG_MAKTX,
+                              KWMENG = order.KWMENG,
+                              TOTAL_FKIMG = order.TOTAL_FKIMG,
+                              TOTAL_LFIMG = order.TOTAL_LFIMG,
+                              TOTAL_BMENG = order.TOTAL_BMENG,
+                              TOTAL_IN_PRODUCTION = (order.CMPT_TOTAL_IN_PRODUCTION + order.CMPT_TOTAL_IN_PLAN).ToString(),
+                              ZZURTM_WEEK_DESC = order.ZZURTM_WEEK_DESC,
+                              TOTAL_ORDER_PRICE = order.TOTAL_ORDER_PRICE,
+                              WAERK = order.WAERK
+                          }).ToList();
             }
 
-            byte[] fileBytes = Convert.FromBase64String(sonuc);
-            return File(fileBytes,
-                        System.Net.Mime.MediaTypeNames.Application.Pdf,
-                        string.Concat(string.Join("-", "ALFEMO", matnr), ".pdf"));
-        }
-        public KNA1 GetUser()
-        {
-            var formsIdentity = HttpContext.User.Identity as FormsIdentity;
-            if (formsIdentity == null) { return null; }
-
-            var ticket = formsIdentity.Ticket;
-            var userData = ticket.UserData;
-            var user = JsonConvert.DeserializeObject<KNA1>(userData);
-            return user;
+            var jsonResult = Json(new { data = orders }, JsonRequestBehavior.AllowGet);
+            jsonResult.MaxJsonLength = int.MaxValue;
+            return jsonResult;
         }
     }
 }

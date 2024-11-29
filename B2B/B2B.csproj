@@ -298,6 +298,7 @@
     <Compile Include="Controllers\PriceTicketController.cs" />
     <Compile Include="Controllers\ProductCardController.cs" />
     <Compile Include="Controllers\SalesOrderController.cs" />
+    <Compile Include="Controllers\ShipmentController.cs" />
     <Compile Include="Controllers\StockController.cs" />
     <Compile Include="Dal\B2bContext.cs" />
     <Compile Include="Global.asax.cs">
@@ -362,6 +363,8 @@
     <Compile Include="Models\ZALF_SUTUNAD_T.cs" />
     <Compile Include="Models\ZALF_S_FIYAT_LIST.cs" />
     <Compile Include="Models\ZALF_S_PAKET.cs" />
+    <Compile Include="Models\ZAL_S_SIPARIS_HEADER.cs" />
+    <Compile Include="Models\ZAL_S_SIPARIS_ROW.cs" />
     <Compile Include="Models\ZSD_S_FIY_TICKET.cs" />
     <Compile Include="Models\Z_FILE.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -456,16 +459,20 @@
     <Content Include="Connected Services\ServiceSalesOrder\B2B.ServiceSalesOrder.GetSalesOrderResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
+    <Content Include="Connected Services\ServiceSalesOrder\B2B.ServiceSalesOrder.GetOpenOrdersResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
     <None Include="Connected Services\ServiceSalesOrder\configuration91.svcinfo" />
     <None Include="Connected Services\ServiceSalesOrder\configuration.svcinfo" />
     <None Include="Connected Services\ServiceSalesOrder\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-    <None Include="Connected Services\ServiceSalesOrder\WebServiceSalesOrder1.disco" />
+    <None Include="Connected Services\ServiceSalesOrder\WebServiceSalesOrder.disco" />
     <Content Include="Connected Services\ServiceStock\B2B.ServiceStock.GetObservedStockResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
+    <None Include="Connected Services\ServiceSalesOrder\WebServiceSalesOrder.wsdl" />
     <None Include="Connected Services\ServiceStock\configuration91.svcinfo" />
     <None Include="Connected Services\ServiceStock\configuration.svcinfo" />
     <None Include="Connected Services\ServiceStock\Reference.svcmap">
@@ -476,7 +483,6 @@
     <Content Include="Connected Services\ServiceTicket\B2B.ServiceTicket.GetPriceTicketResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
-    <None Include="Connected Services\ServiceSalesOrder\WebServiceSalesOrder1.wsdl" />
     <None Include="Connected Services\ServiceStock\WebServiceStock1.wsdl" />
     <None Include="Connected Services\ServiceTicket\configuration91.svcinfo" />
     <None Include="Connected Services\ServiceTicket\configuration.svcinfo" />
@@ -850,6 +856,7 @@
     <Content Include="Views\Help\Index.cshtml" />
     <Content Include="Views\Stock\Index.cshtml" />
     <Content Include="Content\tr.json" />
+    <Content Include="Views\Shipment\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
