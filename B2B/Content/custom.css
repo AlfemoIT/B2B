@@ -331,3 +331,34 @@ h3 {
 .center {
     text-align: center !important;
 }
+
+/*layout*/
+.navbar-inner {
+    background: -webkit-linear-gradient(top, #c51d2e 0%, #af2c36 100%);
+}
+
+.navbar .brand {
+    font: 100 19px / 38px 'PT Sans', sans-serif;
+}
+
+.dropdown-menu li > a:hover,
+.dropdown-menu .active > a,
+.dropdown-menu .active > a:hover,
+.nav-list > .active > a,
+.nav-list > .active > a:hover,
+span.dynatree-active a {
+    background: #bb2432 !important;
+}
+
+a {
+    color: #b92532;
+}
+
+    a:hover, a:focus {
+        color: #b92532;
+    }
+
+.panel-heading a i {
+    color: #2F4F4F;
+}
+/*layout*/

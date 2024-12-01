@@ -111,8 +111,27 @@ namespace B2B.Models
                 return amount;
             }
         }
-
         public string VRKME { get; set; }        //satis ölcu birim
+
+        public string TKNUM { get; set; }  //nakliye
+
+        public string N_ERDAT { get; set; } //nakliye trh
+        public string CMPT_N_ERDAT
+        {
+            get
+            {
+                if (!string.IsNullOrEmpty(N_ERDAT) && N_ERDAT != "0000-00-00")
+                {
+                    return Convert.ToDateTime(N_ERDAT)
+                                  .ToString("dd-MM-yyyy");
+                }
+                return string.Empty;
+            }
+        }
+
+        public string PLAKA { get; set; }
+        public string SURUCU { get; set; }
+        public string TELEFON { get; set; }
 
         public string TOTAL_LFIMG { get; set; }  //sevk mkt
         public double CMPT_TOTAL_LFIMG
@@ -162,6 +181,24 @@ namespace B2B.Models
                 if (!string.IsNullOrEmpty(TOTAL_BMENG))
                 {
                     amount = Convert.ToDouble(TOTAL_BMENG, info);
+                    return amount;
+                }
+                return amount;
+            }
+        }
+
+        public string READY_VOLUM { get; set; } //sevke hazır hacim
+        public double CMPT_READY_VOLUM
+        {
+            get
+            {
+                CultureInfo info = new CultureInfo("tr-TR");
+                info.NumberFormat.NumberDecimalSeparator = ",";
+
+                double amount = 0;
+                if (!string.IsNullOrEmpty(READY_VOLUM))
+                {
+                    amount = Convert.ToDouble(READY_VOLUM, info);
                     return amount;
                 }
                 return amount;

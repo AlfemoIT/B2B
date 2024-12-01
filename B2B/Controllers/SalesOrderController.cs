@@ -93,6 +93,7 @@ namespace B2B.Controllers
                               TOTAL_FKIMG = order.TOTAL_FKIMG,
                               TOTAL_LFIMG = order.TOTAL_LFIMG,
                               TOTAL_BMENG = order.TOTAL_BMENG,
+                              READY_VOLUM = order.READY_VOLUM,
                               TOTAL_IN_PRODUCTION = (order.CMPT_TOTAL_IN_PRODUCTION + order.CMPT_TOTAL_IN_PLAN).ToString(),
                               ZZURTM_WEEK_DESC = order.ZZURTM_WEEK_DESC,
                               TOTAL_ORDER_PRICE = order.TOTAL_ORDER_PRICE,

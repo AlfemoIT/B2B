@@ -83,5 +83,25 @@ namespace B2B.Models
             }
         }
         public string WAERK { get; set; } //para birimi
+
+        public string TKNUM { get; set; }  //nakliye
+
+        public string N_ERDAT { get; set; } //nakliye trh
+        public string CMPT_N_ERDAT
+        {
+            get
+            {
+                if (!string.IsNullOrEmpty(N_ERDAT) && N_ERDAT != "0000-00-00")
+                {
+                    return Convert.ToDateTime(N_ERDAT)
+                                  .ToString("dd-MM-yyyy");
+                }
+                return string.Empty;
+            }
+        }
+
+        public string PLAKA { get; set; }
+        public string SURUCU { get; set; }
+        public string TELEFON { get; set; }
     }
 }

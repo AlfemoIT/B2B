@@ -11,7 +11,21 @@
 
 <style>
     table.table-striped > tbody > tr:hover {
-        cursor: pointer; /* Changes the cursor to a pointer */
+        cursor: pointer;
+    }
+
+    .resizable-container {
+        border-bottom: 1px solid #ddd;
+        padding: 10px;
+        overflow: hidden;
+        resize: vertical; /* Makes the div resizable */
+        display: flex;
+        flex-direction: column;
+    }
+
+    .dataTables_wrapper {
+        flex: 1;
+        overflow: auto;
     }
 </style>
 
@@ -33,17 +47,17 @@
 </div>
 
 <div class="row">
-    <button id="btn-execute" class="btn btn-default btn-etiket float-left heading" style="position: relative; left: 13px;">
+    @*<button id="btn-execute" class="btn btn-default btn-etiket float-left heading" style="position: relative; left: 13px;">
         <i class="fa fa-check"></i>
         Yürüt
-    </button>
+    </button>*@
 
-    <div class="col-sm-12 col-md-12" style="margin-top:30px">
+    <div class="col-sm-12 col-md-12">
         <h3 class="heading">
-            <button id="download-xlsx" class="btn btn-default btn-etiket" href="#" style="position: relative; bottom: 41px;">
+            @*<button id="download-xlsx" class="btn btn-default btn-etiket" href="#" style="position: relative; bottom: 41px;">
                 <img src="~/img/xls.png" />
                 <span class="font-size-13">Excel'e Aktar</span>
-            </button>
+            </button>*@
         </h3>
     </div>
 
@@ -51,7 +65,7 @@
         <div class="col-sm-6">
             <form>
                 <div class="form-group row">
-                    <label class="col-sm-2 col-form-label">Sipariş Durumu :</label>
+                    <label class="col-sm-2 col-form-label" style="padding-left: 8px;">Sipariş Durumu :</label>
                     <div class="col-sm-3">
                         <select id="drpOrderState" class="form-control js-example-basic-single">
                             <option value="ACIK">ACIK</option>
@@ -70,7 +84,7 @@
     </div>
 
     <div class="col-sm-12 col-md-12">
-        <div class="pane">
+        <div id="resizable1" class="resizable-container" style="height: 45%;">
             <table class="table table-striped table-bordered dTableR" id="tblSales" style="width:100%">
                 <thead>
                     <tr>
@@ -90,7 +104,7 @@
             </table>
         </div>
 
-        <div class="pane" style="margin-top:20px">
+        <div id="resizable2" class="resizable-container" style="height: 45%;">
             <table class="table table-striped table-bordered dTableR" id="tblSaleRows" style="width:100%">
                 <thead>
                     <tr>
@@ -103,6 +117,7 @@
                         <th class="center">Teslim Edildi</th>
                         <th class="center">Sevk Edildi</th>
                         <th class="center">Hazır</th>
+                        <th class="center">Hazır Hacim (M3)</th>
                         <th class="center">Üretimde</th>
                         <th class="center">Hafta</th>
                         <th class="center">Tutar</th>
@@ -117,6 +132,7 @@
 </div>
 
 @section Scripts{
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script type="text/javascript">
         $(function () {
             $('.js-example-basic-single').select2();
@@ -139,7 +155,7 @@
                     dataSrc: function (json) {
                         return json.data;
                     }
-               },
+                },
                 retrieve: true,
                 autoWidth: false,
                 displayLength: 5,
@@ -196,6 +212,8 @@
                      url: "@Url.Content("~/Content/tr.json")",
                 },
                 retrieve: true,
+                autoWidth: false,
+                displayLength: 5,
                 columns: [
                     { data: 'CMPT_VBELN', width: "40px" },
                     { data: 'CMPT_POSNR', width: "30px" },
@@ -214,6 +232,7 @@
                     { data: 'CMPT_TOTAL_FKIMG', width: "40px" },
                     { data: 'CMPT_TOTAL_LFIMG', width: "40px", },
                     { data: 'CMPT_TOTAL_BMENG', width: "40px", },
+                    { data: 'CMPT_READY_VOLUM', width: "50px", },
                     { data: 'CMPT_TOTAL_IN_PRODUCTION', width: "40px"},
                     { data: 'ZZURTM_WEEK_DESC', width: "40px" },
                     {
@@ -223,7 +242,8 @@
                                 return new Intl.NumberFormat('tr-TR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(data);
                             }
                             return data;
-                        }
+                        },
+                        width:"100px"
                     },
                     {
                         data: 'WAERK', width: "50px",
@@ -236,7 +256,7 @@
                     }
                  ],
                  columnDefs: [
-                     { className: 'dt-center', targets: [0, 1, 5,6, 7, 8, 9, 10, 12] }
+                     { className: 'dt-center', targets: [0, 1, 5,6, 7, 8, 9,10, 11, 13] }
                  ]
             });
 
@@ -248,11 +268,11 @@
                 }
 
                 var currentColor = $(this).find('td').css('background-color');
-                if (currentColor === 'rgb(57 147 186 / 88%)') {
+                if (currentColor === 'rgb(187 36 50 / 80%)') {
                     $(this).find('td').css('background', '');
                     $(this).find('td').css('color', '');
                 } else {
-                    $(this).find('td').css('background', 'rgb(57 147 186 / 88%)');
+                    $(this).find('td').css('background', 'rgb(187 36 50 / 80%)');
                     $(this).find('td').css('color', 'rgb(255, 255, 255)');
                 }
                 lastClickedRow = this;
@@ -278,6 +298,22 @@
                 disableElements();
                 table.ajax.reload(null, false);
             });
+
+            $("#resizable1").resizable({
+                handles: "s", // South (bottom) handle only
+                minHeight: 200, // Minimum height
+                resize: function (event, ui) {
+                    $('#tblSales').DataTable().columns.adjust();
+                }
+            });
+
+            //$("#resizable2").resizable({
+            //    handles: "s",
+            //    minHeight: 200,
+            //    resize: function (event, ui) {
+            //        $('#tblSaleRows').DataTable().columns.adjust();
+            //    }
+            //});
 
             function disableElements() {
                 $("#btn-execute").prop("disabled", true);

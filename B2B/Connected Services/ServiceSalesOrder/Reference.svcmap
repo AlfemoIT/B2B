@@ -19,11 +19,11 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://192.168.90.12:85/B2B/WebServiceSalesOrder.asmx" Protocol="http" SourceId="1" />
+    <MetadataSource Address="http://192.168.188.3:85/B2B/WebServiceSalesOrder.asmx" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="WebServiceSalesOrder.wsdl" MetadataType="Wsdl" ID="4291176a-4cca-44c9-87a3-7c8b07400973" SourceId="1" SourceUrl="http://192.168.90.12:85/B2B/WebServiceSalesOrder.asmx?wsdl" />
-    <MetadataFile FileName="WebServiceSalesOrder.disco" MetadataType="Disco" ID="5e8b67dd-ffc7-4bd5-83f7-d888c2909aac" SourceId="1" SourceUrl="http://192.168.90.12:85/B2B/WebServiceSalesOrder.asmx?disco" />
+    <MetadataFile FileName="WebServiceSalesOrder1.disco" MetadataType="Disco" ID="1e622499-0439-490d-b984-9088ac8c3cc6" SourceId="1" SourceUrl="http://192.168.188.3:85/B2B/WebServiceSalesOrder.asmx?disco" />
+    <MetadataFile FileName="WebServiceSalesOrder1.wsdl" MetadataType="Wsdl" ID="1c79a004-1fd0-4070-908a-cdb72845a75b" SourceId="1" SourceUrl="http://192.168.188.3:85/B2B/WebServiceSalesOrder.asmx?wsdl" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

@@ -462,17 +462,20 @@
     <Content Include="Connected Services\ServiceSalesOrder\B2B.ServiceSalesOrder.GetOpenOrdersResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
+    <Content Include="Connected Services\ServiceSalesOrder\B2B.ServiceSalesOrder.GetShipmentsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
     <None Include="Connected Services\ServiceSalesOrder\configuration91.svcinfo" />
     <None Include="Connected Services\ServiceSalesOrder\configuration.svcinfo" />
     <None Include="Connected Services\ServiceSalesOrder\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-    <None Include="Connected Services\ServiceSalesOrder\WebServiceSalesOrder.disco" />
+    <None Include="Connected Services\ServiceSalesOrder\WebServiceSalesOrder1.disco" />
     <Content Include="Connected Services\ServiceStock\B2B.ServiceStock.GetObservedStockResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
-    <None Include="Connected Services\ServiceSalesOrder\WebServiceSalesOrder.wsdl" />
+    <None Include="Connected Services\ServiceSalesOrder\WebServiceSalesOrder1.wsdl" />
     <None Include="Connected Services\ServiceStock\configuration91.svcinfo" />
     <None Include="Connected Services\ServiceStock\configuration.svcinfo" />
     <None Include="Connected Services\ServiceStock\Reference.svcmap">
@@ -571,6 +574,7 @@
     <Content Include="Content\tabular\tabulator_site.min.css" />
     <Content Include="Content\tabular\tabulator_site_dark.css" />
     <Content Include="Content\tabular\tabulator_site_dark.min.css" />
+    <Content Include="Content\tamarillo.css" />
     <Content Include="favicon.ico" />
     <Content Include="favicon.png" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -578,6 +582,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="img\alfemo\tiamo-small-koltuk-tkm.jpg" />
     <Content Include="img\pdf-icon.png" />
+    <Content Include="img\user_avatar1.jpg" />
     <Content Include="img\xls.png" />
     <Content Include="img\acc_icons.png" />
     <Content Include="img\adt-icons.png" />
