@@ -298,6 +298,7 @@
     <Compile Include="Controllers\PriceTicketController.cs" />
     <Compile Include="Controllers\ProductCardController.cs" />
     <Compile Include="Controllers\SalesOrderController.cs" />
+    <Compile Include="Controllers\SalesOrderDetailController.cs" />
     <Compile Include="Controllers\ShipmentController.cs" />
     <Compile Include="Controllers\StockController.cs" />
     <Compile Include="Dal\B2bContext.cs" />
@@ -471,11 +472,11 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-    <None Include="Connected Services\ServiceSalesOrder\WebServiceSalesOrder1.disco" />
+    <None Include="Connected Services\ServiceSalesOrder\WebServiceSalesOrder.disco" />
     <Content Include="Connected Services\ServiceStock\B2B.ServiceStock.GetObservedStockResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
-    <None Include="Connected Services\ServiceSalesOrder\WebServiceSalesOrder1.wsdl" />
+    <None Include="Connected Services\ServiceSalesOrder\WebServiceSalesOrder.wsdl" />
     <None Include="Connected Services\ServiceStock\configuration91.svcinfo" />
     <None Include="Connected Services\ServiceStock\configuration.svcinfo" />
     <None Include="Connected Services\ServiceStock\Reference.svcmap">
@@ -862,6 +863,7 @@
     <Content Include="Views\Stock\Index.cshtml" />
     <Content Include="Content\tr.json" />
     <Content Include="Views\Shipment\Index.cshtml" />
+    <Content Include="Views\SalesOrderDetail\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

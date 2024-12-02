@@ -165,10 +165,10 @@
   </wsdl:binding>
   <wsdl:service name="WebServiceSalesOrder">
     <wsdl:port name="WebServiceSalesOrderSoap" binding="tns:WebServiceSalesOrderSoap">
-      <soap:address location="http://192.168.188.3:85/B2B/WebServiceSalesOrder.asmx" />
+      <soap:address location="http://192.168.90.12:85/B2B/WebServiceSalesOrder.asmx" />
     </wsdl:port>
     <wsdl:port name="WebServiceSalesOrderSoap12" binding="tns:WebServiceSalesOrderSoap12">
-      <soap12:address location="http://192.168.188.3:85/B2B/WebServiceSalesOrder.asmx" />
+      <soap12:address location="http://192.168.90.12:85/B2B/WebServiceSalesOrder.asmx" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

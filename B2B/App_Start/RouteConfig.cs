@@ -20,6 +20,12 @@ namespace B2B
             );
 
             routes.MapRoute(
+               name: "SalesOrderDetail",
+               url: "sales-order-detail/{id}",
+               defaults: new { controller = "SalesOrderDetail", action = "Index", id = UrlParameter.Optional }
+            );
+
+            routes.MapRoute(
                 name: "Shipment",
                 url: "shipment/{id}",
                 defaults: new { controller = "Shipment", action = "Index", id = UrlParameter.Optional }

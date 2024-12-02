@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="HMfhGEu4wq9Yda1yulj16QzKuRRYUdmQzmX1IpBr6bM=">
+<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="plxi/c4lZfv4BgfIIWLjQ6y87E506+CWS01Ua72atog=">
   <bindingConfigurations>
     <bindingConfiguration bindingType="basicHttpBinding" name="WebServiceSalesOrderSoap">
       <properties>
@@ -112,10 +112,10 @@
     </bindingConfiguration>
   </bindingConfigurations>
   <endpoints>
-    <endpoint name="WebServiceSalesOrderSoap" contract="ServiceSalesOrder.WebServiceSalesOrderSoap" bindingType="basicHttpBinding" address="http://192.168.188.3:85/B2B/WebServiceSalesOrder.asmx" bindingConfiguration="WebServiceSalesOrderSoap">
+    <endpoint name="WebServiceSalesOrderSoap" contract="ServiceSalesOrder.WebServiceSalesOrderSoap" bindingType="basicHttpBinding" address="http://192.168.90.12:85/B2B/WebServiceSalesOrder.asmx" bindingConfiguration="WebServiceSalesOrderSoap">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>http://192.168.188.3:85/B2B/WebServiceSalesOrder.asmx</serializedValue>
+          <serializedValue>http://192.168.90.12:85/B2B/WebServiceSalesOrder.asmx</serializedValue>
         </property>
         <property path="/behaviorConfiguration" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />

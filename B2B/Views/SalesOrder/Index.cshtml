@@ -37,7 +37,7 @@
             </a>
         </li>
         <li style="background: none;">
-            <span style="width: 40px;"><a href="#" style="width: 83px;">Satış</a></span>
+            <span style="width: 40px;"><a href="#" style="width: 83px;">Rapor</a></span>
             <div class="chevronOverlay" style="display: block;"></div>
         </li>
         <li>
@@ -48,16 +48,16 @@
 
 <div class="row">
     @*<button id="btn-execute" class="btn btn-default btn-etiket float-left heading" style="position: relative; left: 13px;">
-        <i class="fa fa-check"></i>
-        Yürüt
-    </button>*@
+            <i class="fa fa-check"></i>
+            Yürüt
+        </button>*@
 
     <div class="col-sm-12 col-md-12">
         <h3 class="heading">
             @*<button id="download-xlsx" class="btn btn-default btn-etiket" href="#" style="position: relative; bottom: 41px;">
-                <img src="~/img/xls.png" />
-                <span class="font-size-13">Excel'e Aktar</span>
-            </button>*@
+                    <img src="~/img/xls.png" />
+                    <span class="font-size-13">Excel'e Aktar</span>
+                </button>*@
         </h3>
     </div>
 
@@ -189,7 +189,7 @@
                     { data: 'WAERK', width: "50px"}
                 ],
                 columnDefs: [
-                    { className: 'dt-center', targets: [0,1,2,3,4,8] }
+                    { className: 'dt-center', targets: [0, 1, 2, 3, 4, 8] }
                 ],
                 initComplete: function (settings, json) {
                     $("#btn-execute").prop("disabled", false);
@@ -301,7 +301,7 @@
 
             $("#resizable1").resizable({
                 handles: "s", // South (bottom) handle only
-                minHeight: 200, // Minimum height
+                minHeight: 200,
                 resize: function (event, ui) {
                     $('#tblSales').DataTable().columns.adjust();
                 }
@@ -318,7 +318,6 @@
             function disableElements() {
                 $("#btn-execute").prop("disabled", true);
                 $("#download-xlsx").prop("disabled", true);
-        /*        $('#drpOrderState').prop('disabled', true).trigger('change.select2');*/
             }
         });
     </script>
