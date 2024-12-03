@@ -582,6 +582,7 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="img\alfemo\tiamo-small-koltuk-tkm.jpg" />
+    <Content Include="img\excel.png" />
     <Content Include="img\pdf-icon.png" />
     <Content Include="img\user_avatar1.jpg" />
     <Content Include="img\xls.png" />

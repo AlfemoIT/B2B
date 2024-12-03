@@ -30,7 +30,6 @@
         margin-top: 20px;
     }
 
-        /* Style the buttons */
         .dataTables_wrapper .dataTables_paginate .paginate_button {
             box-sizing: border-box;
             display: inline-block;
@@ -62,6 +61,10 @@
         display: flex;
         justify-content: center;
         margin-top: -15px;
+    }
+
+    .dataTables_scroll {
+        margin-top: 12px;
     }
 </style>
 
@@ -101,6 +104,13 @@
                     </div>
                 </div>
             </form>
+        </div>
+
+        <div class="col-sm-6">
+            <button id="download-xlsx" class="btn btn-default btn-excel" href="#">
+                <img src="~/img/excel.png" width="20%" />
+                <span class="font-size-12">Excel'e Aktar</span>
+            </button>
         </div>
     </div>
 
@@ -148,7 +158,7 @@
             $('.js-example-basic-single').select2();
             $("#download-xlsx").prop("disabled", true);
 
-            var tableRow = $('#tblSaleRows').DataTable({
+            var table = $('#tblSaleRows').DataTable({
                 scrollX: true,
                 fixedHeader: true,
                 autoWidth: false,
@@ -202,7 +212,15 @@
                     { data: 'CMPT_TOTAL_FKIMG'},
                     { data: 'CMPT_TOTAL_LFIMG'},
                     { data: 'CMPT_TOTAL_BMENG'},
-                    { data: 'CMPT_READY_VOLUM'},
+                    {
+                        data: 'CMPT_READY_VOLUM',
+                        render: function (data, type, row) {
+                            if (type === 'display') {
+                                return new Intl.NumberFormat('tr-TR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(data);
+                            }
+                            return data;
+                        }
+                    },
                     { data: 'CMPT_TOTAL_IN_PRODUCTION'},
                     { data: 'ZZURTM_WEEK_DESC' },
                     {
@@ -218,13 +236,126 @@
                     { data: 'KUNAGTANIM' },
                     { data: 'LONG_MAKTX' }
                  ],
-                 columnDefs: [
-                     {
-                         className: 'dt-center', targets: [0, 1, 2, 3, 4, 5, 9, 10, 11, 12, 13, 14, 15]
-                     },
-                     { className: 'dt-right', targets: [16] }
-                 ]
-              });
+                columnDefs: [
+                    {
+                        className: 'dt-center', targets: [0, 1, 2, 3, 4, 5, 9, 10, 11, 12, 13, 14, 15]
+                    },
+                    { className: 'dt-right', targets: [16] }
+                ],
+                initComplete: function (settings, json) {
+                    $("#download-xlsx").prop("disabled", false);
+                }
+            });
+
+            table.on('xhr', function (e, settings, json, xhr) {
+                $("#download-xlsx").prop("disabled", false);
+            });
+
+            $("#drpOrderState").on('change', function (e) {
+                const selectedValue = $(this).val();
+                table.clear().draw();
+
+                disableElements();
+                table.ajax.reload(null, false);
+            });
+
+            $('#download-xlsx').click(function () {
+                var count = table.data().count();
+                if (count > 0) {
+                    var filename = $("#drpOrderState").val() + '_SIPARISLER.xlsx';
+                    exportTableToExcel('tblSaleRows', filename);
+                }
+            });
+
+            var headers;
+            function exportTableToExcel(tableID, filename) {
+                headers = ['CMPT_ABGRU', 'CMPT_AUDAT', 'CMPT_DELIV_DATE', 'CMPT_VBELN', 'CMPT_POSNR', 'ZZMUSTERI_AD',
+                    'MATNR', 'MAKTX', 'CMPT_KWMENG', 'CMPT_TOTAL_FKIMG', 'CMPT_TOTAL_LFIMG', 'CMPT_TOTAL_BMENG',
+                    'CMPT_READY_VOLUM', 'CMPT_TOTAL_IN_PRODUCTION', 'ZZURTM_WEEK_DESC', 'CMPT_TOTAL_ORDER_PRICE',
+                    'KUNAGTANIM', 'LONG_MAKTX'];
+
+                var exportTable = $('<table>');
+                var thead = $('<thead>');
+                var tbody = $('<tbody>');
+
+                $('#tblSaleRows thead tr')
+                    .clone()
+                    .each(function () {
+                        $(this).find('th:first-child').remove();
+                    })
+                    .appendTo(thead);
+                thead.appendTo(exportTable);
+
+                var data = table.rows(':not(.no-data)').data().toArray();
+                data.forEach(function (row) {
+                    var tr = $('<tr>');
+                    headers.forEach(function (header) {
+                        if (header == "CMPT_AUDAT" || header == "CMPT_DELIV_DATE") {
+                            if (row[header] != null && row[header] != '') {
+
+                                const dateString = row[header]?.trim();
+                                if (dateString) {
+                                    //format dd-MM-yyyy or similar
+                                    const dateRegex = /^(\d{2})[-.](\d{2})[-.](\d{4})$/;
+                                    const match = dateString.match(dateRegex);
+                                    if (match) {
+                                        const day = match[1];
+                                        const month = match[2];
+                                        const year = match[3];
+
+                                        const formattedDate = `${year}-${month}-${day}`;
+                                        $('<td>').text(formattedDate).appendTo(tr);
+                                    }
+                                }
+
+                            }
+                        }
+                        else {
+                            $('<td>').text(row[header]).appendTo(tr);
+                        }
+                    });
+                    tr.appendTo(tbody);
+                });
+                tbody.appendTo(exportTable);
+
+                var wb = XLSX.utils.table_to_book(exportTable[0], { sheet: "Sheet1" });
+                const ws = wb.Sheets["Sheet1"];
+                Object.keys(ws).forEach(cell => {
+                    if (ws[cell].t === 'n') { // Check if the cell contains a number
+                        const formattedValue = new Intl.NumberFormat('tr-TR', {
+                            minimumFractionDigits: 2,
+                            maximumFractionDigits: 2,
+                            useGrouping: true // Ensures thousands separators
+                        }).format(ws[cell].v);
+
+                        ws[cell].v = formattedValue;
+                        ws[cell].t = 's'; // Set the type to string to preserve the formatting
+                    }
+                });
+
+                var wbout = XLSX.write(wb, { bookType: 'xlsx', type: 'binary' });
+                function s2ab(s) {
+                    var buf = new ArrayBuffer(s.length);
+                    var view = new Uint8Array(buf);
+                    for (var i = 0; i < s.length; i++) {
+                        view[i] = s.charCodeAt(i) & 0xFF;
+                    }
+                    return buf;
+                }
+
+                var blob = new Blob([s2ab(wbout)], { type: "application/octet-stream" });
+                var link = document.createElement('a');
+                link.href = URL.createObjectURL(blob);
+                link.download = 'table_export.xlsx';
+                link.download = filename;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            }
+
+            function disableElements() {
+                $("#download-xlsx").prop("disabled", true);
+            }
         });
     </script>
 }

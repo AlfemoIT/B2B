@@ -76,6 +76,13 @@
                 </div>
             </form>
         </div>
+
+        <div class="col-sm-6">
+            <button id="download-xlsx" class="btn btn-default btn-excel" href="#">
+                <img src="~/img/excel.png" width="20%" />
+                <span class="font-size-12">Excel'e Aktar</span>
+            </button>
+        </div>
     </div>
 
     <div class="col-sm-12" style="margin-top:40px">
@@ -306,14 +313,6 @@
                     $('#tblSales').DataTable().columns.adjust();
                 }
             });
-
-            //$("#resizable2").resizable({
-            //    handles: "s",
-            //    minHeight: 200,
-            //    resize: function (event, ui) {
-            //        $('#tblSaleRows').DataTable().columns.adjust();
-            //    }
-            //});
 
             function disableElements() {
                 $("#btn-execute").prop("disabled", true);

@@ -38,9 +38,8 @@ namespace B2B.Controllers
             var jsonResult = Json(new
             {
                 data = orders.Where(x => x.CMPT_TOTAL_ORDER_PRICE > 0)
-                                                     .ToList()
-            },
-                                  JsonRequestBehavior.AllowGet);
+                             .ToList()
+            }, JsonRequestBehavior.AllowGet);
             jsonResult.MaxJsonLength = int.MaxValue;
             return jsonResult;
         }

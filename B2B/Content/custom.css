@@ -160,6 +160,10 @@ table.dataTable > tbody > tr > th, table.dataTable > tbody > tr > td {
     font-size: 13px;
 }
 
+.font-size-12 {
+    font-size: 12px;
+}
+
 .btn-grid {
     padding: 3px 12px;
 }
@@ -362,3 +366,11 @@ a {
     color: #2F4F4F;
 }
 /*layout*/
+
+.btn-excel {
+    float: right;
+    position: relative;
+    bottom: 5px;
+    padding: 5px 0px;
+    cursor: pointer !important;
+}
