@@ -114,6 +114,13 @@ namespace B2B.Models
         public string VRKME { get; set; }        //satis ölcu birim
 
         public string TKNUM { get; set; }  //nakliye
+        public string CMPT_TKNUM
+        {
+            get
+            {
+                return TKNUM.TrimStart(new Char[] { '0' });
+            }
+        }
 
         public string N_ERDAT { get; set; } //nakliye trh
         public string CMPT_N_ERDAT

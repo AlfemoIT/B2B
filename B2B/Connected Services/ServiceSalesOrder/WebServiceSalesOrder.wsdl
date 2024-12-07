@@ -43,14 +43,33 @@
       <s:element name="GetShipments">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="iv_kunnr" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="lst_kunnr" type="tns:ArrayOfString" />
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:complexType name="ArrayOfString">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="s:string" />
+        </s:sequence>
+      </s:complexType>
       <s:element name="GetShipmentsResponse">
         <s:complexType>
           <s:sequence>
             <s:element minOccurs="0" maxOccurs="1" name="GetShipmentsResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetShipmentDetails">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="iv_tknum" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetShipmentDetailsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetShipmentDetailsResult" type="s:string" />
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -83,6 +102,15 @@
   <wsdl:message name="GetShipmentsAuthHeader">
     <wsdl:part name="AuthHeader" element="tns:AuthHeader" />
   </wsdl:message>
+  <wsdl:message name="GetShipmentDetailsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetShipmentDetails" />
+  </wsdl:message>
+  <wsdl:message name="GetShipmentDetailsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetShipmentDetailsResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetShipmentDetailsAuthHeader">
+    <wsdl:part name="AuthHeader" element="tns:AuthHeader" />
+  </wsdl:message>
   <wsdl:portType name="WebServiceSalesOrderSoap">
     <wsdl:operation name="GetSalesOrder">
       <wsdl:input message="tns:GetSalesOrderSoapIn" />
@@ -95,6 +123,10 @@
     <wsdl:operation name="GetShipments">
       <wsdl:input message="tns:GetShipmentsSoapIn" />
       <wsdl:output message="tns:GetShipmentsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetShipmentDetails">
+      <wsdl:input message="tns:GetShipmentDetailsSoapIn" />
+      <wsdl:output message="tns:GetShipmentDetailsSoapOut" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="WebServiceSalesOrderSoap" type="tns:WebServiceSalesOrderSoap">
@@ -129,6 +161,16 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="GetShipmentDetails">
+      <soap:operation soapAction="http://tempuri.org/GetShipmentDetails" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:GetShipmentDetailsAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:binding name="WebServiceSalesOrderSoap12" type="tns:WebServiceSalesOrderSoap">
     <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
@@ -157,6 +199,16 @@
       <wsdl:input>
         <soap12:body use="literal" />
         <soap12:header message="tns:GetShipmentsAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetShipmentDetails">
+      <soap12:operation soapAction="http://tempuri.org/GetShipmentDetails" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:GetShipmentDetailsAuthHeader" part="AuthHeader" use="literal" />
       </wsdl:input>
       <wsdl:output>
         <soap12:body use="literal" />

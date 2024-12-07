@@ -364,6 +364,7 @@
     <Compile Include="Models\ZALF_SUTUNAD_T.cs" />
     <Compile Include="Models\ZALF_S_FIYAT_LIST.cs" />
     <Compile Include="Models\ZALF_S_PAKET.cs" />
+    <Compile Include="Models\ZAL_S_NAKLIYE.cs" />
     <Compile Include="Models\ZAL_S_SIPARIS_HEADER.cs" />
     <Compile Include="Models\ZAL_S_SIPARIS_ROW.cs" />
     <Compile Include="Models\ZSD_S_FIY_TICKET.cs" />
@@ -466,6 +467,9 @@
     <Content Include="Connected Services\ServiceSalesOrder\B2B.ServiceSalesOrder.GetShipmentsResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
+    <Content Include="Connected Services\ServiceSalesOrder\B2B.ServiceSalesOrder.GetShipmentDetailsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
     <None Include="Connected Services\ServiceSalesOrder\configuration91.svcinfo" />
     <None Include="Connected Services\ServiceSalesOrder\configuration.svcinfo" />
     <None Include="Connected Services\ServiceSalesOrder\Reference.svcmap">
@@ -536,6 +540,7 @@
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\google-code-prettify\prettify.css" />
     <Content Include="Content\gtip2\jquery.qtip.min.css" />
+    <Content Include="Content\hint_css\hint.min.css" />
     <Content Include="Content\Images\ChevronOverlay.png" />
     <Content Include="Content\jBreadcrumbs\BreadCrumb.css" />
     <Content Include="Content\jBreadcrumbs\Images\ChevronOverlay.png" />
@@ -549,6 +554,7 @@
     <Content Include="Content\jquery-ui\external\globalize.js" />
     <Content Include="Content\jquery-ui\jquery-ui-1.10.0.custom.min.js" />
     <Content Include="Content\select2.min.css" />
+    <Content Include="Content\shipment.css" />
     <Content Include="Content\sticky\sticky.css" />
     <Content Include="Content\style.css" />
     <Content Include="Content\tabular\tabulator.css" />
@@ -582,8 +588,15 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="img\alfemo\tiamo-small-koltuk-tkm.jpg" />
+    <Content Include="img\cell_phone.png" />
+    <Content Include="img\driver.png" />
     <Content Include="img\excel.png" />
+    <Content Include="img\excel_office.png" />
     <Content Include="img\pdf-icon.png" />
+    <Content Include="img\shipment.png" />
+    <Content Include="img\shipped.png" />
+    <Content Include="img\shipped_office.png" />
+    <Content Include="img\truck.png" />
     <Content Include="img\user_avatar1.jpg" />
     <Content Include="img\xls.png" />
     <Content Include="img\acc_icons.png" />

@@ -38,6 +38,14 @@ namespace B2B.ServiceSalesOrder {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetShipments", ReplyAction="*")]
         System.Threading.Tasks.Task<B2B.ServiceSalesOrder.GetShipmentsResponse> GetShipmentsAsync(B2B.ServiceSalesOrder.GetShipmentsRequest request);
+        
+        // CODEGEN: Generating message contract since message GetShipmentDetailsRequest has headers
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetShipmentDetails", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        B2B.ServiceSalesOrder.GetShipmentDetailsResponse GetShipmentDetails(B2B.ServiceSalesOrder.GetShipmentDetailsRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetShipmentDetails", ReplyAction="*")]
+        System.Threading.Tasks.Task<B2B.ServiceSalesOrder.GetShipmentDetailsResponse> GetShipmentDetailsAsync(B2B.ServiceSalesOrder.GetShipmentDetailsRequest request);
     }
     
     /// <remarks/>
@@ -194,14 +202,14 @@ namespace B2B.ServiceSalesOrder {
         public B2B.ServiceSalesOrder.AuthHeader AuthHeader;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
-        public string iv_kunnr;
+        public string[] lst_kunnr;
         
         public GetShipmentsRequest() {
         }
         
-        public GetShipmentsRequest(B2B.ServiceSalesOrder.AuthHeader AuthHeader, string iv_kunnr) {
+        public GetShipmentsRequest(B2B.ServiceSalesOrder.AuthHeader AuthHeader, string[] lst_kunnr) {
             this.AuthHeader = AuthHeader;
-            this.iv_kunnr = iv_kunnr;
+            this.lst_kunnr = lst_kunnr;
         }
     }
     
@@ -219,6 +227,44 @@ namespace B2B.ServiceSalesOrder {
         
         public GetShipmentsResponse(string GetShipmentsResult) {
             this.GetShipmentsResult = GetShipmentsResult;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="GetShipmentDetails", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
+    public partial class GetShipmentDetailsRequest {
+        
+        [System.ServiceModel.MessageHeaderAttribute(Namespace="http://tempuri.org/")]
+        public B2B.ServiceSalesOrder.AuthHeader AuthHeader;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
+        public string iv_tknum;
+        
+        public GetShipmentDetailsRequest() {
+        }
+        
+        public GetShipmentDetailsRequest(B2B.ServiceSalesOrder.AuthHeader AuthHeader, string iv_tknum) {
+            this.AuthHeader = AuthHeader;
+            this.iv_tknum = iv_tknum;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="GetShipmentDetailsResponse", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
+    public partial class GetShipmentDetailsResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
+        public string GetShipmentDetailsResult;
+        
+        public GetShipmentDetailsResponse() {
+        }
+        
+        public GetShipmentDetailsResponse(string GetShipmentDetailsResult) {
+            this.GetShipmentDetailsResult = GetShipmentDetailsResult;
         }
     }
     
@@ -308,10 +354,10 @@ namespace B2B.ServiceSalesOrder {
             return base.Channel.GetShipments(request);
         }
         
-        public string GetShipments(B2B.ServiceSalesOrder.AuthHeader AuthHeader, string iv_kunnr) {
+        public string GetShipments(B2B.ServiceSalesOrder.AuthHeader AuthHeader, string[] lst_kunnr) {
             B2B.ServiceSalesOrder.GetShipmentsRequest inValue = new B2B.ServiceSalesOrder.GetShipmentsRequest();
             inValue.AuthHeader = AuthHeader;
-            inValue.iv_kunnr = iv_kunnr;
+            inValue.lst_kunnr = lst_kunnr;
             B2B.ServiceSalesOrder.GetShipmentsResponse retVal = ((B2B.ServiceSalesOrder.WebServiceSalesOrderSoap)(this)).GetShipments(inValue);
             return retVal.GetShipmentsResult;
         }
@@ -321,11 +367,36 @@ namespace B2B.ServiceSalesOrder {
             return base.Channel.GetShipmentsAsync(request);
         }
         
-        public System.Threading.Tasks.Task<B2B.ServiceSalesOrder.GetShipmentsResponse> GetShipmentsAsync(B2B.ServiceSalesOrder.AuthHeader AuthHeader, string iv_kunnr) {
+        public System.Threading.Tasks.Task<B2B.ServiceSalesOrder.GetShipmentsResponse> GetShipmentsAsync(B2B.ServiceSalesOrder.AuthHeader AuthHeader, string[] lst_kunnr) {
             B2B.ServiceSalesOrder.GetShipmentsRequest inValue = new B2B.ServiceSalesOrder.GetShipmentsRequest();
             inValue.AuthHeader = AuthHeader;
-            inValue.iv_kunnr = iv_kunnr;
+            inValue.lst_kunnr = lst_kunnr;
             return ((B2B.ServiceSalesOrder.WebServiceSalesOrderSoap)(this)).GetShipmentsAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        B2B.ServiceSalesOrder.GetShipmentDetailsResponse B2B.ServiceSalesOrder.WebServiceSalesOrderSoap.GetShipmentDetails(B2B.ServiceSalesOrder.GetShipmentDetailsRequest request) {
+            return base.Channel.GetShipmentDetails(request);
+        }
+        
+        public string GetShipmentDetails(B2B.ServiceSalesOrder.AuthHeader AuthHeader, string iv_tknum) {
+            B2B.ServiceSalesOrder.GetShipmentDetailsRequest inValue = new B2B.ServiceSalesOrder.GetShipmentDetailsRequest();
+            inValue.AuthHeader = AuthHeader;
+            inValue.iv_tknum = iv_tknum;
+            B2B.ServiceSalesOrder.GetShipmentDetailsResponse retVal = ((B2B.ServiceSalesOrder.WebServiceSalesOrderSoap)(this)).GetShipmentDetails(inValue);
+            return retVal.GetShipmentDetailsResult;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<B2B.ServiceSalesOrder.GetShipmentDetailsResponse> B2B.ServiceSalesOrder.WebServiceSalesOrderSoap.GetShipmentDetailsAsync(B2B.ServiceSalesOrder.GetShipmentDetailsRequest request) {
+            return base.Channel.GetShipmentDetailsAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<B2B.ServiceSalesOrder.GetShipmentDetailsResponse> GetShipmentDetailsAsync(B2B.ServiceSalesOrder.AuthHeader AuthHeader, string iv_tknum) {
+            B2B.ServiceSalesOrder.GetShipmentDetailsRequest inValue = new B2B.ServiceSalesOrder.GetShipmentDetailsRequest();
+            inValue.AuthHeader = AuthHeader;
+            inValue.iv_tknum = iv_tknum;
+            return ((B2B.ServiceSalesOrder.WebServiceSalesOrderSoap)(this)).GetShipmentDetailsAsync(inValue);
         }
     }
 }

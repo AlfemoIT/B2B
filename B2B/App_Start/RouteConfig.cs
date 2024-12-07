@@ -27,9 +27,15 @@ namespace B2B
 
             routes.MapRoute(
                 name: "Shipment",
-                url: "shipment/{id}",
+                url: "shipment/{action}/{id}",
                 defaults: new { controller = "Shipment", action = "Index", id = UrlParameter.Optional }
             );
+
+            //routes.MapRoute(
+            //   name: "ShipmentHeader",
+            //   url: "Transport/Data",
+            //   defaults: new { controller = "Shipment", action = "GetData" }
+            //);
 
             routes.MapRoute(
                 name: "Document",

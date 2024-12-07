@@ -4,10 +4,12 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<link href="~/Content/shipment.css" rel="stylesheet" />
+
 <div id="jCrumbs" class="breadCrumb module">
     <ul>
         <li>
-            <a href="#">
+            <a href="/">
                 <i class="glyphicon glyphicon-home"></i>
             </a>
         </li>
@@ -22,159 +24,293 @@
 </div>
 
 <div class="row">
-    <button id="btn-execute" class="btn btn-default btn-etiket float-left heading" style="position: relative; left: 13px;">
-        <i class="fa fa-check"></i>
-        Yürüt
-    </button>
-
-    <div class="col-sm-12 col-md-12" style="margin-top:30px">
-        <h3 class="heading">
-            <button id="download-xlsx" class="btn btn-default btn-etiket" href="#" style="position: relative; bottom: 41px;">
-                <img src="~/img/xls.png" />
-                <span class="font-size-13">Excel'e Aktar</span>
-            </button>
-        </h3>
+    <div class="col-sm-12 col-md-12">
+        <h3 class="heading"></h3>
     </div>
 
     <div class="col-sm-12 col-md-12">
-        <div class="col-sm-6">
+        <div class="col-sm-5 col-md-5">
             <form>
                 <div class="form-group row">
-                    <label class="col-sm-2 col-form-label">Nakliye Durumu :</label>
-                    <div class="col-sm-3">
-                        <select id="drpOrderState" class="form-control js-example-basic-single">
+                    <label class="col-lg-3 control-label">Nakliye Durumu:</label>
+                    <div class="col-lg-5">
+                        <select id="drpOrderState" class="form-control js-example-basic-single" style="width:100%">
                             <option value="ACIK">ACIK</option>
                             <option value="KAPALI">KAPALI</option>
-                            <option value="TUMU">TUMU</option>
                         </select>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="inputPassword1" class="col-lg-3 control-label">Nakliye No:</label>
+                    <div class="col-lg-5">
+                        <select id="drpShipment" class="form-control js-example-basic-single" style="width:100%">
+                            <option></option>
+                        </select>
+                    </div>
+                    <div class="col-lg-1">
+                        <a id="btnShipment" class="btn btn-default form-control icon-text-button hint--top hint--rounded"
+                           data-hint="Teslim Aldım">
+                            <img src="~/img/shipped_office.png" />
+                        </a>
+                    </div>
+                    <div class="col-lg-1">
+                        <a id="btn-excel" class="btn btn-default form-control icon-text-button hint--top hint--rounded"
+                           data-hint="Excele Aktar" href="#">
+                            <img src="~/img/excel_office.png" />
+                        </a>
                     </div>
                 </div>
             </form>
         </div>
+
+        <div class="col-sm-4 col-md-4 float-right">
+            <div class="vcard">
+                <ul>
+                    <li class="v-heading">
+                        Sürücü Bilgileri
+                    </li>
+                    <li>
+                        <ul class="sepH_b item-list list-unstyled">
+                            <li><img src="~/img/driver.png" />  <span id="driver_name">....................................................</span></li>
+                            <li><img src="~/img/cell_phone.png" />  <span id="driver_phone">....................................................</span></li>
+                            <li><img src="~/img/truck.png" />  <span id="number_plate">....................................................</span></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
     </div>
 
-    <div class="col-sm-12" style="margin-top:40px">
-        <div class="heading">
-        </div>
+    <div class="col-sm-12 col-md-12 heading" style="margin-top:90px">
     </div>
 
     <div class="col-sm-12 col-md-12">
-        <div class="pane">
-            <table class="table table-striped table-bordered dTableR" id="tblShipment" style="width:100%">
-                <thead>
-                    <tr>
-                        <th class="center">#</th>
-                        <th class="center">Nakliye Durumu</th>
-                        <th class="center">Nakliye Durumu</th>
-                        <th class="center">Nakliye No</th>
-                        <th class="center">Cari</th>
-                        <th class="center">Sürücü</th>
-                        <th class="center">Telefon</th>
-                        <th class="center">Araç Plakası</th>
-                    </tr>
-                </thead>
-                <tbody>
-                </tbody>
-            </table>
-        </div>
-
-        <div class="pane" style="margin-top:20px">
-            <table class="table table-striped table-bordered dTableR" id="tblShipRows" style="width:100%">
-                <thead>
-                    <tr>
-                        <th class="center">Nakliye No</th>
-                        <th class="center">İrsaliye Tarihi</th>
-                        <th class="center">İrsaliye No</th>
-                        <th class="center">İrsaliye Kalemi</th>
-                        <th class="center">Sipariş No/Kalem</th>
-                        <th class="center">Malzeme</th>
-                        <th class="center">Tanım</th>
-                        <th class="center">Uzun Tanım</th>
-                        <th class="center">Miktar</th>
-                        <th class="center">Müşteri</th>
-                    </tr>
-                </thead>
-                <tbody>
-                </tbody>
-            </table>
-        </div>
+        <table class="table table-striped table-bordered display nowrap" id="tblShipment" style="width:100%">
+            <thead>
+                <tr>
+                    <th class="center"></th>
+                    <th class="center">Nakliye No</th>
+                    <th class="center">İrsaliye Tarihi</th>
+                    <th class="center">İrsaliye No</th>
+                    <th class="center">İrsaliye Kalemi</th>
+                    <th class="center">Sipariş No/Kalem</th>
+                    <th class="center">Malzeme</th>
+                    <th class="center">Tanım</th>
+                    <th class="center">Miktar</th>
+                    <th class="center">Müşteri</th>
+                    <th class="center">Cari</th>
+                    <th class="left">Uzun Tanım</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
     </div>
+
+    <div id="freezeOverlay"></div>
 </div>
 
-
 @section Scripts{
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.10/js/select2.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
     <script type="text/javascript">
         $(function () {
-            $('.js-example-basic-single').select2();
-            $("#download-xlsx").prop("disabled", true);
+            $("#btn-excel").prop("disabled", true);
+            $('#drpOrderState').select2({
+                allowClear: true
+            });
+            $('#drpShipment').select2({
+                placeholder: 'Seçiniz',
+                allowClear: true
+            });
 
-            $("#tblShipment").DataTable();
-            $('#tblShipRows').DataTable();
+            GetShipmentNumbers();
 
-            @*var table = $("#tblShipment").DataTable({
+            var table = $("#tblShipment").DataTable({
                 language: {
-                     url: "@Url.Content("~/Content/tr.json")",
+                    url: "@Url.Content("~/Content/tr.json")",
+                    processing: '<i class="fa fa-spinner fa-spin fa-3x fa-fw"></i><span class="sr-only">Loading...</span>'
                 },
-                ajax:
-                {
-                    url: '@Url.Action("GetData")',
-                    type: "POST",
-                    dataType: 'json',
-                    data: function (d) {
-                        var customer = JSON.parse(sessionStorage.getItem("Customer"));
-                        console.log(customer)
-                        d.iv_kunnr = customer.SapCode;
-                    },
-                    dataSrc: function (json) {
-                        console.log(json.data)
-                        return json.data;
-                    }
-                },
-                retrieve: true,
+                processing: true,
+                scrollX: true,
+                fixedHeader: true,
                 autoWidth: false,
-                displayLength: 5,
+                responsive: true,
+                retrieve: true,
+                displayLength: 15,
+                ajax: null,
                 columns: [
-                    //{
-                    //    width: "50px",
-                    //    render: function (data, type, row) {
-                    //        if (row.CMPT_ABGRU == "ACIK") {
-                    //            return `<i class="splashy-information"></i>`;
-                    //        }
-                    //        else {
-                    //            return `<i class="splashy-check"></i>`;
-                    //        }
-                    //    }
-                    //},
-                    //{ data: 'CMPT_ABGRU', width: "50px" },
-                    { data: 'TKNUM' },
+                    {
+                        width: "50px",
+                        render: function (data, type, row) {
+                            return `<input name="row_sel" class="select_row" type="checkbox" checked>`;
+                        }
+                    },
+                    { data: 'CMPT_TKNUM' },
+                    { data: 'CMPT_ERDAT' },
+                    { data: 'CMPT_LPS_VBELN' },
+                    { data: 'CMPT_LPS_POSNR' },
+
+                    { data: 'CMPT_VBELN' },
+                    { data: 'MATNR' },
+                    { data: 'MAKTX' },
+                    {
+                        data: 'CMPT_KWMENG',
+                        render: function (data, type, row) {
+                            if (type === 'display') {
+                                return new Intl.NumberFormat('tr-TR', { minimumFractionDigits: 0, maximumFractionDigits: 0 }).format(data);
+                            }
+                            return data;
+                        }
+                    },
+                    { data: 'ZZMUSTERI_AD' },
                     { data: 'KUNAGTANIM' },
-                    { data: 'SURUCU' },
-                    { data: 'TELEFON' },
-                    { data: 'PLAKA' }
+                    { data: 'LONG_MAKTX' }
                 ],
-                //columnDefs: [
-                //    { className: 'dt-center', targets: [0, 1, 2,5,6] }
-                //],
-                initComplete: function (settings, json) {
-                    $("#btn-execute").prop("disabled", false);
+                columnDefs: [
+                    {
+                        className: 'dt-center', targets: [0, 1, 2, 3, 4, 5, 8]
+                    }
+                ]
+            });
+
+            table.on('xhr', function (e, settings, json, xhr) {
+                $('#freezeOverlay').hide();
+                $("#btn-excel").prop("disabled", false);
+            });
+
+            $('#drpShipment').on('change', function (e) {
+                const selectedValue = $(this).val();
+                if (selectedValue) {
+                    DisableElements();
+                    Clear();
+                    GetDriver(selectedValue);
+                    table.ajax.url(`/Shipment/GetDetail?nakliye_no=${selectedValue}`).load();
+                } else {
+                    table.clear().draw();
+                    Clear();
                 }
-            });*@
+            });
 
-            //table.on('xhr', function (e, settings, json, xhr) {
-            //    $("#btn-execute").prop("disabled", false);
-            //    $("#download-xlsx").prop("disabled", false);
+            $('#btn-excel').click(function () {
+                var count = table.data().count();
+                if (count > 0) {
+                    var filename = $("#drpShipment").val() + '_NAKLIYE.xlsx';
+                    exportTableToExcel('tblShipment', filename);
+                }
+            });
 
-            //    //$('#drpOrderState option:first').prop('selected', true);
-            //    //$('#drpOrderState').trigger('change');
+            var headers;
+            function exportTableToExcel(tableID, filename) {
+                headers = ['CMPT_TKNUM', 'CMPT_ERDAT', 'CMPT_LPS_VBELN', 'CMPT_LPS_POSNR', 'CMPT_VBELN',
+                    'MATNR', 'MAKTX', 'CMPT_KWMENG', 'ZZMUSTERI_AD', 'KUNAGTANIM','LONG_MAKTX'];
 
-            //    //$('#drpOrderState').prop('disabled', false)
-            //    //                  .trigger('change.select2');
-            //});
+                var exportTable = $('<table>');
+                var thead = $('<thead>');
+                var tbody = $('<tbody>');
 
+                $('#tblShipment thead tr')
+                    .clone()
+                    .each(function () {
+                        $(this).find('th:first-child').remove();
+                    })
+                    .appendTo(thead);
+                thead.appendTo(exportTable);
 
+                var data = table.rows(':not(.no-data)').data().toArray();
+                data.forEach(function (row) {
+                    var tr = $('<tr>');
+                    headers.forEach(function (header) {
+                        if (header == "CMPT_ERDAT") {
+                            if (row[header] != null && row[header] != '') {
+                                const dateString = row[header]?.trim();
+                                if (dateString) {
+                                    //format dd-MM-yyyy or similar
+                                    const dateRegex = /^(\d{2})[-.](\d{2})[-.](\d{4})$/;
+                                    const match = dateString.match(dateRegex);
+                                    if (match) {
+                                        const day = match[1];
+                                        const month = match[2];
+                                        const year = match[3];
 
+                                        const formattedDate = `${year}-${month}-${day}`;
+                                        $('<td>').text(formattedDate).appendTo(tr);
+                                    }
+                                }
+                            }
+                        }
+                        else {
+                            $('<td>').text(row[header]).appendTo(tr);
+                        }
+                    });
+                    tr.appendTo(tbody);
+                });
+                tbody.appendTo(exportTable);
 
+                var wb = XLSX.utils.table_to_book(exportTable[0], { sheet: "Sheet1" });
+                var wbout = XLSX.write(wb, { bookType: 'xlsx', type: 'binary' });
+                function s2ab(s) {
+                    var buf = new ArrayBuffer(s.length);
+                    var view = new Uint8Array(buf);
+                    for (var i = 0; i < s.length; i++) {
+                        view[i] = s.charCodeAt(i) & 0xFF;
+                    }
+                    return buf;
+                }
 
+                var blob = new Blob([s2ab(wbout)], { type: "application/octet-stream" });
+                var link = document.createElement('a');
+                link.href = URL.createObjectURL(blob);
+                link.download = 'table_export.xlsx';
+                link.download = filename;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            }
+
+            function GetShipmentNumbers() {
+                $.ajax({
+                    url: '@Url.Action("GetData")',
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function (data) {
+                        data.items.forEach(function (item) {
+                            var newOption = new Option(item.text, item.id, false, false);
+                            $('#drpShipment').append(newOption);
+                        });
+
+                        $('#drpShipment').trigger('change');
+                    },
+                    error: function () { }
+                });
+            }
+
+            function GetDriver(shipment_no) {
+                $.ajax({
+                    url: '@Url.Action("GetDriver")',
+                    type: 'POST',
+                    data: { tknum: shipment_no },
+                    success: function (response) {
+                        $("#driver_name").text(response.data.SURUCU);
+                        $("#driver_phone").text(response.data.TELEFON);
+                        $("#number_plate").text(response.data.PLAKA);
+                    },
+                    error: function (error) {
+                        console.error('Error:', error);
+                    }
+                });
+            }
+
+            function DisableElements() {
+                $("#btn-excel").prop("disabled", true);
+                $('#freezeOverlay').show();
+            }
+
+            function Clear() {
+                $("#driver_name").text('....................................................');
+                $("#driver_phone").text('....................................................');
+                $("#number_plate").text('....................................................');
+            }
         });
     </script>
 }

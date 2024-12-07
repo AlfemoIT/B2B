@@ -3,70 +3,9 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<style>
-    .dataTables_wrapper .dataTable thead th.sorting:after,
-    .dataTables_wrapper .dataTable thead th.sorting_asc:after,
-    .dataTables_wrapper .dataTable thead th.sorting_desc:after {
-        margin-left: 5px;
-        position: relative;
-        top: 2px;
-    }
+<link href="~/Content/shipment.css" rel="stylesheet" />
 
-    .dataTables_wrapper .dataTable thead th {
-        padding-right: 20px; /* Creates space for the icon */
-    }
 
-    .dataTables_filter {
-        margin-top: -28px;
-    }
-
-    .table thead > tr > th, .table tbody > tr > th, .table tfoot > tr > th {
-        text-align: center;
-    }
-
-    .dataTables_wrapper .dataTables_paginate {
-        display: flex;
-        justify-content: center; /* Center-align the pagination */
-        margin-top: 20px;
-    }
-
-        .dataTables_wrapper .dataTables_paginate .paginate_button {
-            box-sizing: border-box;
-            display: inline-block;
-            min-width: 1.5em;
-            padding: 0.3em 0.8em;
-            margin-left: 2px;
-            text-align: center;
-            text-decoration: none !important;
-            cursor: pointer;
-            color: inherit !important;
-            border: 1px solid transparent;
-            border-radius: 2px;
-            background: transparent;
-        }
-
-            .dataTables_wrapper .dataTables_paginate .paginate_button.current {
-                color: inherit !important;
-                border: 1px solid rgba(0, 0, 0, 0.3);
-                background: linear-gradient(to bottom, rgba(230, 230, 230, 0.05) 0%, rgba(0, 0, 0, 0.05) 100%);
-            }
-
-            .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
-                color: white !important;
-                border: 1px solid #111;
-                background: linear-gradient(to bottom, #585858 0%, #111 100%);
-            }
-
-    .dataTables_wrapper .dataTables_paginate {
-        display: flex;
-        justify-content: center;
-        margin-top: -15px;
-    }
-
-    .dataTables_scroll {
-        margin-top: 12px;
-    }
-</style>
 
 <div id="jCrumbs" class="breadCrumb module">
     <ul>
@@ -80,7 +19,7 @@
             <div class="chevronOverlay" style="display: block;"></div>
         </li>
         <li>
-            Sipariş Detay
+            Siparişlerim
         </li>
     </ul>
 </div>
@@ -102,15 +41,17 @@
                             <option value="TUMU">TUMU</option>
                         </select>
                     </div>
+
+                    <div class="col-sm-2">
+                        <a id="download-xlsx"
+                                class="btn btn-default form-control icon-text-button hint--top hint--rounded"
+                                data-hint="Excele Aktar"
+                                href="#">
+                            <img src="~/img/excel_office.png" />
+                        </a>
+                    </div>
                 </div>
             </form>
-        </div>
-
-        <div class="col-sm-6">
-            <button id="download-xlsx" class="btn btn-default btn-excel" href="#">
-                <img src="~/img/excel.png" width="20%" />
-                <span class="font-size-12">Excel'e Aktar</span>
-            </button>
         </div>
     </div>
 

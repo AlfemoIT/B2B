@@ -12,7 +12,7 @@
 }
 
 .back-color-theme {
-    background-color: #248ab5;
+    background-color: #d78990;
 }
 
 .btn-middle-icon {
@@ -373,4 +373,14 @@ a {
     bottom: 5px;
     padding: 5px 0px;
     cursor: pointer !important;
+}
+
+.heading {
+    border-bottom: 1px solid #dcdcdc;
+    margin-bottom: 13px;
+    padding-bottom: 5px;
+}
+
+.left{
+    text-align : left !important;
 }
