@@ -3,8 +3,6 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@model B2B.Models.KNA1
-
 <style>
     div.dt-processing > div:last-child {
         display: none;
@@ -13,9 +11,25 @@
     .fa-3x {
         font-size: 4.5em;
     }
-</style>
 
-<input type="hidden" id="kna1-sortl" name="kna1-sortl" value="@Model.SORTL" />
+    .icon-text-button {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 39px;
+        height: 31px;
+        color: black;
+        background-color: #f6eeef;
+        border-color: #22222261;
+    }
+
+        .icon-text-button:hover, .icon-text-button:focus, .icon-text-button:active, .icon-text-button.active, .open .dropdown-toggle.icon-text-button {
+            color: black;
+            background-color: #f6eeef;
+            border-color: #22222261;
+        }
+</style>
 
 <div id="jCrumbs" class="breadCrumb module">
     <ul>
@@ -35,22 +49,31 @@
 </div>
 
 <div class="row">
-    <button id="btn-execute" class="btn btn-default btn-etiket float-left heading" style="position: relative; left: 13px;">
-        <i class="fa fa-check"></i>
-        Yürüt
-    </button>
+    @*<button id="btn-execute" class="btn btn-default btn-etiket float-left heading" style="position: relative; left: 13px;">
+            <i class="fa fa-check"></i>
+            Yürüt
+        </button>*@
 
-    <div class="col-sm-12 col-md-12" style="margin-top:30px">
-        <h3 class="heading">
-            <button id="download-xlsx" class="btn btn-default btn-etiket" href="#" style="position: relative; bottom: 41px;">
-                <img src="~/img/xls.png" />
-                <span class="font-size-13">Excel'e Aktar</span>
-            </button>
-        </h3>
+    @*<a id="btn-execute" class="btn btn-default form-control icon-text-button hint--top hint--rounded float-left heading"
+           data-hint="yürüt">
+            <img src="~/img/shipped_office.png" />
+        </a>*@
+
+    @*<div class="col-sm-12 col-md-12" style="margin-top:30px">
+            <h3 class="heading">
+                <button id="download-xlsx" class="btn btn-default btn-etiket" href="#" style="position: relative; bottom: 41px;">
+                    <img src="~/img/xls.png" />
+                    <span class="font-size-13">Excel'e Aktar</span>
+                </button>
+            </h3>
+        </div>*@
+
+    <div class="col-sm-12 col-md-12">
+        <h3 class="heading"></h3>
     </div>
 
     <div class="col-sm-12 col-md-12">
-        <div class="col-sm-9">
+        <div class="col-sm-7">
             <form>
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Ana Grup :</label>
@@ -76,6 +99,18 @@
                         <select id="drpMvgr4" class="form-control js-example-basic-single">
                             <option value="">Seçiniz</option>
                         </select>
+                    </div>
+                    <div class="col-sm-1">
+                        <a  id="btn-execute" class="btn btn-default form-control icon-text-button hint--top hint--rounded"
+                           data-hint="Yürüt">
+                            <img src="~/img/ok.png" />
+                        </a>
+                    </div>
+                    <div class="col-sm-1" style="padding-left:0">
+                        <a id="download-xlsx" class="btn btn-default form-control icon-text-button hint--top hint--rounded"
+                           data-hint="Excele Aktar" href="#">
+                            <img src="~/img/excel_office.png" />
+                        </a>
                     </div>
                 </div>
             </form>
@@ -158,9 +193,9 @@
             var table = $('#tblStock').DataTable({
                 language: {
                     url: "@Url.Content("~/Content/tr.json")",
-                   'processing': '<i class="fa fa-spinner fa-spin fa-3x fa-fw"></i><span class="sr-only">Loading...</span>'
+                    processing: '<i class="fa fa-spinner fa-spin fa-3x fa-fw"></i><span class="sr-only">Loading...</span>'
                 },
-                processing: true, 
+                processing: true,
                 retrieve: true,
                 columns: [
                     { "title": "Malzeme","data": "MATNR"  },
@@ -201,7 +236,8 @@
             });
 
             setTimeout(function () {
-                if ($("#kna1-sortl").val() == 'BAYI') {
+                var customer = JSON.parse(sessionStorage.getItem("Customer"));
+                if (customer.GroupName == 'BAYI') {
                     table.column(7).visible(false);
                     table.column(8).visible(false);
                     table.column(9).visible(false);
@@ -247,9 +283,12 @@
                     return;
                 }
 
-                $("#p-selection").html(bezei3 + bezei2 + bezei4+' Listesi');
+                $("#p-selection").html(bezei3 + bezei2 + bezei4 + ' Listesi');
 
-                table.ajax.url('/Stock/GetData?sortl=' + $("#kna1-sortl").val() + '&mvgr2=' + mvgr2 + '&mvgr3=' + mvgr3 + '&mvgr4=' + mvgr4).load();
+                var customer = JSON.parse(sessionStorage.getItem("Customer"));
+                var cGroupName = customer.GroupName;
+
+                table.ajax.url('/Stock/GetData?sortl=' + cGroupName + '&mvgr2=' + mvgr2 + '&mvgr3=' + mvgr3 + '&mvgr4=' + mvgr4).load();
             });
 
             $('#download-xlsx').click(function () {

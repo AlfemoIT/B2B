@@ -4,6 +4,7 @@ using B2B.Models.ViewModels;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -23,18 +24,21 @@ namespace B2B.Controllers
         }
         public PartialViewResult _NavBar()
         {
+            var englishCulture = new CultureInfo("en");
             var user = GetUser();
             using (var context = new B2bContext())
             {
                 if (user.RoleID == 6) //bolge muduru
                 {
-                    var customers = (from customer in context.Customers
+                    var customers = (from customer in context.Customers.AsEnumerable()
+                                     join cgroup in context.CustomerGroups.AsEnumerable() on customer.CustomerGroupID equals cgroup.ID
                                      where customer.SalesOfficeID == user.SalesOfficeID
                                      select new CustomerDto
                                      {
                                          ID = customer.ID,
                                          Name = customer.Name,
-                                         SapCode = customer.SapCode
+                                         SapCode = customer.SapCode,
+                                         GroupName = cgroup.Name.ToUpper(englishCulture)
                                      }).ToList();
 
                     return PartialView(new CustomerViewModel
@@ -45,13 +49,15 @@ namespace B2B.Controllers
                 }
                 else
                 {
-                    var customers = (from customera in context.CustomerAssignments.Where(x => x.UserID == user.ID)
-                                     join customer in context.Customers on customera.CustomerID equals customer.ID
+                    var customers = (from customera in context.CustomerAssignments.Where(x => x.UserID == user.ID).AsEnumerable()
+                                     join customer in context.Customers.AsEnumerable() on customera.CustomerID equals customer.ID
+                                     join cgroup in context.CustomerGroups.AsEnumerable() on customer.CustomerGroupID equals cgroup.ID
                                      select new CustomerDto
                                      {
                                          ID = customer.ID,
                                          Name = customer.Name,
-                                         SapCode = customer.SapCode
+                                         SapCode = customer.SapCode,
+                                         GroupName = cgroup.Name.ToUpper(englishCulture)
                                      }).ToList();
 
                     return PartialView(new CustomerViewModel

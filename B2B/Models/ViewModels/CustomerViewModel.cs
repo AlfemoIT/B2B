@@ -15,6 +15,7 @@ namespace B2B.Models.ViewModels
     {
         public int ID { get; set; }
         public string Name { get; set; }
+        public string GroupName { get; set; }
         public string SapCode { get; set; }
     }
 }

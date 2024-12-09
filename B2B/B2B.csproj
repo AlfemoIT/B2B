@@ -592,6 +592,7 @@
     <Content Include="img\driver.png" />
     <Content Include="img\excel.png" />
     <Content Include="img\excel_office.png" />
+    <Content Include="img\ok.png" />
     <Content Include="img\pdf-icon.png" />
     <Content Include="img\shipment.png" />
     <Content Include="img\shipped.png" />

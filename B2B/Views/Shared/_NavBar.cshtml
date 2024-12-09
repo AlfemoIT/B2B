@@ -5,9 +5,6 @@
 <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
     <div class="navbar-inner">
         <div class="container">
-            @*<a class="brand pull-left text-center" href="#">
-                    <img src="~/alfemo.png" alt="logo.svg (43 KB)" width="85%" style="border-radius:3px">
-                </a>*@
             <a class="brand pull-left text-center" href="#">
                 ALFEMO
             </a>
@@ -25,7 +22,7 @@
                         <ul class="dropdown-menu">
                             @foreach (var customer in Model.Customers)
                             {
-                                <li><a href="#" onclick="changeCustomer('@customer.SapCode','@customer.Name')"> @customer.Name </a></li>
+                                <li><a href="#" onclick="changeCustomer('@customer.SapCode','@customer.Name','@customer.GroupName')"> @customer.Name </a></li>
                                 <li class="divider"></li>
                             }
                         </ul>
@@ -63,11 +60,12 @@
         }
     });
 
-    function changeCustomer(cSapCode, cName) {
+    function changeCustomer(cSapCode, cName,cGroupName) {
         var customer = {
             ID : 1,
             SapCode : cSapCode,
-            Name: cName
+            Name: cName,
+            GroupName: cGroupName
         }
         $("#customer_name").html(customer.Name);
         sessionStorage.setItem("Customer", JSON.stringify(customer));
