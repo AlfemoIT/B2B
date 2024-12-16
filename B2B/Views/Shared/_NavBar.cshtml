@@ -22,7 +22,12 @@
                         <ul class="dropdown-menu">
                             @foreach (var customer in Model.Customers)
                             {
-                                <li><a href="#" onclick="changeCustomer('@customer.SapCode','@customer.Name','@customer.GroupName')"> @customer.Name </a></li>
+                                <li>
+                                    <a href="#"
+                                       onclick="changeCustomer('@customer.SapCode','@customer.Name','@customer.GroupName','@customer.IsCentral')">
+                                        @customer.Name
+                                    </a>
+                                </li>
                                 <li class="divider"></li>
                             }
                         </ul>
@@ -31,7 +36,7 @@
                 <li class="divider-vertical hidden-sm hidden-xs"></li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        @*<img src="~/img/user_avatar1.jpg" alt="" class="user_avatar">*@
+                        <span class="glyphicon glyphicon-user" style="padding-right:3px !important"></span>
                         @Model.UserName
                         <b class="caret"></b>
                     </a>
@@ -60,9 +65,10 @@
         }
     });
 
-    function changeCustomer(cSapCode, cName,cGroupName) {
+    function changeCustomer(cSapCode, cName,cGroupName,cIsCentral) {
         var customer = {
-            ID : 1,
+            ID: 1,
+            IsCentral: cIsCentral,
             SapCode : cSapCode,
             Name: cName,
             GroupName: cGroupName

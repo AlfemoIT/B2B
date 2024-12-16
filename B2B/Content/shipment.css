@@ -14,24 +14,6 @@
     padding-bottom: 5px;
 }
 
-.icon-text-button {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 39px;
-    height: 31px;
-    color: black;
-    background-color: #f6eeef;
-    border-color: #22222261;
-}
-
-    .icon-text-button:hover, .icon-text-button:focus, .icon-text-button:active, .icon-text-button.active, .open .dropdown-toggle.icon-text-button {
-        color: black;
-        background-color: #f6eeef;
-        border-color: #22222261;
-    }
-
 /*datatable processing*/
 div.dt-processing > div:last-child {
     display: none;
@@ -59,7 +41,7 @@ div.dt-processing > div:last-child {
 }
 
 .dataTables_wrapper .dataTable thead th {
-    padding-right: 20px; /* Creates space for the icon */
+    padding-right: 20px;
 }
 
 .dataTables_filter {

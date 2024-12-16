@@ -31,11 +31,11 @@ namespace B2B
                 defaults: new { controller = "Shipment", action = "Index", id = UrlParameter.Optional }
             );
 
-            //routes.MapRoute(
-            //   name: "ShipmentHeader",
-            //   url: "Transport/Data",
-            //   defaults: new { controller = "Shipment", action = "GetData" }
-            //);
+            routes.MapRoute(
+               name: "AccountStatement",
+               url: "account-statement/{action}/{id}",
+               defaults: new { controller = "AccountStatement", action = "Index", id = UrlParameter.Optional }
+            );
 
             routes.MapRoute(
                 name: "Document",

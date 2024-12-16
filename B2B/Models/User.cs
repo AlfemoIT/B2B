@@ -11,12 +11,12 @@ namespace B2B.Models
         public User()
         {
             CustomerAssignment = new List<CustomerAssignment>();
+            PageAssignment = new List<PageAssignment>();
         }
         public int ID { get; set; }
         public int UserGroupID { get; set; }
         public int RoleID { get; set; }
-        public int? SalesOfficeID { get; set; } //sorumlu oldugu bolge
-
+        public int? SalesOfficeID { get; set; }    //sorumlu oldugu bolge
         public string RegistrationNo { get; set; } //sicil no
         public string NameSurname { get; set; }
         public string Password { get; set; }
@@ -30,6 +30,9 @@ namespace B2B.Models
 
         [JsonIgnore]
         public ICollection<CustomerAssignment> CustomerAssignment { get; set; }
+
+        [JsonIgnore]
+        public ICollection<PageAssignment> PageAssignment { get; set; }
 
         [JsonIgnore]
         public virtual SalesOffice SalesOffice { get; set; }

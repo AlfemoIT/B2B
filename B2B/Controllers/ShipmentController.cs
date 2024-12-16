@@ -42,8 +42,8 @@ namespace B2B.Controllers
             List<ZAL_S_NAKLIYE> shipments = new List<ZAL_S_NAKLIYE>();
             if (lst_kunnr.Count > 0)
             {
-                var client = new ServiceSalesOrder.WebServiceSalesOrderSoapClient();
-                var hd = new ServiceSalesOrder.AuthHeader()
+                var client = new ServiceShipment.WebServiceShipmentSoapClient();
+                var hd = new ServiceShipment.AuthHeader()
                 {
                     Username = "AlfemoUB2B_ServiceUser",
                     Password = "Alfemo!2024_!"
@@ -84,8 +84,8 @@ namespace B2B.Controllers
         {
             List<ZAL_S_NAKLIYE> shipments = new List<ZAL_S_NAKLIYE>();
 
-            var client = new ServiceSalesOrder.WebServiceSalesOrderSoapClient();
-            var hd = new ServiceSalesOrder.AuthHeader()
+            var client = new ServiceShipment.WebServiceShipmentSoapClient();
+            var hd = new ServiceShipment.AuthHeader()
             {
                 Username = "AlfemoUB2B_ServiceUser",
                 Password = "Alfemo!2024_!"

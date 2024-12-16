@@ -17,5 +17,6 @@ namespace B2B.Models.ViewModels
         public string Name { get; set; }
         public string GroupName { get; set; }
         public string SapCode { get; set; }
+        public bool IsCentral { get; set; }
     }
 }

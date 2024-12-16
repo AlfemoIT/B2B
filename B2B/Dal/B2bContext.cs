@@ -19,6 +19,9 @@ namespace B2B.Dal
         public DbSet<CustomerGroup> CustomerGroups { get; set; }
         public DbSet<SalesOffice> SalesOffices { get; set; }
         public DbSet<CustomerAssignment> CustomerAssignments { get; set; }
+        public DbSet<Page> Pages { get; set; }
+        public DbSet<PageCategory> PageCategories { get; set; }
+        public DbSet<PageAssignment> PageAssignments { get; set; }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

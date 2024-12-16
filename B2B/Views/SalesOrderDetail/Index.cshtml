@@ -22,72 +22,69 @@
     </ul>
 </div>
 
-<div class="row">
-    <div class="col-sm-12 col-md-12">
-        <h3 class="heading"></h3>
-    </div>
-
-    <div class="col-sm-12 col-md-12">
-        <div class="col-sm-6">
-            <form>
-                <div class="form-group row">
-                    <label class="col-sm-2 col-form-label" style="padding-left: 8px;">Sipariş Durumu :</label>
-                    <div class="col-sm-3">
-                        <select id="drpOrderState" class="form-control js-example-basic-single">
-                            <option value="ACIK">ACIK</option>
-                            <option value="KAPALI">KAPALI</option>
-                            <option value="TUMU">TUMU</option>
-                        </select>
-                    </div>
-
-                    <div class="col-sm-2">
-                        <a id="download-xlsx"
-                           class="btn btn-default form-control icon-text-button hint--top hint--rounded"
-                           data-hint="Excele Aktar"
-                           href="#">
-                            <img src="~/img/excel_office.png" />
-                        </a>
-                    </div>
+<div class="col-sm-12 col-md-12 border-filter">
+    <div class="col-sm-6">
+        <form>
+            <div class="form-group row">
+                <label class="col-sm-1 col-form-label" style="padding-left: 8px;">Sipariş Durumu</label>
+                <div class="col-sm-3">
+                    <select id="drpOrderState" class="form-control js-example-basic-single" style="width:100%;">
+                        <option value="ACIK">ACIK</option>
+                        <option value="KAPALI">KAPALI</option>
+                        <option value="TUMU">TUMU</option>
+                    </select>
                 </div>
-            </form>
-        </div>
-    </div>
 
-    <div class="col-sm-12" style="margin-top:40px">
-        <div class="heading">
-        </div>
-    </div>
+                <div class="col-sm-1">
+                    <a id="btn-execute" class="btn btn-default form-control icon-text-button hint--top hint--rounded"
+                       data-hint="Yürüt">
+                        <img src="~/img/realtime.png" />
+                    </a>
+                </div>
 
-    <div class="col-sm-12 col-md-12">
-        <table class="table table-striped table-bordered display nowrap" id="tblSaleRows" style="width:100%">
-            <thead>
-                <tr>
-                    <th></th>
-                    <th>SD</th>
-                    <th>Sipariş Tarihi</th>
-                    <th>Teslim Tarihi</th>
-                    <th>Sipariş No</th>
-                    <th>Kalem</th>
-                    <th>Müşteri</th>
-                    <th>Malzeme</th>
-                    <th>Tanım</th>
-                    <th>Miktar</th>
-                    <th>Teslim Edildi</th>
-                    <th>Sevk Edildi</th>
-                    <th>Hazır</th>
-                    <th>Hazır Hacim (M3)</th>
-                    <th>Üretimde</th>
-                    <th>Hafta</th>
-                    <th>Tutar (TL)</th>
-                    <th>Cari</th>
-                    <th>Uzun Tanım</th>
-                </tr>
-            </thead>
-            <tbody>
-            </tbody>
-        </table>
+                <div class="col-sm-1 padding-left-0">
+                    <a id="download-xlsx"
+                       class="btn btn-default form-control icon-text-button hint--top hint--rounded"
+                       data-hint="Excele Aktar"
+                       href="#">
+                        <img src="~/img/microsoft_excel.png" />
+                    </a>
+                </div>
+            </div>
+        </form>
     </div>
 </div>
+
+<div class="col-sm-12 col-md-12 padding-left-0 padding-right-0 margin-top-5">
+    <table class="table table-striped table-bordered display nowrap" id="tblSaleRows" style="width:100%">
+        <thead>
+            <tr>
+                <th></th>
+                <th>SD</th>
+                <th>Sipariş Tarihi</th>
+                <th>Teslim Tarihi</th>
+                <th>Sipariş No</th>
+                <th>Kalem</th>
+                <th>Müşteri</th>
+                <th>Malzeme</th>
+                <th>Tanım</th>
+                <th>Miktar</th>
+                <th>Teslim Edildi</th>
+                <th>Sevk Edildi</th>
+                <th>Hazır</th>
+                <th>Hazır Hacim (M3)</th>
+                <th>Üretimde</th>
+                <th>Hafta</th>
+                <th>Tutar (TL)</th>
+                <th>Cari</th>
+                <th>Uzun Tanım</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</div>
+
 
 @section Scripts{
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -95,7 +92,8 @@
     <script>
         $(function () {
             $('.js-example-basic-single').select2();
-            $("#download-xlsx").prop("disabled", true);
+            $("#download-xlsx").prop("disabled", true)
+                .addClass("disabled-link");
 
             var table = $('#tblSaleRows').DataTable({
                 scrollX: true,
@@ -187,13 +185,20 @@
             });
 
             table.on('xhr', function (e, settings, json, xhr) {
-                $("#download-xlsx").prop("disabled", false);
+                $("#download-xlsx").prop("disabled", false)
+                    .removeClass("disabled-link");;
             });
 
             $("#drpOrderState").on('change', function (e) {
                 const selectedValue = $(this).val();
                 table.clear().draw();
 
+                disableElements();
+                table.ajax.reload(null, false);
+            });
+
+            $("#btn-execute").click(function () {
+                table.clear().draw();
                 disableElements();
                 table.ajax.reload(null, false);
             });
@@ -293,7 +298,9 @@
             }
 
             function disableElements() {
-                $("#download-xlsx").prop("disabled", true);
+                $("#download-xlsx")
+                    .prop("disabled", true)
+                    .addClass("disabled-link");
             }
         });
     </script>
