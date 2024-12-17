@@ -1,4 +1,5 @@
-﻿using System;
+﻿using B2B.Helper;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -93,19 +94,15 @@ namespace B2B.Models
         public string MAKTX { get; set; }
         public string LONG_MAKTX { get; set; }
         public string VTEXT { get; set; }
-
         public string KWMENG { get; set; }
         public double CMPT_KWMENG
         {
             get
             {
-                CultureInfo info = new CultureInfo("tr-TR");
-                info.NumberFormat.NumberDecimalSeparator = ",";
-
                 double amount = 0;
                 if (!string.IsNullOrEmpty(TOTAL_LFIMG))
                 {
-                    amount = Convert.ToDouble(KWMENG, info);
+                    amount = Convert.ToDouble(KWMENG, CultureHelper.TRCultureInfo);
                     return amount;
                 }
                 return amount;
@@ -145,13 +142,10 @@ namespace B2B.Models
         {
             get
             {
-                CultureInfo info = new CultureInfo("tr-TR");
-                info.NumberFormat.NumberDecimalSeparator = ",";
-
                 double amount = 0;
                 if (!string.IsNullOrEmpty(TOTAL_LFIMG))
                 {
-                    amount = Convert.ToDouble(TOTAL_LFIMG, info);
+                    amount = Convert.ToDouble(TOTAL_LFIMG, CultureHelper.TRCultureInfo);
                     return amount;
                 }
                 return amount;
@@ -163,13 +157,10 @@ namespace B2B.Models
         {
             get
             {
-                CultureInfo info = new CultureInfo("tr-TR");
-                info.NumberFormat.NumberDecimalSeparator = ",";
-
                 double amount = 0;
                 if (!string.IsNullOrEmpty(TOTAL_FKIMG))
                 {
-                    amount = Convert.ToDouble(TOTAL_FKIMG, info);
+                    amount = Convert.ToDouble(TOTAL_FKIMG, CultureHelper.TRCultureInfo);
                     return amount;
                 }
                 return amount;
@@ -181,13 +172,10 @@ namespace B2B.Models
         {
             get
             {
-                CultureInfo info = new CultureInfo("tr-TR");
-                info.NumberFormat.NumberDecimalSeparator = ",";
-
                 double amount = 0;
                 if (!string.IsNullOrEmpty(TOTAL_BMENG))
                 {
-                    amount = Convert.ToDouble(TOTAL_BMENG, info);
+                    amount = Convert.ToDouble(TOTAL_BMENG, CultureHelper.TRCultureInfo);
                     return amount;
                 }
                 return amount;
@@ -199,13 +187,10 @@ namespace B2B.Models
         {
             get
             {
-                CultureInfo info = new CultureInfo("tr-TR");
-                info.NumberFormat.NumberDecimalSeparator = ",";
-
                 double amount = 0;
                 if (!string.IsNullOrEmpty(READY_VOLUM))
                 {
-                    amount = Convert.ToDouble(READY_VOLUM, info);
+                    amount = Convert.ToDouble(READY_VOLUM, CultureHelper.TRCultureInfo);
                     return amount;
                 }
                 return amount;
@@ -217,13 +202,10 @@ namespace B2B.Models
         {
             get
             {
-                CultureInfo info = new CultureInfo("tr-TR");
-                info.NumberFormat.NumberDecimalSeparator = ",";
-
                 double amount = 0;
                 if (!string.IsNullOrEmpty(TOTAL_IN_PRODUCTION))
                 {
-                    amount = Convert.ToDouble(TOTAL_IN_PRODUCTION, info);
+                    amount = Convert.ToDouble(TOTAL_IN_PRODUCTION, CultureHelper.TRCultureInfo);
                     return amount;
                 }
                 return amount;
@@ -235,13 +217,10 @@ namespace B2B.Models
         {
             get
             {
-                CultureInfo info = new CultureInfo("tr-TR");
-                info.NumberFormat.NumberDecimalSeparator = ",";
-
                 double amount = 0;
                 if (!string.IsNullOrEmpty(TOTAL_IN_PLAN))
                 {
-                    amount = Convert.ToDouble(TOTAL_IN_PLAN, info);
+                    amount = Convert.ToDouble(TOTAL_IN_PLAN, CultureHelper.TRCultureInfo);
                     return amount;
                 }
                 return amount;
@@ -255,13 +234,10 @@ namespace B2B.Models
         {
             get
             {
-                CultureInfo info = new CultureInfo("tr-TR");
-                info.NumberFormat.NumberDecimalSeparator = ",";
-
                 double amount = 0;
                 if (!string.IsNullOrEmpty(TOTAL_ORDER_PRICE))
                 {
-                    amount = Convert.ToDouble(TOTAL_ORDER_PRICE, info);
+                    amount = Convert.ToDouble(TOTAL_ORDER_PRICE, CultureHelper.TRCultureInfo);
                     return amount;
                 }
                 return amount;
@@ -272,13 +248,10 @@ namespace B2B.Models
         {
             get
             {
-                CultureInfo info = new CultureInfo("tr-TR");
-                info.NumberFormat.NumberDecimalSeparator = ",";
-
                 double amount = 0;
                 if (!string.IsNullOrEmpty(TOTAL_ORDER_PRICE_TL))
                 {
-                    amount = Convert.ToDouble(TOTAL_ORDER_PRICE_TL, info);
+                    amount = Convert.ToDouble(TOTAL_ORDER_PRICE_TL, CultureHelper.TRCultureInfo);
                     return amount;
                 }
                 return amount;

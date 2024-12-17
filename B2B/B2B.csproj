@@ -312,10 +312,12 @@
     <Compile Include="Controllers\SalesOrderDetailController.cs" />
     <Compile Include="Controllers\ShipmentController.cs" />
     <Compile Include="Controllers\StockController.cs" />
+    <Compile Include="Controllers\StoreController.cs" />
     <Compile Include="Dal\B2bContext.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helper\CultureHelper.cs" />
     <Compile Include="Migrations\202407291242126_InitialCreate.cs" />
     <Compile Include="Migrations\202407291242126_InitialCreate.designer.cs">
       <DependentUpon>202407291242126_InitialCreate.cs</DependentUpon>
@@ -384,6 +386,14 @@
     <Compile Include="Migrations\202412140927516_AddIndexToCategory.designer.cs">
       <DependentUpon>202412140927516_AddIndexToCategory.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202412170814171_AddStorageTable.cs" />
+    <Compile Include="Migrations\202412170814171_AddStorageTable.designer.cs">
+      <DependentUpon>202412170814171_AddStorageTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202412170818432_AddCodeToStorage.cs" />
+    <Compile Include="Migrations\202412170818432_AddCodeToStorage.designer.cs">
+      <DependentUpon>202412170818432_AddCodeToStorage.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\CustomerAssignment.cs" />
@@ -400,6 +410,8 @@
     <Compile Include="Models\Role.cs" />
     <Compile Include="Models\SalesOffice.cs" />
     <Compile Include="Models\CategoryWithPagesDTO.cs" />
+    <Compile Include="Models\Storage.cs" />
+    <Compile Include="Models\StorageAssignment.cs" />
     <Compile Include="Models\Tree\Child.cs" />
     <Compile Include="Models\Tree\Root.cs" />
     <Compile Include="Models\Tree\State.cs" />
@@ -558,17 +570,20 @@
     </Content>
     <None Include="Connected Services\ServiceSalesOrder\WebServiceSalesOrder.wsdl" />
     <None Include="Connected Services\ServiceShipment\WebServiceShipment.wsdl" />
+    <Content Include="Connected Services\ServiceStock\B2B.ServiceStock.GetStoreObservedStockResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
     <None Include="Connected Services\ServiceStock\configuration91.svcinfo" />
     <None Include="Connected Services\ServiceStock\configuration.svcinfo" />
     <None Include="Connected Services\ServiceStock\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-    <None Include="Connected Services\ServiceStock\WebServiceStock1.disco" />
+    <None Include="Connected Services\ServiceStock\WebServiceStock.disco" />
     <Content Include="Connected Services\ServiceTicket\B2B.ServiceTicket.GetPriceTicketResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
-    <None Include="Connected Services\ServiceStock\WebServiceStock1.wsdl" />
+    <None Include="Connected Services\ServiceStock\WebServiceStock.wsdl" />
     <None Include="Connected Services\ServiceTicket\configuration91.svcinfo" />
     <None Include="Connected Services\ServiceTicket\configuration.svcinfo" />
     <None Include="Connected Services\ServiceTicket\Reference.svcmap">
@@ -963,6 +978,7 @@
     <Content Include="Views\Shipment\Index.cshtml" />
     <Content Include="Views\SalesOrderDetail\Index.cshtml" />
     <Content Include="Views\AccountStatement\Index.cshtml" />
+    <Content Include="Views\Store\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1046,6 +1062,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202412140927516_AddIndexToCategory.resx">
       <DependentUpon>202412140927516_AddIndexToCategory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202412170814171_AddStorageTable.resx">
+      <DependentUpon>202412170814171_AddStorageTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202412170818432_AddCodeToStorage.resx">
+      <DependentUpon>202412170818432_AddCodeToStorage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Resource.en-US.resx" />
     <EmbeddedResource Include="Resource.resx">

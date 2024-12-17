@@ -19,11 +19,11 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="https://services.alfemo.com.tr:9095/B2B/WebServiceStock.asmx" Protocol="http" SourceId="1" />
+    <MetadataSource Address="http://192.168.90.12:85/B2B/WebServiceStock.asmx" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="WebServiceStock1.disco" MetadataType="Disco" ID="9c39aabc-61b6-4570-a795-ac5d58a66ce7" SourceId="1" SourceUrl="https://services.alfemo.com.tr:9095/B2B/WebServiceStock.asmx?disco" />
-    <MetadataFile FileName="WebServiceStock1.wsdl" MetadataType="Wsdl" ID="6170be92-c754-455e-b503-a4e490e48d59" SourceId="1" SourceUrl="https://services.alfemo.com.tr:9095/B2B/WebServiceStock.asmx?wsdl" />
+    <MetadataFile FileName="WebServiceStock.wsdl" MetadataType="Wsdl" ID="d5c0c6da-fb64-4e9c-9ea8-6be3c238de03" SourceId="1" SourceUrl="http://192.168.90.12:85/B2B/WebServiceStock.asmx?wsdl" />
+    <MetadataFile FileName="WebServiceStock.disco" MetadataType="Disco" ID="deca7780-23fa-4386-ad6d-6f3bb46dab85" SourceId="1" SourceUrl="http://192.168.90.12:85/B2B/WebServiceStock.asmx?disco" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using B2B.Helper;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -53,13 +54,10 @@ namespace B2B.Models
         {
             get
             {
-                CultureInfo info = new CultureInfo("tr-TR");
-                info.NumberFormat.NumberDecimalSeparator = ",";
-
                 double amount = 0;
                 if (!string.IsNullOrEmpty(TOTAL_ORDER_PRICE))
                 {
-                    amount = Convert.ToDouble(TOTAL_ORDER_PRICE, info);
+                    amount = Convert.ToDouble(TOTAL_ORDER_PRICE, CultureHelper.TRCultureInfo);
                     return amount;
                 }
                 return amount;
@@ -70,13 +68,10 @@ namespace B2B.Models
         {
             get
             {
-                CultureInfo info = new CultureInfo("tr-TR");
-                info.NumberFormat.NumberDecimalSeparator = ",";
-
                 double amount = 0;
                 if (!string.IsNullOrEmpty(TOTAL_ORDER_PRICE_TL))
                 {
-                    amount = Convert.ToDouble(TOTAL_ORDER_PRICE_TL, info);
+                    amount = Convert.ToDouble(TOTAL_ORDER_PRICE_TL, CultureHelper.TRCultureInfo);
                     return amount;
                 }
                 return amount;

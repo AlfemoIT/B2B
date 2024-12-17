@@ -22,6 +22,8 @@ namespace B2B.Dal
         public DbSet<Page> Pages { get; set; }
         public DbSet<PageCategory> PageCategories { get; set; }
         public DbSet<PageAssignment> PageAssignments { get; set; }
+        public DbSet<Storage> Storages { get; set; }
+        public DbSet<StorageAssignment> StorageAssignments { get; set; }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

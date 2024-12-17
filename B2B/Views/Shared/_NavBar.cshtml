@@ -24,7 +24,7 @@
                             {
                                 <li>
                                     <a href="#"
-                                       onclick="changeCustomer('@customer.SapCode','@customer.Name','@customer.GroupName','@customer.IsCentral')">
+                                       onclick="changeCustomer('@customer.ID','@customer.SapCode','@customer.Name','@customer.GroupName','@customer.IsCentral')">
                                         @customer.Name
                                     </a>
                                 </li>
@@ -65,9 +65,9 @@
         }
     });
 
-    function changeCustomer(cSapCode, cName,cGroupName,cIsCentral) {
+    function changeCustomer(cID,cSapCode, cName,cGroupName,cIsCentral) {
         var customer = {
-            ID: 1,
+            ID: cID,
             IsCentral: cIsCentral,
             SapCode : cSapCode,
             Name: cName,

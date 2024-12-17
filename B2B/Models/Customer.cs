@@ -26,5 +26,8 @@ namespace B2B.Models
 
         [JsonIgnore]
         public ICollection<CustomerAssignment> CustomerAssignments { get; set; }
+
+        [JsonIgnore]
+        public ICollection<StorageAssignment> StorageAssignments { get; set; }
     }
 }

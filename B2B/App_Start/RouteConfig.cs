@@ -80,6 +80,12 @@ namespace B2B
             );
 
             routes.MapRoute(
+               name: "Store",
+               url: "store-free-stock/{action}/{id}",
+               defaults: new { controller = "Store", action = "Index", id = UrlParameter.Optional }
+           );
+
+            routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using B2B.Helper;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -28,13 +29,10 @@ namespace B2B.Models
         {
             get
             {
-                CultureInfo info = new CultureInfo("tr-TR");
-                info.NumberFormat.NumberDecimalSeparator = ".";
-
                 double amount = 0;
                 if (!string.IsNullOrEmpty(ANPD))
                 {
-                    amount = Convert.ToDouble(ANPD, info);
+                    amount = Convert.ToDouble(ANPD, CultureHelper.TRCultureInfo);
                     return string.Format("{0:N0}", amount);
                 }
                 return amount.ToString();
@@ -46,13 +44,10 @@ namespace B2B.Models
         {
             get
             {
-                CultureInfo info = new CultureInfo("tr-TR");
-                info.NumberFormat.NumberDecimalSeparator = ".";
-
                 double amount = 0;
                 if (!string.IsNullOrEmpty(MRSN))
                 {
-                    amount = Convert.ToDouble(MRSN, info);
+                    amount = Convert.ToDouble(MRSN, CultureHelper.TRCultureInfo);
                     return string.Format("{0:N0}", amount);
                 }
                 return amount.ToString();
@@ -64,13 +59,10 @@ namespace B2B.Models
         {
             get
             {
-                CultureInfo info = new CultureInfo("tr-TR");
-                info.NumberFormat.NumberDecimalSeparator = ".";
-
                 double amount = 0;
                 if (!string.IsNullOrEmpty(A049))
                 {
-                    amount = Convert.ToDouble(A049, info);
+                    amount = Convert.ToDouble(A049, CultureHelper.TRCultureInfo);
                     return string.Format("{0:N0}", amount);
                 }
                 return amount.ToString();
@@ -82,18 +74,31 @@ namespace B2B.Models
         {
             get
             {
-                CultureInfo info = new CultureInfo("tr-TR");
-                info.NumberFormat.NumberDecimalSeparator = ".";
-
                 double amount = 0;
                 if (!string.IsNullOrEmpty(SEVK))
                 {
-                    amount = Convert.ToDouble(SEVK, info);
+                    amount = Convert.ToDouble(SEVK, CultureHelper.TRCultureInfo);
                     return string.Format("{0:N0}", amount);
                 }
                 return amount.ToString();
             }
         }
+
+        public string TESHIR { get; set; }
+        public string CMPT_TESHIR
+        {
+            get
+            {
+                double amount = 0;
+                if (!string.IsNullOrEmpty(TESHIR))
+                {
+                    amount = Convert.ToDouble(TESHIR, CultureHelper.TRCultureInfo);
+                    return string.Format("{0:N0}", amount);
+                }
+                return amount.ToString();
+            }
+        }
+
         public string VRKME { get; set; }
         public string LVORM { get; set; } //silme isareti
         public string VMSTA { get; set; } //blokaj
