@@ -395,6 +395,7 @@
       <DependentUpon>202412170818432_AddCodeToStorage.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Chart\SalesOrderChart.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\CustomerAssignment.cs" />
     <Compile Include="Models\CustomerGroup.cs" />
@@ -630,6 +631,7 @@
     <Content Include="Content\dynatree\src\skin\ui.dynatree.css" />
     <Content Include="Content\dynatree\src\skin\vline.gif" />
     <Content Include="Content\font-awesome.min.css" />
+    <Content Include="Content\fullcalendar\fullcalendar_gebo.css" />
     <Content Include="Content\google-code-prettify\prettify.css" />
     <Content Include="Content\gtip2\jquery.qtip.min.css" />
     <Content Include="Content\hint_css\hint.min.css" />
@@ -685,15 +687,20 @@
     <Content Include="img\driver.png" />
     <Content Include="img\excel.png" />
     <Content Include="img\excel_office.png" />
+    <Content Include="img\green_bar.png" />
     <Content Include="img\microsoft_excel_1.png" />
     <Content Include="img\microsoft_excel.png" />
+    <Content Include="img\oasis.jpg" />
     <Content Include="img\ok.png" />
     <Content Include="img\ok_20px.png" />
     <Content Include="img\pdf-icon.png" />
     <Content Include="img\realtime.png" />
+    <Content Include="img\red_bar.png" />
+    <Content Include="img\red_bar_v2.png" />
     <Content Include="img\schedule.png" />
     <Content Include="img\shipped.png" />
     <Content Include="img\shipped_office.png" />
+    <Content Include="img\shopping_cart.png" />
     <Content Include="img\truck.png" />
     <Content Include="img\turkish_lira.png" />
     <Content Include="img\user_avatar1.jpg" />

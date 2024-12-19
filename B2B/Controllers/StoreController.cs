@@ -18,7 +18,7 @@ namespace B2B.Controllers
         }
 
         [HttpGet]
-        public JsonResult GetData(string cID, string mvgr2, string mvgr3, string mvgr4)
+        public JsonResult GetData(string cID)
         {
             List<ZALF_S_PAKET> pakets = new List<ZALF_S_PAKET>();
             string iv_lgort = string.Empty;
@@ -39,7 +39,7 @@ namespace B2B.Controllers
                         Username = "AlfemoUB2B_ServiceUser",
                         Password = "Alfemo!2024_!"
                     };
-                    var sonuc = client.GetStoreObservedStock(hd, iv_lgort, mvgr2, mvgr3, mvgr4);
+                    var sonuc = client.GetStoreObservedStock(hd, iv_lgort, string.Empty, string.Empty, string.Empty);
                     if (!string.IsNullOrEmpty(sonuc))
                     {
                         pakets = JsonConvert.DeserializeObject<List<ZALF_S_PAKET>>(sonuc);

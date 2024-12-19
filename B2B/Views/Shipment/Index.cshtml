@@ -1,8 +1,21 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Nakliye";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+<style>
+    .form-group {
+        margin-bottom: 10px;
+    }
+
+    .row + .row {
+        margin-top: 10px;
+    }
+
+    .border-filter {
+        padding-top: 10px !important;
+    }
+</style>
 
 <link href="~/Content/shipment.css" rel="stylesheet" />
 
@@ -24,7 +37,7 @@
 </div>
 
 <div class="col-sm-12 col-md-12 border-filter">
-    <div class="col-sm-5 col-md-5 padding-left-2">
+    <div class="col-sm-5 col-md-5 padding-left-2" style="top:9px;">
         <form>
             <div class="form-group row">
                 <label class="col-sm-3 control-label">Nakliye Durumu</label>
@@ -35,6 +48,7 @@
                     </select>
                 </div>
             </div>
+
             <div class="form-group row">
                 <label for="inputPassword1" class="col-sm-3 control-label">Nakliye No</label>
                 <div class="col-sm-4 col-md-4">
@@ -45,7 +59,6 @@
                 <div class="col-sm-1">
                     <a id="btnShipment" class="btn btn-default form-control icon-text-button hint--top hint--rounded"
                        data-hint="Teslim Aldım">
-                        @*<img src="~/img/shipped_office.png" />*@
                         <img src="~/img/delivered.png" />
                     </a>
                 </div>

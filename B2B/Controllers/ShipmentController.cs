@@ -82,7 +82,24 @@ namespace B2B.Controllers
         }
         public JsonResult GetDetail(string nakliye_no)
         {
-            List<ZAL_S_NAKLIYE> shipments = new List<ZAL_S_NAKLIYE>();
+            var lst_kunnr = new List<string>();
+            var shipments = new List<ZAL_S_NAKLIYE>();
+            var user = GetUser();
+            using (var context = new B2bContext())
+            {
+                if (user.RoleID == 6) //bolge muduru icin
+                {
+                    lst_kunnr = (from customer in context.Customers
+                                 where customer.SalesOfficeID == user.SalesOfficeID
+                                 select customer.SapCode).ToList();
+                }
+                else
+                {
+                    lst_kunnr = (from customera in context.CustomerAssignments.Where(x => x.UserID == user.ID)
+                                 join customer in context.Customers on customera.CustomerID equals customer.ID
+                                 select customer.SapCode).ToList();
+                }
+            }
 
             var client = new ServiceShipment.WebServiceShipmentSoapClient();
             var hd = new ServiceShipment.AuthHeader()
@@ -90,7 +107,7 @@ namespace B2B.Controllers
                 Username = "AlfemoUB2B_ServiceUser",
                 Password = "Alfemo!2024_!"
             };
-            var sonuc = client.GetShipmentDetails(hd, nakliye_no);
+            var sonuc = client.GetShipmentDetails(hd, lst_kunnr.ToArray(), nakliye_no);
             if (!sonuc.Contains("-111"))
             {
                 shipments = JsonConvert.DeserializeObject<List<ZAL_S_NAKLIYE>>(sonuc);

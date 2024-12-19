@@ -53,6 +53,25 @@
             </div>
         </form>
     </div>
+
+    <div class="col-sm-4 col-md-4 float-right">
+        <div class="vcard">
+            <ul>
+                <li class="v-heading">
+                    Toplam
+                </li>
+
+                <li>
+                    <ul class="sepH_b item-list list-unstyled">
+                        <li>
+                            <span id="txt_total_m3">Sevke Hazır (M3) : </span>
+                            <span id="txt_m3_value"></span>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
 </div>
 
 <div class="col-sm-12 col-md-12 padding-left-0 padding-right-0 margin-top-5">
@@ -94,6 +113,7 @@
             $('.js-example-basic-single').select2();
             $("#download-xlsx").prop("disabled", true)
                 .addClass("disabled-link");
+            $("#txt_m3_value").text('');
 
             var table = $('#tblSaleRows').DataTable({
                 scrollX: true,
@@ -101,7 +121,7 @@
                 autoWidth: false,
                 responsive: true,
                 retrieve: true,
-                displayLength: 18,
+                displayLength: 17,
                 pagingType: 'full_numbers',
                 language: { url: "@Url.Content("~/Content/tr.json")"},
                 ajax:
@@ -115,6 +135,18 @@
                         d.iv_cmpt_abgru = $("#drpOrderState").val()
                     },
                     dataSrc: function (json) {
+                        var totalM3 = json.data
+                            .filter(function (item) {
+                                return item.CMPT_ABGRU === "ACIK";
+                            })
+                            .reduce(function (sum, item) {
+                                return sum + item.CMPT_READY_VOLUM; // Replace "volume" with the property you want to sum
+                            }, 0);
+
+                        $("#txt_m3_value").text(new Intl.NumberFormat('tr-TR',
+                                                { minimumFractionDigits: 2, maximumFractionDigits: 2 })
+                                          .format(totalM3));
+
                         return json.data;
                     }
                 },
@@ -264,18 +296,21 @@
 
                 var wb = XLSX.utils.table_to_book(exportTable[0], { sheet: "Sheet1" });
                 const ws = wb.Sheets["Sheet1"];
-                Object.keys(ws).forEach(cell => {
-                    if (ws[cell].t === 'n') { // Check if the cell contains a number
-                        const formattedValue = new Intl.NumberFormat('tr-TR', {
-                            minimumFractionDigits: 2,
-                            maximumFractionDigits: 2,
-                            useGrouping: true // Ensures thousands separators
-                        }).format(ws[cell].v);
+                //Object.keys(ws).forEach(cell => {
+                //    const column = cell[0];
+                //    const targetColumns = ['P'];
+                //    if (targetColumns.includes(column) && ws[cell].t === 'n') {
+                //        const numericValue = ws[cell].v / 100;
+                //        const formattedValue = new Intl.NumberFormat('tr-TR', {
+                //            minimumFractionDigits: 2,
+                //            maximumFractionDigits: 2,
+                //            useGrouping: true,
+                //        }).format(numericValue);
 
-                        ws[cell].v = formattedValue;
-                        ws[cell].t = 's'; // Set the type to string to preserve the formatting
-                    }
-                });
+                //        ws[cell].v = formattedValue;
+                //     /*   ws[cell].t = 'n';*/
+                //    }
+                //});
 
                 var wbout = XLSX.write(wb, { bookType: 'xlsx', type: 'binary' });
                 function s2ab(s) {
@@ -295,6 +330,40 @@
                 document.body.appendChild(link);
                 link.click();
                 document.body.removeChild(link);
+
+                //var wb = XLSX.utils.table_to_book(exportTable[0], { sheet: "Sheet1" });
+                //const ws = wb.Sheets["Sheet1"];
+                //Object.keys(ws).forEach(cell => {
+                //    if (ws[cell].t === 'n') { // Check if the cell contains a number
+                //        const formattedValue = new Intl.NumberFormat('tr-TR', {
+                //            minimumFractionDigits: 2,
+                //            maximumFractionDigits: 2,
+                //            useGrouping: true // Ensures thousands separators
+                //        }).format(ws[cell].v);
+
+                //        ws[cell].v = formattedValue;
+                //        ws[cell].t = 's'; // Set the type to string to preserve the formatting
+                //    }
+                //});
+
+                //var wbout = XLSX.write(wb, { bookType: 'xlsx', type: 'binary' });
+                //function s2ab(s) {
+                //    var buf = new ArrayBuffer(s.length);
+                //    var view = new Uint8Array(buf);
+                //    for (var i = 0; i < s.length; i++) {
+                //        view[i] = s.charCodeAt(i) & 0xFF;
+                //    }
+                //    return buf;
+                //}
+
+                //var blob = new Blob([s2ab(wbout)], { type: "application/octet-stream" });
+                //var link = document.createElement('a');
+                //link.href = URL.createObjectURL(blob);
+                //link.download = 'table_export.xlsx';
+                //link.download = filename;
+                //document.body.appendChild(link);
+                //link.click();
+                //document.body.removeChild(link);
             }
 
             function disableElements() {

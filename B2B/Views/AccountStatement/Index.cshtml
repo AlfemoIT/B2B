@@ -222,21 +222,21 @@
 
                 var wb = XLSX.utils.table_to_book(exportTable[0], { sheet: "Sheet1" });
                 const ws = wb.Sheets["Sheet1"];
-                Object.keys(ws).forEach(cell => {
-                    const column = cell[0];
-                    const targetColumns = ['D'];
-                    if (targetColumns.includes(column) && ws[cell].t === 'n') {
-                        const numericValue = ws[cell].v / 100;
-                        const formattedValue = new Intl.NumberFormat('tr-TR', {
-                            minimumFractionDigits: 2,
-                            maximumFractionDigits: 2,
-                            useGrouping: true,
-                        }).format(numericValue);
+                //Object.keys(ws).forEach(cell => {
+                //    const column = cell[0];
+                //    const targetColumns = ['D'];
+                //    if (targetColumns.includes(column) && ws[cell].t === 'n') {
+                //        const numericValue = ws[cell].v / 100;
+                //        const formattedValue = new Intl.NumberFormat('tr-TR', {
+                //            minimumFractionDigits: 2,
+                //            maximumFractionDigits: 2,
+                //            useGrouping: true,
+                //        }).format(numericValue);
 
-                        ws[cell].v = formattedValue;
-                        ws[cell].t = 's';
-                    }
-                });
+                //        ws[cell].v = formattedValue;
+                //        ws[cell].t = 's';
+                //    }
+                //});
 
                 var wbout = XLSX.write(wb, { bookType: 'xlsx', type: 'binary' });
                 function s2ab(s) {

@@ -140,13 +140,17 @@ namespace B2B.ServiceShipment {
         public B2B.ServiceShipment.AuthHeader AuthHeader;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
+        public string[] lst_kunnr;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=1)]
         public string iv_tknum;
         
         public GetShipmentDetailsRequest() {
         }
         
-        public GetShipmentDetailsRequest(B2B.ServiceShipment.AuthHeader AuthHeader, string iv_tknum) {
+        public GetShipmentDetailsRequest(B2B.ServiceShipment.AuthHeader AuthHeader, string[] lst_kunnr, string iv_tknum) {
             this.AuthHeader = AuthHeader;
+            this.lst_kunnr = lst_kunnr;
             this.iv_tknum = iv_tknum;
         }
     }
@@ -225,9 +229,10 @@ namespace B2B.ServiceShipment {
             return base.Channel.GetShipmentDetails(request);
         }
         
-        public string GetShipmentDetails(B2B.ServiceShipment.AuthHeader AuthHeader, string iv_tknum) {
+        public string GetShipmentDetails(B2B.ServiceShipment.AuthHeader AuthHeader, string[] lst_kunnr, string iv_tknum) {
             B2B.ServiceShipment.GetShipmentDetailsRequest inValue = new B2B.ServiceShipment.GetShipmentDetailsRequest();
             inValue.AuthHeader = AuthHeader;
+            inValue.lst_kunnr = lst_kunnr;
             inValue.iv_tknum = iv_tknum;
             B2B.ServiceShipment.GetShipmentDetailsResponse retVal = ((B2B.ServiceShipment.WebServiceShipmentSoap)(this)).GetShipmentDetails(inValue);
             return retVal.GetShipmentDetailsResult;
@@ -238,9 +243,10 @@ namespace B2B.ServiceShipment {
             return base.Channel.GetShipmentDetailsAsync(request);
         }
         
-        public System.Threading.Tasks.Task<B2B.ServiceShipment.GetShipmentDetailsResponse> GetShipmentDetailsAsync(B2B.ServiceShipment.AuthHeader AuthHeader, string iv_tknum) {
+        public System.Threading.Tasks.Task<B2B.ServiceShipment.GetShipmentDetailsResponse> GetShipmentDetailsAsync(B2B.ServiceShipment.AuthHeader AuthHeader, string[] lst_kunnr, string iv_tknum) {
             B2B.ServiceShipment.GetShipmentDetailsRequest inValue = new B2B.ServiceShipment.GetShipmentDetailsRequest();
             inValue.AuthHeader = AuthHeader;
+            inValue.lst_kunnr = lst_kunnr;
             inValue.iv_tknum = iv_tknum;
             return ((B2B.ServiceShipment.WebServiceShipmentSoap)(this)).GetShipmentDetailsAsync(inValue);
         }

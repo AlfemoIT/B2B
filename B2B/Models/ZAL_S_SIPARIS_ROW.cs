@@ -51,6 +51,56 @@ namespace B2B.Models
                 return string.Empty;
             }
         }
+        public int CMPT_YEAR
+        {
+            get
+            {
+                if (!string.IsNullOrEmpty(AUDAT) && AUDAT != "0000-00-00")
+                {
+                    return Convert.ToDateTime(AUDAT).Year;
+                }
+                return 0;
+            }
+        }
+        public int CMPT_MONTH
+        {
+            get
+            {
+                if (!string.IsNullOrEmpty(AUDAT) && AUDAT != "0000-00-00")
+                {
+                    return Convert.ToDateTime(AUDAT).Month;
+                }
+                return 0;
+            }
+        }
+        public string CMPT_MONTH_NAME
+        {
+            get
+            {
+                if (!string.IsNullOrEmpty(AUDAT) && AUDAT != "0000-00-00")
+                {
+                    return Convert.ToDateTime(AUDAT).ToString("MMMM");
+                }
+                return string.Empty;
+            }
+        }
+        public int CMPT_WEEK
+        {
+            get
+            {
+                if (!string.IsNullOrEmpty(AUDAT) && AUDAT != "0000-00-00")
+                {
+                    var date = Convert.ToDateTime(AUDAT);
+
+                    Calendar calendar = CultureHelper.TRCultureInfo.Calendar;
+                    CalendarWeekRule weekRule = CalendarWeekRule.FirstDay;
+                    DayOfWeek firstDayOfWeek = DayOfWeek.Monday;
+                    int weekNumber = calendar.GetWeekOfYear(date, weekRule, firstDayOfWeek);
+                    return weekNumber;
+                }
+                return 0;
+            }
+        }
 
         public string CMTD_DELIV_DATE { get; set; }  //müşterinin istediği teslim tarihi
         public string CMPT_DELIV_DATE

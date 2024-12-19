@@ -99,7 +99,7 @@ div.dt-processing > div:last-child {
 /*.vcard rigt info*/
 .vcard {
     position: relative;
-    bottom: 6px;
+    bottom: 2px;
     left: 12px;
 }
 

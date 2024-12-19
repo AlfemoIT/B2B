@@ -8,6 +8,11 @@
     div.dt-processing > div:last-child {
         display: none;
     }
+
+    .border-filter {
+        border-top: 0px;
+        padding-top: 0px;
+    }
 </style>
 
 <link href="~/Content/shipment.css" rel="stylesheet" />
@@ -30,40 +35,16 @@
 </div>
 
 <div class="col-sm-12 col-md-12 border-filter">
-    <div class="col-sm-6 col-md-6 padding-left-2">
+    <div class="col-sm-4 col-md-4 padding-left-2">
         <form>
             <div class="form-group row">
-                <label class="col-sm-2 col-form-label">Ana Grup:</label>
-                <div class="col-sm-3">
-                    <select id="drpMvgr3" class="form-control js-example-basic-single" style="width:100%;">
-                        <option value="">Seçiniz</option>
-                    </select>
-                </div>
-            </div>
-
-            <div class="form-group row">
-                <label class="col-sm-2 col-form-label">Koleksiyon:</label>
-                <div class="col-sm-3">
-                    <select id="drpMvgr2" class="form-control js-example-basic-single" style="width:100%;">
-                        <option value="">Seçiniz</option>
-                    </select>
-                </div>
-            </div>
-
-            <div class="form-group row">
-                <label class="col-sm-2 col-form-label" style="margin-bottom:18px">Ürün Tipi:</label>
-                <div class="col-sm-3">
-                    <select id="drpMvgr4" class="form-control js-example-basic-single" style="width:100%;">
-                        <option value="">Seçiniz</option>
-                    </select>
-                </div>
                 <div class="col-sm-1">
                     <a id="btn-execute" class="btn btn-default form-control icon-text-button hint--top hint--rounded"
                        data-hint="Yürüt">
                         <img src="~/img/realtime.png" />
                     </a>
                 </div>
-                <div class="col-sm-1 padding-left-0">
+                <div class="col-sm-1">
                     <a id="download-xlsx" class="btn btn-default form-control icon-text-button hint--top hint--rounded"
                        data-hint="Excele Aktar" href="#">
                         <img src="~/img/microsoft_excel.png" />
@@ -104,38 +85,6 @@
             $('.js-example-basic-single').select2();
             $("#download-xlsx").prop("disabled", true);
 
-            $.ajax({
-                url: '@Url.Action("GetMaterialGrub", "Stock")',
-                type: 'POST',
-                contentType: 'application/json',
-                success: function (response) {
-                    const drpMvgr3 = document.getElementById('drpMvgr3');
-                    $.each(response.data.tvm3ts, function (index, mvm3t) {
-                        const optionElement = document.createElement('option');
-                              optionElement.value = mvm3t.MVGR3;
-                              optionElement.textContent = mvm3t.BEZEI;
-                        drpMvgr3.appendChild(optionElement);
-                    });
-
-                    const drpMvgr2 = document.getElementById('drpMvgr2');
-                    $.each(response.data.tvm2ts, function (index, mvm2t) {
-                        const optionElement = document.createElement('option');
-                              optionElement.value = mvm2t.MVGR2;
-                              optionElement.textContent = mvm2t.BEZEI;
-                        drpMvgr2.appendChild(optionElement);
-                     });
-
-                    const drpMvgr4 = document.getElementById('drpMvgr4');
-                    $.each(response.data.tvm4ts, function (index, mvm4t) {
-                        const optionElement = document.createElement('option');
-                              optionElement.value = mvm4t.MVGR4;
-                              optionElement.textContent = mvm4t.BEZEI;
-                        drpMvgr4.appendChild(optionElement);
-                    });
-                },
-                error: function () { }
-            });
-
             var table = $('#tblStock').DataTable({
                 language: {
                     url: "@Url.Content("~/Content/tr.json")",
@@ -143,6 +92,7 @@
                 },
                 processing: true,
                 retrieve: true,
+                displayLength: 18,
                 columns: [
                     { "title": "Malzeme","data": "MATNR"  },
                     { "title": "Malzeme Kısa Metni", "data": "MAKTX" },
@@ -164,22 +114,8 @@
 
             table.on('xhr', function (e, settings, json, xhr) {
                 $('#freezeOverlay').hide();
-
                 $("#btn-execute").prop("disabled", false);
                 $("#download-xlsx").prop("disabled", false);
-
-                $('#drpMvgr2 option:first').prop('selected', true);
-                $('#drpMvgr2').trigger('change');
-
-                $('#drpMvgr3 option:first').prop('selected', true);
-                $('#drpMvgr3').trigger('change');
-
-                $('#drpMvgr4 option:first').prop('selected', true);
-                $('#drpMvgr4').trigger('change');
-
-                $('#drpMvgr2').prop('disabled', false).trigger('change.select2');
-                $('#drpMvgr3').prop('disabled', false).trigger('change.select2');
-                $('#drpMvgr4').prop('disabled', false).trigger('change.select2');
             });
 
             $("#btn-execute").click(function () {
@@ -191,47 +127,16 @@
 
                 disableElements();
 
-                var mvgr3 = $('#drpMvgr3').val();
-                var bezei3 = $('#drpMvgr3 option:selected').text();
-                if (bezei3 == "Seçiniz") {
-                    bezei3 = "";
-                }
-
-                var mvgr2 = $('#drpMvgr2').val();
-                var bezei2 = $('#drpMvgr2 option:selected').text();
-                if (bezei2 == "Seçiniz") {
-                    bezei2 = "";
-                }
-                else if (bezei3 != ""){
-                    bezei2 = ' / ' + bezei2;
-                }
-
-                var mvgr4 = $('#drpMvgr4').val();
-                var bezei4 = $('#drpMvgr4 option:selected').text();
-                if (bezei4 == "Seçiniz") {
-                    bezei4 = "";
-                }
-                else if (bezei3 != "" || bezei2!=""){
-                    bezei4 = ' / ' + bezei4;
-                }
-
-                if (mvgr2 == 0 && mvgr3 == 0 && mvgr4 == 0) {
-                    document.getElementById("div-message").style.display = "block";
-                    $("#btn-execute").prop('disabled', false);
-                    return;
-                }
-
-                $("#p-selection").html(bezei3 + bezei2 + bezei4 + ' Listesi');
-
                 var customer = JSON.parse(sessionStorage.getItem("Customer"));
-                table.ajax.url('/Store/GetData?cID=' + customer.ID + '&mvgr2=' + mvgr2 + '&mvgr3=' + mvgr3 + '&mvgr4=' + mvgr4).load();
+                table.ajax.url('/Store/GetData?cID=' + customer.ID).load();
             });
 
             $('#download-xlsx').click(function () {
                 document.getElementById("div-message-excel").style.display = "none";
                 var count = table.data().count();
                 if (count > 0) {
-                    var filename = $("#p-selection").html() + '.xlsx';
+                    var customer = JSON.parse(sessionStorage.getItem("Customer"));
+                    var filename = customer.Name + '_Stok_Listesi.xlsx';
                     exportTableToExcel('tblStock', filename);
                 }
                 else {
