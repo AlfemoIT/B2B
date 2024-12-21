@@ -540,12 +540,6 @@
     <Content Include="Connected Services\ServiceSalesOrder\B2B.ServiceSalesOrder.GetOpenOrdersResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
-    <Content Include="Connected Services\ServiceSalesOrder\B2B.ServiceSalesOrder.GetShipmentsResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\ServiceSalesOrder\B2B.ServiceSalesOrder.GetShipmentDetailsResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
     <None Include="Connected Services\ServiceSalesOrder\configuration91.svcinfo" />
     <None Include="Connected Services\ServiceSalesOrder\configuration.svcinfo" />
     <None Include="Connected Services\ServiceSalesOrder\Reference.svcmap">

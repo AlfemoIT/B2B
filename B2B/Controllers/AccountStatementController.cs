@@ -19,29 +19,36 @@ namespace B2B.Controllers
         }
 
         [HttpGet]
-        public JsonResult GetData()
+        public JsonResult GetData(string iv_kunnr)
         {
             var user = GetUser();
             List<ZAL_S_CARI> accounts = new List<ZAL_S_CARI>();
-            using (var context = new B2bContext())
+
+            if (user.RoleID != 6) // bolge muduru degilse
             {
-                var iv_kunnr = (from customer in context.Customers
+                using (var context = new B2bContext())
+                {
+                    iv_kunnr = (from customer in context.Customers
                                 where customer.SalesOfficeID == user.SalesOfficeID &&
                                       customer.IsCentral == true
                                 select customer.SapCode).FirstOrDefault();
 
-                var client = new ServiceAccount.WebServiceCariSoapClient();
-                var hd = new ServiceAccount.AuthHeader()
-                {
-                    Username = "AlfemoUB2B_ServiceUser",
-                    Password = "Alfemo!2024_!"
-                };
-                var sonuc = client.AccountStatement(hd, iv_kunnr);
-                if (!sonuc.Contains("-111"))
-                {
-                    accounts = JsonConvert.DeserializeObject<List<ZAL_S_CARI>>(sonuc);
+
                 }
             }
+
+            var client = new ServiceAccount.WebServiceCariSoapClient();
+            var hd = new ServiceAccount.AuthHeader()
+            {
+                Username = "AlfemoUB2B_ServiceUser",
+                Password = "Alfemo!2024_!"
+            };
+            var sonuc = client.AccountStatement(hd, iv_kunnr);
+            try
+            {
+                accounts = JsonConvert.DeserializeObject<List<ZAL_S_CARI>>(sonuc);
+            }
+            catch (Exception) { }
 
             var jsonResult = Json(new
             {

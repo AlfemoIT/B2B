@@ -24,7 +24,8 @@
                             {
                                 <li>
                                     <a href="#"
-                                       onclick="changeCustomer('@customer.ID','@customer.SapCode','@customer.Name','@customer.GroupName','@customer.IsCentral')">
+                                       data-customer='@Html.Raw(JsonConvert.SerializeObject(customer))'
+                                       onclick="changeCustomer(this)">
                                         @customer.Name
                                     </a>
                                 </li>
@@ -65,14 +66,8 @@
         }
     });
 
-    function changeCustomer(cID,cSapCode, cName,cGroupName,cIsCentral) {
-        var customer = {
-            ID: cID,
-            IsCentral: cIsCentral,
-            SapCode : cSapCode,
-            Name: cName,
-            GroupName: cGroupName
-        }
+    function changeCustomer(element) {
+        const customer = JSON.parse(element.getAttribute('data-customer'));
         $("#customer_name").html(customer.Name);
         sessionStorage.setItem("Customer", JSON.stringify(customer));
     }

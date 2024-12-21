@@ -478,7 +478,8 @@ a {
 .text-debit-green {
     font-weight: bold !important;
     color: #86b796 !important;
-    font-size: 14px !important;
+    font-size: 13px !important;
+    /*    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);*/
 }
 
 .fa-spin {

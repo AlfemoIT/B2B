@@ -159,7 +159,6 @@
                     { data: 'CMPT_ERDAT' },
                     { data: 'CMPT_LPS_VBELN' },
                     { data: 'CMPT_LPS_POSNR' },
-
                     { data: 'CMPT_VBELN' },
                     { data: 'MATNR' },
                     { data: 'MAKTX' },
@@ -193,7 +192,8 @@
                     DisableElements();
                     Clear();
                     GetDriver(selectedValue);
-                    table.ajax.url(`/Shipment/GetDetail?nakliye_no=${selectedValue}`).load();
+                    var customer = JSON.parse(sessionStorage.getItem("Customer"));
+                    table.ajax.url(`/Shipment/GetDetail?nakliye_no=${selectedValue}&iv_kunnr=${customer.SapCode}`).load();
                 } else {
                     table.clear().draw();
                     Clear();
@@ -277,8 +277,10 @@
             }
 
             function GetShipmentNumbers() {
+                var customer = JSON.parse(sessionStorage.getItem("Customer"));
+
                 $.ajax({
-                    url: '@Url.Action("GetData")',
+                    url: `/Shipment/GetData?iv_kunnr=${customer.SapCode}`,
                     type: 'GET',
                     dataType: 'json',
                     success: function (data) {

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using B2B.Helper;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -26,19 +27,31 @@ namespace B2B.Models
         }
         public string BELGE_TUR { get; set; }
         public string BELGE_TARIH { get; set; }
-        public string CMPT_BELGE_TARIH
+        public DateTime CMPT_BELGE_DATE
         {
             get
             {
                 if (!string.IsNullOrEmpty(BELGE_TARIH) && BELGE_TARIH != "0000-00-00")
                 {
-                    return Convert.ToDateTime(BELGE_TARIH)
-                                  .ToString("dd-MM-yyyy");
+                    return DateTime.ParseExact(BELGE_TARIH, "yyyy-MM-dd", CultureHelper.TRCultureInfo);
                 }
-                return string.Empty;
+                return DateTime.MinValue;
             }
         }
         public string TUTAR { get; set; }
+        public double CMPT_TUTAR
+        {
+            get
+            {
+                double amount = 0;
+                if (!string.IsNullOrEmpty(TUTAR))
+                {
+                    amount = Convert.ToDouble(TUTAR, CultureHelper.TRCultureInfo);
+                    return amount;
+                }
+                return amount;
+            }
+        }
         public string CURRENCY { get; set; }
         public string METIN { get; set; }
     }

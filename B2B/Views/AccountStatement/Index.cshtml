@@ -50,16 +50,18 @@
         </a>
     </div>
 
-    <div class="col-sm-3 col-md-3 float-right padding-right-0">
+    <div class="col-sm-4 col-md-4 float-right padding-right-0">
         <div class="vcard">
             <ul>
                 <li class="v-heading">
-                    Bakiye Bilgileri&nbsp;&nbsp;<span id="debit"></span>
+                    <span id="customerName" style="font-weight: 700;font-size: 13px;color: #222222;">
+                        Bakiye Bilgileri
+                    </span>&nbsp;&nbsp;<span id="debit"></span>
                 </li>
                 <li>
                     <ul class="sepH_b item-list list-unstyled">
                         <li>
-                            <img src="~/img/schedule.png" />&nbsp;<span class="span-info"> @DateTime.Now.ToString("MM/dd/yyyy") </span>
+                            <img src="~/img/schedule.png" />&nbsp;<span class="span-info"> @DateTime.Now.ToString("dd/MM/yyyy") </span>
                         </li>
                         <li>
                             <img src="~/img/turkish_lira.png" />&nbsp;<span id="total"></span>
@@ -78,7 +80,6 @@
                 <th class="center">Belge Tarihi</th>
                 <th class="center">Belge No</th>
                 <th class="center">Fatura No</th>
-
                 <th class="center">Tutar</th>
                 <th class="center">PB</th>
                 <th class="center">Metin</th>
@@ -119,16 +120,28 @@
                 lengthMenu: [[100, 250, 500, -1], [100, 250, 500, "Tümü"]],
                 order: [[0, 'desc']],
                 columns: [
-                    { data: 'CMPT_BELGE_TARIH', width: '150px' },
-                    { data: 'CMPT_REFERANS', width: '150px'},
-                    { data: 'CMPT_FATURA_NO', width: '100px'},
                     {
-                        data: 'TUTAR',width : '150px',
+                        data: 'CMPT_BELGE_DATE', width: '150px',
+                        render: function (data, type, row) {
+                            if (type === 'display' || type === 'filter') {
+                                var timestamp = parseInt(data.match(/\d+/)[0], 10);
+                                var date = new Date(timestamp);
+                                var formattedDate = date.toLocaleDateString('tr-TR');
+                                return formattedDate;
+                            }
+                            return data;
+                         }
+                    },
+                    { data: 'CMPT_REFERANS', width: '150px'},
+                    { data: 'CMPT_FATURA_NO'},
+                    {
+                        data: 'CMPT_TUTAR',width : '150px',
                         render: function (data, type, row) {
                             if (type === 'display') {
-                                let numberStr = data;
-                                let number = parseFloat(numberStr.replace(',', '.'));
-                                return new Intl.NumberFormat('tr-TR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(number);
+                                //let numberStr = data;
+                                //let number = parseFloat(numberStr.replace(',', '.'));
+                                //return new Intl.NumberFormat('tr-TR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(number);
+                                return new Intl.NumberFormat('tr-TR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(data);
                             }
                             return data;
                         }
@@ -137,7 +150,7 @@
                         data: 'CURRENCY', width: '50px',
                         render: function (data, type, row) {
                             if (type === 'display' && data == "TRY") {
-                                return "TL";
+                                return "<span>&#8378;</span>";
                             }
                             return data;
                         }
@@ -145,12 +158,8 @@
                     { data: 'METIN' }
                 ],
                 columnDefs: [
-                    {
-                        className: 'dt-center', targets: [0,1, 2, 4]
-                    },
-                    {
-                        className: 'title-align-right', targets: [3]
-                    }
+                    {  className: 'dt-center', targets: [0,1, 2, 4] },
+                    {  className: 'title-align-right', targets: [3]}
                 ],
                 initComplete: function () {
                     $(".dataTables_processing").hide();
@@ -166,14 +175,17 @@
 
             $('#btn-execute').on('click', function () {
                 $("#total").text('');
-                table.ajax.url('@Url.Action("GetData")').load(function (json) {
+                var customer = JSON.parse(sessionStorage.getItem("Customer"));
+                $("#customerName").text(customer.Name)
+
+                table.ajax.url(`/AccountStatement/GetData?iv_kunnr=${customer.SapCode}`).load(function (json) {
                     var totalItem = json.data.filter(function (item) {
                         return item.REFERANS === "*";
                     });
                     let numberStr = totalItem[0].TUTAR;
                     let number = parseFloat(numberStr.replace(',', '.'));
                     var total = new Intl.NumberFormat('tr-TR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(number);
-                    if (total > 0) {
+                    if (number > 0) {
                         $("#debit").text("BORÇLU")
                                    .removeClass('text-debit-red')
                                    .addClass('text-debit-green');
@@ -194,14 +206,15 @@
             $('#btn-excel').click(function () {
                 var count = table.data().count();
                 if (count > 0) {
-                    var filename ='CARI_EKSTRE.xlsx';
+                    var customer = JSON.parse(sessionStorage.getItem("Customer"));
+                    var filename = customer.Name+'_EKSTRE.xlsx';
                     exportTableToExcel('tblAccount', filename);
                 }
             });
 
             var headers;
             function exportTableToExcel(tableID, filename) {
-                headers = ['CMPT_BELGE_TARIH', 'CMPT_REFERANS', 'CMPT_FATURA_NO', 'TUTAR', 'CURRENCY','METIN'];
+                headers = ['CMPT_BELGE_DATE', 'CMPT_REFERANS', 'CMPT_FATURA_NO', 'CMPT_TUTAR', 'CURRENCY','METIN'];
 
                 var exportTable = $('<table>');
                 var thead = $('<thead>');
@@ -214,30 +227,22 @@
                 data.forEach(function (row) {
                     var tr = $('<tr>');
                     headers.forEach(function (header) {
-                        $('<td>').text(row[header]).appendTo(tr);
+                       if(header == "CMPT_BELGE_DATE") {
+                            var timestamp = parseInt(row[header].match(/\d+/)[0], 10);
+                            var date = new Date(timestamp);
+                            var formattedDate = date.toLocaleDateString('tr-TR');
+                            $('<td>').text(formattedDate).appendTo(tr);
+                       } else if (header == "CURRENCY") {
+                           $('<td>').text("₺").appendTo(tr);
+                       } else {
+                            $('<td>').text(row[header]).appendTo(tr);
+                       }
                     });
                     tr.appendTo(tbody);
                 });
                 tbody.appendTo(exportTable);
 
                 var wb = XLSX.utils.table_to_book(exportTable[0], { sheet: "Sheet1" });
-                const ws = wb.Sheets["Sheet1"];
-                //Object.keys(ws).forEach(cell => {
-                //    const column = cell[0];
-                //    const targetColumns = ['D'];
-                //    if (targetColumns.includes(column) && ws[cell].t === 'n') {
-                //        const numericValue = ws[cell].v / 100;
-                //        const formattedValue = new Intl.NumberFormat('tr-TR', {
-                //            minimumFractionDigits: 2,
-                //            maximumFractionDigits: 2,
-                //            useGrouping: true,
-                //        }).format(numericValue);
-
-                //        ws[cell].v = formattedValue;
-                //        ws[cell].t = 's';
-                //    }
-                //});
-
                 var wbout = XLSX.write(wb, { bookType: 'xlsx', type: 'binary' });
                 function s2ab(s) {
                     var buf = new ArrayBuffer(s.length);

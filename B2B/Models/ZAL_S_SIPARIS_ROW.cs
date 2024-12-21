@@ -158,7 +158,7 @@ namespace B2B.Models
                 return amount;
             }
         }
-        public string VRKME { get; set; }        //satis ölcu birim
+        public string VRKME { get; set; }   //satis ölcu birim
 
         public string TKNUM { get; set; }  //nakliye
         public string CMPT_TKNUM
@@ -187,7 +187,22 @@ namespace B2B.Models
         public string SURUCU { get; set; }
         public string TELEFON { get; set; }
 
-        public string TOTAL_LFIMG { get; set; }  //sevk mkt
+        public string TOTAL_OPEN_LFIMG { get; set; } //acik teslimat miktar
+        public double CMPT_TOTAL_OPEN_LFIMG
+        {
+            get
+            {
+                double amount = 0;
+                if (!string.IsNullOrEmpty(TOTAL_OPEN_LFIMG))
+                {
+                    amount = Convert.ToDouble(TOTAL_OPEN_LFIMG, CultureHelper.TRCultureInfo);
+                    return amount;
+                }
+                return amount;
+            }
+        }
+
+        public string TOTAL_LFIMG { get; set; }   //teslim miktarı
         public double CMPT_TOTAL_LFIMG
         {
             get
@@ -217,7 +232,7 @@ namespace B2B.Models
             }
         }
 
-        public string TOTAL_BMENG { get; set; }  //teyit
+        public string TOTAL_BMENG { get; set; }  //teyit - sevke hazır miktar
         public double CMPT_TOTAL_BMENG
         {
             get
@@ -232,7 +247,7 @@ namespace B2B.Models
             }
         }
 
-        public string READY_VOLUM { get; set; } //sevke hazır hacim
+        public string READY_VOLUM { get; set; }  //sevke hazır hacim
         public double CMPT_READY_VOLUM
         {
             get
@@ -247,7 +262,7 @@ namespace B2B.Models
             }
         }
 
-        public string TOTAL_IN_PRODUCTION { get; set; }  //uretimde mkt
+        public string TOTAL_IN_PRODUCTION { get; set; }  //üretim miktarı
         public double CMPT_TOTAL_IN_PRODUCTION
         {
             get
@@ -305,6 +320,18 @@ namespace B2B.Models
                     return amount;
                 }
                 return amount;
+            }
+        }
+        public string ORDER_MUH_ONAY { get; set; }
+        public string CMPT_ORDER_MUH_ONAY
+        {
+            get
+            {
+                if (!string.IsNullOrEmpty(ORDER_MUH_ONAY))
+                {
+                    return "<i class=\"splashy-check\"></i>";
+                }
+                return string.Empty;
             }
         }
     }

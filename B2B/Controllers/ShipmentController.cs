@@ -19,17 +19,15 @@ namespace B2B.Controllers
         }
 
         [HttpGet]
-        public JsonResult GetData()
+        public JsonResult GetData(string iv_kunnr)
         {
             var user = GetUser();
             List<string> lst_kunnr = new List<string>();
             using (var context = new B2bContext())
             {
-                if (user.RoleID == 6)
+                if (user.RoleID == 6) //bolge muduru
                 {
-                    lst_kunnr = (from customer in context.Customers
-                                 where customer.SalesOfficeID == user.SalesOfficeID
-                                 select customer.SapCode).ToList();
+                    lst_kunnr.Add(iv_kunnr);
                 }
                 else
                 {
@@ -55,7 +53,7 @@ namespace B2B.Controllers
                     TempData["Shipments"] = shipments;
                 }
             }
-            var result = shipments.OrderByDescending(x => x.CMPT_N_ERDAT)
+            var result = shipments.OrderByDescending(x => x.CMPT_N_ERDAT_DATE)
             .Select(x => new
             {
                 id = x.CMPT_TKNUM,
@@ -80,7 +78,7 @@ namespace B2B.Controllers
             jsonResult.MaxJsonLength = int.MaxValue;
             return jsonResult;
         }
-        public JsonResult GetDetail(string nakliye_no)
+        public JsonResult GetDetail(string nakliye_no, string iv_kunnr)
         {
             var lst_kunnr = new List<string>();
             var shipments = new List<ZAL_S_NAKLIYE>();
@@ -89,9 +87,7 @@ namespace B2B.Controllers
             {
                 if (user.RoleID == 6) //bolge muduru icin
                 {
-                    lst_kunnr = (from customer in context.Customers
-                                 where customer.SalesOfficeID == user.SalesOfficeID
-                                 select customer.SapCode).ToList();
+                    lst_kunnr.Add(iv_kunnr);
                 }
                 else
                 {

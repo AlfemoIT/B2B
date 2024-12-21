@@ -18,6 +18,7 @@ namespace B2B.Models
                 return TKNUM.TrimStart(new Char[] { '0' });
             }
         }
+
         public string N_ERDAT { get; set; }    //kaydin eklendi tarih
         public string CMPT_N_ERDAT
         {
@@ -31,6 +32,18 @@ namespace B2B.Models
                 return string.Empty;
             }
         }
+        public DateTime CMPT_N_ERDAT_DATE
+        {
+            get
+            {
+                if (!string.IsNullOrEmpty(N_ERDAT) && N_ERDAT != "0000-00-00")
+                {
+                    return DateTime.ParseExact(N_ERDAT, "yyyy-MM-dd", CultureHelper.TRCultureInfo);
+                }
+                return DateTime.MinValue;
+            }
+        }
+
         public string PLAKA { get; set; }
         public string SURUCU { get; set; }
         public string TELEFON { get; set; }
@@ -104,7 +117,7 @@ namespace B2B.Models
         public string LONG_MAKTX { get; set; }
 
         public string KWMENG { get; set; }
-        public double CMPT_KWMENG 
+        public double CMPT_KWMENG
         {
             get
             {
