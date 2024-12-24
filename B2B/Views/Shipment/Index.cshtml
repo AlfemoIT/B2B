@@ -57,9 +57,14 @@
                     </select>
                 </div>
                 <div class="col-sm-1">
-                    <a id="btnShipment" class="btn btn-default form-control icon-text-button hint--top hint--rounded"
-                       data-hint="Teslim Aldım">
-                        <img src="~/img/delivered.png" />
+                    @*<a id="btnShipment" class="btn btn-default form-control icon-text-button hint--top hint--rounded"
+                           data-hint="Teslim Aldım">
+                            <img src="~/img/delivered.png" />
+                        </a>*@
+
+                    <a id="btn-execute" class="btn btn-default form-control icon-text-button hint--top hint--rounded"
+                       data-hint="Yürüt">
+                        <img src="~/img/realtime.png" />
                     </a>
                 </div>
                 <div class="col-sm-1 padding-left-0">
@@ -206,6 +211,11 @@
                     var filename = $("#drpShipment").val() + '_NAKLIYE.xlsx';
                     exportTableToExcel('tblShipment', filename);
                 }
+            });
+
+            $("#btn-execute").click(function () {
+                $('#drpShipment').empty();
+                GetShipmentNumbers();
             });
 
             var headers;

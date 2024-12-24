@@ -19,11 +19,11 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://192.168.90.12:85/B2B/WebServiceSalesOrder.asmx" Protocol="http" SourceId="1" />
+    <MetadataSource Address="https://services.alfemo.com.tr:9095/B2B/WebServiceSalesOrder.asmx" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="WebServiceSalesOrder.wsdl" MetadataType="Wsdl" ID="b75467c5-d3fe-4054-94ac-65b1e3f44b2c" SourceId="1" SourceUrl="http://192.168.90.12:85/B2B/WebServiceSalesOrder.asmx?wsdl" />
-    <MetadataFile FileName="WebServiceSalesOrder.disco" MetadataType="Disco" ID="a7806f61-a777-440a-9aa7-f97fdbfe6ac5" SourceId="1" SourceUrl="http://192.168.90.12:85/B2B/WebServiceSalesOrder.asmx?disco" />
+    <MetadataFile FileName="WebServiceSalesOrder1.wsdl" MetadataType="Wsdl" ID="d30167ce-8efa-4439-8c1f-0b978b434ced" SourceId="1" SourceUrl="https://services.alfemo.com.tr:9095/B2B/WebServiceSalesOrder.asmx?wsdl" />
+    <MetadataFile FileName="WebServiceSalesOrder1.disco" MetadataType="Disco" ID="ea4a3faa-c79e-40be-b78f-39b1c0711212" SourceId="1" SourceUrl="https://services.alfemo.com.tr:9095/B2B/WebServiceSalesOrder.asmx?disco" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

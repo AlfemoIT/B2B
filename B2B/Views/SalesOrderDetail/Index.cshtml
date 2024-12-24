@@ -63,7 +63,8 @@
         <div class="vcard">
             <ul>
                 <li class="v-heading">
-                    Toplam
+                    <span id="customerName" style="font-weight: 700;font-size: 13px;color: #222222;">
+                    </span>
                 </li>
                 <li>
                     <ul class="sepH_b item-list list-unstyled">
@@ -122,6 +123,9 @@
                 .addClass("disabled-link");
             $("#txt_m3_value").text('');
 
+            var customer = JSON.parse(sessionStorage.getItem("Customer"));
+            $("#customerName").text(customer.Name)
+
             var table = $('#tblSaleRows').DataTable({
                 language: {
                     url: "@Url.Content("~/Content/tr.json")",
@@ -175,8 +179,31 @@
                     },
                     { data: 'CMPT_ABGRU' },
                     { data: 'CMPT_ORDER_MUH_ONAY' },
-                    { data: 'CMPT_AUDAT' },      //order date
-                    { data: 'CMPT_DELIV_DATE' }, //teslim tarih
+                    {
+                        data: 'CMPT_AUDAT_DATE',
+                        render: function (data, type, row) {
+                            if (type === 'display' || type === 'filter') {
+                                var timestamp = parseInt(data.match(/\d+/)[0], 10);
+                                var date = new Date(timestamp);
+                                var formattedDate = date.toLocaleDateString('tr-TR');
+                                return formattedDate;
+                            }
+                            return data;
+                        }
+                    },      //order date
+                    {
+                        data: 'CMPT_DELIV_DATE',
+                        render: function (data, type, row) {
+                            if (type === 'display' || type === 'filter') {
+                                var timestamp = parseInt(data.match(/\d+/)[0], 10);
+                                var date = new Date(timestamp);
+                                var formattedDate = date.toLocaleDateString('tr-TR');
+                                return formattedDate;
+                            }
+                            return data;
+                        }
+                    }, //teslim tarih
+
                     { data: 'CMPT_VBELN' },
                     { data: 'CMPT_POSNR' },
                     { data: 'ZZMUSTERI_AD' },
@@ -242,6 +269,9 @@
             });
 
             $("#btn-execute").click(function () {
+                var customer = JSON.parse(sessionStorage.getItem("Customer"));
+                $("#customerName").text(customer.Name)
+
                 table.clear().draw();
                 disableElements();
                 table.ajax.reload(null, false);
@@ -257,7 +287,7 @@
 
             var headers;
             function exportTableToExcel(tableID, filename) {
-                headers = ['CMPT_ABGRU', 'CMPT_AUDAT', 'CMPT_DELIV_DATE', 'CMPT_VBELN', 'CMPT_POSNR', 'ZZMUSTERI_AD',
+                headers = ['CMPT_ABGRU','CMPT_AUDAT', 'CMPT_DELIV_DATE', 'CMPT_VBELN', 'CMPT_POSNR', 'ZZMUSTERI_AD',
                     'MATNR', 'MAKTX', 'CMPT_KWMENG', 'CMPT_TOTAL_FKIMG', 'CMPT_TOTAL_LFIMG', 'CMPT_TOTAL_BMENG',
                     'CMPT_READY_VOLUM', 'CMPT_TOTAL_IN_PRODUCTION', 'ZZURTM_WEEK_DESC', 'CMPT_TOTAL_ORDER_PRICE',
                     'KUNAGTANIM', 'LONG_MAKTX'];
@@ -270,6 +300,7 @@
                     .clone()
                     .each(function () {
                         $(this).find('th:first-child').remove();
+                        $(this).find('th:nth-child(2)').remove();
                     })
                     .appendTo(thead);
                 thead.appendTo(exportTable);
@@ -278,21 +309,12 @@
                 data.forEach(function (row) {
                     var tr = $('<tr>');
                     headers.forEach(function (header) {
-                        if (header == "CMPT_AUDAT" || header == "CMPT_DELIV_DATE") {
+                        if (header == "CMPT_AUDAT_DATE" || header == "CMPT_DELIV_DATE") {
                             if (row[header] != null && row[header] != '') {
-                                const dateString = row[header]?.trim();
-                                if (dateString) {
-                                    //format dd-MM-yyyy or similar
-                                    const dateRegex = /^(\d{2})[-.](\d{2})[-.](\d{4})$/;
-                                    const match = dateString.match(dateRegex);
-                                    if (match) {
-                                        const day = match[1];
-                                        const month = match[2];
-                                        const year = match[3];
-                                        const formattedDate = `${year}-${month}-${day}`;
-                                        $('<td>').text(formattedDate).appendTo(tr);
-                                    }
-                                }
+                                var timestamp = parseInt(row[header].match(/\d+/)[0], 10);
+                                var date = new Date(timestamp);
+                                var formattedDate = date.toLocaleDateString('tr-TR');
+                                $('<td>').text(formattedDate).appendTo(tr);
                             }
                         }
                         else {

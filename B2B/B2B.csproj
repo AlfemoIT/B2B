@@ -447,17 +447,17 @@
     <Content Include="Connected Services\ServiceAccount\B2B.ServiceAccount.AccountStatementResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
-    <None Include="Connected Services\ServiceAccount\WebServiceCari.disco" />
     <None Include="Connected Services\ServiceAccount\configuration91.svcinfo" />
     <None Include="Connected Services\ServiceAccount\configuration.svcinfo" />
     <None Include="Connected Services\ServiceAccount\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+    <None Include="Connected Services\ServiceAccount\WebServiceCari1.disco" />
     <Content Include="Connected Services\ServiceAuth\B2B.ServiceAuth.AuthUserResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
-    <None Include="Connected Services\ServiceAccount\WebServiceCari.wsdl" />
+    <None Include="Connected Services\ServiceAccount\WebServiceCari1.wsdl" />
     <None Include="Connected Services\ServiceAuth\configuration91.svcinfo" />
     <None Include="Connected Services\ServiceAuth\configuration.svcinfo" />
     <None Include="Connected Services\ServiceAuth\Reference.svcmap">
@@ -546,39 +546,39 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-    <None Include="Connected Services\ServiceSalesOrder\WebServiceSalesOrder.disco" />
+    <None Include="Connected Services\ServiceSalesOrder\WebServiceSalesOrder1.disco" />
     <Content Include="Connected Services\ServiceShipment\B2B.ServiceShipment.GetShipmentDetailsResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <Content Include="Connected Services\ServiceShipment\B2B.ServiceShipment.GetShipmentsResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
-    <None Include="Connected Services\ServiceShipment\WebServiceShipment.disco" />
+    <None Include="Connected Services\ServiceSalesOrder\WebServiceSalesOrder1.wsdl" />
     <None Include="Connected Services\ServiceShipment\configuration91.svcinfo" />
     <None Include="Connected Services\ServiceShipment\configuration.svcinfo" />
     <None Include="Connected Services\ServiceShipment\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+    <None Include="Connected Services\ServiceShipment\WebServiceShipment1.disco" />
     <Content Include="Connected Services\ServiceStock\B2B.ServiceStock.GetObservedStockResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
-    <None Include="Connected Services\ServiceSalesOrder\WebServiceSalesOrder.wsdl" />
-    <None Include="Connected Services\ServiceShipment\WebServiceShipment.wsdl" />
     <Content Include="Connected Services\ServiceStock\B2B.ServiceStock.GetStoreObservedStockResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
+    <None Include="Connected Services\ServiceShipment\WebServiceShipment1.wsdl" />
     <None Include="Connected Services\ServiceStock\configuration91.svcinfo" />
     <None Include="Connected Services\ServiceStock\configuration.svcinfo" />
     <None Include="Connected Services\ServiceStock\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-    <None Include="Connected Services\ServiceStock\WebServiceStock.disco" />
+    <None Include="Connected Services\ServiceStock\WebServiceStock1.disco" />
     <Content Include="Connected Services\ServiceTicket\B2B.ServiceTicket.GetPriceTicketResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
-    <None Include="Connected Services\ServiceStock\WebServiceStock.wsdl" />
+    <None Include="Connected Services\ServiceStock\WebServiceStock1.wsdl" />
     <None Include="Connected Services\ServiceTicket\configuration91.svcinfo" />
     <None Include="Connected Services\ServiceTicket\configuration.svcinfo" />
     <None Include="Connected Services\ServiceTicket\Reference.svcmap">
@@ -675,7 +675,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="img\alfemo\tiamo-small-koltuk-tkm.jpg" />
+    <Content Include="img\alfemo\yemek_odasi_small.jpg" />
     <Content Include="img\cell_phone.png" />
     <Content Include="img\delivered.png" />
     <Content Include="img\driver.png" />
@@ -684,7 +684,6 @@
     <Content Include="img\green_bar.png" />
     <Content Include="img\microsoft_excel_1.png" />
     <Content Include="img\microsoft_excel.png" />
-    <Content Include="img\oasis.jpg" />
     <Content Include="img\ok.png" />
     <Content Include="img\ok_20px.png" />
     <Content Include="img\pdf-icon.png" />
@@ -692,17 +691,13 @@
     <Content Include="img\red_bar.png" />
     <Content Include="img\red_bar_v2.png" />
     <Content Include="img\schedule.png" />
-    <Content Include="img\shipped.png" />
     <Content Include="img\shipped_office.png" />
-    <Content Include="img\shopping_cart.png" />
     <Content Include="img\truck.png" />
     <Content Include="img\turkish_lira.png" />
     <Content Include="img\user_avatar1.jpg" />
     <Content Include="img\xls.png" />
     <Content Include="img\acc_icons.png" />
     <Content Include="img\adt-icons.png" />
-    <Content Include="img\alfemo\penta-koltuk-tkm.jpg" />
-    <Content Include="img\alfemo\tiamo-koltuk-tkm.jpg" />
     <Content Include="img\bg_a.png" />
     <Content Include="img\bg_b.png" />
     <Content Include="img\bg_c.png" />

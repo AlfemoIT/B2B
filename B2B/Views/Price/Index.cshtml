@@ -2,8 +2,13 @@
     ViewBag.Title = "Fiyat Listesi";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-@model B2B.Models.KNA1
+<style>
+    .form-control[disabled], .form-control[readonly], fieldset[disabled] .form-control {
+        cursor: not-allowed;
+        background-color: #f6eced;
+        color: #333333;
+    }
+</style>
 
 <div id="jCrumbs" class="breadCrumb module">
     <ul>
@@ -26,41 +31,47 @@
     <div class="col-sm-12 col-md-12">
         <h3 class="heading">
             Fiyatlar
-            <a id="download-xlsx" class="btn btn-default btn-etiket" href="#">
-                <img src="~/img/xls.png" />
-                <span class="font-size-13">Excel'e Aktar</span>
+            <a id="download-xlsx" class="btn btn-default form-control icon-text-button hint--top hint--rounded btn-etiket"
+               data-hint="Excele Aktar" href="#">
+                <img src="~/img/microsoft_excel.png" />
             </a>
         </h3>
     </div>
 </div>
 
-<input type="hidden" id="kna1-sortl" name="kna1-sortl" value="@Model.SORTL" />
+<input type="hidden" id="kna1-sortl" name="kna1-sortl" />
 
-@if (Model.SORTL.Equals("BAYI"))
-{
-    <div class="row heading margin-top-5 margin-left-0">
-        <div class="col-sm-12 col-md-12 padding-left-0">
-            <form class="form-horizontal" role="form">
-                <div class="form-group margin-left-0">
-                    <label for="input-campaign" class="col-lg-1 control-label lbl-campaign">Satış Kampanyası :</label>
-                    <div class="col-lg-3">
-                        <input type="text" class="form-control txt-bold font-size-13" id="input-campaign" disabled>
-                    </div>
-                    <label for="input-start-date" class="col-lg-2 control-label">Başlangıç / Bitiş Tarihi :</label>
-                    <div class="col-lg-2">
-                        <input type="text" class="form-control txt-bold font-size-13" id="input-start-date" disabled>
-                    </div>
+<div id="div_campaign" class="row heading margin-top-5 margin-left-0 hidden">
+    <div class="col-sm-10 col-md-10 padding-left-0">
+        <form class="form-horizontal" role="form">
+            <div class="form-group margin-left-0">
+                <label for="input-campaign" class="col-lg-1 control-label lbl-campaign">Satış Kampanyası :</label>
+                <div class="col-lg-3">
+                    <input type="text" class="form-control txt-bold font-size-12" id="input-campaign" disabled>
                 </div>
-            </form>
-        </div>
+                <label for="input-start-date" class="col-lg-2 control-label">Başlangıç / Bitiş Tarihi :</label>
+                <div class="col-lg-2">
+                    <input type="text" class="form-control txt-bold font-size-12" id="input-start-date" disabled>
+                </div>
+            </div>
+        </form>
     </div>
-}
+</div>
 
 <div id="example-table"></div>
 
 @section Scripts{
     <script type="text/javascript">
         $(function () {
+            var customer = JSON.parse(sessionStorage.getItem("Customer"));
+            $("#kna1-sortl").val(customer.GroupName);
+            if (customer.GroupName == 'BAYI') { //gözükecek
+                $("#div_campaign").removeClass('hidden')
+            }
+            else {
+                $("#div_campaign").addClass('hidden')
+            }
+
             var turkishLang = {
                 "ajax": {
                     "loading": "Yükleniyor",

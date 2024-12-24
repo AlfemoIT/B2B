@@ -12,7 +12,7 @@ namespace B2B.Helper
         static CultureHelper()
         {
             TRCultureInfo = new CultureInfo("tr-TR");
-            TRCultureInfo.NumberFormat.NumberDecimalSeparator = ",";
+            TRCultureInfo.NumberFormat.NumberDecimalSeparator = ".";
         }
     }
 }

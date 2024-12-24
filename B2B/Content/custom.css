@@ -71,32 +71,27 @@ table.dataTable > tbody > tr > th, table.dataTable > tbody > tr > td {
 }
 
     .tabulator .tabulator-header .tabulator-col {
-        background: #ebf2f6;
+        background: #f6eced;
         border-right: 1px solid #ddd;
     }
 
+        .tabulator .tabulator-header .tabulator-col.tabulator-sortable.tabulator-col-sorter-element:hover {
+            background-color: #f6eced;
+            cursor: pointer;
+        }
+
 .tabulator .tabulator-header {
-    background-color: #ebf2f6;
+    background-color: #f6eced;
     border-bottom: 1px solid #ddd;
 }
 
-    .tabulator .tabulator-header .tabulator-col.tabulator-sortable.tabulator-col-sorter-element:hover {
-        background-color: #ebf2f6;
-        cursor: pointer;
-    }
-
-    .tabulator .tabulator-header .tabulator-col {
-        background: #ebf2f6;
-        border-right: 1px solid rgba(0, 0, 0, 0.3);
-    }
-
 .tabulator .tabulator-header {
-    background-color: #ebf2f6;
+    background-color: #f6eced;
     border-bottom: 1px solid rgba(0, 0, 0, 0.3);
 }
 
     .tabulator .tabulator-header .tabulator-col.tabulator-sortable.tabulator-col-sorter-element:hover {
-        background-color: #ebf2f6;
+        background-color: #f6eced;
         cursor: pointer;
     }
 

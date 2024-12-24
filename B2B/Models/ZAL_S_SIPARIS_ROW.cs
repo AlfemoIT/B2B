@@ -51,6 +51,18 @@ namespace B2B.Models
                 return string.Empty;
             }
         }
+        public DateTime CMPT_AUDAT_DATE
+        {
+            get
+            {
+                if (!string.IsNullOrEmpty(AUDAT) && AUDAT != "0000-00-00")
+                {
+                    return DateTime.ParseExact(AUDAT, "yyyy-MM-dd", CultureHelper.TRCultureInfo);
+                }
+                return DateTime.MinValue;
+            }
+        }
+
         public int CMPT_YEAR
         {
             get
@@ -103,16 +115,27 @@ namespace B2B.Models
         }
 
         public string CMTD_DELIV_DATE { get; set; }  //müşterinin istediği teslim tarihi
-        public string CMPT_DELIV_DATE
+        //public string CMPT_DELIV_DATE
+        //{
+        //    get
+        //    {
+        //        if (!string.IsNullOrEmpty(CMTD_DELIV_DATE) && CMTD_DELIV_DATE != "0000-00-00")
+        //        {
+        //            return Convert.ToDateTime(CMTD_DELIV_DATE)
+        //                          .ToString("dd-MM-yyyy");
+        //        }
+        //        return string.Empty;
+        //    }
+        //}
+        public DateTime CMPT_DELIV_DATE
         {
             get
             {
                 if (!string.IsNullOrEmpty(CMTD_DELIV_DATE) && CMTD_DELIV_DATE != "0000-00-00")
                 {
-                    return Convert.ToDateTime(CMTD_DELIV_DATE)
-                                  .ToString("dd-MM-yyyy");
+                    return DateTime.ParseExact(CMTD_DELIV_DATE, "yyyy-MM-dd", CultureHelper.TRCultureInfo);
                 }
-                return string.Empty;
+                return DateTime.MinValue;
             }
         }
 

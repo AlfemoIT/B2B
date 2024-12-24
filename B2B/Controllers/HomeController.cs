@@ -22,16 +22,19 @@ namespace B2B.Controllers
         [HttpPost]
         //public JsonResult GetChartData(string iv_kunnr, string iv_cmpt_abgru)
         //{
+        //    List<string> lst_kunnr = new List<string>();
         //    List<ZAL_S_SIPARIS_ROW> orders = new List<ZAL_S_SIPARIS_ROW>();
         //    if (!string.IsNullOrEmpty(iv_kunnr))
         //    {
+        //        lst_kunnr.Add(iv_kunnr);
         //        var client = new ServiceSalesOrder.WebServiceSalesOrderSoapClient();
         //        var hd = new ServiceSalesOrder.AuthHeader()
         //        {
         //            Username = "AlfemoUB2B_ServiceUser",
         //            Password = "Alfemo!2024_!"
         //        };
-        //        var sonuc = client.GetOpenOrders(hd, iv_kunnr, iv_cmpt_abgru);
+
+        //        var sonuc = client.GetOpenOrders(hd, lst_kunnr.ToArray(), iv_cmpt_abgru);
         //        if (!sonuc.Contains("-111"))
         //        {
         //            orders = JsonConvert.DeserializeObject<List<ZAL_S_SIPARIS_ROW>>(sonuc);
