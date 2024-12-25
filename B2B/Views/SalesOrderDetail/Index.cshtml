@@ -112,7 +112,6 @@
 
 <div id="freezeOverlay"></div>
 
-
 @section Scripts{
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
@@ -124,6 +123,7 @@
             $("#txt_m3_value").text('');
 
             var customer = JSON.parse(sessionStorage.getItem("Customer"));
+            console.log(customer);
             $("#customerName").text(customer.Name)
 
             var table = $('#tblSaleRows').DataTable({
@@ -178,8 +178,8 @@
                         }
                     },
                     { data: 'CMPT_ABGRU' },
-                    { data: 'CMPT_ORDER_MUH_ONAY' },
-                    {
+                    { data: 'CMPT_ORDER_MUH_ONAY',visible:false },
+                    {//order date
                         data: 'CMPT_AUDAT_DATE',
                         render: function (data, type, row) {
                             if (type === 'display' || type === 'filter') {
@@ -190,8 +190,8 @@
                             }
                             return data;
                         }
-                    },      //order date
-                    {
+                    },
+                    { //teslim tarih
                         data: 'CMPT_DELIV_DATE',
                         render: function (data, type, row) {
                             if (type === 'display' || type === 'filter') {
@@ -202,8 +202,7 @@
                             }
                             return data;
                         }
-                    }, //teslim tarih
-
+                    },
                     { data: 'CMPT_VBELN' },
                     { data: 'CMPT_POSNR' },
                     { data: 'ZZMUSTERI_AD' },
@@ -233,7 +232,7 @@
                     { data: 'CMPT_TOTAL_IN_PRODUCTION'},
                     { data: 'ZZURTM_WEEK_DESC' },
                     {
-                        data: 'CMPT_TOTAL_ORDER_PRICE',
+                        data: 'CMPT_TOTAL_ORDER_PRICE',visible:false,
                         render: function (data, type, row) {
                             if (type === 'display') {
                                 return new Intl.NumberFormat('tr-TR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(data);
@@ -246,10 +245,8 @@
                     { data: 'LONG_MAKTX' }
                  ],
                 columnDefs: [
-                    {
-                        className: 'dt-center', targets: [0, 1, 2, 3, 4, 5, 9, 10, 11, 12, 13, 14,15]
-                    },
-                    { className: 'dt-right', targets: [16,17] }
+                    { className: 'dt-center', targets: [0, 1, 2, 3, 4, 5, 10, 11, 12, 13, 14,15]},
+                    { className: 'dt-right', targets: [9,16,17] }
                 ],
                 initComplete: function (settings, json) {
                     $("#download-xlsx").prop("disabled", false);
@@ -257,8 +254,15 @@
             }).on('xhr', function (e, settings, json, xhr) {
                 $('#freezeOverlay').hide();
                 $("#download-xlsx").prop("disabled", false)
-                    .removeClass("disabled-link");
+                                   .removeClass("disabled-link");
             });
+
+            setTimeout(function () {
+                var customer = JSON.parse(sessionStorage.getItem("Customer"));
+                if (customer.RoleID == 2) {
+                    table.column(17).visible(true);
+                }
+            }, 200);
 
             $("#drpOrderState").on('change', function (e) {
                 const selectedValue = $(this).val();
@@ -289,7 +293,7 @@
             function exportTableToExcel(tableID, filename) {
                 headers = ['CMPT_ABGRU','CMPT_AUDAT', 'CMPT_DELIV_DATE', 'CMPT_VBELN', 'CMPT_POSNR', 'ZZMUSTERI_AD',
                     'MATNR', 'MAKTX', 'CMPT_KWMENG', 'CMPT_TOTAL_FKIMG', 'CMPT_TOTAL_LFIMG', 'CMPT_TOTAL_BMENG',
-                    'CMPT_READY_VOLUM', 'CMPT_TOTAL_IN_PRODUCTION', 'ZZURTM_WEEK_DESC', 'CMPT_TOTAL_ORDER_PRICE',
+                    'CMPT_READY_VOLUM', 'CMPT_TOTAL_IN_PRODUCTION', 'ZZURTM_WEEK_DESC',
                     'KUNAGTANIM', 'LONG_MAKTX'];
 
                 var exportTable = $('<table>');

@@ -22,18 +22,16 @@ namespace B2B.Controllers
         public JsonResult GetData(string iv_kunnr)
         {
             var user = GetUser();
-            List<ZAL_S_CARI> accounts = new List<ZAL_S_CARI>();
-
+            var accounts = new List<ZAL_S_CARI>();
             if (user.RoleID != 6) // bolge muduru degilse
             {
                 using (var context = new B2bContext())
                 {
-                    iv_kunnr = (from customer in context.Customers
+                    iv_kunnr = (from customera in context.CustomerAssignments.Where(x => x.UserID == user.ID)
+                                join customer in context.Customers on customera.CustomerID equals customer.ID
                                 where customer.SalesOfficeID == user.SalesOfficeID &&
                                       customer.IsCentral == true
                                 select customer.SapCode).FirstOrDefault();
-
-
                 }
             }
 
@@ -61,7 +59,6 @@ namespace B2B.Controllers
         {
             var formsIdentity = HttpContext.User.Identity as FormsIdentity;
             if (formsIdentity == null) { return null; }
-
             var ticket = formsIdentity.Ticket;
             var userData = ticket.UserData;
             var user = JsonConvert.DeserializeObject<User>(userData);

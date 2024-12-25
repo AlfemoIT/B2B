@@ -22,8 +22,8 @@
     <MetadataSource Address="https://services.alfemo.com.tr:9095/B2B/WebServiceSalesOrder.asmx" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="WebServiceSalesOrder1.wsdl" MetadataType="Wsdl" ID="d30167ce-8efa-4439-8c1f-0b978b434ced" SourceId="1" SourceUrl="https://services.alfemo.com.tr:9095/B2B/WebServiceSalesOrder.asmx?wsdl" />
-    <MetadataFile FileName="WebServiceSalesOrder1.disco" MetadataType="Disco" ID="ea4a3faa-c79e-40be-b78f-39b1c0711212" SourceId="1" SourceUrl="https://services.alfemo.com.tr:9095/B2B/WebServiceSalesOrder.asmx?disco" />
+    <MetadataFile FileName="WebServiceSalesOrder1.wsdl" MetadataType="Wsdl" ID="feac2187-4ee4-495c-9208-98a95eebeacf" SourceId="1" SourceUrl="https://services.alfemo.com.tr:9095/B2B/WebServiceSalesOrder.asmx?wsdl" />
+    <MetadataFile FileName="WebServiceSalesOrder1.disco" MetadataType="Disco" ID="c131b346-bb12-4b42-9b3a-41c9f8038361" SourceId="1" SourceUrl="https://services.alfemo.com.tr:9095/B2B/WebServiceSalesOrder.asmx?disco" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

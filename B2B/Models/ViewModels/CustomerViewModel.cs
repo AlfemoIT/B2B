@@ -8,6 +8,7 @@ namespace B2B.Models.ViewModels
     public class CustomerViewModel
     {
         public string UserName { get; set; }
+        public int RoleID { get; set; }
         public List<CustomerDto> Customers { get; set; }
     }
 
@@ -18,5 +19,6 @@ namespace B2B.Models.ViewModels
         public string GroupName { get; set; }
         public string SapCode { get; set; }
         public bool IsCentral { get; set; }
+        public int RoleID { get; set; }
     }
 }

@@ -22,8 +22,8 @@
     <MetadataSource Address="https://services.alfemo.com.tr:9095/B2B/WebServiceCari.asmx" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="WebServiceCari1.wsdl" MetadataType="Wsdl" ID="1f91e974-aeff-45e4-a7f6-c022ce0e2bdc" SourceId="1" SourceUrl="https://services.alfemo.com.tr:9095/B2B/WebServiceCari.asmx?wsdl" />
-    <MetadataFile FileName="WebServiceCari1.disco" MetadataType="Disco" ID="7a9b06b5-58aa-4f12-ae92-4683494f3ce5" SourceId="1" SourceUrl="https://services.alfemo.com.tr:9095/B2B/WebServiceCari.asmx?disco" />
+    <MetadataFile FileName="WebServiceCari1.wsdl" MetadataType="Wsdl" ID="0e5abd1f-2dc9-4524-b2f2-b0cf804430e6" SourceId="1" SourceUrl="https://services.alfemo.com.tr:9095/B2B/WebServiceCari.asmx?wsdl" />
+    <MetadataFile FileName="WebServiceCari1.disco" MetadataType="Disco" ID="cd72d2a3-6841-4337-be73-a1be80f27e8d" SourceId="1" SourceUrl="https://services.alfemo.com.tr:9095/B2B/WebServiceCari.asmx?disco" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

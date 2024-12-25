@@ -23,7 +23,7 @@ namespace B2B.Controllers
             var user = GetUser();
             using (var context = new B2bContext())
             {
-                var categoriesWithPages = (from pa in context.PageAssignments.AsEnumerable().Where(pa=>pa.UserID == user.ID)
+                var categoriesWithPages = (from pa in context.PageAssignments.AsEnumerable().Where(pa => pa.UserID == user.ID)
                                            join p in context.Pages on pa.Page.ID equals p.ID
                                            join c in context.PageCategories on p.PageCategoryID equals c.ID
                                            group p by new { c.Name, c.Icon, c.Index } into g
@@ -38,7 +38,7 @@ namespace B2B.Controllers
                                                    Name = p.Name,
                                                    Url = p.Url
                                                }).ToList()
-                                           }).OrderBy(x=>x.Index)
+                                           }).OrderBy(x => x.Index)
                                              .ToList();
                 return PartialView(categoriesWithPages);
             }
@@ -61,12 +61,14 @@ namespace B2B.Controllers
                                          Name = customer.Name,
                                          IsCentral = customer.IsCentral,
                                          SapCode = customer.SapCode,
-                                         GroupName = cgroup.Name.ToUpper(englishCulture)
+                                         GroupName = cgroup.Name.ToUpper(englishCulture),
+                                         RoleID = user.RoleID
                                      }).ToList();
 
                     return PartialView(new CustomerViewModel
                     {
                         UserName = user.NameSurname,
+                        RoleID = user.RoleID,
                         Customers = customers
                     });
                 }
@@ -83,12 +85,14 @@ namespace B2B.Controllers
                                          Name = customer.Name,
                                          IsCentral = customer.IsCentral,
                                          SapCode = customer.SapCode,
-                                         GroupName = cgroup.Name.ToUpper(englishCulture)
+                                         GroupName = cgroup.Name.ToUpper(englishCulture),
+                                         RoleID = user.RoleID
                                      }).ToList();
 
                     return PartialView(new CustomerViewModel
                     {
                         UserName = user.NameSurname,
+                        RoleID = user.RoleID,
                         Customers = customers
                     });
                 }

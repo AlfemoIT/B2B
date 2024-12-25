@@ -547,27 +547,27 @@
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
     <None Include="Connected Services\ServiceSalesOrder\WebServiceSalesOrder1.disco" />
+    <None Include="Connected Services\ServiceSalesOrder\WebServiceSalesOrder1.wsdl" />
     <Content Include="Connected Services\ServiceShipment\B2B.ServiceShipment.GetShipmentDetailsResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <Content Include="Connected Services\ServiceShipment\B2B.ServiceShipment.GetShipmentsResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
-    <None Include="Connected Services\ServiceSalesOrder\WebServiceSalesOrder1.wsdl" />
+    <None Include="Connected Services\ServiceShipment\WebServiceShipment.disco" />
     <None Include="Connected Services\ServiceShipment\configuration91.svcinfo" />
     <None Include="Connected Services\ServiceShipment\configuration.svcinfo" />
     <None Include="Connected Services\ServiceShipment\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-    <None Include="Connected Services\ServiceShipment\WebServiceShipment1.disco" />
     <Content Include="Connected Services\ServiceStock\B2B.ServiceStock.GetObservedStockResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <Content Include="Connected Services\ServiceStock\B2B.ServiceStock.GetStoreObservedStockResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
-    <None Include="Connected Services\ServiceShipment\WebServiceShipment1.wsdl" />
+    <None Include="Connected Services\ServiceShipment\WebServiceShipment.wsdl" />
     <None Include="Connected Services\ServiceStock\configuration91.svcinfo" />
     <None Include="Connected Services\ServiceStock\configuration.svcinfo" />
     <None Include="Connected Services\ServiceStock\Reference.svcmap">
