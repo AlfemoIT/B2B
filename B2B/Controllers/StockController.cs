@@ -1,4 +1,5 @@
-﻿using B2B.Models;
+﻿using B2B.Dal;
+using B2B.Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -14,18 +15,7 @@ namespace B2B.Controllers
         [Authorize]
         public ActionResult Index()
         {
-            return View(GetUser());
-        }
-
-        public KNA1 GetUser()
-        {
-            var formsIdentity = HttpContext.User.Identity as FormsIdentity;
-            if (formsIdentity == null) { return null; }
-
-            var ticket = formsIdentity.Ticket;
-            var userData = ticket.UserData;
-            var user = JsonConvert.DeserializeObject<KNA1>(userData);
-            return user;
+            return View();
         }
 
         [HttpPost]

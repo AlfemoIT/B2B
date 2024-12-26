@@ -1,22 +1,76 @@
-﻿@model B2B.Models.User
+﻿@using Newtonsoft.Json;
+
+@model B2B.Models.ViewModels.CustomerViewModel
 
 <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
     <div class="navbar-inner">
         <div class="container">
             <a class="brand pull-left text-center" href="#">
-                <img src="~/alfemo.png" alt="logo.svg (43 KB)" width="85%" style="border-radius:3px">
+                ALFEMO
             </a>
 
             <ul class="nav navbar-nav user_menu pull-right">
                 <li class="divider-vertical hidden-sm hidden-xs"></li>
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle cursor-default">
-                        <img src="~/img/user_avatar.png" alt="" class="user_avatar">
-                        @Model.NameSurname
+                    <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                        <span class="glyphicon glyphicon-map-marker"></span>
+                        <span id="customer_name"></span>
+                        <b class="caret"></b>
                     </a>
+                    @if (Model.Customers.Count > 1)
+                    {
+                        <ul class="dropdown-menu">
+                            @foreach (var customer in Model.Customers)
+                            {
+                                <li>
+                                    <a href="#"
+                                       data-customer='@Html.Raw(JsonConvert.SerializeObject(customer))'
+                                       onclick="changeCustomer(this)">
+                                        @customer.Name
+                                    </a>
+                                </li>
+                                <li class="divider"></li>
+                            }
+                        </ul>
+                    }
+                </li>
+                <li class="divider-vertical hidden-sm hidden-xs"></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <span class="glyphicon glyphicon-user" style="padding-right:3px !important"></span>
+                        @Model.UserName
+                        <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu" style="left:-7px">
+                        <li><a href="#">Hesabım</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#" onclick="logout()">Çıkış</a></li>
+                    </ul>
                 </li>
             </ul>
         </div>
     </div>
 </nav>
+
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script>
+    $(document).ready(function () {
+        if (sessionStorage.getItem("Customer") != null) {
+            var customer = JSON.parse(sessionStorage.getItem("Customer"));
+            $("#customer_name").html(customer.Name);
+        }
+        else {
+            var modelData = @Html.Raw(JsonConvert.SerializeObject(Model));
+            $("#customer_name").html(modelData.Customers[0].Name)
+            sessionStorage.setItem("Customer", JSON.stringify(modelData.Customers[0]));
+        }
+    });
+
+    function changeCustomer(element) {
+        const customer = JSON.parse(element.getAttribute('data-customer'));
+        $("#customer_name").html(customer.Name);
+        sessionStorage.setItem("Customer", JSON.stringify(customer));
+    }
+</script>
+
 

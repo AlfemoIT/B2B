@@ -1,4 +1,5 @@
-﻿using System;
+﻿using B2B.Helper;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -19,13 +20,10 @@ namespace B2B.Models
         {
             get
             {
-                CultureInfo info = new CultureInfo("tr-TR");
-                info.NumberFormat.NumberDecimalSeparator = ".";
-
                 double amount = 0;
                 if (!string.IsNullOrEmpty(PESIN_FIYAT))
                 {
-                    amount = Convert.ToDouble(PESIN_FIYAT, info);
+                    amount = Convert.ToDouble(PESIN_FIYAT, CultureHelper.TRCultureInfo);
                     return string.Format("{0:N0}", amount);
                 }
                 return amount.ToString();
@@ -37,13 +35,10 @@ namespace B2B.Models
         {
             get
             {
-                CultureInfo info = new CultureInfo("tr-TR");
-                info.NumberFormat.NumberDecimalSeparator = ".";
-
                 double amount = 0;
                 if (!string.IsNullOrEmpty(TAKSIT_9))
                 {
-                    amount = Convert.ToDouble(TAKSIT_9, info);
+                    amount = Convert.ToDouble(TAKSIT_9, CultureHelper.TRCultureInfo);
                     return string.Format("{0:N0}", amount);
                 }
                 return amount.ToString();

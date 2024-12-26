@@ -1,0 +1,267 @@
+﻿
+@{
+    ViewBag.Title = "Cari Hesap Ekstresi";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="~/Content/shipment.css" rel="stylesheet" />
+<style>
+    .vcard {
+        left: 0;
+        bottom: 5px;
+    }
+
+    ul, ol {
+        margin-top: 2px;
+        margin-bottom: 10px;
+    }
+</style>
+
+<div id="jCrumbs" class="breadCrumb module">
+    <ul>
+        <li>
+            <a href="/">
+                <i class="glyphicon glyphicon-home"></i>
+            </a>
+        </li>
+        <li style="background: none;">
+            <span style="width: 40px;"><a href="#" style="width: 83px;">Rapor</a></span>
+            <div class="chevronOverlay" style="display: block;"></div>
+        </li>
+        <li>
+            Cari Ekstre
+        </li>
+    </ul>
+</div>
+
+<div class="col-sm-12 col-md-12 border-filter">
+    <div class="col-sm-2 padding-left-2">
+        <a id="btn-execute" class="btn btn-default form-control icon-text-button hint--top hint--rounded float-left"
+           style="margin-right:5px"
+           data-hint="Yürüt">
+            <img src="~/img/realtime_2.png" />
+        </a>
+
+        <a id="btn-excel"
+           class="btn btn-default form-control icon-text-button hint--top hint--rounded"
+           data-hint="Excele Aktar"
+           href="#">
+            <img src="~/img/mexcel_25.png" />
+        </a>
+    </div>
+
+    <div class="col-sm-4 col-md-4 float-right padding-right-0">
+        <div class="vcard">
+            <ul>
+                <li class="v-heading">
+                    <span id="customerName" style="font-weight: 700;font-size: 13px;color: #222222;">
+                        Bakiye Bilgileri
+                    </span>&nbsp;&nbsp;<span id="debit"></span>
+                </li>
+                <li>
+                    <ul class="sepH_b item-list list-unstyled">
+                        <li>
+                            <img src="~/img/schedule.png" />&nbsp;<span class="span-info"> @DateTime.Now.ToString("dd/MM/yyyy") </span>
+                        </li>
+                        <li>
+                            <img src="~/img/turkish_lira.png" />&nbsp;<span id="total"></span>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="col-sm-12 col-md-12 padding-left-0 padding-right-0">
+    <table class="table table-striped table-bordered display nowrap" id="tblAccount" style="width:100%">
+        <thead>
+            <tr>
+                <th class="center">Belge Tarihi</th>
+                <th class="center">Belge No</th>
+                <th class="center">Fatura No</th>
+                <th class="center">Tutar</th>
+                <th class="center">PB</th>
+                <th class="center">Metin</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</div>
+
+<div id="freezeOverlay"></div>
+
+@section Scripts{
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $("#total").text('');
+            $("#btn-excel")
+                 .prop("disabled", true)
+                 .addClass("disabled-link");
+
+            var table = $("#tblAccount").DataTable({
+                language: {
+                    url: "@Url.Content("~/Content/tr.json")",
+                    processing: '<i class="fa fa-spinner fa-spin fa-3x fa-fw"></i><span class="sr-only">Loading...</span>'
+                },
+                ajax : null,
+                processing: true,
+                fixedHeader: true,
+                autoWidth: true,
+                responsive: true,
+                retrieve: true,
+                scrollY: "500px",
+                scrollCollapse: true,
+                paging: true,
+                searching: true,
+                displayLength: 100,
+                lengthMenu: [[100, 250, 500, -1], [100, 250, 500, "Tümü"]],
+                order: [[0, 'desc']],
+                columns: [
+                    {
+                        data: 'CMPT_BELGE_DATE', width: '150px',
+                        render: function (data, type, row) {
+                            if (type === 'display' || type === 'filter') {
+                                var timestamp = parseInt(data.match(/\d+/)[0], 10);
+                                var date = new Date(timestamp);
+                                var formattedDate = date.toLocaleDateString('tr-TR');
+                                return formattedDate;
+                            }
+                            return data;
+                         }
+                    },
+                    { data: 'CMPT_REFERANS', width: '150px'},
+                    { data: 'CMPT_FATURA_NO'},
+                    {
+                        data: 'CMPT_TUTAR',width : '150px',
+                        render: function (data, type, row) {
+                            if (type === 'display') {
+                                //let numberStr = data;
+                                //let number = parseFloat(numberStr.replace(',', '.'));
+                                //return new Intl.NumberFormat('tr-TR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(number);
+                                return new Intl.NumberFormat('tr-TR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(data);
+                            }
+                            return data;
+                        }
+                    },
+                    {
+                        data: 'CURRENCY', width: '50px',
+                        render: function (data, type, row) {
+                            if (type === 'display' && data == "TRY") {
+                                return "<span>&#8378;</span>";
+                            }
+                            return data;
+                        }
+                    },
+                    { data: 'METIN' }
+                ],
+                columnDefs: [
+                    {  className: 'dt-center', targets: [0,1, 2, 4] },
+                    {  className: 'title-align-right', targets: [3]}
+                ],
+                initComplete: function () {
+                    $(".dataTables_processing").hide();
+                    $('#freezeOverlay').hide();
+                }
+            }).on('xhr', function () {
+                $('#freezeOverlay').hide();
+                $(".dataTables_processing").hide();
+                $("#btn-excel")
+                    .prop("disabled", false)
+                    .removeClass("disabled-link");
+            });
+
+            $('#btn-execute').on('click', function () {
+                $("#total").text('');
+                var customer = JSON.parse(sessionStorage.getItem("Customer"));
+                $("#customerName").text(customer.Name)
+
+                table.ajax.url(`/AccountStatement/GetData?iv_kunnr=${customer.SapCode}`).load(function (json) {
+                    var totalItem = json.data.filter(function (item) {
+                        return item.REFERANS === "*";
+                    });
+                    let numberStr = totalItem[0].TUTAR;
+                    let number = parseFloat(numberStr.replace(',', '.'));
+                    var total = new Intl.NumberFormat('tr-TR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(number);
+                    if (number > 0) {
+                        $("#debit").text("BORÇLU")
+                                   .removeClass('text-debit-red')
+                                   .addClass('text-debit-green');
+                    } else {
+                        $("#debit").text("ALACAKLI")
+                                   .removeClass('text-debit-green')
+                                   .addClass('text-debit-red');
+                    }
+                    $("#total").text(total);
+
+                    json.data = json.data.filter(function (item) {
+                        return item.REFERANS !== "*";
+                    });
+                    table.clear().rows.add(json.data).draw();
+                });
+            });
+
+            $('#btn-excel').click(function () {
+                var count = table.data().count();
+                if (count > 0) {
+                    var customer = JSON.parse(sessionStorage.getItem("Customer"));
+                    var filename = customer.Name+'_EKSTRE.xlsx';
+                    exportTableToExcel('tblAccount', filename);
+                }
+            });
+
+            var headers;
+            function exportTableToExcel(tableID, filename) {
+                headers = ['CMPT_BELGE_DATE', 'CMPT_REFERANS', 'CMPT_FATURA_NO', 'CMPT_TUTAR', 'CURRENCY','METIN'];
+
+                var exportTable = $('<table>');
+                var thead = $('<thead>');
+                var tbody = $('<tbody>');
+
+                $('#tblAccount thead tr').clone().appendTo(thead);
+                thead.appendTo(exportTable);
+
+                var data = table.rows(':not(.no-data)').data().toArray();
+                data.forEach(function (row) {
+                    var tr = $('<tr>');
+                    headers.forEach(function (header) {
+                       if(header == "CMPT_BELGE_DATE") {
+                            var timestamp = parseInt(row[header].match(/\d+/)[0], 10);
+                            var date = new Date(timestamp);
+                            var formattedDate = date.toLocaleDateString('tr-TR');
+                            $('<td>').text(formattedDate).appendTo(tr);
+                       } else if (header == "CURRENCY") {
+                           $('<td>').text("₺").appendTo(tr);
+                       } else {
+                            $('<td>').text(row[header]).appendTo(tr);
+                       }
+                    });
+                    tr.appendTo(tbody);
+                });
+                tbody.appendTo(exportTable);
+
+                var wb = XLSX.utils.table_to_book(exportTable[0], { sheet: "Sheet1" });
+                var wbout = XLSX.write(wb, { bookType: 'xlsx', type: 'binary' });
+                function s2ab(s) {
+                    var buf = new ArrayBuffer(s.length);
+                    var view = new Uint8Array(buf);
+                    for (var i = 0; i < s.length; i++) {
+                        view[i] = s.charCodeAt(i) & 0xFF;
+                    }
+                    return buf;
+                }
+
+                var blob = new Blob([s2ab(wbout)], { type: "application/octet-stream" });
+                var link = document.createElement('a');
+                link.href = URL.createObjectURL(blob);
+                link.download = 'table_export.xlsx';
+                link.download = filename;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            }
+        });
+    </script>
+}

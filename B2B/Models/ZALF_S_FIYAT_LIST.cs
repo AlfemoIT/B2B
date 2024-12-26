@@ -1,4 +1,5 @@
-﻿using System;
+﻿using B2B.Helper;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -17,13 +18,10 @@ namespace B2B.Models
         {
             get
             {
-                CultureInfo info = new CultureInfo("tr-TR");
-                info.NumberFormat.NumberDecimalSeparator = ".";
-
                 double amount = 0;
                 if (!string.IsNullOrEmpty(FIYAT1))
                 {
-                    amount = Convert.ToDouble(FIYAT1, info);
+                    amount = Convert.ToDouble(FIYAT1, CultureHelper.TRCultureInfo);
                     if (amount == 0)
                     {
                         return string.Empty;
@@ -39,13 +37,10 @@ namespace B2B.Models
         {
             get
             {
-                CultureInfo info = new CultureInfo("tr-TR");
-                info.NumberFormat.NumberDecimalSeparator = ".";
-
                 double amount = 0;
                 if (!string.IsNullOrEmpty(FIYAT2))
                 {
-                    amount = Convert.ToDouble(FIYAT2, info);
+                    amount = Convert.ToDouble(FIYAT2, CultureHelper.TRCultureInfo);
                     if (amount == 0)
                     {
                         return string.Empty;
@@ -61,13 +56,10 @@ namespace B2B.Models
         {
             get
             {
-                CultureInfo info = new CultureInfo("tr-TR");
-                info.NumberFormat.NumberDecimalSeparator = ".";
-
                 double amount = 0;
                 if (!string.IsNullOrEmpty(FIYAT3))
                 {
-                    amount = Convert.ToDouble(FIYAT3, info);
+                    amount = Convert.ToDouble(FIYAT3, CultureHelper.TRCultureInfo);
                     if (amount == 0)
                     {
                         return string.Empty;
@@ -83,13 +75,10 @@ namespace B2B.Models
         {
             get
             {
-                CultureInfo info = new CultureInfo("tr-TR");
-                info.NumberFormat.NumberDecimalSeparator = ".";
-
                 double amount = 0;
                 if (!string.IsNullOrEmpty(FIYAT4))
                 {
-                    amount = Convert.ToDouble(FIYAT4, info);
+                    amount = Convert.ToDouble(FIYAT4, CultureHelper.TRCultureInfo);
                     if (amount == 0)
                     {
                         return string.Empty;
@@ -105,13 +94,10 @@ namespace B2B.Models
         {
             get
             {
-                CultureInfo info = new CultureInfo("tr-TR");
-                info.NumberFormat.NumberDecimalSeparator = ".";
-
                 double amount = 0;
                 if (!string.IsNullOrEmpty(FIYAT5))
                 {
-                    amount = Convert.ToDouble(FIYAT5, info);
+                    amount = Convert.ToDouble(FIYAT5, CultureHelper.TRCultureInfo);
                     if (amount == 0)
                     {
                         return string.Empty;
@@ -127,13 +113,10 @@ namespace B2B.Models
         {
             get
             {
-                CultureInfo info = new CultureInfo("tr-TR");
-                info.NumberFormat.NumberDecimalSeparator = ".";
-
                 double amount = 0;
                 if (!string.IsNullOrEmpty(Z001))
                 {
-                    amount = Convert.ToDouble(Z001, info);
+                    amount = Convert.ToDouble(Z001, CultureHelper.TRCultureInfo);
                     if (amount == 0)
                     {
                         return string.Empty;
@@ -149,13 +132,10 @@ namespace B2B.Models
         {
             get
             {
-                CultureInfo info = new CultureInfo("tr-TR");
-                info.NumberFormat.NumberDecimalSeparator = ".";
-
                 double amount = 0;
                 if (!string.IsNullOrEmpty(Z015))
                 {
-                    amount = Convert.ToDouble(Z015, info);
+                    amount = Convert.ToDouble(Z015, CultureHelper.TRCultureInfo);
                     if (amount == 0)
                     {
                         return string.Empty;
@@ -171,13 +151,10 @@ namespace B2B.Models
         {
             get
             {
-                CultureInfo info = new CultureInfo("tr-TR");
-                info.NumberFormat.NumberDecimalSeparator = ".";
-
                 double amount = 0;
                 if (!string.IsNullOrEmpty(Z022))
                 {
-                    amount = Convert.ToDouble(Z022, info);
+                    amount = Convert.ToDouble(Z022, CultureHelper.TRCultureInfo);
                     if (amount == 0)
                     {
                         return string.Empty;

@@ -14,7 +14,7 @@ namespace B2B.Controllers
         [Authorize]
         public ActionResult Index()
         {
-            return View(GetUser());
+            return View();
         }
 
         [HttpPost]
@@ -112,16 +112,6 @@ namespace B2B.Controllers
             var jsonResult = Json(new { tableData = consolidatedChildren.ToList(), campaign = product_price?.CAMPAIGN }, JsonRequestBehavior.AllowGet);
             jsonResult.MaxJsonLength = int.MaxValue;
             return jsonResult;
-        }
-        public KNA1 GetUser()
-        {
-            var formsIdentity = HttpContext.User.Identity as FormsIdentity;
-            if (formsIdentity == null) { return null; }
-
-            var ticket = formsIdentity.Ticket;
-            var userData = ticket.UserData;
-            var user = JsonConvert.DeserializeObject<KNA1>(userData);
-            return user;
         }
     }
 }

@@ -22,10 +22,18 @@ namespace B2B.ServiceSalesOrder {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetSalesOrder", ReplyAction="*")]
         System.Threading.Tasks.Task<B2B.ServiceSalesOrder.GetSalesOrderResponse> GetSalesOrderAsync(B2B.ServiceSalesOrder.GetSalesOrderRequest request);
+        
+        // CODEGEN: Generating message contract since message GetOpenOrdersRequest has headers
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetOpenOrders", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        B2B.ServiceSalesOrder.GetOpenOrdersResponse GetOpenOrders(B2B.ServiceSalesOrder.GetOpenOrdersRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetOpenOrders", ReplyAction="*")]
+        System.Threading.Tasks.Task<B2B.ServiceSalesOrder.GetOpenOrdersResponse> GetOpenOrdersAsync(B2B.ServiceSalesOrder.GetOpenOrdersRequest request);
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9037.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9032.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -126,6 +134,48 @@ namespace B2B.ServiceSalesOrder {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="GetOpenOrders", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
+    public partial class GetOpenOrdersRequest {
+        
+        [System.ServiceModel.MessageHeaderAttribute(Namespace="http://tempuri.org/")]
+        public B2B.ServiceSalesOrder.AuthHeader AuthHeader;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
+        public string[] lst_kunnr;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=1)]
+        public string iv_cmpt_abgru;
+        
+        public GetOpenOrdersRequest() {
+        }
+        
+        public GetOpenOrdersRequest(B2B.ServiceSalesOrder.AuthHeader AuthHeader, string[] lst_kunnr, string iv_cmpt_abgru) {
+            this.AuthHeader = AuthHeader;
+            this.lst_kunnr = lst_kunnr;
+            this.iv_cmpt_abgru = iv_cmpt_abgru;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="GetOpenOrdersResponse", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
+    public partial class GetOpenOrdersResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
+        public string GetOpenOrdersResult;
+        
+        public GetOpenOrdersResponse() {
+        }
+        
+        public GetOpenOrdersResponse(string GetOpenOrdersResult) {
+            this.GetOpenOrdersResult = GetOpenOrdersResult;
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public interface WebServiceSalesOrderSoapChannel : B2B.ServiceSalesOrder.WebServiceSalesOrderSoap, System.ServiceModel.IClientChannel {
     }
@@ -178,6 +228,33 @@ namespace B2B.ServiceSalesOrder {
             inValue.iv_vbeln = iv_vbeln;
             inValue.iv_kunnr = iv_kunnr;
             return ((B2B.ServiceSalesOrder.WebServiceSalesOrderSoap)(this)).GetSalesOrderAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        B2B.ServiceSalesOrder.GetOpenOrdersResponse B2B.ServiceSalesOrder.WebServiceSalesOrderSoap.GetOpenOrders(B2B.ServiceSalesOrder.GetOpenOrdersRequest request) {
+            return base.Channel.GetOpenOrders(request);
+        }
+        
+        public string GetOpenOrders(B2B.ServiceSalesOrder.AuthHeader AuthHeader, string[] lst_kunnr, string iv_cmpt_abgru) {
+            B2B.ServiceSalesOrder.GetOpenOrdersRequest inValue = new B2B.ServiceSalesOrder.GetOpenOrdersRequest();
+            inValue.AuthHeader = AuthHeader;
+            inValue.lst_kunnr = lst_kunnr;
+            inValue.iv_cmpt_abgru = iv_cmpt_abgru;
+            B2B.ServiceSalesOrder.GetOpenOrdersResponse retVal = ((B2B.ServiceSalesOrder.WebServiceSalesOrderSoap)(this)).GetOpenOrders(inValue);
+            return retVal.GetOpenOrdersResult;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<B2B.ServiceSalesOrder.GetOpenOrdersResponse> B2B.ServiceSalesOrder.WebServiceSalesOrderSoap.GetOpenOrdersAsync(B2B.ServiceSalesOrder.GetOpenOrdersRequest request) {
+            return base.Channel.GetOpenOrdersAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<B2B.ServiceSalesOrder.GetOpenOrdersResponse> GetOpenOrdersAsync(B2B.ServiceSalesOrder.AuthHeader AuthHeader, string[] lst_kunnr, string iv_cmpt_abgru) {
+            B2B.ServiceSalesOrder.GetOpenOrdersRequest inValue = new B2B.ServiceSalesOrder.GetOpenOrdersRequest();
+            inValue.AuthHeader = AuthHeader;
+            inValue.lst_kunnr = lst_kunnr;
+            inValue.iv_cmpt_abgru = iv_cmpt_abgru;
+            return ((B2B.ServiceSalesOrder.WebServiceSalesOrderSoap)(this)).GetOpenOrdersAsync(inValue);
         }
     }
 }

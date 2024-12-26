@@ -1,4 +1,5 @@
-﻿using System;
+﻿using B2B.Helper;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
@@ -58,13 +59,10 @@ namespace B2B.Models
         {
             get
             {
-                CultureInfo info = new CultureInfo("tr-TR");
-                info.NumberFormat.NumberDecimalSeparator = ".";
-
                 double amount = 0;
                 if (!string.IsNullOrEmpty(KWMENG))
                 {
-                    amount = Convert.ToDouble(KWMENG, info);
+                    amount = Convert.ToDouble(KWMENG, CultureHelper.TRCultureInfo);
                     return string.Format("{0:0}", amount);
                 }
                 return amount.ToString();

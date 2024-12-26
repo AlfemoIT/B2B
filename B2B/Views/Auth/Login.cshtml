@@ -17,7 +17,7 @@
     <style>
         body::after {
             content: "";
-            background: url(/img/alfemo/penta-koltuk-tkm.jpg);
+            background: url(/img/alfemo/oasis_small.jpg);
             background-repeat: no-repeat;
             background-size: 100% 100%;
             opacity: 0.5;
@@ -28,12 +28,14 @@
             position: absolute;
             z-index: -1;
         }
+
+        
     </style>
 </head>
 <body>
     <div class="login_box">
         <div class="top_b">
-            <img src="~/alfemo.png" alt="logo.svg (43 KB)" width="170" height="26" style="border-radius:1px">
+            <span>ALFEMO</span>
         </div>
 
         @Html.Raw(ViewBag.Message)
@@ -67,14 +69,18 @@
                     </div>
                 </div>
 
-                <div class="form-group">
-                    <span class="linkform">
+                <div class="form-group" style="display:none">
+                    <span class="linkform forget-password">
                         <a href="#pass_form">Şifremi unutttum</a>
                     </span>
                 </div>
             </div>
 
             <div class="btm_b clearfix">
+                <span style="color: #d55c66; font-size: 12px; position: relative; top: 5px;">
+                    Alfemo BT 2024
+                </span>
+
                 <button class="btn btn-default btn-sm pull-right" type="submit">
                     Giriş
                 </button>

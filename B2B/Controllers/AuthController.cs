@@ -70,17 +70,15 @@ namespace B2B.Controllers
             Session.Clear();
             Session.Abandon();
 
-            //clear authentication cookie
             HttpCookie rFormsCookie = new HttpCookie(FormsAuthentication.FormsCookieName, "");
             rFormsCookie.Expires = DateTime.Now.AddYears(-1);
             Response.Cookies.Add(rFormsCookie);
 
-            //clear session cookie 
             HttpCookie rSessionCookie = new HttpCookie("ASP.NET_SessionId", "");
             rSessionCookie.Expires = DateTime.Now.AddYears(-1);
             Response.Cookies.Add(rSessionCookie);
 
-            return RedirectToAction("Login");
+            return Json(new { success = true }, JsonRequestBehavior.AllowGet);
         }
     }
 }
