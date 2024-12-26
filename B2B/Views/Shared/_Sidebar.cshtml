@@ -1,10 +1,10 @@
-﻿@model B2B.Models.User
+﻿@model List<B2B.Models.CategoryWithPagesDTO>
 
 <a href="javascript:void(0)" class="sidebar_switch on_switch ttip_r" title="Hide Sidebar">Sidebar switch</a>
 
 <div class="sidebar">
     <div class="sidebar_inner_scroll">
-        <div class="sidebar_inner">
+        <div class="sidebar_inner" style="margin-bottom: -92px; min-height: 100%;">
             <form action="#" class="input-group input-group-sm">
                 <input autocomplete="off" name="query" class="search_query form-control input-sm" size="16"
                        placeholder="Search..." type="text">
@@ -25,45 +25,28 @@
                     </div>
                 </div>
 
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <a href="#collapseOne" data-parent="#side_accordion" data-toggle="collapse"
-                           class="accordion-toggle">
-                            <i class="glyphicon glyphicon-list-alt"></i> Satış
-                        </a>
-                    </div>
-                    <div class="accordion-body collapse" id="collapseOne">
-                        <div class="panel-body">
-                            <ul class="nav nav-pills nav-stacked">
-                                <li><a href="sales-order">Siparişlerim</a></li>
-                                <li><a href="free-stock">Stok Listesi</a></li>
-                            </ul>
+                @foreach (var category in Model)
+                {
+                    var categoryID = category.CategoryName.Replace(" ", "_");
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <a href="#@categoryID" data-parent="#side_accordion" data-toggle="collapse"
+                               class="accordion-toggle">
+                                <i class="@category.Icon"></i> @category.CategoryName
+                            </a>
+                        </div>
+                        <div class="accordion-body collapse" id="@categoryID">
+                            <div class="panel-body">
+                                <ul class="nav nav-pills nav-stacked">
+                                    @foreach (var page in category.Pages)
+                                    {
+                                        <li><a href="@page.Url">@page.Name</a></li>
+                                    }
+                                </ul>
+                            </div>
                         </div>
                     </div>
-                </div>
-
-
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <a href="#collapseTwo" data-parent="#side_accordion" data-toggle="collapse"
-                           class="accordion-toggle">
-                            <i class="glyphicon glyphicon-folder-open"></i>  İşlemler
-                        </a>
-                    </div>
-
-                    <div class="accordion-body collapse" id="collapseTwo">
-                        <div class="panel-body">
-                            <ul class="nav nav-pills nav-stacked">
-                                <li><a href="search-document">Montaj Kılavuz Arama</a></li>
-                                <li><a href="product-card">Ürün Tanıtım Kartı</a></li>
-                                <li><a href="price-ticket">Fiyat Etiketi</a></li>
-                                <li><a href="price-list">Fiyat Listesi</a></li>
-                                <li><a href="pictures">Görseller</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
+                }
 
                 <div class="panel panel-default">
                     <div class="panel-heading">
@@ -75,7 +58,7 @@
 
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <a href="Auth/Logout" class="accordion-toggle">
+                        <a href="#" onclick="logout()" class="accordion-toggle">
                             <i class="glyphicon glyphicon-log-out"></i> Çıkış
                         </a>
                     </div>
@@ -85,11 +68,10 @@
             <div class="push"></div>
         </div>
 
-        <div class="sidebar_info" style="display:none">
-            <ul class="list-unstyled">
+        <div class="sidebar_info">
+            <ul class="list-unstyled text-center">
                 <li>
-                    <span class="act act-warning">65</span>
-                    <strong>New comments</strong>
+                    <strong style="color: #c02130c4;">Alfemo BT 2024</strong>
                 </li>
             </ul>
         </div>

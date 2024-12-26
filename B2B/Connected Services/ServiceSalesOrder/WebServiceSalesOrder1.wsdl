@@ -25,6 +25,26 @@
         </s:sequence>
         <s:anyAttribute />
       </s:complexType>
+      <s:element name="GetOpenOrders">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="lst_kunnr" type="tns:ArrayOfString" />
+            <s:element minOccurs="0" maxOccurs="1" name="iv_cmpt_abgru" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfString">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetOpenOrdersResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetOpenOrdersResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
     </s:schema>
   </wsdl:types>
   <wsdl:message name="GetSalesOrderSoapIn">
@@ -36,10 +56,23 @@
   <wsdl:message name="GetSalesOrderAuthHeader">
     <wsdl:part name="AuthHeader" element="tns:AuthHeader" />
   </wsdl:message>
+  <wsdl:message name="GetOpenOrdersSoapIn">
+    <wsdl:part name="parameters" element="tns:GetOpenOrders" />
+  </wsdl:message>
+  <wsdl:message name="GetOpenOrdersSoapOut">
+    <wsdl:part name="parameters" element="tns:GetOpenOrdersResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetOpenOrdersAuthHeader">
+    <wsdl:part name="AuthHeader" element="tns:AuthHeader" />
+  </wsdl:message>
   <wsdl:portType name="WebServiceSalesOrderSoap">
     <wsdl:operation name="GetSalesOrder">
       <wsdl:input message="tns:GetSalesOrderSoapIn" />
       <wsdl:output message="tns:GetSalesOrderSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetOpenOrders">
+      <wsdl:input message="tns:GetOpenOrdersSoapIn" />
+      <wsdl:output message="tns:GetOpenOrdersSoapOut" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="WebServiceSalesOrderSoap" type="tns:WebServiceSalesOrderSoap">
@@ -54,6 +87,16 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="GetOpenOrders">
+      <soap:operation soapAction="http://tempuri.org/GetOpenOrders" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:GetOpenOrdersAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:binding name="WebServiceSalesOrderSoap12" type="tns:WebServiceSalesOrderSoap">
     <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
@@ -62,6 +105,16 @@
       <wsdl:input>
         <soap12:body use="literal" />
         <soap12:header message="tns:GetSalesOrderAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOpenOrders">
+      <soap12:operation soapAction="http://tempuri.org/GetOpenOrders" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:GetOpenOrdersAuthHeader" part="AuthHeader" use="literal" />
       </wsdl:input>
       <wsdl:output>
         <soap12:body use="literal" />

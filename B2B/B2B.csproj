@@ -248,6 +248,11 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Connected Services\ServiceAccount\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Connected Services\ServiceAuth\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -278,6 +283,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Connected Services\ServiceShipment\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Connected Services\ServiceStock\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -288,6 +298,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\AccountStatementController.cs" />
     <Compile Include="Controllers\AuthController.cs" />
     <Compile Include="Controllers\DocumentController.cs" />
     <Compile Include="Controllers\HelpController.cs" />
@@ -298,11 +309,15 @@
     <Compile Include="Controllers\PriceTicketController.cs" />
     <Compile Include="Controllers\ProductCardController.cs" />
     <Compile Include="Controllers\SalesOrderController.cs" />
+    <Compile Include="Controllers\SalesOrderDetailController.cs" />
+    <Compile Include="Controllers\ShipmentController.cs" />
     <Compile Include="Controllers\StockController.cs" />
+    <Compile Include="Controllers\StoreController.cs" />
     <Compile Include="Dal\B2bContext.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helper\CultureHelper.cs" />
     <Compile Include="Migrations\202407291242126_InitialCreate.cs" />
     <Compile Include="Migrations\202407291242126_InitialCreate.designer.cs">
       <DependentUpon>202407291242126_InitialCreate.cs</DependentUpon>
@@ -331,7 +346,56 @@
     <Compile Include="Migrations\202407301153028_AddColumnRegistration.designer.cs">
       <DependentUpon>202407301153028_AddColumnRegistration.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202410301049478_AddSalesOfficeIDToUser.cs" />
+    <Compile Include="Migrations\202410301049478_AddSalesOfficeIDToUser.designer.cs">
+      <DependentUpon>202410301049478_AddSalesOfficeIDToUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202412110555395_IsCentralColumn.cs" />
+    <Compile Include="Migrations\202412110555395_IsCentralColumn.designer.cs">
+      <DependentUpon>202412110555395_IsCentralColumn.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202412121407465_AddPageTable.cs" />
+    <Compile Include="Migrations\202412121407465_AddPageTable.designer.cs">
+      <DependentUpon>202412121407465_AddPageTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202412140709549_AddCategoryToPage.cs" />
+    <Compile Include="Migrations\202412140709549_AddCategoryToPage.designer.cs">
+      <DependentUpon>202412140709549_AddCategoryToPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202412140845191_AddIconToPage.cs" />
+    <Compile Include="Migrations\202412140845191_AddIconToPage.designer.cs">
+      <DependentUpon>202412140845191_AddIconToPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202412140901471_AddPageCategory.cs" />
+    <Compile Include="Migrations\202412140901471_AddPageCategory.designer.cs">
+      <DependentUpon>202412140901471_AddPageCategory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202412140904245_RemoveCategoryToPage.cs" />
+    <Compile Include="Migrations\202412140904245_RemoveCategoryToPage.designer.cs">
+      <DependentUpon>202412140904245_RemoveCategoryToPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202412140920210_ChangeFKCatInPage.cs" />
+    <Compile Include="Migrations\202412140920210_ChangeFKCatInPage.designer.cs">
+      <DependentUpon>202412140920210_ChangeFKCatInPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202412140923526_FixedToPage.cs" />
+    <Compile Include="Migrations\202412140923526_FixedToPage.designer.cs">
+      <DependentUpon>202412140923526_FixedToPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202412140927516_AddIndexToCategory.cs" />
+    <Compile Include="Migrations\202412140927516_AddIndexToCategory.designer.cs">
+      <DependentUpon>202412140927516_AddIndexToCategory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202412170814171_AddStorageTable.cs" />
+    <Compile Include="Migrations\202412170814171_AddStorageTable.designer.cs">
+      <DependentUpon>202412170814171_AddStorageTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202412170818432_AddCodeToStorage.cs" />
+    <Compile Include="Migrations\202412170818432_AddCodeToStorage.designer.cs">
+      <DependentUpon>202412170818432_AddCodeToStorage.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Chart\SalesOrderChart.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\CustomerAssignment.cs" />
     <Compile Include="Models\CustomerGroup.cs" />
@@ -340,9 +404,15 @@
     <Compile Include="Models\KONA.cs" />
     <Compile Include="Models\MARA.cs" />
     <Compile Include="Models\MATERIAL_GRUB.cs" />
+    <Compile Include="Models\Page.cs" />
+    <Compile Include="Models\PageAssignment.cs" />
+    <Compile Include="Models\PageCategory.cs" />
     <Compile Include="Models\PRODUCT_PRICE.cs" />
     <Compile Include="Models\Role.cs" />
     <Compile Include="Models\SalesOffice.cs" />
+    <Compile Include="Models\CategoryWithPagesDTO.cs" />
+    <Compile Include="Models\Storage.cs" />
+    <Compile Include="Models\StorageAssignment.cs" />
     <Compile Include="Models\Tree\Child.cs" />
     <Compile Include="Models\Tree\Root.cs" />
     <Compile Include="Models\Tree\State.cs" />
@@ -354,9 +424,14 @@
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\UserGroup.cs" />
     <Compile Include="Models\VBAP.cs" />
+    <Compile Include="Models\ViewModels\CustomerViewModel.cs" />
     <Compile Include="Models\ZALF_SUTUNAD_T.cs" />
     <Compile Include="Models\ZALF_S_FIYAT_LIST.cs" />
     <Compile Include="Models\ZALF_S_PAKET.cs" />
+    <Compile Include="Models\ZAL_S_CARI.cs" />
+    <Compile Include="Models\ZAL_S_NAKLIYE.cs" />
+    <Compile Include="Models\ZAL_S_SIPARIS_HEADER.cs" />
+    <Compile Include="Models\ZAL_S_SIPARIS_ROW.cs" />
     <Compile Include="Models\ZSD_S_FIY_TICKET.cs" />
     <Compile Include="Models\Z_FILE.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -369,9 +444,20 @@
   <ItemGroup>
     <Content Include="alfemo-icon.jpeg" />
     <Content Include="alfemo.png" />
+    <Content Include="Connected Services\ServiceAccount\B2B.ServiceAccount.AccountStatementResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <None Include="Connected Services\ServiceAccount\configuration91.svcinfo" />
+    <None Include="Connected Services\ServiceAccount\configuration.svcinfo" />
+    <None Include="Connected Services\ServiceAccount\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Connected Services\ServiceAccount\WebServiceCari1.disco" />
     <Content Include="Connected Services\ServiceAuth\B2B.ServiceAuth.AuthUserResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
+    <None Include="Connected Services\ServiceAccount\WebServiceCari1.wsdl" />
     <None Include="Connected Services\ServiceAuth\configuration91.svcinfo" />
     <None Include="Connected Services\ServiceAuth\configuration.svcinfo" />
     <None Include="Connected Services\ServiceAuth\Reference.svcmap">
@@ -451,6 +537,9 @@
     <Content Include="Connected Services\ServiceSalesOrder\B2B.ServiceSalesOrder.GetSalesOrderResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
+    <Content Include="Connected Services\ServiceSalesOrder\B2B.ServiceSalesOrder.GetOpenOrdersResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
     <None Include="Connected Services\ServiceSalesOrder\configuration91.svcinfo" />
     <None Include="Connected Services\ServiceSalesOrder\configuration.svcinfo" />
     <None Include="Connected Services\ServiceSalesOrder\Reference.svcmap">
@@ -458,9 +547,27 @@
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
     <None Include="Connected Services\ServiceSalesOrder\WebServiceSalesOrder1.disco" />
+    <None Include="Connected Services\ServiceSalesOrder\WebServiceSalesOrder1.wsdl" />
+    <Content Include="Connected Services\ServiceShipment\B2B.ServiceShipment.GetShipmentDetailsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\ServiceShipment\B2B.ServiceShipment.GetShipmentsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <None Include="Connected Services\ServiceShipment\WebServiceShipment.disco" />
+    <None Include="Connected Services\ServiceShipment\configuration91.svcinfo" />
+    <None Include="Connected Services\ServiceShipment\configuration.svcinfo" />
+    <None Include="Connected Services\ServiceShipment\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
     <Content Include="Connected Services\ServiceStock\B2B.ServiceStock.GetObservedStockResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
+    <Content Include="Connected Services\ServiceStock\B2B.ServiceStock.GetStoreObservedStockResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <None Include="Connected Services\ServiceShipment\WebServiceShipment.wsdl" />
     <None Include="Connected Services\ServiceStock\configuration91.svcinfo" />
     <None Include="Connected Services\ServiceStock\configuration.svcinfo" />
     <None Include="Connected Services\ServiceStock\Reference.svcmap">
@@ -471,7 +578,6 @@
     <Content Include="Connected Services\ServiceTicket\B2B.ServiceTicket.GetPriceTicketResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
-    <None Include="Connected Services\ServiceSalesOrder\WebServiceSalesOrder1.wsdl" />
     <None Include="Connected Services\ServiceStock\WebServiceStock1.wsdl" />
     <None Include="Connected Services\ServiceTicket\configuration91.svcinfo" />
     <None Include="Connected Services\ServiceTicket\configuration.svcinfo" />
@@ -519,8 +625,10 @@
     <Content Include="Content\dynatree\src\skin\ui.dynatree.css" />
     <Content Include="Content\dynatree\src\skin\vline.gif" />
     <Content Include="Content\font-awesome.min.css" />
+    <Content Include="Content\fullcalendar\fullcalendar_gebo.css" />
     <Content Include="Content\google-code-prettify\prettify.css" />
     <Content Include="Content\gtip2\jquery.qtip.min.css" />
+    <Content Include="Content\hint_css\hint.min.css" />
     <Content Include="Content\Images\ChevronOverlay.png" />
     <Content Include="Content\jBreadcrumbs\BreadCrumb.css" />
     <Content Include="Content\jBreadcrumbs\Images\ChevronOverlay.png" />
@@ -534,6 +642,7 @@
     <Content Include="Content\jquery-ui\external\globalize.js" />
     <Content Include="Content\jquery-ui\jquery-ui-1.10.0.custom.min.js" />
     <Content Include="Content\select2.min.css" />
+    <Content Include="Content\shipment.css" />
     <Content Include="Content\sticky\sticky.css" />
     <Content Include="Content\style.css" />
     <Content Include="Content\tabular\tabulator.css" />
@@ -560,18 +669,39 @@
     <Content Include="Content\tabular\tabulator_site.min.css" />
     <Content Include="Content\tabular\tabulator_site_dark.css" />
     <Content Include="Content\tabular\tabulator_site_dark.min.css" />
+    <Content Include="Content\tamarillo.css" />
     <Content Include="favicon.ico" />
     <Content Include="favicon.png" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="img\alfemo\tiamo-small-koltuk-tkm.jpg" />
+    <Content Include="img\alfemo\oasis_small.jpg" />
+    <Content Include="img\alfemo\yemek_odasi_small.jpg" />
+    <Content Include="img\cell_phone.png" />
+    <Content Include="img\delivered.png" />
+    <Content Include="img\driver.png" />
+    <Content Include="img\excel.png" />
+    <Content Include="img\excel_office.png" />
+    <Content Include="img\green_bar.png" />
+    <Content Include="img\mexcel.png" />
+    <Content Include="img\mexcel_25.png" />
+    <Content Include="img\microsoft_excel.png" />
+    <Content Include="img\ok.png" />
+    <Content Include="img\ok_20px.png" />
     <Content Include="img\pdf-icon.png" />
+    <Content Include="img\realtime.png" />
+    <Content Include="img\realtime_2.png" />
+    <Content Include="img\realtime_25.png" />
+    <Content Include="img\red_bar.png" />
+    <Content Include="img\red_bar_v2.png" />
+    <Content Include="img\schedule.png" />
+    <Content Include="img\shipped_office.png" />
+    <Content Include="img\truck.png" />
+    <Content Include="img\turkish_lira.png" />
+    <Content Include="img\user_avatar1.jpg" />
     <Content Include="img\xls.png" />
     <Content Include="img\acc_icons.png" />
     <Content Include="img\adt-icons.png" />
-    <Content Include="img\alfemo\penta-koltuk-tkm.jpg" />
-    <Content Include="img\alfemo\tiamo-koltuk-tkm.jpg" />
     <Content Include="img\bg_a.png" />
     <Content Include="img\bg_b.png" />
     <Content Include="img\bg_c.png" />
@@ -845,6 +975,10 @@
     <Content Include="Views\Help\Index.cshtml" />
     <Content Include="Views\Stock\Index.cshtml" />
     <Content Include="Content\tr.json" />
+    <Content Include="Views\Shipment\Index.cshtml" />
+    <Content Include="Views\SalesOrderDetail\Index.cshtml" />
+    <Content Include="Views\AccountStatement\Index.cshtml" />
+    <Content Include="Views\Store\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -866,12 +1000,14 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
+    <WCFMetadataStorage Include="Connected Services\ServiceAccount\" />
     <WCFMetadataStorage Include="Connected Services\ServiceAuth\" />
     <WCFMetadataStorage Include="Connected Services\ServiceColumn\" />
     <WCFMetadataStorage Include="Connected Services\ServiceMalzeme\" />
     <WCFMetadataStorage Include="Connected Services\ServicePrice\" />
     <WCFMetadataStorage Include="Connected Services\ServiceQdms\" />
     <WCFMetadataStorage Include="Connected Services\ServiceSalesOrder\" />
+    <WCFMetadataStorage Include="Connected Services\ServiceShipment\" />
     <WCFMetadataStorage Include="Connected Services\ServiceStock\" />
     <WCFMetadataStorage Include="Connected Services\ServiceTicket\" />
   </ItemGroup>
@@ -896,6 +1032,42 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202407301153028_AddColumnRegistration.resx">
       <DependentUpon>202407301153028_AddColumnRegistration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202410301049478_AddSalesOfficeIDToUser.resx">
+      <DependentUpon>202410301049478_AddSalesOfficeIDToUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202412110555395_IsCentralColumn.resx">
+      <DependentUpon>202412110555395_IsCentralColumn.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202412121407465_AddPageTable.resx">
+      <DependentUpon>202412121407465_AddPageTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202412140709549_AddCategoryToPage.resx">
+      <DependentUpon>202412140709549_AddCategoryToPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202412140845191_AddIconToPage.resx">
+      <DependentUpon>202412140845191_AddIconToPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202412140901471_AddPageCategory.resx">
+      <DependentUpon>202412140901471_AddPageCategory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202412140904245_RemoveCategoryToPage.resx">
+      <DependentUpon>202412140904245_RemoveCategoryToPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202412140920210_ChangeFKCatInPage.resx">
+      <DependentUpon>202412140920210_ChangeFKCatInPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202412140923526_FixedToPage.resx">
+      <DependentUpon>202412140923526_FixedToPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202412140927516_AddIndexToCategory.resx">
+      <DependentUpon>202412140927516_AddIndexToCategory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202412170814171_AddStorageTable.resx">
+      <DependentUpon>202412170814171_AddStorageTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202412170818432_AddCodeToStorage.resx">
+      <DependentUpon>202412170818432_AddCodeToStorage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Resource.en-US.resx" />
     <EmbeddedResource Include="Resource.resx">

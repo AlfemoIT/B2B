@@ -16,6 +16,7 @@ namespace B2B.Models
         public string TaxNo { get; set; }
         public string Phone1 { get; set; }
         public string Phone2 { get; set; }
+        public bool IsCentral { get; set; }
 
         [JsonIgnore]
         public virtual SalesOffice SalesOffice { get; set; }
@@ -25,5 +26,8 @@ namespace B2B.Models
 
         [JsonIgnore]
         public ICollection<CustomerAssignment> CustomerAssignments { get; set; }
+
+        [JsonIgnore]
+        public ICollection<StorageAssignment> StorageAssignments { get; set; }
     }
 }

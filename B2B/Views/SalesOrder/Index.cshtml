@@ -3,7 +3,31 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@model B2B.Models.KNA1
+@model B2B.Models.User
+
+@{
+    TempData.Keep("Orders");
+}
+
+<style>
+    table.table-striped > tbody > tr:hover {
+        cursor: pointer;
+    }
+
+    .resizable-container {
+        border-bottom: 1px solid #ddd;
+        padding: 10px;
+        overflow: hidden;
+        resize: vertical; /* Makes the div resizable */
+        display: flex;
+        flex-direction: column;
+    }
+
+    .dataTables_wrapper {
+        flex: 1;
+        overflow: auto;
+    }
+</style>
 
 <div id="jCrumbs" class="breadCrumb module">
     <ul>
@@ -13,7 +37,7 @@
             </a>
         </li>
         <li style="background: none;">
-            <span style="width: 40px;"><a href="#" style="width: 83px;">Satış</a></span>
+            <span style="width: 40px;"><a href="#" style="width: 83px;">Rapor</a></span>
             <div class="chevronOverlay" style="display: block;"></div>
         </li>
         <li>
@@ -23,33 +47,105 @@
 </div>
 
 <div class="row">
+    @*<button id="btn-execute" class="btn btn-default btn-etiket float-left heading" style="position: relative; left: 13px;">
+            <i class="fa fa-check"></i>
+            Yürüt
+        </button>*@
+
     <div class="col-sm-12 col-md-12">
-        <h3 class="heading">@Model.SORTL Siparişleri</h3>
-        <table class="table table-striped table-bordered dTableR" id="tblSales" style="width:100%">
-            <thead>
-                <tr>
-                    <th>Sipariş Tarihi</th>
-                    <th style="text-align:center">Sipariş No</th>
-                    <th>Müşteri</th>
-                    <th>Ürün</th>
-                    <th>Ürün Tanımı</th>
-                    <th>Ürün Uzun Tanımı</th>
-                    <th>Miktar</th>
-                    <th>Birim</th>
-                    <th>Teslimat Tarihi</th>
-                    <th>Garanti/Montaj Kılavuzu</th>
-                </tr>
-            </thead>
-            <tbody>
-            </tbody>
-        </table>
+        <h3 class="heading">
+            @*<button id="download-xlsx" class="btn btn-default btn-etiket" href="#" style="position: relative; bottom: 41px;">
+                    <img src="~/img/xls.png" />
+                    <span class="font-size-13">Excel'e Aktar</span>
+                </button>*@
+        </h3>
+    </div>
+
+    <div class="col-sm-12 col-md-12">
+        <div class="col-sm-6">
+            <form>
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label" style="padding-left: 8px;">Sipariş Durumu :</label>
+                    <div class="col-sm-3">
+                        <select id="drpOrderState" class="form-control js-example-basic-single">
+                            <option value="ACIK">ACIK</option>
+                            <option value="KAPALI">KAPALI</option>
+                            <option value="TUMU">TUMU</option>
+                        </select>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div class="col-sm-6">
+            <button id="download-xlsx" class="btn btn-default btn-excel" href="#">
+                <img src="~/img/excel.png" width="20%" />
+                <span class="font-size-12">Excel'e Aktar</span>
+            </button>
+        </div>
+    </div>
+
+    <div class="col-sm-12" style="margin-top:40px">
+        <div class="heading">
+        </div>
+    </div>
+
+    <div class="col-sm-12 col-md-12">
+        <div id="resizable1" class="resizable-container" style="height: 45%;">
+            <table class="table table-striped table-bordered dTableR" id="tblSales" style="width:100%">
+                <thead>
+                    <tr>
+                        <th class="center">Sipariş Durumu</th>
+                        <th class="center">Sipariş Durumu</th>
+                        <th class="center">Sipariş Tarihi</th>
+                        <th class="center">Teslim Tarihi</th>
+                        <th class="center">Sipariş No</th>
+                        <th class="center">Cari</th>
+                        <th class="center">Müşteri</th>
+                        <th class="center">Tutar</th>
+                        <th class="center">Para Birimi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+
+        <div id="resizable2" class="resizable-container" style="height: 45%;">
+            <table class="table table-striped table-bordered dTableR" id="tblSaleRows" style="width:100%">
+                <thead>
+                    <tr>
+                        <th class="center">Sipariş No</th>
+                        <th class="center">Kalem</th>
+                        <th class="center">Malzeme</th>
+                        <th class="center">Tanım</th>
+                        <th class="center">Uzun Tanım</th>
+                        <th class="center">Miktar</th>
+                        <th class="center">Teslim Edildi</th>
+                        <th class="center">Sevk Edildi</th>
+                        <th class="center">Hazır</th>
+                        <th class="center">Hazır Hacim (M3)</th>
+                        <th class="center">Üretimde</th>
+                        <th class="center">Hafta</th>
+                        <th class="center">Tutar</th>
+                        <th class="center">Para Birimi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
 
 @section Scripts{
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script type="text/javascript">
         $(function () {
-            $('#tblSales').DataTable({
+            $('.js-example-basic-single').select2();
+            $("#download-xlsx").prop("disabled", true);
+
+            var table = $('#tblSales').DataTable({
                 language: {
                      url: "@Url.Content("~/Content/tr.json")",
                 },
@@ -58,36 +154,170 @@
                     url: '@Url.Action("GetData")',
                     type: "POST",
                     dataType: 'json',
+                    data: function (d) {
+                        var customer = JSON.parse(sessionStorage.getItem("Customer"));
+                        d.iv_kunnr = customer.SapCode;
+                        d.iv_cmpt_abgru = $("#drpOrderState").val()
+                    },
                     dataSrc: function (json) {
                         return json.data;
                     }
                 },
+                retrieve: true,
                 autoWidth: false,
-                displayLength: 12,
+                displayLength: 5,
                 columns: [
-                    { data: 'CMPT_AUDAT' }, //order date
-                    { data: 'CMPT_VBELN' },
-                    { data:'ZZMUSTERI_AD'},
-                    { data: 'MATNR' },
-                    { data: 'ARKTX' },
-                    { data: 'ZCL_MAKTX' },
-                    { data: 'CMPT_KWMENG'},
-                    { data: 'VRKME' },
-                    { data: 'CMPT_CMTD_DELIV_DATE' },
                     {
-                        "mData": null,
-                        "bSortable": false,
-                        "mRender": function (data, type) {
-                            return '<a href="/SalesOrder/GetMontagePdf?matnr=' + data.MATNR +'" class="btn back-color-theme btn-grid">' +
-                                      '<i class="fa fa-download btn-middle-icon"></i>' +
-                                   '</a > ';
+                        width: "50px",
+                        render: function (data, type, row) {
+                            if (row.CMPT_ABGRU == "ACIK") {
+                                return `<i class="splashy-information"></i>`;
+                            }
+                            else {
+                                return `<i class="splashy-check"></i>`;
+                            }
                         }
-                    }
+                    },
+                    { data: 'CMPT_ABGRU', width: "50px"},
+                    { data: 'CMPT_AUDAT' }, //order date
+                    { data: 'CMPT_DELIV_DATE' }, //order date
+                    { data: 'CMPT_VBELN' },
+                    { data: 'KUNAGTANIM' },
+                    { data: 'ZZMUSTERI_AD' },
+                    {
+                        data: 'CMPT_TOTAL_ORDER_PRICE',
+                        render: function (data, type, row) {
+                            if (type === 'display') {
+                                return new Intl.NumberFormat('tr-TR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(data);
+                            }
+                            return data;
+                        }
+                    },
+                    { data: 'WAERK', width: "50px"}
                 ],
                 columnDefs: [
-                    { className: 'dt-center', targets: [0,1, 7, 8, 9] }
-                ]
+                    { className: 'dt-center', targets: [0, 1, 2, 3, 4, 8] }
+                ],
+                initComplete: function (settings, json) {
+                    $("#btn-execute").prop("disabled", false);
+                }
+           });
+
+            table.on('xhr', function (e, settings, json, xhr) {
+                $("#btn-execute").prop("disabled", false);
+                $("#download-xlsx").prop("disabled", false);
+
+                //$('#drpOrderState option:first').prop('selected', true);
+                //$('#drpOrderState').trigger('change');
+
+                //$('#drpOrderState').prop('disabled', false)
+                //                  .trigger('change.select2');
             });
+
+             var tableRow = $('#tblSaleRows').DataTable({
+                language: {
+                     url: "@Url.Content("~/Content/tr.json")",
+                },
+                retrieve: true,
+                autoWidth: false,
+                displayLength: 5,
+                columns: [
+                    { data: 'CMPT_VBELN', width: "40px" },
+                    { data: 'CMPT_POSNR', width: "30px" },
+                    { data: 'MATNR' },
+                    { data: 'MAKTX' },
+                    { data: 'LONG_MAKTX' },
+                    {
+                        data: 'CMPT_KWMENG', width: "30px",
+                        render: function (data, type, row) {
+                            if (type === 'display') {
+                                return new Intl.NumberFormat('tr-TR', { minimumFractionDigits: 0, maximumFractionDigits: 0 }).format(data);
+                            }
+                            return data;
+                        }
+                    },
+                    { data: 'CMPT_TOTAL_FKIMG', width: "40px" },
+                    { data: 'CMPT_TOTAL_LFIMG', width: "40px", },
+                    { data: 'CMPT_TOTAL_BMENG', width: "40px", },
+                    { data: 'CMPT_READY_VOLUM', width: "50px", },
+                    { data: 'CMPT_TOTAL_IN_PRODUCTION', width: "40px"},
+                    { data: 'ZZURTM_WEEK_DESC', width: "40px" },
+                    {
+                        data: 'CMPT_TOTAL_ORDER_PRICE',
+                        render: function (data, type, row) {
+                            if (type === 'display') {
+                                return new Intl.NumberFormat('tr-TR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(data);
+                            }
+                            return data;
+                        },
+                        width:"100px"
+                    },
+                    {
+                        data: 'WAERK', width: "50px",
+                        render: function (data, type, row) {
+                            if (row.WAERK == "TRY") {
+                                return "TL";
+                            }
+                            return data;
+                        }
+                    }
+                 ],
+                 columnDefs: [
+                     { className: 'dt-center', targets: [0, 1, 5,6, 7, 8, 9,10, 11, 13] }
+                 ]
+            });
+
+            var lastClickedRow = null;
+            $('#tblSales tbody').on('dblclick', 'tr', function () {
+                if (lastClickedRow) {
+                    $(lastClickedRow).find('td').css('background', '');
+                    $(lastClickedRow).find('td').css('color', '');
+                }
+
+                var currentColor = $(this).find('td').css('background-color');
+                if (currentColor === 'rgb(187 36 50 / 80%)') {
+                    $(this).find('td').css('background', '');
+                    $(this).find('td').css('color', '');
+                } else {
+                    $(this).find('td').css('background', 'rgb(187 36 50 / 80%)');
+                    $(this).find('td').css('color', 'rgb(255, 255, 255)');
+                }
+                lastClickedRow = this;
+
+                tableRow.clear().draw();
+                tableRow.ajax.url('/SalesOrder/GetDataRow?siparis=' + table.row(this).data().VBELN).load();
+            });
+
+            $("#btn-execute").click(function () {
+                table.clear().draw();
+                tableRow.clear().draw();
+
+                disableElements();
+                table.ajax.reload(null, false);
+            });
+
+            $("#drpOrderState").on('change', function (e) {
+                const selectedValue = $(this).val();
+
+                table.clear().draw();
+                tableRow.clear().draw();
+
+                disableElements();
+                table.ajax.reload(null, false);
+            });
+
+            $("#resizable1").resizable({
+                handles: "s", // South (bottom) handle only
+                minHeight: 200,
+                resize: function (event, ui) {
+                    $('#tblSales').DataTable().columns.adjust();
+                }
+            });
+
+            function disableElements() {
+                $("#btn-execute").prop("disabled", true);
+                $("#download-xlsx").prop("disabled", true);
+            }
         });
     </script>
 }

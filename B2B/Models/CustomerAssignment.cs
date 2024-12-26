@@ -9,7 +9,6 @@ namespace B2B.Models
     public class CustomerAssignment
     {
         public int ID { get; set; }
-
         public int UserID { get; set; }
         public int CustomerID { get; set; }
 

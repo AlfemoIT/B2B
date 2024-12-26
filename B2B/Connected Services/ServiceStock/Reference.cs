@@ -22,10 +22,18 @@ namespace B2B.ServiceStock {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetObservedStock", ReplyAction="*")]
         System.Threading.Tasks.Task<B2B.ServiceStock.GetObservedStockResponse> GetObservedStockAsync(B2B.ServiceStock.GetObservedStockRequest request);
+        
+        // CODEGEN: Generating message contract since message GetStoreObservedStockRequest has headers
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetStoreObservedStock", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        B2B.ServiceStock.GetStoreObservedStockResponse GetStoreObservedStock(B2B.ServiceStock.GetStoreObservedStockRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetStoreObservedStock", ReplyAction="*")]
+        System.Threading.Tasks.Task<B2B.ServiceStock.GetStoreObservedStockResponse> GetStoreObservedStockAsync(B2B.ServiceStock.GetStoreObservedStockRequest request);
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9037.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9032.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -134,6 +142,56 @@ namespace B2B.ServiceStock {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="GetStoreObservedStock", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
+    public partial class GetStoreObservedStockRequest {
+        
+        [System.ServiceModel.MessageHeaderAttribute(Namespace="http://tempuri.org/")]
+        public B2B.ServiceStock.AuthHeader AuthHeader;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
+        public string iv_lgort;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=1)]
+        public string iv_mvgr2;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=2)]
+        public string iv_mvgr3;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=3)]
+        public string iv_mvgr4;
+        
+        public GetStoreObservedStockRequest() {
+        }
+        
+        public GetStoreObservedStockRequest(B2B.ServiceStock.AuthHeader AuthHeader, string iv_lgort, string iv_mvgr2, string iv_mvgr3, string iv_mvgr4) {
+            this.AuthHeader = AuthHeader;
+            this.iv_lgort = iv_lgort;
+            this.iv_mvgr2 = iv_mvgr2;
+            this.iv_mvgr3 = iv_mvgr3;
+            this.iv_mvgr4 = iv_mvgr4;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="GetStoreObservedStockResponse", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
+    public partial class GetStoreObservedStockResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
+        public string GetStoreObservedStockResult;
+        
+        public GetStoreObservedStockResponse() {
+        }
+        
+        public GetStoreObservedStockResponse(string GetStoreObservedStockResult) {
+            this.GetStoreObservedStockResult = GetStoreObservedStockResult;
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public interface WebServiceStockSoapChannel : B2B.ServiceStock.WebServiceStockSoap, System.ServiceModel.IClientChannel {
     }
@@ -190,6 +248,37 @@ namespace B2B.ServiceStock {
             inValue.iv_mvgr3 = iv_mvgr3;
             inValue.iv_mvgr4 = iv_mvgr4;
             return ((B2B.ServiceStock.WebServiceStockSoap)(this)).GetObservedStockAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        B2B.ServiceStock.GetStoreObservedStockResponse B2B.ServiceStock.WebServiceStockSoap.GetStoreObservedStock(B2B.ServiceStock.GetStoreObservedStockRequest request) {
+            return base.Channel.GetStoreObservedStock(request);
+        }
+        
+        public string GetStoreObservedStock(B2B.ServiceStock.AuthHeader AuthHeader, string iv_lgort, string iv_mvgr2, string iv_mvgr3, string iv_mvgr4) {
+            B2B.ServiceStock.GetStoreObservedStockRequest inValue = new B2B.ServiceStock.GetStoreObservedStockRequest();
+            inValue.AuthHeader = AuthHeader;
+            inValue.iv_lgort = iv_lgort;
+            inValue.iv_mvgr2 = iv_mvgr2;
+            inValue.iv_mvgr3 = iv_mvgr3;
+            inValue.iv_mvgr4 = iv_mvgr4;
+            B2B.ServiceStock.GetStoreObservedStockResponse retVal = ((B2B.ServiceStock.WebServiceStockSoap)(this)).GetStoreObservedStock(inValue);
+            return retVal.GetStoreObservedStockResult;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<B2B.ServiceStock.GetStoreObservedStockResponse> B2B.ServiceStock.WebServiceStockSoap.GetStoreObservedStockAsync(B2B.ServiceStock.GetStoreObservedStockRequest request) {
+            return base.Channel.GetStoreObservedStockAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<B2B.ServiceStock.GetStoreObservedStockResponse> GetStoreObservedStockAsync(B2B.ServiceStock.AuthHeader AuthHeader, string iv_lgort, string iv_mvgr2, string iv_mvgr3, string iv_mvgr4) {
+            B2B.ServiceStock.GetStoreObservedStockRequest inValue = new B2B.ServiceStock.GetStoreObservedStockRequest();
+            inValue.AuthHeader = AuthHeader;
+            inValue.iv_lgort = iv_lgort;
+            inValue.iv_mvgr2 = iv_mvgr2;
+            inValue.iv_mvgr3 = iv_mvgr3;
+            inValue.iv_mvgr4 = iv_mvgr4;
+            return ((B2B.ServiceStock.WebServiceStockSoap)(this)).GetStoreObservedStockAsync(inValue);
         }
     }
 }
