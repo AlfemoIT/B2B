@@ -36,8 +36,9 @@ namespace B2B.Controllers
                                                {
                                                    Id = p.ID,
                                                    Name = p.Name,
-                                                   Url = p.Url
-                                               }).ToList()
+                                                   Url = p.Url,
+                                                   Index = p.Index
+                                               }).OrderBy(x => x.Index).ToList()
                                            }).OrderBy(x => x.Index)
                                              .ToList();
                 return PartialView(categoriesWithPages);

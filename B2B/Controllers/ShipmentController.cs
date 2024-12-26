@@ -53,7 +53,9 @@ namespace B2B.Controllers
                     TempData["Shipments"] = shipments;
                 }
             }
-            var result = shipments.OrderByDescending(x => x.CMPT_N_ERDAT_DATE)
+
+            var cmpt_date = DateTime.Now.Date.AddDays(-10);
+            var result = shipments.Where(x => x.CMPT_N_ERDAT_DATE > cmpt_date).OrderByDescending(x => x.CMPT_N_ERDAT_DATE)
             .Select(x => new
             {
                 id = x.CMPT_TKNUM,

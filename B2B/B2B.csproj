@@ -675,6 +675,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="img\alfemo\oasis_small.jpg" />
     <Content Include="img\alfemo\yemek_odasi_small.jpg" />
     <Content Include="img\cell_phone.png" />
     <Content Include="img\delivered.png" />
@@ -682,12 +683,15 @@
     <Content Include="img\excel.png" />
     <Content Include="img\excel_office.png" />
     <Content Include="img\green_bar.png" />
-    <Content Include="img\microsoft_excel_1.png" />
+    <Content Include="img\mexcel.png" />
+    <Content Include="img\mexcel_25.png" />
     <Content Include="img\microsoft_excel.png" />
     <Content Include="img\ok.png" />
     <Content Include="img\ok_20px.png" />
     <Content Include="img\pdf-icon.png" />
     <Content Include="img\realtime.png" />
+    <Content Include="img\realtime_2.png" />
+    <Content Include="img\realtime_25.png" />
     <Content Include="img\red_bar.png" />
     <Content Include="img\red_bar_v2.png" />
     <Content Include="img\schedule.png" />
