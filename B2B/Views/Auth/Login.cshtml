@@ -8,7 +8,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Alfemo</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <link href="~/Content/blue.css" rel="stylesheet" />
     <link href="~/Content/gtip2/jquery.qtip.min.css" rel="stylesheet" />
     <link href="~/Content/style.css" rel="stylesheet" />
@@ -27,6 +27,34 @@
             right: 0;
             position: absolute;
             z-index: -1;
+        }
+
+        .input-sm {
+            height: 33px;
+            padding: 5px 10px;
+            font-size: 12px;
+            line-height: 1.5;
+            border-radius: 3px;
+        }
+
+        .form-group {
+            margin-bottom: 8px;
+        }
+
+        .login_page .top_b {
+            height: 47px;
+            padding: 1px 20px;
+        }
+
+        .login_page .top_b {
+            background: #bd2331;
+            color: white;
+            font-size: 19px;
+        }
+
+        .login_page .login_box {
+            top: 24%;
+            box-shadow: 0 0 6px rgb(0 0 0 / 70%);
         }
     </style>
 </head>
@@ -50,11 +78,11 @@
                                type="text"
                                id="RegistrationNo"
                                name="RegistrationNo"
-                               placeholder="Kullanıcı" />
+                               placeholder="Kullanıcı Adı" />
                     </div>
                 </div>
 
-                <div class="form-group">
+                <div class="form-group" style="margin-bottom:8px">
                     <div class="input-group">
                         <span class="input-group-addon input-sm">
                             <i class="glyphicon glyphicon-lock"></i>
@@ -62,13 +90,38 @@
                         <input class="form-control input-sm"
                                type="password"
                                id="Password" name="Password"
-                               placeholder="********"
+                               placeholder="Şifre"
                                autocomplete="off" />
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <img src="@Url.Action("Login", "Captcha")" alt="CAPTCHA Image" />
+                    <div class="input-group">
+                        <span class="input-group-addon input-sm"
+                              style="border-right: 1px solid #ccc;cursor:pointer"
+                              id="RefreshCaptcha">
+                            <i class="glyphicon glyphicon-refresh"></i>
+                        </span>
+                        <img id="ImgCaptcha" src="@Url.Action("GenerateCaptcha", "Auth")"
+                             alt="CAPTCHA"
+                             class="form-control"
+                             style="width:50%;height:40px;" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon input-sm"
+                              style="border-right: 1px solid #ccc;cursor:pointer"
+                              id="RefreshCaptcha">
+                            <i class="glyphicon glyphicon-qrcode"></i>
+                        </span>
+                        <input class="form-control input-sm"
+                               type="text"
+                               id="Captcha" name="Captcha"
+                               autocomplete="off"
+                               placeholder="Doğrulama Kodu" />
+                    </div>
                 </div>
 
                 <div class="form-group" style="display:none">
@@ -98,6 +151,10 @@
         $(document).ready(function () {
             $('#TELF1').usPhoneFormat({
                 format: '(xxx) xxx-xxxx',
+            });
+
+            $('#RefreshCaptcha').on('click', function () {
+                document.getElementById("ImgCaptcha").src = '@Url.Action("GenerateCaptcha", "Auth")' + '?t=' + new Date().getTime();
             });
         });
 
