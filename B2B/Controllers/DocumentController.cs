@@ -10,6 +10,8 @@ namespace B2B.Controllers
 {
     public class DocumentController : Controller
     {
+        const string GUARANTI_KEY = "KYS-ELK01-L002-L002";
+
         [Authorize]
         public ActionResult Index()
         {
@@ -36,6 +38,28 @@ namespace B2B.Controllers
             var jsonResult = Json(new { data = maras }, JsonRequestBehavior.AllowGet);
             jsonResult.MaxJsonLength = int.MaxValue;
             return jsonResult;
+        }
+
+        [HttpGet]
+        public ActionResult GetMontagePdf(string matnr)
+        {
+            var client = new ServiceQdms.AlfemoWebSiteServiceSoapClient();
+            var hd = new ServiceQdms.AuthHeader()
+            {
+                Username = "Alf_mntj_user",
+                Password = "ALF6G#_@09yUr#s!"
+            };
+
+            var sonuc = client.AlfemoUrunPdf(hd, string.Join("-", "M", matnr));
+            if (sonuc.Contains("404 Hata: Malzemenin teknik resmi yok."))
+            {
+                sonuc = client.AlfemoUrunPdf(hd, GUARANTI_KEY);
+            }
+
+            byte[] fileBytes = Convert.FromBase64String(sonuc);
+            return File(fileBytes,
+                        System.Net.Mime.MediaTypeNames.Application.Pdf,
+                        string.Concat(string.Join("-", "ALFEMO", matnr), ".pdf"));
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using B2B.Dal;
+using B2B.Helper;
 using B2B.Models;
 using Newtonsoft.Json;
 using System;
@@ -23,7 +24,9 @@ namespace B2B.Controllers
         {
             var user = GetUser();
             var accounts = new List<ZAL_S_CARI>();
-            if (user.RoleID != 6) // bolge muduru degilse
+            if (user.RoleID != (int)EnumHelper.Role.BolgeMuduru ||
+                user.UserGroupID != (int)EnumHelper.UserGroup.Admin ||
+                user.UserGroupID != (int)EnumHelper.UserGroup.PowerUser)
             {
                 using (var context = new B2bContext())
                 {

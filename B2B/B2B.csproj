@@ -317,7 +317,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helper\CaptchaHelper.cs" />
     <Compile Include="Helper\CultureHelper.cs" />
+    <Compile Include="Helper\EnumHelper.cs" />
     <Compile Include="Migrations\202407291242126_InitialCreate.cs" />
     <Compile Include="Migrations\202407291242126_InitialCreate.designer.cs">
       <DependentUpon>202407291242126_InitialCreate.cs</DependentUpon>
@@ -425,6 +427,7 @@
     <Compile Include="Models\UserGroup.cs" />
     <Compile Include="Models\VBAP.cs" />
     <Compile Include="Models\ViewModels\CustomerViewModel.cs" />
+    <Compile Include="Models\ViewModels\UserViewModel.cs" />
     <Compile Include="Models\ZALF_SUTUNAD_T.cs" />
     <Compile Include="Models\ZALF_S_FIYAT_LIST.cs" />
     <Compile Include="Models\ZALF_S_PAKET.cs" />
@@ -945,6 +948,8 @@
     <Content Include="Scripts\tabular\tabulator_esm.min.js" />
     <Content Include="Scripts\typeahead\typeahead.min.js" />
     <Content Include="Scripts\UItoTop\jquery.ui.totop.min.js" />
+    <Content Include="Scripts\validation\jquery.validate.js" />
+    <Content Include="Scripts\validation\jquery.validate.min.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
