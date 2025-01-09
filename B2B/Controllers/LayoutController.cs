@@ -1,4 +1,5 @@
 ﻿using B2B.Dal;
+using B2B.Helper;
 using B2B.Models;
 using B2B.Models.ViewModels;
 using Newtonsoft.Json;
@@ -50,7 +51,31 @@ namespace B2B.Controllers
             var user = GetUser();
             using (var context = new B2bContext())
             {
-                if (user.RoleID == 6) //bolge muduru
+                if (user.UserGroupID == (int)EnumHelper.UserGroup.Admin ||
+                    user.UserGroupID == (int)EnumHelper.UserGroup.PowerUser)
+                {
+                    var customers = (from customer in context.Customers.AsEnumerable()
+                                     join cgroup in context.CustomerGroups.AsEnumerable()
+                                     on customer.CustomerGroupID equals cgroup.ID
+                                     select new CustomerDto
+                                     {
+                                         ID = customer.ID,
+                                         Name = customer.Name,
+                                         IsCentral = customer.IsCentral,
+                                         SapCode = customer.SapCode,
+                                         GroupName = cgroup.Name.ToUpper(englishCulture),
+                                         RoleID = user.RoleID
+                                     }).ToList();
+
+                    return PartialView(new CustomerViewModel
+                    {
+                        UserName = user.NameSurname,
+                        RoleID = user.RoleID,
+                        Customers = customers
+                    });
+                }
+
+                if (user.RoleID == (int)EnumHelper.Role.BolgeMuduru)
                 {
                     var customers = (from customer in context.Customers.AsEnumerable()
                                      join cgroup in context.CustomerGroups.AsEnumerable()

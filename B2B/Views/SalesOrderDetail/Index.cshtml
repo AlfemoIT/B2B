@@ -292,11 +292,6 @@
 
             var headers;
             function exportTableToExcel(tableID, filename) {
-                headers = ['CMPT_ABGRU','CMPT_AUDAT_DATE', 'CMPT_DELIV_DATE', 'CMPT_VBELN', 'CMPT_POSNR', 'ZZMUSTERI_AD',
-                    'MATNR', 'MAKTX', 'CMPT_KWMENG', 'CMPT_TOTAL_FKIMG', 'CMPT_TOTAL_LFIMG', 'CMPT_TOTAL_BMENG',
-                    'CMPT_READY_VOLUM','CMPT_TKNUM', 'CMPT_TOTAL_IN_PRODUCTION', 'ZZURTM_WEEK_DESC',
-                    'KUNAGTANIM', 'LONG_MAKTX'];
-
                 var exportTable = $('<table>');
                 var thead = $('<thead>');
                 var tbody = $('<tbody>');
@@ -309,6 +304,15 @@
                     })
                     .appendTo(thead);
                 thead.appendTo(exportTable);
+
+                headers = ['CMPT_ABGRU', 'CMPT_AUDAT_DATE', 'CMPT_DELIV_DATE', 'CMPT_VBELN', 'CMPT_POSNR', 'ZZMUSTERI_AD',
+                    'MATNR', 'MAKTX', 'CMPT_KWMENG', 'CMPT_TOTAL_FKIMG', 'CMPT_TOTAL_LFIMG', 'CMPT_TOTAL_BMENG',
+                    'CMPT_READY_VOLUM', 'CMPT_TKNUM', 'CMPT_TOTAL_IN_PRODUCTION', 'ZZURTM_WEEK_DESC',
+                    'CMPT_TOTAL_ORDER_PRICE', 'KUNAGTANIM', 'LONG_MAKTX'];
+
+                if (!table.column(18).visible()) {
+                    headers.splice(16, 1); // 1 means remove one item CMPT_TOTAL_ORDER_PRICE
+                }
 
                 var data = table.rows(':not(.no-data)').data().toArray();
                 data.forEach(function (row) {

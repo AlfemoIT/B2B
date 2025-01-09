@@ -319,6 +319,7 @@
     </Compile>
     <Compile Include="Helper\CaptchaHelper.cs" />
     <Compile Include="Helper\CultureHelper.cs" />
+    <Compile Include="Helper\EnumHelper.cs" />
     <Compile Include="Migrations\202407291242126_InitialCreate.cs" />
     <Compile Include="Migrations\202407291242126_InitialCreate.designer.cs">
       <DependentUpon>202407291242126_InitialCreate.cs</DependentUpon>

@@ -12,7 +12,7 @@ namespace B2B.Helper
     {
         public static string GenerateCaptchaText(int length)
         {
-            const string chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789"; // Exclude confusing characters
+            const string chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
             var random = new Random();
             var result = new char[length];
             for (int i = 0; i < length; i++)
@@ -21,7 +21,6 @@ namespace B2B.Helper
             }
             return new string(result);
         }
-
         public static byte[] GenerateCaptchaImage(string captchaText)
         {
             using (var bitmap = new Bitmap(160, 50))
@@ -41,7 +40,7 @@ namespace B2B.Helper
                 }
 
                 // Add noise
-                for (int i = 0; i < 100; i++)
+                for (int i = 0; i < 150; i++)
                 {
                     var x = random.Next(bitmap.Width);
                     var y = random.Next(bitmap.Height);
@@ -55,6 +54,5 @@ namespace B2B.Helper
                 }
             }
         }
-
     }
 }
