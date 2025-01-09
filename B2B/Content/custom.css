@@ -249,21 +249,21 @@ div.dt-container .dt-processing {
         margin: 0 auto !important;
     }
 
-    .sidebar {
+    /* .sidebar {
         left: 50%;
         margin-left: -959px;
-    }
+    }*/
 
 
-    .sidebar_switch {
+    /*  .sidebar_switch {
         left: 50%;
         margin-left: -739px;
-    }
+    }*/
 
-    .sidebar_hidden .sidebar_switch {
+    /*   .sidebar_hidden .sidebar_switch {
         margin-left: -950px;
         left: 50%;
-    }
+    }*/
 }
 /*main content set full*/
 
@@ -510,6 +510,20 @@ a {
 
     .sidebar_info ul {
         font-size: 10px;
-         background: transparent; 
-         border: 0px solid #e5e5e5; 
-    }   
+        background: transparent;
+        border: 0px solid #e5e5e5;
+    }
+
+.navbar-nav.pull-right > li > .dropdown-menu, .navbar-nav > li > .dropdown-menu.pull-right {
+    right: -7px;
+    left: auto;
+}
+
+.dropdown-menu-scroll {
+    max-height: 400px;
+    overflow-y: auto;
+    border: 1px solid #ccc;
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+}
