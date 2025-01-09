@@ -24,9 +24,10 @@ namespace B2B.Controllers
         {
             var user = GetUser();
             var accounts = new List<ZAL_S_CARI>();
-            if (user.RoleID != (int)EnumHelper.Role.BolgeMuduru ||
-                user.UserGroupID != (int)EnumHelper.UserGroup.Admin ||
-                user.UserGroupID != (int)EnumHelper.UserGroup.PowerUser)
+
+            if (user.RoleID == (int)EnumHelper.Role.Yatirimci ||
+               user.RoleID == (int)EnumHelper.Role.MagazaMuduru ||
+               user.RoleID == (int)EnumHelper.Role.SatisDanismani)
             {
                 using (var context = new B2bContext())
                 {
