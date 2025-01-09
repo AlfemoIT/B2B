@@ -1,4 +1,5 @@
 ﻿using B2B.Dal;
+using B2B.Helper;
 using B2B.Models;
 using Newtonsoft.Json;
 using System;
@@ -25,7 +26,9 @@ namespace B2B.Controllers
             List<string> lst_kunnr = new List<string>();
             using (var context = new B2bContext())
             {
-                if (user.RoleID == 6) //bolge muduru
+                if (user.RoleID == (int)EnumHelper.Role.BolgeMuduru ||
+                    user.UserGroupID == (int)EnumHelper.UserGroup.Admin ||
+                    user.UserGroupID == (int)EnumHelper.UserGroup.PowerUser)
                 {
                     lst_kunnr.Add(iv_kunnr);
                 }
@@ -55,7 +58,8 @@ namespace B2B.Controllers
             }
 
             var cmpt_date = DateTime.Now.Date.AddDays(-10);
-            var result = shipments.Where(x => x.CMPT_N_ERDAT_DATE > cmpt_date).OrderByDescending(x => x.CMPT_N_ERDAT_DATE)
+            var result = shipments.Where(x => x.CMPT_N_ERDAT_DATE > cmpt_date)
+            .OrderByDescending(x => x.CMPT_N_ERDAT_DATE)
             .Select(x => new
             {
                 id = x.CMPT_TKNUM,
@@ -87,7 +91,9 @@ namespace B2B.Controllers
             var user = GetUser();
             using (var context = new B2bContext())
             {
-                if (user.RoleID == 6) //bolge muduru icin
+                if (user.RoleID == (int)EnumHelper.Role.BolgeMuduru ||
+                    user.UserGroupID == (int)EnumHelper.UserGroup.Admin ||
+                    user.UserGroupID == (int)EnumHelper.UserGroup.PowerUser)
                 {
                     lst_kunnr.Add(iv_kunnr);
                 }

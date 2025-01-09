@@ -1,8 +1,11 @@
 ﻿using B2B.Dal;
+using B2B.Helper;
 using B2B.Models;
+using B2B.Models.ViewModels;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Web;
 using System.Web.Configuration;
@@ -19,15 +22,35 @@ namespace B2B.Controllers
         }
 
         [HttpPost]
-        public ActionResult Login(User user)
+        public ActionResult Login(UserViewModel user)
         {
             if (string.IsNullOrEmpty(user.RegistrationNo) ||
-                string.IsNullOrEmpty(user.Password))
+                string.IsNullOrEmpty(user.Password) || 
+                string.IsNullOrEmpty(user.Captcha))
             {
                 ViewBag.Message = String
                     .Concat("<div class='alert alert-warning alert-dismissable'>",
-                            "Tc/Vergi ve Telefon No boş geçilemez!.",
+                            "Kullanıcı adı,şifre ve doğrulama kodu boş geçilemez.",
                             "</div> ");
+                return View();
+            }
+
+            var storedCaptcha = Session["Captcha"] as string;
+            if (storedCaptcha == null)
+            {
+                ViewBag.Message = String
+                   .Concat("<div class='alert alert-warning alert-dismissable'>",
+                           "Lütfen doğrulama kodunu girdiniz.",
+                           "</div>");
+                return View();
+            }
+
+            if (!user.Captcha.Equals(storedCaptcha, StringComparison.OrdinalIgnoreCase))
+            {
+                ViewBag.Message = String
+                   .Concat("<div class='alert alert-warning alert-dismissable'>",
+                           "Girdiğiniz doğrulama kodu eşleşmemektedir.Lütfen tekrar deneyiniz.",
+                           "</div>");
                 return View();
             }
 
@@ -79,6 +102,14 @@ namespace B2B.Controllers
             Response.Cookies.Add(rSessionCookie);
 
             return Json(new { success = true }, JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult GenerateCaptcha()
+        {
+            var captchaText = CaptchaHelper.GenerateCaptchaText(5);
+            Session["Captcha"] = captchaText;
+
+            var captchaImage = CaptchaHelper.GenerateCaptchaImage(captchaText);
+            return File(captchaImage, "image/png");
         }
     }
 }

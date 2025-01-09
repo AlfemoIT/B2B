@@ -35,7 +35,6 @@ namespace B2B.Controllers
                     Password = "Alfemo!2024_!"
                 };
                 var sonuc = client.GetOpenOrders(hd, lst_kunnr.ToArray(), iv_cmpt_abgru);
-
                 if (!sonuc.Contains("-111"))
                 {
                     orders = JsonConvert.DeserializeObject<List<ZAL_S_SIPARIS_ROW>>(sonuc);
