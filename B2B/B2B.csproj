@@ -915,10 +915,12 @@
     <Content Include="Scripts\jquery-input-mask-phone-number.js" />
     <Content Include="Scripts\jquery-input-mask-phone-number.min.js" />
     <Content Include="Scripts\jquery-migrate.min.js" />
+    <Content Include="Scripts\jquery-ui.1.12.1.js" />
     <Content Include="Scripts\jquery-ui\external\globalize.js" />
     <Content Include="Scripts\jquery-ui\jquery-ui-1.10.0.custom.min.js" />
     <Content Include="Scripts\jquery-ui\jquery-ui.js" />
     <Content Include="Scripts\jquery.actual.min.js" />
+    <Content Include="Scripts\jquery.dataTables.1.13.6.min.js" />
     <Content Include="Scripts\jquery.debouncedresize.min.js" />
     <Content Include="Scripts\jquery.easing.1.3.min.js" />
     <Content Include="Scripts\jquery.imagesloaded.min.js" />
@@ -936,6 +938,7 @@
     <Content Include="Scripts\jBreadcrumbs\jquery.jBreadCrumb.1.1.min.js" />
     <Content Include="Scripts\jquery.wookmark.js" />
     <Content Include="Scripts\jquery_cookie_min.js" />
+    <Content Include="Scripts\jstree.min.js" />
     <Content Include="Scripts\select2.min.js" />
     <Content Include="Scripts\selectNav.js" />
     <Content Include="Scripts\slimScroll\jquery.slimscroll.js" />
@@ -950,6 +953,7 @@
     <Content Include="Scripts\UItoTop\jquery.ui.totop.min.js" />
     <Content Include="Scripts\validation\jquery.validate.js" />
     <Content Include="Scripts\validation\jquery.validate.min.js" />
+    <Content Include="Scripts\xlsx.full.min.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

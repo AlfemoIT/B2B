@@ -93,7 +93,7 @@
 <div id="freezeOverlay"></div>
 
 @section Scripts{
-    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="~/Scripts/jquery.dataTables.1.13.6.min.js"></script>
     <script type="text/javascript">
         $(function () {
             $("#total").text('');
@@ -138,9 +138,6 @@
                         data: 'CMPT_TUTAR',width : '150px',
                         render: function (data, type, row) {
                             if (type === 'display') {
-                                //let numberStr = data;
-                                //let number = parseFloat(numberStr.replace(',', '.'));
-                                //return new Intl.NumberFormat('tr-TR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(number);
                                 return new Intl.NumberFormat('tr-TR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(data);
                             }
                             return data;
