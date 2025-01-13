@@ -48,7 +48,10 @@ namespace B2B.Controllers
             var sonuc = client.AccountStatement(hd, iv_kunnr);
             try
             {
-                accounts = JsonConvert.DeserializeObject<List<ZAL_S_CARI>>(sonuc);
+                if (!sonuc.Contains("Liste veri içerm"))
+                {
+                    accounts = JsonConvert.DeserializeObject<List<ZAL_S_CARI>>(sonuc);
+                }
             }
             catch (Exception) { }
 
