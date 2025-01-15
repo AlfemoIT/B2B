@@ -301,6 +301,7 @@ div.dt-container .dt-processing {
     border-bottom-color: #fff !important;
 }
 
+
 .dropdown-menu li a {
     border-radius: 1px;
 }
@@ -341,7 +342,7 @@ h3 {
 }
 
 .navbar .brand {
-    font: 100 19px / 38px 'PT Sans', sans-serif;
+    font: 100 18px / 38px 'PT Sans', sans-serif;
 }
 
 .dropdown-menu li > a:hover,
