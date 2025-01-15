@@ -248,6 +248,9 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Areas\Management\Controllers\DashboardController.cs" />
+    <Compile Include="Areas\Management\Controllers\LayoutController.cs" />
+    <Compile Include="Areas\Management\ManagementAreaRegistration.cs" />
     <Compile Include="Connected Services\ServiceAccount\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -396,6 +399,10 @@
     <Compile Include="Migrations\202412170818432_AddCodeToStorage.designer.cs">
       <DependentUpon>202412170818432_AddCodeToStorage.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202501150621256_AddIsManagementToPage.cs" />
+    <Compile Include="Migrations\202501150621256_AddIsManagementToPage.designer.cs">
+      <DependentUpon>202501150621256_AddIsManagementToPage.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Chart\SalesOrderChart.cs" />
     <Compile Include="Models\Customer.cs" />
@@ -447,9 +454,13 @@
   <ItemGroup>
     <Content Include="alfemo-icon.jpeg" />
     <Content Include="alfemo.png" />
+    <Content Include="Areas\Management\Content\customMngmnt.css" />
     <Content Include="Connected Services\ServiceAccount\B2B.ServiceAccount.AccountStatementResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
+    <Content Include="Areas\Management\Views\web.config" />
+    <Content Include="Areas\Management\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Management\Views\Dashboard\Index.cshtml" />
     <None Include="Connected Services\ServiceAccount\configuration91.svcinfo" />
     <None Include="Connected Services\ServiceAccount\configuration.svcinfo" />
     <None Include="Connected Services\ServiceAccount\Reference.svcmap">
@@ -600,6 +611,7 @@
     <Content Include="Content\colorbox\colorbox.css" />
     <Content Include="Content\colorbox\images\controls.png" />
     <Content Include="Content\colorbox\images\loading.gif" />
+    <Content Include="Content\dark.css" />
     <Content Include="Content\dataTables.css" />
     <Content Include="Content\datatables\extras\TableTools\media\css\TableTools.css" />
     <Content Include="Content\datatables\extras\TableTools\media\images\background.png" />
@@ -991,6 +1003,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Management\Data\" />
+    <Folder Include="Areas\Management\Views\Layout\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -1077,6 +1091,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202412170818432_AddCodeToStorage.resx">
       <DependentUpon>202412170818432_AddCodeToStorage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202501150621256_AddIsManagementToPage.resx">
+      <DependentUpon>202501150621256_AddIsManagementToPage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Resource.en-US.resx" />
     <EmbeddedResource Include="Resource.resx">

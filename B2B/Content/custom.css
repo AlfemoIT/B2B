@@ -301,10 +301,6 @@ div.dt-container .dt-processing {
     border-bottom-color: #fff !important;
 }
 
-.navbar .divider-vertical {
-    margin: 0 5px;
-}
-
 .dropdown-menu li a {
     border-radius: 1px;
 }
@@ -322,10 +318,6 @@ div.dt-container .dt-processing {
     background-color: #e5e5e5;
 }
 /*navbar*/
-
-/*home*/
-
-/*home*/
 
 .btn {
     font-size: 12px;
@@ -345,7 +337,7 @@ h3 {
 
 /*layout*/
 .navbar-inner {
-    background: -webkit-linear-gradient(top, #c51d2e 0%, #af2c36 100%);
+    background: -webkit-linear-gradient(top, #dd273a 0%, #af2c36 70%);
 }
 
 .navbar .brand {
@@ -358,7 +350,7 @@ h3 {
 .nav-list > .active > a,
 .nav-list > .active > a:hover,
 span.dynatree-active a {
-    background: #bb2432 !important;
+    background: #cb2838 !important;
 }
 
 a {
@@ -379,7 +371,7 @@ a {
 
     .sidebar .panel .panel-heading a {
         color: white;
-        background: #bd2331;
+        background: -webkit-linear-gradient(top, #dd273a 0%, #af2c36 70%);
     }
 
 .panel-heading a i {
@@ -389,11 +381,21 @@ a {
 .sidebar .panel-heading {
     text-shadow: none;
 }
+
+.sidebar_inner form {
+    padding: 12px 20px 7px;
+}
+
+.navbar .divider-vertical {
+    margin: 0 5px;
+    border-left-color: #bd2b38;
+    border-right-color: #b82b37;
+}
 /*layout*/
 
 /*login*/
 .login_page .top_b {
-    background: #bd2331;
+    background: #cb2838;
     color: white;
     font-size: 18px;
 }

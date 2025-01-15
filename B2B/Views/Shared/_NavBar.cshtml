@@ -6,7 +6,7 @@
     <div class="navbar-inner">
         <div class="container">
             <a class="brand pull-left text-center" href="#">
-                ALFEMO
+                @Model.AreaTitle
             </a>
 
             <ul class="nav navbar-nav user_menu pull-right">
@@ -42,8 +42,11 @@
                         <b class="caret"></b>
                     </a>
                     <ul class="dropdown-menu" style="left:-7px">
-                        <li><a href="#">Hesabım</a></li>
-                        <li class="divider"></li>
+                        @foreach (var menu in Model.UserSubMenus)
+                        {
+                            <li><a href="@menu.Url">@menu.Name</a></li>
+                            <li class="divider"></li>
+                        }
                         <li><a href="#" onclick="logout()">Çıkış</a></li>
                     </ul>
                 </li>

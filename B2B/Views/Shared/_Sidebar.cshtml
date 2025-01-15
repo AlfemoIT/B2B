@@ -1,5 +1,7 @@
 ﻿@model List<B2B.Models.CategoryWithPagesDTO>
 
+@{ var currentPath = Request.Url.AbsolutePath; }
+
 <a href="javascript:void(0)" class="sidebar_switch on_switch ttip_r" title="Hide Sidebar">Sidebar switch</a>
 
 <div class="sidebar">
@@ -18,10 +20,20 @@
             <div id="side_accordion" class="panel-group">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <a href="/" data-parent="#side_accordion"
-                           class="accordion-toggle">
-                            <i class="glyphicon glyphicon-home"></i> Anasayfa
-                        </a>
+                        @if (currentPath.Contains("management"))
+                        {
+                            <a href="/management" data-parent="#side_accordion"
+                               class="accordion-toggle">
+                                <i class="glyphicon glyphicon-home"></i> Anasayfa
+                            </a>
+                        }
+                        else
+                        {
+                            <a href="/" data-parent="#side_accordion"
+                               class="accordion-toggle">
+                                <i class="glyphicon glyphicon-home"></i> Anasayfa
+                            </a>
+                        }
                     </div>
                 </div>
 

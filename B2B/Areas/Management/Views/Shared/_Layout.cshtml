@@ -6,13 +6,14 @@
     <title>@ViewBag.Title</title>
     <link rel="shortcut icon" href="~/alfemo-icon.jpeg">
     @Html.Partial("_Style")
-
+    <link href="~/Content/dark.css" rel="stylesheet" />
+    <link href="~/Areas/Management/Content/customMngmnt.css" rel="stylesheet" />
 </head>
 
 <body class="full_width">
     <div id="maincontainer" class="clearfix">
         <header>
-            @Html.Action("_NavBar", "Layout")
+            @Html.Action("_NavBar", "Layout", new { area = "Management" })
         </header>
 
         <div id="contentwrapper">
@@ -21,7 +22,7 @@
             </div>
         </div>
 
-        @Html.Action("_SideBar", "Layout")
+        @Html.Action("_SideBar", "Layout", new { area = "Management" })
 
         @Html.Partial("_Script")
     </div>

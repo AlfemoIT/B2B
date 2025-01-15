@@ -7,9 +7,11 @@ namespace B2B.Models.ViewModels
 {
     public class CustomerViewModel
     {
+        public String AreaTitle { get; set; }
         public string UserName { get; set; }
         public int RoleID { get; set; }
         public List<CustomerDto> Customers { get; set; }
+        public List<UserSubMenu> UserSubMenus { get; set; }
     }
 
     public class CustomerDto
@@ -20,5 +22,11 @@ namespace B2B.Models.ViewModels
         public string SapCode { get; set; }
         public bool IsCentral { get; set; }
         public int RoleID { get; set; }
+    }
+
+    public class UserSubMenu
+    {
+        public string Name { get; set; }
+        public string Url { get; set; }
     }
 }

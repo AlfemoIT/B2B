@@ -11,13 +11,12 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
 
-namespace B2B.Controllers
+namespace B2B.Areas.Management.Controllers
 {
     public class LayoutController : Controller
     {
         public ActionResult Index()
         {
-            TempData["Area"] = "ALFEMO";
             return View();
         }
         public PartialViewResult _SideBar()
@@ -26,7 +25,7 @@ namespace B2B.Controllers
             using (var context = new B2bContext())
             {
                 var categoriesWithPages = (from pa in context.PageAssignments.AsEnumerable().Where(pa => pa.UserID == user.ID)
-                                           join p in context.Pages.AsEnumerable().Where(p => p.IsManagement == false)
+                                           join p in context.Pages.AsEnumerable().Where(p => p.IsManagement == true)
                                            on pa.Page.ID equals p.ID
                                            join c in context.PageCategories on p.PageCategoryID equals c.ID
                                            group p by new { c.Name, c.Icon, c.Index } into g
@@ -71,13 +70,13 @@ namespace B2B.Controllers
 
                     return PartialView(new CustomerViewModel
                     {
-                        AreaTitle = "ALFEMO",
+                        AreaTitle = "ALFEMO - B2B YÖNETİM",
                         UserName = user.NameSurname,
                         RoleID = user.RoleID,
                         Customers = customers,
-                        UserSubMenus = new List<UserSubMenu>() {
-                           new UserSubMenu{ Name = "Hesabım" , Url="/"}
-                           //new UserSubMenu{ Name = "Yönetim" , Url="/management"}
+                        UserSubMenus = new List<UserSubMenu>()
+                        {
+                            new UserSubMenu{ Name ="B2B" , Url="/"}
                         }
                     });
                 }
@@ -100,14 +99,11 @@ namespace B2B.Controllers
 
                     return PartialView(new CustomerViewModel
                     {
-                        AreaTitle = "ALFEMO",
+                        AreaTitle = "ALFEMO - B2B YÖNETİM",
                         UserName = user.NameSurname,
                         RoleID = user.RoleID,
                         Customers = customers,
-                        UserSubMenus = new List<UserSubMenu>() {
-                           new UserSubMenu{ Name = "Hesabım" , Url="/"},
-                           //new UserSubMenu{ Name = "Yönetim" , Url="/management"}
-                        }
+                        UserSubMenus = new List<UserSubMenu>()
                     });
                 }
                 else
@@ -129,14 +125,11 @@ namespace B2B.Controllers
 
                     return PartialView(new CustomerViewModel
                     {
-                        AreaTitle = "ALFEMO",
+                        AreaTitle = "ALFEMO - B2B YÖNETİM",
                         UserName = user.NameSurname,
                         RoleID = user.RoleID,
                         Customers = customers,
-                        UserSubMenus = new List<UserSubMenu>() {
-                           new UserSubMenu{ Name = "Hesabım" , Url="/"}
-                           //new UserSubMenu{ Name = "Yönetim" , Url="/management"}
-                        }
+                        UserSubMenus = new List<UserSubMenu>()
                     });
                 }
             }
