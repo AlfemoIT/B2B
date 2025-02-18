@@ -303,6 +303,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AccountStatementController.cs" />
     <Compile Include="Controllers\AuthController.cs" />
     <Compile Include="Controllers\DocumentController.cs" />
@@ -406,6 +407,14 @@
     <Compile Include="Migrations\202501150621256_AddIsManagementToPage.designer.cs">
       <DependentUpon>202501150621256_AddIsManagementToPage.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202501301234512_AddIsDeletedToUser.cs" />
+    <Compile Include="Migrations\202501301234512_AddIsDeletedToUser.designer.cs">
+      <DependentUpon>202501301234512_AddIsDeletedToUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202502171045203_IsAciveAddUser.cs" />
+    <Compile Include="Migrations\202502171045203_IsAciveAddUser.designer.cs">
+      <DependentUpon>202502171045203_IsAciveAddUser.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Chart\SalesOrderChart.cs" />
     <Compile Include="Models\Customer.cs" />
@@ -447,6 +456,7 @@
     <Compile Include="Models\ZAL_S_SIPARIS_ROW.cs" />
     <Compile Include="Models\ZSD_S_FIY_TICKET.cs" />
     <Compile Include="Models\Z_FILE.cs" />
+    <Compile Include="Models\Z_USER.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resource.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -464,6 +474,7 @@
     <Content Include="Areas\Management\Views\web.config" />
     <Content Include="Areas\Management\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Management\Views\Dashboard\Index.cshtml" />
+    <Content Include="Areas\Management\Views\User\Index.cshtml" />
     <None Include="Connected Services\ServiceAccount\configuration91.svcinfo" />
     <None Include="Connected Services\ServiceAccount\configuration.svcinfo" />
     <None Include="Connected Services\ServiceAccount\Reference.svcmap">
@@ -936,6 +947,7 @@
     <Content Include="Scripts\jquery-ui\jquery-ui.js" />
     <Content Include="Scripts\jquery.actual.min.js" />
     <Content Include="Scripts\jquery.dataTables.1.13.6.min.js" />
+    <Content Include="Scripts\jquery.dataTables.min.1.13.6.js" />
     <Content Include="Scripts\jquery.debouncedresize.min.js" />
     <Content Include="Scripts\jquery.easing.1.3.min.js" />
     <Content Include="Scripts\jquery.imagesloaded.min.js" />
@@ -954,6 +966,7 @@
     <Content Include="Scripts\jquery.wookmark.js" />
     <Content Include="Scripts\jquery_cookie_min.js" />
     <Content Include="Scripts\jstree.min.js" />
+    <Content Include="Scripts\select2.min.4.0.10.js" />
     <Content Include="Scripts\select2.min.js" />
     <Content Include="Scripts\selectNav.js" />
     <Content Include="Scripts\slimScroll\jquery.slimscroll.js" />
@@ -1004,12 +1017,12 @@
     <Content Include="Views\AccountStatement\Index.cshtml" />
     <Content Include="Views\Store\Index.cshtml" />
     <Content Include="Views\Error\AccessDenied.cshtml" />
+    <Content Include="Views\Account\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Management\Data\" />
     <Folder Include="Areas\Management\Views\Layout\" />
-    <Folder Include="Areas\Management\Views\User\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -1099,6 +1112,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202501150621256_AddIsManagementToPage.resx">
       <DependentUpon>202501150621256_AddIsManagementToPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202501301234512_AddIsDeletedToUser.resx">
+      <DependentUpon>202501301234512_AddIsDeletedToUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202502171045203_IsAciveAddUser.resx">
+      <DependentUpon>202502171045203_IsAciveAddUser.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Resource.en-US.resx" />
     <EmbeddedResource Include="Resource.resx">

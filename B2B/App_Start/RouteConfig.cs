@@ -83,7 +83,13 @@ namespace B2B
                name: "Store",
                url: "store-free-stock/{action}/{id}",
                defaults: new { controller = "Store", action = "Index", id = UrlParameter.Optional }
-           );
+            );
+
+            routes.MapRoute(
+               name: "Account",
+               url: "account/{action}/{id}",
+               defaults: new { controller = "Account", action = "Index", id = UrlParameter.Optional }
+            );
 
             routes.MapRoute(
                 name: "Default",

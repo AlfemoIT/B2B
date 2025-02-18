@@ -22,6 +22,14 @@ namespace B2B.Areas.Management
             );
 
             context.MapRoute(
+              name: "ManagementUser",
+              url: "management/users/{id}",
+              defaults: new { controller = "User", action = "Index", id = UrlParameter.Optional },
+              namespaces: new[] { "B2B.Areas.Management.Controllers" }
+         );
+
+
+            context.MapRoute(
                 name: "ManagementDefault",
                 url: "management/{controller}/{action}/{id}",
                 defaults: new { action = "Index", id = UrlParameter.Optional },

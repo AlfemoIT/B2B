@@ -24,41 +24,40 @@ namespace B2B.Controllers
         [HttpPost]
         public ActionResult Login(UserViewModel user)
         {
-            //if (string.IsNullOrEmpty(user.RegistrationNo) ||
-            //    string.IsNullOrEmpty(user.Password) ||
-            //    string.IsNullOrEmpty(user.Captcha))
-            //{
-            //    ViewBag.Message = String
-            //        .Concat("<div class='alert alert-warning alert-dismissable'>",
-            //                "Kullanıcı adı,şifre ve doğrulama kodu boş geçilemez.",
-            //                "</div> ");
-            //    return View();
-            //}
+            if (string.IsNullOrEmpty(user.RegistrationNo) ||
+                string.IsNullOrEmpty(user.Password) ||
+                string.IsNullOrEmpty(user.Captcha))
+            {
+                ViewBag.Message = String
+                    .Concat("<div class='alert alert-warning alert-dismissable'>",
+                            "Kullanıcı adı,şifre ve doğrulama kodu boş geçilemez.",
+                            "</div> ");
+                return View();
+            }
 
-            //var storedCaptcha = Session["Captcha"] as string;
-            //if (storedCaptcha == null)
-            //{
-            //    ViewBag.Message = String
-            //       .Concat("<div class='alert alert-warning alert-dismissable'>",
-            //               "Lütfen doğrulama kodunu girdiniz.",
-            //               "</div>");
-            //    return View();
-            //}
+            var storedCaptcha = Session["Captcha"] as string;
+            if (storedCaptcha == null)
+            {
+                ViewBag.Message = String
+                   .Concat("<div class='alert alert-warning alert-dismissable'>",
+                           "Lütfen doğrulama kodunu girdiniz.",
+                           "</div>");
+                return View();
+            }
 
-            //if (!user.Captcha.Equals(storedCaptcha, StringComparison.OrdinalIgnoreCase))
-            //{
-            //    ViewBag.Message = String
-            //       .Concat("<div class='alert alert-warning alert-dismissable'>",
-            //               "Girdiğiniz doğrulama kodu eşleşmemektedir.Lütfen tekrar deneyiniz.",
-            //               "</div>");
-            //    return View();
-            //}
+            if (!user.Captcha.Equals(storedCaptcha, StringComparison.OrdinalIgnoreCase))
+            {
+                ViewBag.Message = String
+                   .Concat("<div class='alert alert-warning alert-dismissable'>",
+                           "Girdiğiniz doğrulama kodu eşleşmemektedir.Lütfen tekrar deneyiniz.",
+                           "</div>");
+                return View();
+            }
 
             using (var context = new B2bContext())
             {
-                //var _user = context.Users.FirstOrDefault(x => x.RegistrationNo.Equals(user.RegistrationNo) &&
-                //                                              x.Password.Equals(user.Password));
-                var _user = context.Users.FirstOrDefault(x => x.RegistrationNo.Equals("S1359"));
+                var _user = context.Users.FirstOrDefault(x => x.RegistrationNo.Equals(user.RegistrationNo) &&
+                                                              x.Password.Equals(user.Password));
                 if (_user == null)
                 {
                     ViewBag.Message = String

@@ -1,5 +1,5 @@
 ﻿.navbar-inner {
-    background: -webkit-linear-gradient(top, #f1a752 0%, #a16e36 70%);
+    background: -webkit-linear-gradient(top, #3ea8d6 0%, #067ead 80%);
 }
 
 .navbar .brand {
@@ -7,14 +7,22 @@
 }
 
 .navbar .divider-vertical {
-    border-left-color: #cb8c45;
-    border-right-color: #b47c3d;
+    border-left-color: #0e84b3;
+    border-right-color: #1a8dbb;
 }
 
 .sidebar .panel .panel-heading a {
-    color: white;
-    background: -webkit-linear-gradient(top, #f1a752 0%, #a16e36 70%);
+    background: #e0e0e0;
 }
+
+.sidebar .panel .panel-heading a {
+    color: #222;
+}
+
+.panel-heading a i {
+    color: #2F4F4F;
+}
+
 
 .dropdown-menu li > a:hover,
 .dropdown-menu .active > a,
@@ -22,7 +30,7 @@
 .nav-list > .active > a,
 .nav-list > .active > a:hover,
 span.dynatree-active a {
-    background: #c98b44e8 !important
+    background: #48a6d2 !important;
 }
 
 .dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus {
@@ -33,4 +41,66 @@ span.dynatree-active a {
 
 .sidebar_inner form {
     padding: 12px 20px 7px;
+}
+
+a {
+    color: #428bca;
+    text-decoration: none;
+}
+
+.icon-text-button img {
+    position: relative;
+    right: 9px;
+    bottom: 3px;
+}
+
+.icon-text-button:hover, .icon-text-button:focus, .icon-text-button:active, .icon-text-button.active, .open .dropdown-toggle.icon-text-button {
+    color: black;
+    background-color: #faf1e7;
+    border-color: #22222261;
+}
+
+.table thead th {
+    background-color: #ebf2f6 !important;
+}
+
+.table.dataTable > thead > tr > th, table.dataTable > thead > tr > td {
+    padding: 10px;
+    border-bottom: 1px solid #d5dbde;
+}
+
+.dataTables_wrapper th.sorting_asc, .dataTables_wrapper th.sorting_desc {
+    background-color: #a8733936 !important;
+}
+
+.sidebar .panel a {
+    color: #222;
+    text-decoration: none !important;
+}
+
+.sidebar .panel-heading .accordion-toggle {
+    display: block;
+    padding: 9px 15px;
+}
+
+.back-color-theme {
+    background-color: #e2a2a8;
+}
+
+.btn-trash {
+    background-color: #e2a2a8;
+}
+
+.btn-edit {
+    background: #89b9d2;
+}
+
+.btn-grid {
+    position: relative;
+    bottom: 7px;
+}
+
+.btn-toggle {
+    position: relative;
+    top: 2px;
 }

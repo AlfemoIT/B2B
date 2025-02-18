@@ -76,7 +76,7 @@ namespace B2B.Controllers
                         RoleID = user.RoleID,
                         Customers = customers,
                         UserSubMenus = new List<UserSubMenu>() {
-                           new UserSubMenu{ Name = "Hesabım" , Url="/"},
+                           new UserSubMenu{ Name = "Hesabım" , Url="/account"},
                            new UserSubMenu{ Name = "Yönetim" , Url="/management"}
                         }
                     });
@@ -105,7 +105,7 @@ namespace B2B.Controllers
                         RoleID = user.RoleID,
                         Customers = customers,
                         UserSubMenus = new List<UserSubMenu>() {
-                           new UserSubMenu{ Name = "Hesabım" , Url="/"},
+                           new UserSubMenu{ Name = "Hesabım" , Url="/account"},
                            //new UserSubMenu{ Name = "Yönetim" , Url="/management"}
                         }
                     });
@@ -134,7 +134,7 @@ namespace B2B.Controllers
                         RoleID = user.RoleID,
                         Customers = customers,
                         UserSubMenus = new List<UserSubMenu>() {
-                           new UserSubMenu{ Name = "Hesabım" , Url="/"}
+                           new UserSubMenu{ Name = "Hesabım" , Url="/account"}
                         }
                     });
                 }

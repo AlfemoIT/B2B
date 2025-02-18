@@ -301,7 +301,6 @@ div.dt-container .dt-processing {
     border-bottom-color: #fff !important;
 }
 
-
 .dropdown-menu li a {
     border-radius: 1px;
 }
@@ -529,4 +528,68 @@ a {
     padding: 0;
     margin: 0;
     list-style-type: none;
+}
+
+.margin-left-15 {
+    margin-left: 15px;
+}
+
+.control-label {
+    color: #222222;
+}
+
+.btn-red {
+    color: #fcfcfc;
+    background-color: #c72a38;
+    border-color: #bd2b38;
+}
+
+    .btn-red:hover, .btn-red:focus, .btn-red:active {
+        color: #fcfcfc;
+        background-color: #c72a38;
+        border-color: #bd2b38;
+    }
+
+.btn-default-v2 {
+    color: #33337b;
+    background-color: #fcfcfc;
+    border-color: #cccccc;
+}
+
+.btn-eye {
+    float: right;
+    position: relative;
+    bottom: 32.2px;
+    color: dimgray;
+    height: 30px;
+    right: 2px;
+}
+
+.height-40 {
+    height: 40px;
+}
+
+.margin-bottom-5 {
+    margin-bottom: 5px !important;
+}
+
+.btn-eye-repeat {
+    float: right;
+    position: relative;
+    bottom: 58px;
+    color: dimgray;
+    height: 30px;
+    right: 2px;
+}
+
+.text-error {
+    color: #d37a82;
+}
+
+.text-success {
+    color: #7fae00;
+}
+
+div.sticky-queue {
+    border-color: rgb(151 151 151);
 }

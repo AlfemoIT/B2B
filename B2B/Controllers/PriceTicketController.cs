@@ -47,7 +47,6 @@ namespace B2B.Controllers
         public JsonResult GetFileNames()
         {
             List<Z_FILE> z_files = new List<Z_FILE>();
-
             FileInfo[] files = new DirectoryInfo(directloc).GetFiles();
             foreach (var file in files)
             {
