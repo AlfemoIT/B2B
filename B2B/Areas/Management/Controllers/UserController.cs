@@ -18,8 +18,8 @@ namespace B2B.Areas.Management.Controllers
             return View();
         }
 
-        [HttpGet]
-        public JsonResult GetData(string cID)
+        [HttpPost]
+        public JsonResult GetData(string iv_cID, string iv_user_state)
         {
             List<Z_USER> users = new List<Z_USER>();
             using (var context = new B2bContext())
@@ -29,7 +29,7 @@ namespace B2B.Areas.Management.Controllers
                          on customera.UserID equals user.ID
                          join role in context.Roles.AsEnumerable()
                          on user.RoleID equals role.ID
-                         where customera.CustomerID == int.Parse(cID)
+                         where customera.CustomerID == int.Parse(iv_cID)
                          select new Z_USER
                          {
                              ID = user.ID,
@@ -38,10 +38,45 @@ namespace B2B.Areas.Management.Controllers
                              NameSurname = user.NameSurname,
                              RegistrationNo = user.RegistrationNo,
                              Password = user.Password,
-                             Phone1 = user.Phone1
+                             Phone1 = user.Phone1,
+                             IsActive = user.IsActive,
+                             IsDeleted = user.IsDeleted
                          }).ToList();
+
+                if (iv_user_state == "0")
+                {
+                    users = users.Where(x => x.IsActive == false)
+                                 .ToList();
+                }
+
+                if (iv_user_state == "1")
+                {
+                    users = users.Where(x => x.IsActive == true)
+                                 .ToList();
+                }
             }
             return Json(new { data = users }, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public JsonResult ChangeUserState(string userID, bool state)
+        {
+            int userIdValue = int.Parse(userID);
+            using (var context = new B2bContext())
+            {
+                var user = context.Users.FirstOrDefault(x => x.ID == userIdValue);
+                if (user != null)
+                {
+                    user.IsActive = state;
+                    context.SaveChanges();
+                }
+            }
+            return Json(new { data = true }, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult EditUser()
+        {
+            return View();
         }
     }
 }

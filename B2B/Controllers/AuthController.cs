@@ -58,6 +58,7 @@ namespace B2B.Controllers
             {
                 var _user = context.Users.FirstOrDefault(x => x.RegistrationNo.Equals(user.RegistrationNo) &&
                                                               x.Password.Equals(user.Password));
+                //var _user = context.Users.FirstOrDefault(x => x.RegistrationNo.Equals("S1359") );
                 if (_user == null)
                 {
                     ViewBag.Message = String

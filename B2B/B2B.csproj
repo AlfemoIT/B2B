@@ -475,6 +475,7 @@
     <Content Include="Areas\Management\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Management\Views\Dashboard\Index.cshtml" />
     <Content Include="Areas\Management\Views\User\Index.cshtml" />
+    <Content Include="Areas\Management\Views\User\EditUser.cshtml" />
     <None Include="Connected Services\ServiceAccount\configuration91.svcinfo" />
     <None Include="Connected Services\ServiceAccount\configuration.svcinfo" />
     <None Include="Connected Services\ServiceAccount\Reference.svcmap">
@@ -704,6 +705,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="img\add_user.png" />
     <Content Include="img\alfemo\oasis_small.jpg" />
     <Content Include="img\alfemo\yemek_odasi_small.jpg" />
     <Content Include="img\cell_phone.png" />

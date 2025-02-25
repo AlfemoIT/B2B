@@ -14,5 +14,7 @@ namespace B2B.Models
         public string Password { get; set; }
         public string Phone1 { get; set; }
         public string RegistrationNo { get; set; }
+        public bool IsActive { get; set; }
+        public bool IsDeleted { get; set; }
     }
 }

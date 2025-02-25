@@ -63,8 +63,8 @@
 
             <div class="form-group">
                 <select id="drpUserState" class="form-control js-example-basic-single" style="width:100%;">
-                    <option value="AKTIF">AKTIF</option>
-                    <option value="PASIF">PASIF</option>
+                    <option value="1">AKTIF</option>
+                    <option value="0">PASIF</option>
                     <option value="TUMU">TUMU</option>
                 </select>
             </div>
@@ -73,19 +73,19 @@
                 <a id="btn-execute"
                    class="btn btn-default form-control icon-text-button hint--top hint--rounded"
                    data-hint="Yürüt">
-                    <img src="~/img/realtime_25.png" />
+                    <img src="~/img/realtime_25.png" class="img-in-btn" />
                 </a>
             </div>
-
-            @*<div class="form-group">
-                    <a id="download-xlsx"
-                       class="btn btn-default form-control icon-text-button hint--top hint--rounded"
-                       data-hint="Excele Aktar"
-                       href="#">
-                        <img src="~/img/mexcel_25.png" />
-                    </a>
-                </div>*@
         </form>
+    </div>
+    <div class="col-sm-6 padding-right-0">
+        <div class="form-group float-right">
+            <a id="add-user"
+               class="btn btn-default form-control icon-text-button hint--top hint--rounded"
+               href="#">
+                <img src="~/img/add_user.png" />
+            </a>
+        </div>
     </div>
 </div>
 
@@ -133,7 +133,19 @@
                 responsive: true,
                 retrieve: true,
                 displayLength: 15,
-                ajax: null,
+                ajax: {
+                    url: '@Url.Action("GetData")',
+                    type: "POST",
+                    dataType: 'json',
+                    data: function (d) {
+                        var customer = JSON.parse(sessionStorage.getItem("Customer"));
+                        d.iv_cID = customer.ID;
+                        d.iv_user_state = $("#drpUserState").val()
+                    },
+                    dataSrc: function (json) {
+                        return json.data;
+                    }
+                },
                 columns: [
                     { data: 'ID', visible: false },
                     { data: 'NameSurname' },
@@ -144,13 +156,22 @@
                         "mData": null,
                         "bSortable": false,
                         "mRender": function (data, type) {
-                            return '<a href="/Document/GetMontagePdf?matnr=' + data.MATNR + '" class="btn btn-trash btn-grid">' +
-                                '<i class="fa fa-trash btn-middle-icon"></i>' +
-                                '</a>' +
-                                ' <a href="/Document/GetMontagePdf?matnr=' + data.MATNR + '" class="btn btn-edit btn-grid">' +
-                                '<i class="fa fa-edit btn-middle-icon"></i>' +
-                                '</a> ' +
-                                '<input type="checkbox" id="toggleSwitch" class="btn-toggle"><span id="switchLabel"></span>';
+                            var checked = true;
+                            if (!data.IsActive) {
+                                checked = false;
+                            }
+
+                            var checkbox = '<input type="checkbox" id="toggleSwitch" class="btn-toggle" data-id="' + data.ID + '" onchange="ChangeUserState(' + data.ID + ')"><span id="switchLabel"></span>';
+                            if (checked) {
+                                checkbox = '<input type="checkbox" id="toggleSwitch" checked class="btn-toggle" data-id="' + data.ID + '" onchange="ChangeUserState(' + data.ID + ')"><span id="switchLabel"></span>'
+                            }
+
+                         return '<a href="#" class="btn btn-trash btn-grid">' +
+                                     '<i class="fa fa-trash btn-middle-icon"></i>' +
+                                   '</a> ' +
+                                   '<a href="/EditUser?uID=" class="btn btn-edit btn-grid"> '+
+                                     '<i class="fa fa-edit btn-middle-icon"></i>' +
+                                   '</a> ' + checkbox ;
                         }
                     }
                 ],
@@ -159,21 +180,45 @@
                     { className: 'dt-center', targets: [0,1,2,3,4,5] }
                 ]
             }).on('xhr', function (e, settings, json, xhr) {
-                $('#freezeOverlay').hide();
+                enableElements();
             });
 
             $("#btn-execute").click(function () {
                 table.clear().draw();
                 disableElements();
-                var customer = JSON.parse(sessionStorage.getItem("Customer"));
-                table.ajax.url('/User/GetData?cID=' + customer.ID).load();
+                table.ajax.reload();
+            });
+
+            $("#drpUserState").change(function () {
+                table.clear().draw();
+                disableElements();
+                table.ajax.reload();
             });
 
             function disableElements() {
                 $("#btn-execute").prop("disabled", true);
                 $('#freezeOverlay').show();
             }
+
+            function enableElements() {
+                $('#freezeOverlay').hide();
+                $("#btn-execute").prop("disabled", false);
+            }
         });
+
+        function ChangeUserState(userID) {
+            var checkbox = document.querySelector('[data-id="' + userID+'"]');
+            fetch('@Url.Action("ChangeUserState")', {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    userID: userID,
+                    state: checkbox.checked
+                })
+            }).then(response => response.json())
+              .then(data => checkbox.prop("checked", !checkbox.prop("checked")) )
+              .catch(error => console.error("Error:", error));
+        }
     </script>
 }
 
