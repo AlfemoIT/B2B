@@ -16,6 +16,7 @@ namespace B2B.Models
         public string Name { get; set; }
         public string Url { get; set; }
         public int Index { get; set; }
+        public bool IsManagement { get; set; }
 
         [JsonIgnore]
         public virtual PageCategory PageCategory { get; set; }

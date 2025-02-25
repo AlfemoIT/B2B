@@ -9,11 +9,11 @@ namespace B2B.Helper
     {
         public enum Role
         {
-            MagazaMuduru = 1,
-            SatisDanismani = 2,
-            Yatirimci = 3,
-            SatisIsGelistirmeDirektoru = 4,
-            TurkiyeSatisMuduru = 5,
+            TurkiyeSatisMuduru = 1,
+            Yatirimci = 2,
+            MagazaMuduru = 3,
+            SatisDanismani = 4,
+            SatisIsGelistirmeDirektoru = 5,
             BolgeMuduru = 6,
             PerakendelerMuduru = 7,
             TurkiyeSatisRaporlamaUzmanı = 8,

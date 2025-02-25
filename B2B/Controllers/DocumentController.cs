@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
 
@@ -49,6 +50,22 @@ namespace B2B.Controllers
                 Username = "Alf_mntj_user",
                 Password = "ALF6G#_@09yUr#s!"
             };
+
+            if (matnr.StartsWith("AL02"))
+            {
+                matnr = matnr.Substring(0, 11);
+            }
+
+            if (matnr.StartsWith("AL12"))
+            {
+                matnr = matnr.Substring(0, 11);
+
+                StringBuilder sb = new StringBuilder(matnr);
+                sb[2] = '0';
+                sb[3] = '2';
+
+                matnr = sb.ToString();
+            }
 
             var sonuc = client.AlfemoUrunPdf(hd, string.Join("-", "M", matnr));
             if (sonuc.Contains("404 Hata: Malzemenin teknik resmi yok."))

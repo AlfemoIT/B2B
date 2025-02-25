@@ -17,6 +17,7 @@ namespace B2B.Controllers
     {
         public ActionResult Index()
         {
+            TempData["Area"] = "ALFEMO";
             return View();
         }
         public PartialViewResult _SideBar()
@@ -25,7 +26,8 @@ namespace B2B.Controllers
             using (var context = new B2bContext())
             {
                 var categoriesWithPages = (from pa in context.PageAssignments.AsEnumerable().Where(pa => pa.UserID == user.ID)
-                                           join p in context.Pages on pa.Page.ID equals p.ID
+                                           join p in context.Pages.AsEnumerable().Where(p => p.IsManagement == false)
+                                           on pa.Page.ID equals p.ID
                                            join c in context.PageCategories on p.PageCategoryID equals c.ID
                                            group p by new { c.Name, c.Icon, c.Index } into g
                                            select new CategoryWithPagesDTO
@@ -69,9 +71,14 @@ namespace B2B.Controllers
 
                     return PartialView(new CustomerViewModel
                     {
+                        AreaTitle = "ALFEMO",
                         UserName = user.NameSurname,
                         RoleID = user.RoleID,
-                        Customers = customers
+                        Customers = customers,
+                        UserSubMenus = new List<UserSubMenu>() {
+                           new UserSubMenu{ Name = "Hesabım" , Url="/account"},
+                           new UserSubMenu{ Name = "Yönetim" , Url="/management"}
+                        }
                     });
                 }
 
@@ -93,9 +100,14 @@ namespace B2B.Controllers
 
                     return PartialView(new CustomerViewModel
                     {
+                        AreaTitle = "ALFEMO",
                         UserName = user.NameSurname,
                         RoleID = user.RoleID,
-                        Customers = customers
+                        Customers = customers,
+                        UserSubMenus = new List<UserSubMenu>() {
+                           new UserSubMenu{ Name = "Hesabım" , Url="/account"},
+                           //new UserSubMenu{ Name = "Yönetim" , Url="/management"}
+                        }
                     });
                 }
                 else
@@ -117,9 +129,13 @@ namespace B2B.Controllers
 
                     return PartialView(new CustomerViewModel
                     {
+                        AreaTitle = "ALFEMO",
                         UserName = user.NameSurname,
                         RoleID = user.RoleID,
-                        Customers = customers
+                        Customers = customers,
+                        UserSubMenus = new List<UserSubMenu>() {
+                           new UserSubMenu{ Name = "Hesabım" , Url="/account"}
+                        }
                     });
                 }
             }

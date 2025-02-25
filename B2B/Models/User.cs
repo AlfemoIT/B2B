@@ -21,6 +21,9 @@ namespace B2B.Models
         public string NameSurname { get; set; }
         public string Password { get; set; }
         public string Phone1 { get; set; }
+        public string Email { get; set; }
+        public bool IsDeleted { get; set; }
+        public bool IsActive { get; set; }
 
         [JsonIgnore]
         public virtual Role Role { get; set; }
