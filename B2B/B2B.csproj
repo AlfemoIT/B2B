@@ -413,6 +413,10 @@
     <Compile Include="Migrations\202502171045203_IsAciveAddUser.designer.cs">
       <DependentUpon>202502171045203_IsAciveAddUser.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202503051059058_AddPageIDToPage.cs" />
+    <Compile Include="Migrations\202503051059058_AddPageIDToPage.designer.cs">
+      <DependentUpon>202503051059058_AddPageIDToPage.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Chart\SalesOrderChart.cs" />
     <Compile Include="Models\Customer.cs" />
@@ -1121,6 +1125,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202502171045203_IsAciveAddUser.resx">
       <DependentUpon>202502171045203_IsAciveAddUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202503051059058_AddPageIDToPage.resx">
+      <DependentUpon>202503051059058_AddPageIDToPage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Resource.en-US.resx" />
     <EmbeddedResource Include="Resource.resx">
