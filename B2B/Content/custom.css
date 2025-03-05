@@ -593,3 +593,27 @@ a {
 div.sticky-queue {
     border-color: rgb(151 151 151);
 }
+
+.img-in-btn {
+    position: relative;
+    right: 9px;
+    bottom: 4px;
+}
+
+.btn-trash {
+    background-color: #e2a2a8;
+}
+
+.btn-edit {
+    background: #89b9d2;
+}
+
+.btn-grid {
+    position: relative;
+    bottom: 7px;
+}
+
+.btn-toggle {
+    position: relative;
+    top: 2px;
+}
