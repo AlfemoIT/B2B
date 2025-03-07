@@ -617,3 +617,12 @@ div.sticky-queue {
     position: relative;
     top: 2px;
 }
+
+.select2-container--default .select2-selection--multiple .select2-selection__choice {
+    background-color: #fbfbfb;
+    border: 1px solid #ccc;
+}
+
+.select2-container--default .select2-selection--multiple .select2-selection__choice__remove {
+    border-right: 1px solid #ccc;
+}

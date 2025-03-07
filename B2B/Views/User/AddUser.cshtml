@@ -1,6 +1,6 @@
 ﻿
 @{
-    ViewBag.Title = "AddUser";
+    ViewBag.Title = "Yeni Kullanıcı";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -31,22 +31,37 @@
 
     <form class="form-horizontal">
         <fieldset>
+
             <div class="form-group">
-                <label class="control-label col-sm-2">Kullanıcı:</label>
+                <label for="u_musteri" class="control-label col-sm-2">Kullanıcı Grup: <span style="color: red;">*</span> </label>
+                <div class="col-sm-8">
+                    @Html.DropDownList("u_usergroup", Model.UserGroups, new { @class = "form-control", id = "u_usergroup", style = "width: 100%;" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-sm-2">Kullanıcı: <span style="color: red;">*</span> </label>
                 <div class="col-sm-8">
                     @Html.TextBox("u_user", "", new { @class = "input-xlarge form-control", id = "u_user", placeholder = "" })
                 </div>
             </div>
 
             <div class="form-group">
-                <label class="control-label col-sm-2">Ad Soyad:</label>
+                <label class="control-label col-sm-2">Ad Soyad: <span style="color: red;">*</span> </label>
                 <div class="col-sm-8">
                     @Html.TextBox("u_name", "", new { @class = "input-xlarge form-control", id = "u_name", placeholder = "" })
                 </div>
             </div>
 
+            <div class="form-group">
+                <label for="u_role" class="control-label col-sm-2">Rol: <span style="color: red;">*</span> </label>
+                <div class="col-sm-8">
+                    @Html.DropDownList("u_role", Model.Roles, new { @class = "form-control", id = "u_role", style = "width: 100%;" })
+                </div>
+            </div>
+
             <div class="form-group margin-bottom-5">
-                <label for="u_password" class="control-label col-sm-2">Şifre:</label>
+                <label for="u_password" class="control-label col-sm-2">Şifre: <span style="color: red;">*</span> </label>
                 <div class="col-sm-8">
                     <div class="sepH_b height-40">
                         @Html.TextBox("u_password", "", new { @class = "input-xlarge form-control", id = "u_password", placeholder = "" })
@@ -60,7 +75,7 @@
             </div>
 
             <div class="form-group">
-                <label for="u_password" class="control-label col-sm-2">Şifre Tekrar:</label>
+                <label for="u_password" class="control-label col-sm-2">Şifre Tekrar: <span style="color: red;">*</span> </label>
                 <div class="col-sm-8">
                     <div class="sepH_b height-40">
                         @Html.TextBox("u_password_re", "", new { @class = "input-xlarge form-control", id = "u_password_re", placeholder = "", Type = "password" })
@@ -90,30 +105,16 @@
             </div>
 
             <div class="form-group">
-                <label for="u_role" class="control-label col-sm-2">Rol:</label>
+                <label for="u_musteri" class="control-label col-sm-2">Mağaza: <span style="color: red;">*</span> </label>
                 <div class="col-sm-8">
-                    @Html.DropDownList("u_role", Model.Roles, new { @class = "form-control", id = "u_role" })
+                    @Html.DropDownList("u_customer", Model.Customers, new { @class = "form-control", id = "u_customer", style = "width: 100%;" })
                 </div>
             </div>
 
             <div class="form-group">
-                <label for="u_musteri" class="control-label col-sm-2">Mağaza:</label>
+                <label for="u_musteri" class="control-label col-sm-2">Sayfa: <span style="color: red;">*</span> </label>
                 <div class="col-sm-8">
-                    @Html.DropDownList("u_customer", Model.Customers, new { @class = "form-control", id = "u_customer" })
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label for="u_musteri" class="control-label col-sm-2">Kullanıcı Grup:</label>
-                <div class="col-sm-8">
-                    @Html.DropDownList("u_usergroup", Model.UserGroups, new { @class = "form-control", id = "u_usergroup" })
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label for="u_musteri" class="control-label col-sm-2">Sayfa Yetkileri:</label>
-                <div class="col-sm-8">
-                    @Html.DropDownList("u_page", Model.Pages, new { @class = "form-control", id = "u_page" })
+                    @Html.DropDownList("u_page", Model.Pages, new { id = "u_page", name = "states[]", multiple = "multiple", style = "width: 100%;" })
                 </div>
             </div>
 
@@ -122,6 +123,7 @@
                     <a class="btn btn-default btn-red" type="submit" id="btnSave">Kaydet</a>
                 </div>
             </div>
+
         </fieldset>
     </form>
 
@@ -152,7 +154,6 @@
         });
 
         $('#u_page').select2({
-            placeholder: 'Seçiniz',
             allowClear: true
         });
 
@@ -190,8 +191,23 @@
                 }
             });
 
-            var isValidate = true;
+          
             document.getElementById("btnSave").addEventListener("click", function () {
+                var isValidate = true;
+                if ($("#u_user").val() == null || $("#u_user").val() == '' ||
+                    $("#u_name").val() == null || $("#u_name").val() == '' ||
+                    $("#u_password").val() == null || $("#u_password").val() == '' ||
+                    $("#u_role").val() == null || $("#u_role").val() == '' ||
+                    $("#u_customer").val() == null || $("#u_customer").val() == '' ||
+                    $("#u_page").val() == null || $("#u_page").val() == '')
+                {
+                    $(".sticky-note").text("Zorunlu alanların doldurulması gerekmektedir.")
+                    $(".sticky-note").removeClass("text-success");
+                    $(".sticky-note").addClass("text-error");
+                    $(".sticky-queue").removeClass("hidden");
+                    isValidate = false;
+                }
+
                 var password = $("#u_password").val();
                 if (password) {
                     var hasUpperCase = /[A-Z]/.test(password);
@@ -225,18 +241,26 @@
                         SelectedRole: $("#u_role").val(),
                         SelectedCustomer: $("#u_customer").val(),
                         SelectedUserGroup: $("#u_usergroup").val(),
-                        SelectedPage: $("#u_page").val()
+                        SelectedPage: $('#u_page').val().join(",")
                     };
 
                     $.ajax({
-                        url: "/Account/Save",
+                        url: "/User/Save",
                         type: "POST",
                         contentType: "application/json",
                         data: JSON.stringify(userData),
                         success: function (response) {
-                            $(".sticky-note").addClass("text-success");
-                            $(".sticky-note").text("İşlem Başarılı")
-                            $(".sticky-queue").removeClass("hidden");
+                            if (response.result) {
+                                $(".sticky-note").addClass("text-success");
+                                $(".sticky-note").text("İşlem Başarılı")
+                                $(".sticky-queue").removeClass("hidden");
+                            }
+                            else {
+                                $(".sticky-note").text(response.message)
+                                $(".sticky-note").removeClass("text-success");
+                                $(".sticky-note").addClass("text-error");
+                                $(".sticky-queue").removeClass("hidden");
+                            }
                         },
                         error: function (xhr, status, error) {
                             $(".sticky-note").addClass("text-error");
@@ -246,13 +270,6 @@
                     });
                 }
             });
-
-            //function Clear() {
-            //    $("#u_password").val('');
-            //    $("#u_email").val('');
-            //    $("#u_phone").val();
-            //    $("#s_password_re").val();
-            //}
         });
     </script>
 }

@@ -83,13 +83,16 @@ namespace B2B.Controllers
         {
             List<Roles> SQLRoleList = new List<Roles>();
             List<Customers> SQLCustomerList = new List<Customers>();
+            List<UserGroups> SQLUserGroupList = new List<UserGroups>();
+            List<Pages> SQLPageList = new List<Pages>();
 
             var userModel = new UserViewModel();
             using (var context = new B2bContext())
             {
                 SQLRoleList = context.Roles.Select(p => new Roles { Id = p.ID, Name = p.Name }).ToList();
-
                 SQLCustomerList = context.Customers.Select(p => new Customers { Id = p.ID, Name = p.Name }).ToList();
+                SQLUserGroupList = context.UserGroups.Select(c => new UserGroups { Id = c.ID, Name = c.Name }).ToList();
+                SQLPageList = context.Pages.Select(c => new Pages { Id = c.ID, Name = c.Name }).ToList();
 
                 userModel = (from _user in context.Users.AsEnumerable()
                              join role in context.Roles.AsEnumerable()
@@ -105,6 +108,7 @@ namespace B2B.Controllers
                                  Phone = _user.Phone1,
                                  Role = role.Name,
 
+                                 // Roles
                                  SelectedRole = SQLRoleList.Find(p => p.Id == _user.RoleID).Id.ToString(),
 
                                  Roles = SQLRoleList.Select(c => new SelectListItem
@@ -113,9 +117,28 @@ namespace B2B.Controllers
                                      Text = c.Name
                                  }).ToList(),
 
+                                 // Customers
                                  SelectedCustomer = SQLCustomerList.Find(p => p.Id == _customera.CustomerID).Id.ToString(),
 
                                  Customers = SQLCustomerList.Select(c => new SelectListItem
+                                 {
+                                     Value = c.Id.ToString(),
+                                     Text = c.Name
+                                 }).ToList(),
+
+                                 // User Groups
+                                 SelectedUserGroup = SQLUserGroupList.Find(p => p.Id == _user.UserGroupID).Id.ToString(),
+
+                                 UserGroups = SQLUserGroupList.Select(c => new SelectListItem
+                                 {
+                                     Value = c.Id.ToString(),
+                                     Text = c.Name
+                                 }).ToList(),
+
+                                 // Pages
+                                 SelectedPages = SQLPageList.Select(p => p.Id).ToList(),
+
+                                 Pages = SQLPageList.Select(c => new SelectListItem
                                  {
                                      Value = c.Id.ToString(),
                                      Text = c.Name
@@ -123,6 +146,9 @@ namespace B2B.Controllers
 
                              }).FirstOrDefault();
             };
+
+            //List<int> listDeneme = SQLPageList.Where(p => p.).ToList();
+
             return View(userModel);
         }
 
@@ -187,7 +213,7 @@ namespace B2B.Controllers
                     Text = c.Name
                 }).ToList();
 
-                userModel.Pages.Add(new SelectListItem { Text = "Seçiniz", Value = "", Selected = true });
+                //userModel.Pages.Add(new SelectListItem { Text = "Seçiniz", Value = "", Selected = true });
             }
             
             return View(userModel);
@@ -198,12 +224,16 @@ namespace B2B.Controllers
         {
             using (var context = new B2bContext())
             {
+                var jsonResult = Json(new { result = true, message = "Kayıt İşlemi Başarılı" }, JsonRequestBehavior.AllowGet);
+                jsonResult.MaxJsonLength = int.MaxValue;
+
                 // User 
-                var userData = context.Users.Where(x => x.RegistrationNo == user.RegistrationNo && x.Password == user.Password).FirstOrDefault();
-                
+                var userData = context.Users
+                                        .Where(x => x.RegistrationNo == user.RegistrationNo && x.Password == user.Password)
+                                        .FirstOrDefault();
                 if (userData != null)
                 {
-                    // Uyarı mesajı
+                    jsonResult = Json(new { result = false, message = "Bu kullanıcı zaten bulunmaktadır" }, JsonRequestBehavior.AllowGet);
                 }
                 else
                 {
@@ -216,52 +246,39 @@ namespace B2B.Controllers
                         Phone1 = user.Phone,
                         RoleID = int.Parse(user.SelectedRole),
                         UserGroupID = int.Parse(user.SelectedUserGroup),
+                        IsActive = true
                     };
 
                     context.Users.Add(newUser);
                     context.SaveChanges();
 
                     // Page Assignment
-                    var page_assignment = context.PageAssignments.Where(x => x.Page.ID == int.Parse(user.SelectedPage) && x.UserID == newUser.ID).FirstOrDefault();
+                    string[] selectedPages = user.SelectedPage.Split(',');
 
-                    if (page_assignment != null)
+                    foreach (string page in selectedPages)
                     {
-                        // Uyarı mesajı
-                    }
-                    else
-                    {
+                        int selectedPageID = int.Parse(page);
                         var newPage = new PageAssignment()
                         {
-                            //Page
-                            //UserID = usID
+                            UserID = newUser.ID,
+                            PageID = selectedPageID
                         };
 
                         context.PageAssignments.Add(newPage);
                         context.SaveChanges();
                     }
 
-                    // User Group Assignment
-                    var usergroup_assignment = context.CustomerAssignments.Where(x => x.CustomerID == int.Parse(user.SelectedCustomer) && x.UserID == newUser.ID).FirstOrDefault();
-
-                    if (usergroup_assignment != null)
+                    // Customer Assignment
+                    int selectedCustomerID = int.Parse(user.SelectedCustomer);
+                    var newUserGroup = new CustomerAssignment()
                     {
-                        // Uyarı mesajı
-                    }
-                    else
-                    {
-                        var newUserGroup = new PageAssignment()
-                        {
-                            //Page
-                            //UserID = usID
-                        };
+                        UserID = newUser.ID,
+                        CustomerID = selectedCustomerID
+                    };
 
-                        context.PageAssignments.Add(newUserGroup);
-                        context.SaveChanges();
-                    }
+                    context.CustomerAssignments.Add(newUserGroup);
+                    context.SaveChanges();
                 }
-
-                var jsonResult = Json(new { data = "success" }, JsonRequestBehavior.AllowGet);
-                jsonResult.MaxJsonLength = int.MaxValue;
                 return jsonResult;
             }
         }

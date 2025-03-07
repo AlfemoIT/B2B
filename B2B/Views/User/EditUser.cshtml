@@ -31,6 +31,15 @@
 
     <form class="form-horizontal">
         <fieldset>
+
+            <div class="form-group">
+                <label for="u_musteri" class="control-label col-sm-2">Kullanıcı Grup: <span style="color: red;">*</span> </label>
+                <div class="col-sm-8">
+                    @*@Html.DropDownList("u_usergroup", Model.UserGroups, new { @class = "form-control", id = "u_usergroup", style = "width: 100%;" })*@
+                    @Html.DropDownListFor(model => model.SelectedUserGroup, Model.UserGroups, new { @class = "form-control", id = "drpUserGroup" })
+                </div>
+            </div>
+
             <div class="form-group">
                 <label class="control-label col-sm-2">Kullanıcı:</label>
                 <div class="col-sm-10">
@@ -40,21 +49,19 @@
                 </div>
             </div>
 
-            @*<div class="form-group">
-                <label class="control-label col-sm-2">Role:</label>
-                <div class="col-sm-10">
-                    <p class="form-control-static">
-                        @Model.Role
-                    </p>
-                </div>
-            </div>*@
-
             <div class="form-group">
                 <label class="control-label col-sm-2">Ad Soyad:</label>
                 <div class="col-sm-10">
                     <p class="form-control-static" id="u_name">
                         @Model.NameSurname
                     </p>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="u_role" class="control-label col-sm-2">Rol:</label>
+                <div class="col-sm-8">
+                    @Html.DropDownListFor(model => model.SelectedRole, Model.Roles, new { @class = "form-control", id = "drpRole" })
                 </div>
             </div>
 
@@ -104,16 +111,18 @@
             </div>
 
             <div class="form-group">
-                <label for="u_role" class="control-label col-sm-2">Rol:</label>
+                <label for="u_musteri" class="control-label col-sm-2">Mağaza:</label>
                 <div class="col-sm-8">
-                    @Html.DropDownListFor(model => model.SelectedRole, Model.Roles, new { @class = "form-control", id = "drpRole" })
+                    @Html.DropDownListFor(model => model.SelectedCustomer, Model.Customers, new { @class = "form-control", id = "drpCustomer" })
                 </div>
             </div>
 
             <div class="form-group">
-                <label for="u_musteri" class="control-label col-sm-2">Mağaza:</label>
+                <label for="u_musteri" class="control-label col-sm-2">Sayfa: <span style="color: red;">*</span> </label>
                 <div class="col-sm-8">
-                    @Html.DropDownListFor(model => model.SelectedCustomer, Model.Customers, new { @class = "form-control", id = "drpCustomer" })
+                    @*@Html.DropDownList("u_page", Model.Pages, new { id = "u_page", name = "states[]", multiple = "multiple", style = "width: 100%;" })*@
+                    @Html.DropDownListFor(model => model.SelectedPages, Model.Pages, new { id = "drpPage", name = "states[]", multiple = "multiple", style = "width: 100%;" })
+
                 </div>
             </div>
 
@@ -143,6 +152,15 @@
 
         $('#drpCustomer').select2({
             placeholder: 'Seçiniz',
+            allowClear: true
+        });
+
+        $('#drpUserGroup').select2({
+            placeholder: 'Seçiniz',
+            allowClear: true
+        });
+
+        $('#drpPage').select2({
             allowClear: true
         });
 

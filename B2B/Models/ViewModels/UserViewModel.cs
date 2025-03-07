@@ -23,6 +23,7 @@ namespace B2B.Models.ViewModels
         public string SelectedUserGroup { get; set; }
         public List<SelectListItem> UserGroups { get; set; }
         public string SelectedPage { get; set; }
+        public List<int> SelectedPages { get; set; }
         public List<SelectListItem> Pages { get; set; }
     }
 }
