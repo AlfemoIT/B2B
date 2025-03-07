@@ -83,84 +83,102 @@ namespace B2B.Controllers
         {
             List<Roles> SQLRoleList = new List<Roles>();
             List<Customers> SQLCustomerList = new List<Customers>();
-            List<UserGroups> SQLUserGroupList = new List<UserGroups>();
-            List<Pages> SQLPageList = new List<Pages>();
 
             var userModel = new UserViewModel();
             using (var context = new B2bContext())
             {
                 SQLRoleList = context.Roles.Select(p => new Roles { Id = p.ID, Name = p.Name }).ToList();
                 SQLCustomerList = context.Customers.Select(p => new Customers { Id = p.ID, Name = p.Name }).ToList();
-                SQLUserGroupList = context.UserGroups.Select(c => new UserGroups { Id = c.ID, Name = c.Name }).ToList();
-                SQLPageList = context.Pages.Select(c => new Pages { Id = c.ID, Name = c.Name }).ToList();
+
+                var userGroups = context.UserGroups
+                                    .Select(c => new SelectListItem
+                                    {
+                                        Value = c.ID.ToString(),
+                                        Text = c.Name
+                                    }).ToList();
+
+                var pages = context.Pages
+                               .Select(c => new SelectListItem
+                               {
+                                   Value = c.ID.ToString(),
+                                   Text = c.Name
+                               }).ToList();
+
+                //userModel = (from _user in context.Users.AsEnumerable()
+                //             join role in context.Roles.AsEnumerable()
+                //             on _user.RoleID equals role.ID
+                //             join _customera in context.CustomerAssignments.AsEnumerable()
+                //             on _user.ID equals _customera.UserID
+                //             where _user.ID == int.Parse(userID)
+
+                //             select new UserViewModel
+                //             {
+                //                 RegistrationNo = _user.RegistrationNo,
+                //                 NameSurname = _user.NameSurname,
+                //                 Eposta = _user.Email,
+                //                 Phone = _user.Phone1,
+                //                 Role = role.Name,
+
+                //                 // Roles
+                //                 SelectedRole = SQLRoleList.Find(p => p.Id == _user.RoleID).Id.ToString(),
+
+                //                 Roles = SQLRoleList.Select(c => new SelectListItem
+                //                 {
+                //                     Value = c.Id.ToString(),
+                //                     Text = c.Name
+                //                 }).ToList(),
+
+                //                 // Customers
+                //                 SelectedCustomer = SQLCustomerList.Find(p => p.Id == _customera.CustomerID).Id.ToString(),
+
+                //                 Customers = SQLCustomerList.Select(c => new SelectListItem
+                //                 {
+                //                     Value = c.Id.ToString(),
+                //                     Text = c.Name
+                //                 }).ToList(),
+
+                //                 // User Groups
+                //                 SelectedUserGroup = SQLUserGroupList.Find(p => p.Id == _user.UserGroupID).Id.ToString(),
+
+                //                 UserGroups = SQLUserGroupList.Select(c => new SelectListItem
+                //                 {
+                //                     Value = c.Id.ToString(),
+                //                     Text = c.Name
+                //                 }).ToList(),
+
+                //                 // Pages
+                //                 SelectedPages = SQLPageList.Select(p => p.Id).ToList(),
+
+                //                 Pages = SQLPageList.Select(c => new SelectListItem
+                //                 {
+                //                     Value = c.Id.ToString(),
+                //                     Text = c.Name
+                //                 }).ToList()
+
+                //             }).FirstOrDefault();
 
                 userModel = (from _user in context.Users.AsEnumerable()
-                             join role in context.Roles.AsEnumerable()
-                             on _user.RoleID equals role.ID
-                             join _customera in context.CustomerAssignments.AsEnumerable()
-                             on _user.ID equals _customera.UserID
+                             join userGrp in context.UserGroups.AsEnumerable()
+                             on _user.UserGroupID equals userGrp.ID
+                             join page in context.PageAssignments.AsEnumerable()
+                             on _user.ID equals page.UserID
                              where _user.ID == int.Parse(userID)
+                             group _user by new { _user.ID, } into g
                              select new UserViewModel
                              {
-                                 RegistrationNo = _user.RegistrationNo,
-                                 NameSurname = _user.NameSurname,
-                                 Eposta = _user.Email,
-                                 Phone = _user.Phone1,
-                                 Role = role.Name,
+                                 RegistrationNo = g.FirstOrDefault().RegistrationNo,
+                                 NameSurname = g.FirstOrDefault().NameSurname,
+                                 Eposta = g.FirstOrDefault().Email,
+                                 Phone = g.FirstOrDefault().Phone1,
 
-                                 // Roles
-                                 SelectedRole = SQLRoleList.Find(p => p.Id == _user.RoleID).Id.ToString(),
+                                 SelectedUserGroup = g.FirstOrDefault().UserGroupID.ToString(),
+                                 UserGroups = userGroups,
 
-                                 Roles = SQLRoleList.Select(c => new SelectListItem
-                                 {
-                                     Value = c.Id.ToString(),
-                                     Text = c.Name
-                                 }).ToList(),
-
-                                 // Customers
-                                 SelectedCustomer = SQLCustomerList.Find(p => p.Id == _customera.CustomerID).Id.ToString(),
-
-                                 Customers = SQLCustomerList.Select(c => new SelectListItem
-                                 {
-                                     Value = c.Id.ToString(),
-                                     Text = c.Name
-                                 }).ToList(),
-
-                                 // User Groups
-                                 SelectedUserGroup = SQLUserGroupList.Find(p => p.Id == _user.UserGroupID).Id.ToString(),
-
-                                 UserGroups = SQLUserGroupList.Select(c => new SelectListItem
-                                 {
-                                     Value = c.Id.ToString(),
-                                     Text = c.Name
-                                 }).ToList(),
-
-                                 // Pages
-                                 SelectedPages = SQLPageList.Select(p => p.Id).ToList(),
-
-                                 Pages = SQLPageList.Select(c => new SelectListItem
-                                 {
-                                     Value = c.Id.ToString(),
-                                     Text = c.Name
-                                 }).ToList()
-
+                                 SelectedPages = g.FirstOrDefault().PageAssignment.Select(x => x.PageID).ToList(),
+                                 Pages = pages
                              }).FirstOrDefault();
             };
-
-            //List<int> listDeneme = SQLPageList.Where(p => p.).ToList();
-
             return View(userModel);
-        }
-
-        public User GetUser()
-        {
-            var formsIdentity = HttpContext.User.Identity as FormsIdentity;
-            if (formsIdentity == null) { return null; }
-
-            var ticket = formsIdentity.Ticket;
-            var userData = ticket.UserData;
-            var user = JsonConvert.DeserializeObject<User>(userData);
-            return user;
         }
 
         public ActionResult AddUser()
@@ -215,7 +233,7 @@ namespace B2B.Controllers
 
                 //userModel.Pages.Add(new SelectListItem { Text = "Seçiniz", Value = "", Selected = true });
             }
-            
+
             return View(userModel);
         }
 
@@ -281,6 +299,17 @@ namespace B2B.Controllers
                 }
                 return jsonResult;
             }
+        }
+
+        public User GetUser()
+        {
+            var formsIdentity = HttpContext.User.Identity as FormsIdentity;
+            if (formsIdentity == null) { return null; }
+
+            var ticket = formsIdentity.Ticket;
+            var userData = ticket.UserData;
+            var user = JsonConvert.DeserializeObject<User>(userData);
+            return user;
         }
 
         public class Roles
