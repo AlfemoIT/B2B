@@ -94,6 +94,7 @@
                 <label for="u_fname" class="control-label col-sm-2">Telefon:</label>
                 <div class="col-sm-8">
                     @Html.TextBox("u_phone", "", new { @class = "input-xlarge form-control", id = "u_phone" })
+                    <span id="phoneNumberError" style="color: red; display: none;">Geçerli bir telefon numarası giriniz</span>
                 </div>
             </div>
 
@@ -101,6 +102,7 @@
                 <label for="u_email" class="control-label col-sm-2">E-Posta:</label>
                 <div class="col-sm-8">
                     @Html.TextBox("u_email", "", new { @class = "input-xlarge form-control", id = "u_email" })
+                    <span id="emailError" style="color: red; display: none;">Geçerli bir e-posta adresi giriniz</span>
                 </div>
             </div>
 
@@ -135,9 +137,41 @@
     </div>
 </div>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.7/jquery.inputmask.min.js"></script>
+
 @section Scripts{
     <script type="text/javascript">
         $(function () {
+
+            $(document).ready(function () {
+
+                $('#u_email').on('input', function () {
+                    var email = $(this).val();
+                    var emailRegex = /^[a-zA-Z0-9._%+-]+@@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+                    if (emailRegex.test(email) || email == null || email == '') {
+                        $('#emailError').hide();    // Hide error message if valid
+                    } else {
+                        $('#emailError').show();    // Show error message if invalid
+                    }
+                });
+            });
+
+            $(document).ready(function () {
+                $('#u_phone').on('input', function () {
+                    var phoneNumber = $(this).val();
+                    var phoneRegex = /^[0-9]{10}$/;
+
+                    if (phoneRegex.test(phoneNumber) || phoneNumber == null || phoneNumber == '') {
+                        $('#phoneNumberError').hide();
+                    } else {
+                        $('#phoneNumberError').show();
+
+                    }
+                });
+            });
+
+
             $('#u_role').select2({
                 placeholder: 'Seçiniz',
                 allowClear: true
@@ -198,8 +232,7 @@
                     $("#u_password").val() == null || $("#u_password").val() == '' ||
                     $("#u_role").val() == null || $("#u_role").val() == '' ||
                     $("#u_customer").val() == null || $("#u_customer").val() == '' ||
-                    $("#u_page").val() == null || $("#u_page").val() == '')
-                {
+                    $("#u_page").val() == null || $("#u_page").val() == '') {
                     $(".sticky-note").text("Zorunlu alanların doldurulması gerekmektedir.")
                     $(".sticky-note").removeClass("text-success");
                     $(".sticky-note").addClass("text-error");

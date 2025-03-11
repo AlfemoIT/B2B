@@ -14,6 +14,7 @@ namespace B2B.Models
         }
         public int ID { get; set; }
         public string Name { get; set; }
+        public int Index { get; set; }
 
         [JsonIgnore]
         public ICollection<User> Users { get; set; }

@@ -417,6 +417,10 @@
     <Compile Include="Migrations\202503051059058_AddPageIDToPage.designer.cs">
       <DependentUpon>202503051059058_AddPageIDToPage.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202503110726304_AddIndexToRole.cs" />
+    <Compile Include="Migrations\202503110726304_AddIndexToRole.designer.cs">
+      <DependentUpon>202503110726304_AddIndexToRole.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Chart\SalesOrderChart.cs" />
     <Compile Include="Models\Customer.cs" />
@@ -1130,6 +1134,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202503051059058_AddPageIDToPage.resx">
       <DependentUpon>202503051059058_AddPageIDToPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202503110726304_AddIndexToRole.resx">
+      <DependentUpon>202503110726304_AddIndexToRole.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Resource.en-US.resx" />
     <EmbeddedResource Include="Resource.resx">

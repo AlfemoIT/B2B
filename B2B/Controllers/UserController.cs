@@ -91,7 +91,15 @@ namespace B2B.Controllers
                         Text = c.Name
                     }).ToList();
 
+                int _userID = GetUser().ID;
+                int userRoleIndex = (from user in context.Users
+                                     join role in context.Roles
+                                     on user.RoleID equals role.ID
+                                     where user.ID == _userID
+                                     select role.Index).FirstOrDefault();
+
                 var roles = context.Roles
+                    .Where(c => c.Index >= userRoleIndex)
                     .Select(c => new SelectListItem
                     {
                         Value = c.ID.ToString(),
@@ -184,7 +192,16 @@ namespace B2B.Controllers
 
                 userGroups.Add(new SelectListItem { Text = "Seçiniz", Value = "", Selected = true });
 
+                int userID = GetUser().ID;     
+                
+                int userRoleIndex = (from user in context.Users
+                                    join role in context.Roles
+                                    on user.RoleID equals role.ID
+                                    where user.ID == userID
+                                    select role.Index).FirstOrDefault();
+
                 var roles = context.Roles
+                    .Where(c => c.Index >= userRoleIndex)
                     .Select(c => new SelectListItem
                     {
                         Value = c.ID.ToString(),
