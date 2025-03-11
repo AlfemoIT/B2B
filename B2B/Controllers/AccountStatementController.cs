@@ -19,6 +19,7 @@ namespace B2B.Controllers
             return View();
         }
 
+
         [HttpGet]
         public JsonResult GetData(string iv_kunnr)
         {

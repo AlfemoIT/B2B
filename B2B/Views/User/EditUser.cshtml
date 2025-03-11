@@ -1,0 +1,261 @@
+﻿
+@{
+    ViewBag.Title = "Alfemo";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model B2B.Models.ViewModels.UserViewModel
+
+<div id="jCrumbs" class="breadCrumb module">
+    <ul>
+        <li>
+            <a href="/Home/Index">
+                <i class="glyphicon glyphicon-home"></i>
+            </a>
+        </li>
+        <li style="background: none;">
+            <span style="width: 50px;"><a href="#" style="width: 83px;">İşlemler</a></span>
+            <div class="chevronOverlay" style="display: block;"></div>
+        </li>
+        <li>
+            Kullanıcılar
+        </li>
+        <li>
+            Düzenle
+        </li>
+    </ul>
+</div>
+
+<div class="col-sm-6 col-md-6 col-lg-6">
+    @Html.Raw(ViewBag.Message)
+
+    <form class="form-horizontal">
+        <fieldset>
+
+            <div class="form-group">
+                <label for="u_musteri" class="control-label col-sm-2">Kullanıcı Grup: <span style="color: red;">*</span> </label>
+                <div class="col-sm-8">
+                    @Html.DropDownListFor(model => model.SelectedUserGroup, Model.UserGroups, new { @class = "form-control", id = "drpUserGroup", style = "width: 100%;" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-sm-2">Kullanıcı:</label>
+                <div class="col-sm-10">
+                    <p class="form-control-static">
+                        <strong style="color: #c72a38;" id="u_registration">@Model.RegistrationNo</strong>
+                    </p>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-sm-2">Ad Soyad:</label>
+                <div class="col-sm-10">
+                    <p class="form-control-static" id="u_name">
+                        @Model.NameSurname
+                    </p>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="u_role" class="control-label col-sm-2">Rol: <span style="color: red;">*</span> </label>
+                <div class="col-sm-8">
+                    @Html.DropDownListFor(model => model.SelectedRole, Model.Roles, new { @class = "form-control", id = "drpRole", style = "width: 100%;" })
+                </div>
+            </div>
+
+            <div class="form-group margin-bottom-5">
+                <label for="u_password" class="control-label col-sm-2">Yeni Şifre: <span style="color: red;">*</span> </label>
+                <div class="col-sm-8">
+                    <div class="sepH_b height-40">
+                        @Html.PasswordFor(model => model.Password, new { @class = "input-xlarge form-control", id = "u_password" })
+
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default btn-eye" id="togglePassword">
+                                <i class="glyphicon glyphicon-eye-open"></i>
+                            </button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="u_password" class="control-label col-sm-2">Şifre Tekrar: <span style="color: red;">*</span> </label>
+                <div class="col-sm-8">
+                    <div class="sepH_b height-40">
+                        <input id="s_password_re" class="input-xlarge form-control" type="password">
+                        <span class="help-block">Şifrenizde büyük harf, küçük harf, rakam ve özel sembol kullanın</span>
+
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default btn-eye-repeat" id="togglePasswordRepeat">
+                                <i class="glyphicon glyphicon-eye-open"></i>
+                            </button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="u_fname" class="control-label col-sm-2">Telefon:</label>
+                <div class="col-sm-8">
+                    @Html.TextBoxFor(model => model.Phone, new { @class = "input-xlarge form-control", id = "u_phone" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="u_email" class="control-label col-sm-2">E-Posta:</label>
+                <div class="col-sm-8">
+                    @Html.TextBoxFor(model => model.Eposta, new { @class = "input-xlarge form-control", id = "u_email", type = "email" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="u_musteri" class="control-label col-sm-2">Mağaza: <span style="color: red;">*</span> </label>
+                <div class="col-sm-8">
+                    @Html.DropDownListFor(model => model.SelectedCustomer, Model.Customers, new { @class = "form-control", id = "drpCustomer", style = "width: 100%;" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="u_musteri" class="control-label col-sm-2">Sayfa: <span style="color: red;">*</span> </label>
+                <div class="col-sm-8">
+                    @Html.DropDownListFor(model => model.SelectedPages, Model.Pages, new { id = "drpPage", multiple = "multiple", style = "width: 100%;" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-8 col-sm-offset-2">
+                    <a class="btn btn-default btn-red" type="submit" id="btnSave">Kaydet</a>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+
+    <div class="sticky-queue top-center hidden">
+        <div class="sticky border-top-center" style="height: 18px; display: block;">
+            <span class="close st-close" title="Close">×</span>
+            <div class="sticky-note"></div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script type="text/javascript">
+        $(function () {
+            $('#drpRole').select2({
+                placeholder: 'Seçiniz',
+                allowClear: true
+            });
+
+            $('#drpCustomer').select2({
+                placeholder: 'Seçiniz',
+                allowClear: true
+            });
+
+            $('#drpUserGroup').select2({
+                placeholder: 'Seçiniz',
+                allowClear: true
+            });
+
+            $('#drpPage').select2({
+                allowClear: true
+            });
+
+            $(".st-close").click(function () {
+                $(".sticky-queue").addClass("hidden");
+            });
+
+            let selectedPages = @Html.Raw(Json.Encode(Model.SelectedPages));
+            $("#drpPage").val(selectedPages).trigger('change');
+
+            document.getElementById("togglePassword").addEventListener("click", function () {
+                var passwordField = document.getElementById("u_password");
+                var icon = this.querySelector("i");
+
+                if (passwordField.type === "password") {
+                    passwordField.type = "text";
+                    icon.classList.remove("glyphicon-eye-open");
+                    icon.classList.add("glyphicon-eye-close");
+                } else {
+                    passwordField.type = "password";
+                    icon.classList.remove("glyphicon-eye-close");
+                    icon.classList.add("glyphicon-eye-open");
+                }
+            });
+
+            document.getElementById("togglePasswordRepeat").addEventListener("click", function () {
+                var passwordField = document.getElementById("s_password_re");
+                var icon = this.querySelector("i");
+
+                if (passwordField.type === "password") {
+                    passwordField.type = "text";
+                    icon.classList.remove("glyphicon-eye-open");
+                    icon.classList.add("glyphicon-eye-close");
+                } else {
+                    passwordField.type = "password";
+                    icon.classList.remove("glyphicon-eye-close");
+                    icon.classList.add("glyphicon-eye-open");
+                }
+            });
+
+            var isValidate = true;
+            document.getElementById("btnSave").addEventListener("click", function () {
+                var password = $("#u_password").val();
+                if (password) {
+                    var hasUpperCase = /[A-Z]/.test(password);
+                    var hasLowerCase = /[a-z]/.test(password);
+                    var hasNumber = /[0-9]/.test(password);
+                    var hasSpecialChar = /[!#$%^&*(),.?":{}|<>]/.test(password);
+
+                    if (!hasUpperCase || !hasLowerCase || !hasNumber || !hasSpecialChar) {
+                        $(".sticky-note").text("Lütfen şifrenizde büyük harf, küçük harf, rakam ve özel sembol kullanın")
+                        $(".sticky-note").removeClass("text-success");
+                        $(".sticky-note").addClass("text-error");
+                        $(".sticky-queue").removeClass("hidden");
+                        isValidate = false;
+                    }
+                    else if (password != $("#s_password_re").val()) {
+                        $(".sticky-note").text("Girilien şifreler birbiriyle uyuşmamaktadır.")
+                        $(".sticky-note").removeClass("text-success");
+                        $(".sticky-note").addClass("text-error");
+                        $(".sticky-queue").removeClass("hidden");
+                        isValidate = false;
+                    }
+                }
+
+                if (isValidate) {
+                    var userData = {
+                        RegistrationNo: $("#u_registration").text(),
+                        NameSurname: '',
+                        Password: $("#u_password").val(),
+                        Eposta: $("#u_email").val(),
+                        Phone: $("#u_phone").val()
+                    };
+
+                    $.ajax({
+                        url: "/Account/Save",
+                        type: "POST",
+                        contentType: "application/json",
+                        data: JSON.stringify(userData),
+                        success: function (response) {
+                            $(".sticky-note").addClass("text-success");
+                            $(".sticky-note").text("İşlem Başarılı")
+                            $(".sticky-queue").removeClass("hidden");
+                        },
+                        error: function (xhr, status, error) {
+                            $(".sticky-note").addClass("text-error");
+                            $(".sticky-note").text("İşlem Başarısız")
+                            $(".sticky-queue").removeClass("hidden");
+                        }
+                    });
+                }
+            });
+        });
+
+        $(document).ready(function () {
+            $('.u_phone').inputmask("(999) 999-9999");
+        });
+
+    </script>
+}
+

@@ -14,19 +14,19 @@ namespace B2B.Areas.Management
 
         public override void RegisterArea(AreaRegistrationContext context)
         {
-            context.MapRoute(
-                 name: "ManagementRoot",
-                 url: "management",
-                 defaults: new { controller = "Dashboard", action = "Index" },
-                 namespaces: new[] { "B2B.Areas.Management.Controllers" }
-            );
+           // context.MapRoute(
+           //      name: "ManagementRoot",
+           //      url: "management",
+           //      defaults: new { controller = "Dashboard", action = "Index" },
+           //      namespaces: new[] { "B2B.Areas.Management.Controllers" }
+           // );
 
-            context.MapRoute(
-              name: "ManagementUser",
-              url: "management/users/{id}",
-              defaults: new { controller = "User", action = "Index", id = UrlParameter.Optional },
-              namespaces: new[] { "B2B.Areas.Management.Controllers" }
-         );
+           // context.MapRoute(
+           //   name: "ManagementUser",
+           //   url: "management/users/{id}",
+           //   defaults: new { controller = "User", action = "Index", id = UrlParameter.Optional },
+           //   namespaces: new[] { "B2B.Areas.Management.Controllers" }
+           //);
 
 
             context.MapRoute(

@@ -26,7 +26,7 @@ namespace B2B.Controllers
             using (var context = new B2bContext())
             {
                 var categoriesWithPages = (from pa in context.PageAssignments.AsEnumerable().Where(pa => pa.UserID == user.ID)
-                                           join p in context.Pages.AsEnumerable().Where(p => p.IsManagement == false)
+                                           join p in context.Pages.AsEnumerable()
                                            on pa.Page.ID equals p.ID
                                            join c in context.PageCategories on p.PageCategoryID equals c.ID
                                            group p by new { c.Name, c.Icon, c.Index } into g
@@ -77,7 +77,7 @@ namespace B2B.Controllers
                         Customers = customers,
                         UserSubMenus = new List<UserSubMenu>() {
                            new UserSubMenu{ Name = "Hesabım" , Url="/account"},
-                           new UserSubMenu{ Name = "Yönetim" , Url="/management"}
+                           //new UserSubMenu{ Name = "Yönetim" , Url="/management"}
                         }
                     });
                 }
