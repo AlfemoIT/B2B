@@ -137,27 +137,26 @@
 
 @section Scripts{
     <script type="text/javascript">
-
-        $('#u_role').select2({
-            placeholder: 'Seçiniz',
-            allowClear: true
-        });
-
-        $('#u_customer').select2({
-            placeholder: 'Seçiniz',
-            allowClear: true
-        });
-
-        $('#u_usergroup').select2({
-            placeholder: 'Seçiniz',
-            allowClear: true
-        });
-
-        $('#u_page').select2({
-            allowClear: true
-        });
-
         $(function () {
+            $('#u_role').select2({
+                placeholder: 'Seçiniz',
+                allowClear: true
+            });
+
+            $('#u_customer').select2({
+                placeholder: 'Seçiniz',
+                allowClear: true
+            });
+
+            $('#u_usergroup').select2({
+                placeholder: 'Seçiniz',
+                allowClear: true
+            });
+
+            $('#u_page').select2({
+                allowClear: true
+            });
+
             $(".st-close").click(function () {
                 $(".sticky-queue").addClass("hidden");
             });
@@ -176,6 +175,7 @@
                     icon.classList.add("glyphicon-eye-open");
                 }
             });
+
             document.getElementById("togglePasswordRepeat").addEventListener("click", function () {
                 var passwordField = document.getElementById("u_password_re");
                 var icon = this.querySelector("i");
@@ -191,7 +191,6 @@
                 }
             });
 
-          
             document.getElementById("btnSave").addEventListener("click", function () {
                 var isValidate = true;
                 if ($("#u_user").val() == null || $("#u_user").val() == '' ||
@@ -271,6 +270,7 @@
                 }
             });
         });
+
     </script>
 }
 

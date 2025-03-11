@@ -84,7 +84,7 @@
             <a id="add-user"
                class="btn btn-default form-control icon-text-button hint--top hint--rounded"
                href="/User/AddUser">
-                <img src="~/img/add_user.png" />
+                <img src="~/img/add_user_v2.png" />
             </a>
         </div>
     </div>
@@ -109,6 +109,27 @@
 </div>
 
 <div id="freezeOverlay"></div>
+
+<div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-dialog-center">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">Silme Onayı</h4>
+            </div>
+
+            <div class="modal-body">
+                <p>Kullanıcıyı silmek istediğinizden emin misiniz ?</p>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">İptal</button>
+                <a id="btnDelete" class="btn btn-danger btn-ok" onclick="Delete()">Sil</a>
+            </div>
+        </div>
+    </div>
+</div>
 
 @section Scripts{
     <script src="~/Scripts/select2.min.4.0.10.js"></script>
@@ -167,7 +188,7 @@
                                 checkbox = '<input type="checkbox" id="toggleSwitch" checked class="btn-toggle" data-id="' + data.ID + '" onchange="ChangeUserState(' + data.ID + ')"><span id="switchLabel"></span>'
                             }
 
-                         return '<a href="#" class="btn btn-trash btn-grid">' +
+                            return '<a href="#" onclick="Confirm(' + data.ID + ')" class="btn btn-trash btn-grid">' +
                                      '<i class="fa fa-trash btn-middle-icon"></i>' +
                                    '</a> ' +
                                 '<a href="/User/EditUser?userID=' + data.ID +'" class="btn btn-edit btn-grid"> '+
@@ -225,6 +246,28 @@
             }).then(response => response.json())
               .then(data => checkbox.prop("checked", !checkbox.prop("checked")) )
               .catch(error => console.error("Error:", error));
+        }
+
+        function Confirm(userID) {
+            $("#btnDelete").attr("data-id", userID)
+            $("#confirm-delete").modal("show");
+        }
+
+        function Delete() {
+            var userID = $("#btnDelete").attr("data-id");
+                        fetch('@Url.Action("DeleteUser")', {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    userID: userID,
+                })
+            }).then(response => response.json())
+              .then(data => table.ajax.reload(null, false) )
+              .catch(error => console.error("Error:", error));
+
+            $("#confirm-delete").modal("hide");
+
+            $('#tblUser').DataTable().ajax.reload();
         }
     </script>
 }

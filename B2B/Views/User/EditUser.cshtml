@@ -35,8 +35,7 @@
             <div class="form-group">
                 <label for="u_musteri" class="control-label col-sm-2">Kullanıcı Grup: <span style="color: red;">*</span> </label>
                 <div class="col-sm-8">
-                    @*@Html.DropDownList("u_usergroup", Model.UserGroups, new { @class = "form-control", id = "u_usergroup", style = "width: 100%;" })*@
-                    @Html.DropDownListFor(model => model.SelectedUserGroup, Model.UserGroups, new { @class = "form-control", id = "drpUserGroup" })
+                    @Html.DropDownListFor(model => model.SelectedUserGroup, Model.UserGroups, new { @class = "form-control", id = "drpUserGroup", style = "width: 100%;" })
                 </div>
             </div>
 
@@ -59,14 +58,14 @@
             </div>
 
             <div class="form-group">
-                <label for="u_role" class="control-label col-sm-2">Rol:</label>
+                <label for="u_role" class="control-label col-sm-2">Rol: <span style="color: red;">*</span> </label>
                 <div class="col-sm-8">
-                    @Html.DropDownListFor(model => model.SelectedRole, Model.Roles, new { @class = "form-control", id = "drpRole" })
+                    @Html.DropDownListFor(model => model.SelectedRole, Model.Roles, new { @class = "form-control", id = "drpRole", style = "width: 100%;" })
                 </div>
             </div>
 
             <div class="form-group margin-bottom-5">
-                <label for="u_password" class="control-label col-sm-2">Yeni Şifre:</label>
+                <label for="u_password" class="control-label col-sm-2">Yeni Şifre: <span style="color: red;">*</span> </label>
                 <div class="col-sm-8">
                     <div class="sepH_b height-40">
                         @Html.PasswordFor(model => model.Password, new { @class = "input-xlarge form-control", id = "u_password" })
@@ -81,7 +80,7 @@
             </div>
 
             <div class="form-group">
-                <label for="u_password" class="control-label col-sm-2">Şifre Tekrar:</label>
+                <label for="u_password" class="control-label col-sm-2">Şifre Tekrar: <span style="color: red;">*</span> </label>
                 <div class="col-sm-8">
                     <div class="sepH_b height-40">
                         <input id="s_password_re" class="input-xlarge form-control" type="password">
@@ -106,23 +105,21 @@
             <div class="form-group">
                 <label for="u_email" class="control-label col-sm-2">E-Posta:</label>
                 <div class="col-sm-8">
-                    @Html.TextBoxFor(model => model.Eposta, new { @class = "input-xlarge form-control", id = "u_email" })
+                    @Html.TextBoxFor(model => model.Eposta, new { @class = "input-xlarge form-control", id = "u_email", type = "email" })
                 </div>
             </div>
 
             <div class="form-group">
-                <label for="u_musteri" class="control-label col-sm-2">Mağaza:</label>
+                <label for="u_musteri" class="control-label col-sm-2">Mağaza: <span style="color: red;">*</span> </label>
                 <div class="col-sm-8">
-                    @Html.DropDownListFor(model => model.SelectedCustomer, Model.Customers, new { @class = "form-control", id = "drpCustomer" })
+                    @Html.DropDownListFor(model => model.SelectedCustomer, Model.Customers, new { @class = "form-control", id = "drpCustomer", style = "width: 100%;" })
                 </div>
             </div>
 
             <div class="form-group">
                 <label for="u_musteri" class="control-label col-sm-2">Sayfa: <span style="color: red;">*</span> </label>
                 <div class="col-sm-8">
-                    @*@Html.DropDownList("u_page", Model.Pages, new { id = "u_page", name = "states[]", multiple = "multiple", style = "width: 100%;" })*@
-                    @Html.DropDownListFor(model => model.SelectedPages, Model.Pages, new { id = "drpPage", name = "states[]", multiple = "multiple", style = "width: 100%;" })
-
+                    @Html.DropDownListFor(model => model.SelectedPages, Model.Pages, new { id = "drpPage", multiple = "multiple", style = "width: 100%;" })
                 </div>
             </div>
 
@@ -144,30 +141,32 @@
 
 @section Scripts{
     <script type="text/javascript">
-
-        $('#drpRole').select2({
-            placeholder: 'Seçiniz',
-            allowClear: true
-        });
-
-        $('#drpCustomer').select2({
-            placeholder: 'Seçiniz',
-            allowClear: true
-        });
-
-        $('#drpUserGroup').select2({
-            placeholder: 'Seçiniz',
-            allowClear: true
-        });
-
-        $('#drpPage').select2({
-            allowClear: true
-        });
-
         $(function () {
+            $('#drpRole').select2({
+                placeholder: 'Seçiniz',
+                allowClear: true
+            });
+
+            $('#drpCustomer').select2({
+                placeholder: 'Seçiniz',
+                allowClear: true
+            });
+
+            $('#drpUserGroup').select2({
+                placeholder: 'Seçiniz',
+                allowClear: true
+            });
+
+            $('#drpPage').select2({
+                allowClear: true
+            });
+
             $(".st-close").click(function () {
                 $(".sticky-queue").addClass("hidden");
             });
+
+            let selectedPages = @Html.Raw(Json.Encode(Model.SelectedPages));
+            $("#drpPage").val(selectedPages).trigger('change');
 
             document.getElementById("togglePassword").addEventListener("click", function () {
                 var passwordField = document.getElementById("u_password");
@@ -183,6 +182,7 @@
                     icon.classList.add("glyphicon-eye-open");
                 }
             });
+
             document.getElementById("togglePasswordRepeat").addEventListener("click", function () {
                 var passwordField = document.getElementById("s_password_re");
                 var icon = this.querySelector("i");
@@ -250,14 +250,12 @@
                     });
                 }
             });
-
-            //function Clear() {
-            //    $("#u_password").val('');
-            //    $("#u_email").val('');
-            //    $("#u_phone").val();
-            //    $("#s_password_re").val();
-            //}
         });
+
+        $(document).ready(function () {
+            $('.u_phone').inputmask("(999) 999-9999");
+        });
+
     </script>
 }
 

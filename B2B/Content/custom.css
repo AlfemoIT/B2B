@@ -626,3 +626,8 @@ div.sticky-queue {
 .select2-container--default .select2-selection--multiple .select2-selection__choice__remove {
     border-right: 1px solid #ccc;
 }
+
+.modal-content {
+    border: 0px solid rgb(189 177 177);
+}
+

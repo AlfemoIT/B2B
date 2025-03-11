@@ -704,6 +704,7 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="img\add_user.png" />
+    <Content Include="img\add_user_v2.png" />
     <Content Include="img\alfemo\oasis_small.jpg" />
     <Content Include="img\alfemo\yemek_odasi_small.jpg" />
     <Content Include="img\cell_phone.png" />
@@ -727,6 +728,7 @@
     <Content Include="img\shipped_office.png" />
     <Content Include="img\truck.png" />
     <Content Include="img\turkish_lira.png" />
+    <Content Include="img\user.png" />
     <Content Include="img\user_avatar1.jpg" />
     <Content Include="img\xls.png" />
     <Content Include="img\acc_icons.png" />

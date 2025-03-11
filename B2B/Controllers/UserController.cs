@@ -17,7 +17,7 @@ namespace B2B.Controllers
     public class UserController : Controller
     {
         // GET: User
-        [CustomAuthorize((int)EnumHelper.UserGroup.Admin, (int)EnumHelper.UserGroup.PowerUser)]
+        [CustomAuthorize((int)EnumHelper.UserGroup.Admin)]
         public ActionResult Index()
         {
             return View();
@@ -34,7 +34,7 @@ namespace B2B.Controllers
                          on customera.UserID equals user.ID
                          join role in context.Roles.AsEnumerable()
                          on user.RoleID equals role.ID
-                         where customera.CustomerID == int.Parse(iv_cID)
+                         where customera.CustomerID == int.Parse(iv_cID) && user.IsDeleted == false
                          select new Z_USER
                          {
                              ID = user.ID,
@@ -81,83 +81,40 @@ namespace B2B.Controllers
 
         public ActionResult EditUser(string userID)
         {
-            List<Roles> SQLRoleList = new List<Roles>();
-            List<Customers> SQLCustomerList = new List<Customers>();
-
             var userModel = new UserViewModel();
             using (var context = new B2bContext())
             {
-                SQLRoleList = context.Roles.Select(p => new Roles { Id = p.ID, Name = p.Name }).ToList();
-                SQLCustomerList = context.Customers.Select(p => new Customers { Id = p.ID, Name = p.Name }).ToList();
-
                 var userGroups = context.UserGroups
-                                    .Select(c => new SelectListItem
-                                    {
-                                        Value = c.ID.ToString(),
-                                        Text = c.Name
-                                    }).ToList();
+                    .Select(c => new SelectListItem
+                    {
+                        Value = c.ID.ToString(),
+                        Text = c.Name
+                    }).ToList();
+
+                var roles = context.Roles
+                    .Select(c => new SelectListItem
+                    {
+                        Value = c.ID.ToString(),
+                        Text = c.Name
+                    }).ToList();
+
+                var customers = context.Customers
+                    .Select(c => new SelectListItem
+                    {
+                        Value = c.ID.ToString(),
+                        Text = c.Name
+                    }).ToList();
 
                 var pages = context.Pages
-                               .Select(c => new SelectListItem
-                               {
-                                   Value = c.ID.ToString(),
-                                   Text = c.Name
-                               }).ToList();
-
-                //userModel = (from _user in context.Users.AsEnumerable()
-                //             join role in context.Roles.AsEnumerable()
-                //             on _user.RoleID equals role.ID
-                //             join _customera in context.CustomerAssignments.AsEnumerable()
-                //             on _user.ID equals _customera.UserID
-                //             where _user.ID == int.Parse(userID)
-
-                //             select new UserViewModel
-                //             {
-                //                 RegistrationNo = _user.RegistrationNo,
-                //                 NameSurname = _user.NameSurname,
-                //                 Eposta = _user.Email,
-                //                 Phone = _user.Phone1,
-                //                 Role = role.Name,
-
-                //                 // Roles
-                //                 SelectedRole = SQLRoleList.Find(p => p.Id == _user.RoleID).Id.ToString(),
-
-                //                 Roles = SQLRoleList.Select(c => new SelectListItem
-                //                 {
-                //                     Value = c.Id.ToString(),
-                //                     Text = c.Name
-                //                 }).ToList(),
-
-                //                 // Customers
-                //                 SelectedCustomer = SQLCustomerList.Find(p => p.Id == _customera.CustomerID).Id.ToString(),
-
-                //                 Customers = SQLCustomerList.Select(c => new SelectListItem
-                //                 {
-                //                     Value = c.Id.ToString(),
-                //                     Text = c.Name
-                //                 }).ToList(),
-
-                //                 // User Groups
-                //                 SelectedUserGroup = SQLUserGroupList.Find(p => p.Id == _user.UserGroupID).Id.ToString(),
-
-                //                 UserGroups = SQLUserGroupList.Select(c => new SelectListItem
-                //                 {
-                //                     Value = c.Id.ToString(),
-                //                     Text = c.Name
-                //                 }).ToList(),
-
-                //                 // Pages
-                //                 SelectedPages = SQLPageList.Select(p => p.Id).ToList(),
-
-                //                 Pages = SQLPageList.Select(c => new SelectListItem
-                //                 {
-                //                     Value = c.Id.ToString(),
-                //                     Text = c.Name
-                //                 }).ToList()
-
-                //             }).FirstOrDefault();
+                    .Select(c => new SelectListItem
+                    {
+                        Value = c.ID.ToString(),
+                        Text = c.Name
+                    }).ToList();
 
                 userModel = (from _user in context.Users.AsEnumerable()
+                             join _customera in context.CustomerAssignments.AsEnumerable()
+                             on _user.ID equals _customera.UserID
                              join userGrp in context.UserGroups.AsEnumerable()
                              on _user.UserGroupID equals userGrp.ID
                              join page in context.PageAssignments.AsEnumerable()
@@ -174,6 +131,12 @@ namespace B2B.Controllers
                                  SelectedUserGroup = g.FirstOrDefault().UserGroupID.ToString(),
                                  UserGroups = userGroups,
 
+                                 SelectedRole = g.FirstOrDefault().RoleID.ToString(),
+                                 Roles = roles,
+
+                                 SelectedCustomer = g.FirstOrDefault().CustomerAssignment.FirstOrDefault().CustomerID.ToString(),
+                                 Customers = customers,
+
                                  SelectedPages = g.FirstOrDefault().PageAssignment.Select(x => x.PageID).ToList(),
                                  Pages = pages
                              }).FirstOrDefault();
@@ -181,57 +144,75 @@ namespace B2B.Controllers
             return View(userModel);
         }
 
+        [HttpPost]
+        public JsonResult DeleteUser(string userID)
+        {
+            var jsonResult = Json(new { result = true }, JsonRequestBehavior.AllowGet);
+            jsonResult.MaxJsonLength = int.MaxValue;
+
+            int _userID = int.Parse(userID);
+
+            using (var context = new B2bContext())
+            {
+                var user = context.Users.FirstOrDefault(p => p.ID == _userID);
+                if (user != null)
+                {
+                    user.IsDeleted = true;
+                    context.SaveChanges();
+                }
+                else
+                {
+                    jsonResult = Json(new { result = false }, JsonRequestBehavior.AllowGet);
+                }
+            }
+
+            return jsonResult;
+        }
+
         public ActionResult AddUser()
         {
             var userModel = new UserViewModel();
 
-            List<Roles> SQLRoleList = new List<Roles>();
-            List<Customers> SQLCustomerList = new List<Customers>();
-            List<UserGroups> SQLUserGroupList = new List<UserGroups>();
-            List<Pages> SQLPageList = new List<Pages>();
-
             using (var context = new B2bContext())
             {
-                SQLRoleList = context.Roles.Select(p => new Roles { Id = p.ID, Name = p.Name }).ToList();
-                SQLCustomerList = context.Customers.Select(p => new Customers { Id = p.ID, Name = p.Name }).ToList();
-                SQLUserGroupList = context.UserGroups.Select(p => new UserGroups { Id = p.ID, Name = p.Name }).ToList();
-                SQLPageList = context.Pages.Select(p => new Pages { Id = p.ID, Name = p.Name }).ToList();
+                var userGroups = context.UserGroups
+                    .Select(c => new SelectListItem
+                    {
+                        Value = c.ID.ToString(),
+                        Text = c.Name
+                    }).ToList();
 
-                // Roles
-                userModel.Roles = SQLRoleList.Select(c => new SelectListItem
-                {
-                    Value = c.Id.ToString(),
-                    Text = c.Name
-                }).ToList();
+                userGroups.Add(new SelectListItem { Text = "Seçiniz", Value = "", Selected = true });
 
-                userModel.Roles.Add(new SelectListItem { Text = "Seçiniz", Value = "", Selected = true });
+                var roles = context.Roles
+                    .Select(c => new SelectListItem
+                    {
+                        Value = c.ID.ToString(),
+                        Text = c.Name
+                    }).ToList();
 
-                // Customers
-                userModel.Customers = SQLCustomerList.Select(c => new SelectListItem
-                {
-                    Value = c.Id.ToString(),
-                    Text = c.Name
-                }).ToList();
+                roles.Add(new SelectListItem { Text = "Seçiniz", Value = "", Selected = true });
 
-                userModel.Customers.Add(new SelectListItem { Text = "Seçiniz", Value = "", Selected = true });
+                var customers = context.Customers
+                    .Select(c => new SelectListItem
+                    {
+                        Value = c.ID.ToString(),
+                        Text = c.Name
+                    }).ToList();
 
-                // User Groups
-                userModel.UserGroups = SQLUserGroupList.Select(c => new SelectListItem
-                {
-                    Value = c.Id.ToString(),
-                    Text = c.Name
-                }).ToList();
+                customers.Add(new SelectListItem { Text = "Seçiniz", Value = "", Selected = true });
 
-                userModel.UserGroups.Add(new SelectListItem { Text = "Seçiniz", Value = "", Selected = true });
+                var pages = context.Pages
+                    .Select(c => new SelectListItem
+                    {
+                        Value = c.ID.ToString(),
+                        Text = c.Name
+                    }).ToList();
 
-                // Pages
-                userModel.Pages = SQLPageList.Select(c => new SelectListItem
-                {
-                    Value = c.Id.ToString(),
-                    Text = c.Name
-                }).ToList();
-
-                //userModel.Pages.Add(new SelectListItem { Text = "Seçiniz", Value = "", Selected = true });
+                userModel.Roles = roles;
+                userModel.Customers = customers;
+                userModel.UserGroups = userGroups;
+                userModel.Pages = pages;
             }
 
             return View(userModel);
