@@ -76,18 +76,27 @@ namespace B2B.Controllers
                         RoleID = user.RoleID,
                         Customers = customers,
                         UserSubMenus = new List<UserSubMenu>() {
-                           new UserSubMenu{ Name = "Hesabım" , Url="/account"},
-                           //new UserSubMenu{ Name = "Yönetim" , Url="/management"}
+                           new UserSubMenu{ Name = "Hesabım" , Url="/account"}
                         }
                     });
                 }
-
-                if (user.RoleID == (int)EnumHelper.Role.BolgeMuduru)
+                else if (user.RoleID == (int)EnumHelper.Role.BolgeMuduru)
                 {
+                    List<int> regionIDs = new List<int>();
+                    if (user.SalesOfficeID == (int)EnumHelper.SalesOffice.Marmara)
+                    {
+                        regionIDs.Add((int)EnumHelper.SalesOffice.IstAvrupa);
+                        regionIDs.Add((int)EnumHelper.SalesOffice.IstAnadolu);
+                    }
+                    else
+                    {
+                        regionIDs.Add((int)user.SalesOfficeID);
+                    }
+
                     var customers = (from customer in context.Customers.AsEnumerable()
                                      join cgroup in context.CustomerGroups.AsEnumerable()
                                      on customer.CustomerGroupID equals cgroup.ID
-                                     where customer.SalesOfficeID == user.SalesOfficeID
+                                     where regionIDs.Contains(customer.SalesOfficeID)
                                      select new CustomerDto
                                      {
                                          ID = customer.ID,
@@ -105,8 +114,7 @@ namespace B2B.Controllers
                         RoleID = user.RoleID,
                         Customers = customers,
                         UserSubMenus = new List<UserSubMenu>() {
-                           new UserSubMenu{ Name = "Hesabım" , Url="/account"},
-                           //new UserSubMenu{ Name = "Yönetim" , Url="/management"}
+                           new UserSubMenu{ Name = "Hesabım" , Url="/account"}
                         }
                     });
                 }

@@ -25,7 +25,6 @@ namespace B2B.Helper
             TaseronTeknikServis = 14,
             Pazarlama = 15
         }
-
         public enum UserGroup
         {
             Bayi = 1,
@@ -34,6 +33,17 @@ namespace B2B.Helper
             TeknikServisKullanici = 4,
             Pazarlama = 5,
             Admin = 6
+        }
+        public enum SalesOffice
+        {
+            IstAvrupa = 10,
+            IstAnadolu = 20,
+            Ege = 30,
+            IcAnadolu = 40,
+            Karadeniz = 50,
+            Güneydogu = 60,
+            PerakendeMagaza = 70,
+            Marmara = 80
         }
     }
 }
