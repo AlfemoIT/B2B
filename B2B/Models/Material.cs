@@ -1,0 +1,53 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace B2B.Models
+{
+    public class Material
+    {
+        public int ID { get; set; }
+        public string MATNR { get; set; }
+        public string MATKL { get; set; }
+        public string MAKTX { get; set; }
+        public string ZCL_MAKTX { get; set; }
+        public string BRGEW { get; set; }
+        public string NETGW { get; set; }
+        public string GEWEI { get; set; }
+        public string VOLUM { get; set; }
+        public string VOLEH { get; set; }
+        public string LAENG { get; set; }
+        public string BREIT { get; set; }
+        public string HOEHE { get; set; }
+        public string MEABM { get; set; }
+
+        public int Tvm1tID { get; set; }
+        public int Tvm2tID { get; set; }
+        public int Tvm3tID { get; set; }
+        public int Tvm4tID { get; set; }
+        public int Tvm5tID { get; set; }
+        public int MaterialPriceGroupID { get; set; }
+
+        public string LVORM { get; set; }
+        public string VMSTA { get; set; }
+        public string VSTAT { get; set; }
+        public string BIRINCI_BOLGE { get; set; }
+        public string IKINCI_BOLGE { get; set; }
+        public string UCUNCU_BOLGE { get; set; }
+        public string AYAK_RENGI { get; set; }
+        public string BELKIRLENTI_1 { get; set; }
+        public string BELKIRLENTI_2 { get; set; }
+        public string KIRLENT45_1 { get; set; }
+        public string KIRLENT45_2 { get; set; }
+
+
+        public virtual Tvm1t Tvm1t { get; set; }
+        public virtual Tvm2t Tvm2t { get; set; }
+        public virtual Tvm3t Tvm3t { get; set; }
+        public virtual Tvm4t Tvm4t { get; set; }
+        public virtual Tvm5t Tvm5t { get; set; }
+        public virtual MaterialPriceGroup MaterialPriceGroup { get; set; }
+    }
+}

@@ -1,13 +1,25 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
 namespace B2B.Models
 {
-    public class TVM4T
+    public class Tvm4t
     {
+        public Tvm4t()
+        {
+            Materials = new List<Material>();
+        }
+
+        public int ID { get; set; }
+        public string MANDT { get; set; }
+        public string SPRAS { get; set; }
         public string MVGR4 { get; set; }
         public string BEZEI { get; set; }
+
+        [JsonIgnore]
+        public virtual ICollection<Material> Materials { get; set; }
     }
 }

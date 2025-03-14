@@ -421,6 +421,10 @@
     <Compile Include="Migrations\202503110726304_AddIndexToRole.designer.cs">
       <DependentUpon>202503110726304_AddIndexToRole.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202503141136457_AddMterialGroupTables.cs" />
+    <Compile Include="Migrations\202503141136457_AddMterialGroupTables.designer.cs">
+      <DependentUpon>202503141136457_AddMterialGroupTables.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Chart\SalesOrderChart.cs" />
     <Compile Include="Models\Customer.cs" />
@@ -430,7 +434,9 @@
     <Compile Include="Models\KNA1.cs" />
     <Compile Include="Models\KONA.cs" />
     <Compile Include="Models\MARA.cs" />
+    <Compile Include="Models\Material.cs" />
     <Compile Include="Models\MATERIAL_GRUB.cs" />
+    <Compile Include="Models\MaterialPriceGroup.cs" />
     <Compile Include="Models\Page.cs" />
     <Compile Include="Models\PageAssignment.cs" />
     <Compile Include="Models\PageCategory.cs" />
@@ -443,11 +449,11 @@
     <Compile Include="Models\Tree\Child.cs" />
     <Compile Include="Models\Tree\Root.cs" />
     <Compile Include="Models\Tree\State.cs" />
-    <Compile Include="Models\TVM1T.cs" />
-    <Compile Include="Models\TVM2T.cs" />
-    <Compile Include="Models\TVM3T.cs" />
-    <Compile Include="Models\TVM4T.cs" />
-    <Compile Include="Models\TVM5T.cs" />
+    <Compile Include="Models\Tvm1t.cs" />
+    <Compile Include="Models\Tvm2t.cs" />
+    <Compile Include="Models\Tvm3t.cs" />
+    <Compile Include="Models\Tvm4t.cs" />
+    <Compile Include="Models\Tvm5t.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\UserGroup.cs" />
     <Compile Include="Models\VBAP.cs" />
@@ -1137,6 +1143,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202503110726304_AddIndexToRole.resx">
       <DependentUpon>202503110726304_AddIndexToRole.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202503141136457_AddMterialGroupTables.resx">
+      <DependentUpon>202503141136457_AddMterialGroupTables.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Resource.en-US.resx" />
     <EmbeddedResource Include="Resource.resx">

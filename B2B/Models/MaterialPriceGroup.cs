@@ -6,17 +6,18 @@ using System.Web;
 
 namespace B2B.Models
 {
-    public class Tvm5t
+    public class MaterialPriceGroup
     {
-        public Tvm5t()
+        public MaterialPriceGroup()
         {
             Materials = new List<Material>();
         }
+
         public int ID { get; set; }
         public string MANDT { get; set; }
         public string SPRAS { get; set; }
-        public string MVGR5 { get; set; }
-        public string BEZEI { get; set; }
+        public string KONDM { get; set; }
+        public string BEZEI20 { get; set; }
 
         [JsonIgnore]
         public virtual ICollection<Material> Materials { get; set; }

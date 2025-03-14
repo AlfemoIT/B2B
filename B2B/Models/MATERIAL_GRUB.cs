@@ -7,8 +7,8 @@ namespace B2B.Models
 {
     public class MATERIAL_GRUB
     {
-        public List<TVM2T> tvm2ts { get; set; }
-        public List<TVM3T> tvm3ts { get; set; }
-        public List<TVM4T> tvm4ts { get; set; }
+        public List<Tvm2t> tvm2ts { get; set; }
+        public List<Tvm3t> tvm3ts { get; set; }
+        public List<Tvm4t> tvm4ts { get; set; }
     }
 }
