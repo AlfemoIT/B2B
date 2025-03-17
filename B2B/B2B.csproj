@@ -433,6 +433,14 @@
     <Compile Include="Migrations\202503170844359_AddStoffCodeTable.designer.cs">
       <DependentUpon>202503170844359_AddStoffCodeTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202503170859233_AddIDToStoffCode.cs" />
+    <Compile Include="Migrations\202503170859233_AddIDToStoffCode.designer.cs">
+      <DependentUpon>202503170859233_AddIDToStoffCode.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202503170906487_ChangeTypeADZHLColumn.cs" />
+    <Compile Include="Migrations\202503170906487_ChangeTypeADZHLColumn.designer.cs">
+      <DependentUpon>202503170906487_ChangeTypeADZHLColumn.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Cawnt.cs" />
     <Compile Include="Models\Chart\SalesOrderChart.cs" />
@@ -1162,6 +1170,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202503170844359_AddStoffCodeTable.resx">
       <DependentUpon>202503170844359_AddStoffCodeTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202503170859233_AddIDToStoffCode.resx">
+      <DependentUpon>202503170859233_AddIDToStoffCode.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202503170906487_ChangeTypeADZHLColumn.resx">
+      <DependentUpon>202503170906487_ChangeTypeADZHLColumn.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Resource.en-US.resx" />
     <EmbeddedResource Include="Resource.resx">

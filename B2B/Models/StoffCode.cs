@@ -10,6 +10,7 @@ namespace B2B.Models
     /// </summary>
     public class StoffCode
     {
+        public int ID { get; set; }
         public string MANDT { get; set; }
         public string KUMAS_KOD { get; set; }
         public string HAMMADDE_KOD { get; set; }

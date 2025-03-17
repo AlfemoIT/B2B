@@ -14,7 +14,7 @@ namespace B2B.Models
         public string ATINN { get; set; }  //karekteristik (Z_KULLANIMDURUM)
         public int ATZHL { get; set; }    //sayac
         public string SPRAS { get; set; }
-        public string ADZHL { get; set; }
+        public int ADZHL { get; set; }
         public string ATWTB { get; set; } //tanim
         public string DATUV { get; set; }
         public string TECHV { get; set; }
