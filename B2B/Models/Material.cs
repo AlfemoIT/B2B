@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using Newtonsoft.Json;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace B2B.Models
@@ -42,12 +43,22 @@ namespace B2B.Models
         public string KIRLENT45_1 { get; set; }
         public string KIRLENT45_2 { get; set; }
 
-
+        [JsonIgnore]
         public virtual Tvm1t Tvm1t { get; set; }
+
+        [JsonIgnore]
         public virtual Tvm2t Tvm2t { get; set; }
+
+        [JsonIgnore]
         public virtual Tvm3t Tvm3t { get; set; }
+
+        [JsonIgnore]
         public virtual Tvm4t Tvm4t { get; set; }
+
+        [JsonIgnore]
         public virtual Tvm5t Tvm5t { get; set; }
+
+        [JsonIgnore]
         public virtual MaterialPriceGroup MaterialPriceGroup { get; set; }
     }
 }

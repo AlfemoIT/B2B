@@ -24,6 +24,7 @@ namespace B2B.Dal
         public DbSet<PageAssignment> PageAssignments { get; set; }
         public DbSet<Storage> Storages { get; set; }
         public DbSet<StorageAssignment> StorageAssignments { get; set; }
+        public DbSet<Material> Materials { get; set; }
         public DbSet<Tvm1t> Mvgr1s { get; set; }
         public DbSet<Tvm2t> Mvgr2s { get; set; }
         public DbSet<Tvm3t> Mvgr3s { get; set; }
