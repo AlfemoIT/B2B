@@ -14,15 +14,18 @@ namespace B2B.Models
         public string MATKL { get; set; }
         public string MAKTX { get; set; }
         public string ZCL_MAKTX { get; set; }
-        public string BRGEW { get; set; }
-        public string NETGW { get; set; }
-        public string GEWEI { get; set; }
+
+        public string BRGEW { get; set; }   //brüt agirlik
+        public string NETGW { get; set; }   //net agirlik
+        public string GEWEI { get; set; }   //birim
+
         public string VOLUM { get; set; }
-        public string VOLEH { get; set; }
-        public string LAENG { get; set; }
-        public string BREIT { get; set; }
-        public string HOEHE { get; set; }
-        public string MEABM { get; set; }
+        public string VOLEH { get; set; }   //hacim birimi
+
+        public string LAENG { get; set; }   //uzunluk
+        public string BREIT { get; set; }   //genişlik
+        public string HOEHE { get; set; }   //yükseklik
+        public string MEABM { get; set; }   //Uzunluk/genişlik/yükseklik birimi
 
         public int Tvm1tID { get; set; }
         public int Tvm2tID { get; set; }
@@ -31,9 +34,10 @@ namespace B2B.Models
         public int Tvm5tID { get; set; }
         public int MaterialPriceGroupID { get; set; }
 
-        public string LVORM { get; set; }
-        public string VMSTA { get; set; }
-        public string VSTAT { get; set; }
+        public string LVORM { get; set; }    //silme isareti
+        public string VMSTA { get; set; }    //Dağıtım zincirine özgü malzeme durumu
+
+        public string VSTAT { get; set; }    //Z_KULLANIMDURUM
         public string BIRINCI_BOLGE { get; set; }
         public string IKINCI_BOLGE { get; set; }
         public string UCUNCU_BOLGE { get; set; }
@@ -42,6 +46,7 @@ namespace B2B.Models
         public string BELKIRLENTI_2 { get; set; }
         public string KIRLENT45_1 { get; set; }
         public string KIRLENT45_2 { get; set; }
+
 
         [JsonIgnore]
         public virtual Tvm1t Tvm1t { get; set; }

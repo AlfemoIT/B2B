@@ -31,6 +31,8 @@ namespace B2B.Dal
         public DbSet<Tvm4t> Mvgr4s { get; set; }
         public DbSet<Tvm5t> Mvgr5s { get; set; }
         public DbSet<MaterialPriceGroup> MaterialPriceGroups { get; set; }
+        public DbSet<Cawnt> Cawnts { get; set; }
+        public DbSet<StoffCode> StoffCodes { get; set; }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

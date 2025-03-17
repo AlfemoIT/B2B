@@ -425,7 +425,16 @@
     <Compile Include="Migrations\202503141136457_AddMterialGroupTables.designer.cs">
       <DependentUpon>202503141136457_AddMterialGroupTables.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202503170837114_AddCawntTable.cs" />
+    <Compile Include="Migrations\202503170837114_AddCawntTable.designer.cs">
+      <DependentUpon>202503170837114_AddCawntTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202503170844359_AddStoffCodeTable.cs" />
+    <Compile Include="Migrations\202503170844359_AddStoffCodeTable.designer.cs">
+      <DependentUpon>202503170844359_AddStoffCodeTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Cawnt.cs" />
     <Compile Include="Models\Chart\SalesOrderChart.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\CustomerAssignment.cs" />
@@ -444,6 +453,7 @@
     <Compile Include="Models\Role.cs" />
     <Compile Include="Models\SalesOffice.cs" />
     <Compile Include="Models\CategoryWithPagesDTO.cs" />
+    <Compile Include="Models\StoffCode.cs" />
     <Compile Include="Models\Storage.cs" />
     <Compile Include="Models\StorageAssignment.cs" />
     <Compile Include="Models\Tree\Child.cs" />
@@ -1146,6 +1156,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202503141136457_AddMterialGroupTables.resx">
       <DependentUpon>202503141136457_AddMterialGroupTables.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202503170837114_AddCawntTable.resx">
+      <DependentUpon>202503170837114_AddCawntTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202503170844359_AddStoffCodeTable.resx">
+      <DependentUpon>202503170844359_AddStoffCodeTable.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Resource.en-US.resx" />
     <EmbeddedResource Include="Resource.resx">
