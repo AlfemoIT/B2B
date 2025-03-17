@@ -441,6 +441,14 @@
     <Compile Include="Migrations\202503170906487_ChangeTypeADZHLColumn.designer.cs">
       <DependentUpon>202503170906487_ChangeTypeADZHLColumn.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202503171004184_ChangeCawntTable.cs" />
+    <Compile Include="Migrations\202503171004184_ChangeCawntTable.designer.cs">
+      <DependentUpon>202503171004184_ChangeCawntTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202503171008273_ChangeStoffCodeTable.cs" />
+    <Compile Include="Migrations\202503171008273_ChangeStoffCodeTable.designer.cs">
+      <DependentUpon>202503171008273_ChangeStoffCodeTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Cawnt.cs" />
     <Compile Include="Models\Chart\SalesOrderChart.cs" />
@@ -1176,6 +1184,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202503170906487_ChangeTypeADZHLColumn.resx">
       <DependentUpon>202503170906487_ChangeTypeADZHLColumn.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202503171004184_ChangeCawntTable.resx">
+      <DependentUpon>202503171004184_ChangeCawntTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202503171008273_ChangeStoffCodeTable.resx">
+      <DependentUpon>202503171008273_ChangeStoffCodeTable.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Resource.en-US.resx" />
     <EmbeddedResource Include="Resource.resx">
