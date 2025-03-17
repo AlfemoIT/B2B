@@ -24,6 +24,15 @@ namespace B2B.Dal
         public DbSet<PageAssignment> PageAssignments { get; set; }
         public DbSet<Storage> Storages { get; set; }
         public DbSet<StorageAssignment> StorageAssignments { get; set; }
+        public DbSet<Material> Materials { get; set; }
+        public DbSet<Tvm1t> Mvgr1s { get; set; }
+        public DbSet<Tvm2t> Mvgr2s { get; set; }
+        public DbSet<Tvm3t> Mvgr3s { get; set; }
+        public DbSet<Tvm4t> Mvgr4s { get; set; }
+        public DbSet<Tvm5t> Mvgr5s { get; set; }
+        public DbSet<MaterialPriceGroup> MaterialPriceGroups { get; set; }
+        public DbSet<Cawnt> Cawnts { get; set; }
+        public DbSet<StoffCode> StoffCodes { get; set; }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
