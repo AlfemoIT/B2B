@@ -462,6 +462,10 @@
     <Compile Include="Migrations\202503200637530_RemoveMandtFromTvmt.designer.cs">
       <DependentUpon>202503200637530_RemoveMandtFromTvmt.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202503200847286_UpdateColumnFromMaterial.cs" />
+    <Compile Include="Migrations\202503200847286_UpdateColumnFromMaterial.designer.cs">
+      <DependentUpon>202503200847286_UpdateColumnFromMaterial.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Cawnt.cs" />
     <Compile Include="Models\Chart\SalesOrderChart.cs" />
@@ -1214,6 +1218,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202503200637530_RemoveMandtFromTvmt.resx">
       <DependentUpon>202503200637530_RemoveMandtFromTvmt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202503200847286_UpdateColumnFromMaterial.resx">
+      <DependentUpon>202503200847286_UpdateColumnFromMaterial.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Resource.en-US.resx" />
     <EmbeddedResource Include="Resource.resx">

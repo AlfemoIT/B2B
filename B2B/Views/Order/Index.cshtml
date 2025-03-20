@@ -56,6 +56,9 @@
                 <select id="drpUseCase" class="form-control js-example-basic-single"
                         disabled
                         style="width:80%;">
+                    <option value="0">Seçiniz</option>
+                    <option value="1">Standart</option>
+                    <option value="5">Özel</option>
                 </select>
             </div>
 
@@ -198,16 +201,22 @@
                 pagingType: 'full_numbers',
                 ajax:
                 {
-                    url: '@Url.Action("GetMaterial","Order")',
+                    url: '@Url.Action("GetMaterials", "Order")',
                     type: "POST",
                     dataType: 'json',
                     data: function (d) {
                         d.IsLoad = $("#hdnLoad").val();
                         d.UseCaseID = $("#drpUseCase").val();
+
                         d.Mvgr2ID = $("#drpMvgr2").val();
                         d.Mvgr3ID = $("#drpMvgr3").val();
                         d.Mvgr4ID = $("#drpMvgr4").val();
                         d.Mvgr5ID = $("#drpMvgr5").val();
+
+                        d.Region1 = $("#drpRegion1").val();
+                        d.Region2 = $("#drpRegion2").val();
+                        d.Region3 = $("#drpRegion3").val();
+                        d.LegColor = $("#drpLegColor").val();
                     },
                     dataSrc: function (json) {
                         return json.data;
@@ -223,53 +232,6 @@
             }).on('xhr', function (e, settings, json, xhr) {
                 $('#freezeOverlay').hide();
             });
-
-            /* ========== get data ========= */
-            fetch('@Url.Action("GetData","Order")',
-                {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json'}
-                })
-                .then(response => response.json())
-                .then(data => {
-                    $('#drpUseCase').select2({
-                        data: data.mGroups.useCases.map(item => ({ id: item.ATZHL, text: item.ATWTB }))
-                    });
-
-                    $('#drpMvgr2').select2({
-                        data: data.mGroups.tvm2ts.map(item => ({ id: item.MVGR2, text: item.BEZEI }))
-                    });
-
-                    $('#drpMvgr3').select2({
-                        data: data.mGroups.tvm3ts.map(item => ({ id: item.MVGR3, text: item.BEZEI }))
-                    });
-
-                    $('#drpMvgr4').select2({
-                        data: data.mGroups.tvm4ts.map(item => ({ id: item.MVGR4, text: item.BEZEI }))
-                    });
-
-                    $('#drpMvgr5').select2({
-                        data: data.mGroups.tvm5ts.map(item => ({ id: item.MVGR5, text: item.BEZEI }))
-                    });
-
-                    $('#drpRegion1').select2({
-                        data: data.mGroups.stoffCodes.map(item => ({ id: item.KUMAS_KOD, text: item.KUMAS_TANIM }))
-                    });
-
-                    $('#drpRegion2').select2({
-                        data: data.mGroups.stoffCodes.map(item => ({ id: item.KUMAS_KOD, text: item.KUMAS_TANIM }))
-                    });
-
-                    $('#drpRegion3').select2({
-                        data: data.mGroups.stoffCodes.map(item => ({ id: item.KUMAS_KOD, text: item.KUMAS_TANIM }))
-                    });
-
-                    $('#drpLegColor').select2({
-                        data: data.mGroups.legColors.map(item => ({ id: item.ATZHL, text: item.ATWTB }))
-                    });
-                })
-                .catch(error => console.error("Error loading data:", error));
-            /* ======================== */
 
             /* ===== odeme tipi ===== */
             $('#drpPaymentType').on('select2:select', function (e) {
@@ -307,10 +269,9 @@
             /* ===== kullanım durumu ===== */
             $("#drpUseCase").on('select2:select', function (e) {
                 $('#drpMvgr2').prop('disabled', false);
-                $("#drpMvgr2").trigger("change");
+                /* $("#drpMvgr2").trigger("change");*/
 
-                $("#hdnLoad").val(1);
-                table.ajax.reload(null, false);
+
             });
             /* ======================== */
 
@@ -336,6 +297,10 @@
 
                 $('#drpLegColor').prop('disabled', false);
                 $("#drpLegColor").trigger("change");
+
+                 //$("#hdnLoad").val(1);
+                //table.ajax.reload(null, false);
+
                 //material tabosunu doldur
             });
             /* ======================== */

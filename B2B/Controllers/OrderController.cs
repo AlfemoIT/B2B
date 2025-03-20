@@ -16,7 +16,9 @@ namespace B2B.Controllers
         }
 
         [HttpPost]
-        public JsonResult GetMaterial(int IsLoad, string UseCaseID, string Mvgr2ID, string Mvgr3ID, string Mvgr4ID, string Mvgr5ID)
+        public JsonResult GetMaterials(int IsLoad, string UseCaseID,
+                                      string Mvgr2ID, string Mvgr3ID, string Mvgr4ID, string Mvgr5ID,
+                                      string Region1, string Region2, string Region3, string LegColor)
         {
             List<Material> materials = new List<Material>();
             if (IsLoad == 1)
@@ -35,27 +37,10 @@ namespace B2B.Controllers
         [HttpPost]
         public JsonResult GetData()
         {
-            MATERIAL_GRUB mGroups = new MATERIAL_GRUB()
-            {
-                tvm2ts = new List<Tvm2t>() { new Tvm2t { ID = 0, MVGR2 = "0", BEZEI = "Seçiniz" } },
-                tvm3ts = new List<Tvm3t>() { new Tvm3t { ID = 0, MVGR3 = "0", BEZEI = "Seçiniz" } },
-                tvm4ts = new List<Tvm4t>() { new Tvm4t { ID = 0, MVGR4 = "0", BEZEI = "Seçiniz" } },
-                tvm5ts = new List<Tvm5t>() { new Tvm5t { ID = 0, MVGR5 = "0", BEZEI = "Seçiniz" } },
-                legColors = new List<Cawnt>() { new Cawnt { ID = 0, ATZHL = 0, ATWTB = "Seçiniz" } },
-                useCases = new List<Cawnt>() { new Cawnt { ID = 0, ATZHL = 0, ATWTB = "Seçiniz" } },
-                stoffCodes = new List<StoffCode> { new StoffCode { ID = 0, KUMAS_KOD = "0", KUMAS_TANIM = "Seçiniz" } }
-            };
-
+            MATERIAL_GRUB mGroups = new MATERIAL_GRUB();
             using (var context = new B2bContext())
             {
-                mGroups.tvm2ts.AddRange(context.Mvgr2s.ToList());
-                mGroups.tvm3ts.AddRange(context.Mvgr3s.ToList());
-                mGroups.tvm4ts.AddRange(context.Mvgr4s.ToList());
-                mGroups.tvm5ts.AddRange(context.Mvgr5s.ToList());
-                mGroups.stoffCodes.AddRange(context.StoffCodes.ToList());
-                mGroups.legColors.AddRange(context.Cawnts.Where(x => x.ATINN == "AYAKRENGI").ToList());
-                mGroups.useCases.AddRange(context.Cawnts.Where(x => x.ATINN == "Z_KULLANIMDURUMU" && (x.ATZHL == 1 || x.ATZHL == 2))
-                                                        .ToList());
+                mGroups.tvm2ts = context.Mvgr2s.ToList();
             }
 
             var jsonResult = Json(new { mGroups }, JsonRequestBehavior.AllowGet);
