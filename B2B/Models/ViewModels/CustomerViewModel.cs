@@ -13,7 +13,6 @@ namespace B2B.Models.ViewModels
         public List<CustomerDto> Customers { get; set; }
         public List<UserSubMenu> UserSubMenus { get; set; }
     }
-
     public class CustomerDto
     {
         public int ID { get; set; }
@@ -23,7 +22,6 @@ namespace B2B.Models.ViewModels
         public bool IsCentral { get; set; }
         public int RoleID { get; set; }
     }
-
     public class UserSubMenu
     {
         public string Name { get; set; }

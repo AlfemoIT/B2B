@@ -12,14 +12,11 @@ namespace B2B.Models
         {
             Materials = new List<Material>();
         }
-
         public int ID { get; set; }
-        public string MANDT { get; set; }
-        public string SPRAS { get; set; }
         public string MVGR2 { get; set; }
         public string BEZEI { get; set; }
 
         [JsonIgnore]
-        public virtual ICollection<Material> Materials { get; set; }
+        public ICollection<Material> Materials { get; set; }
     }
 }

@@ -1,0 +1,64 @@
+﻿div.dt-processing > div:last-child {
+    display: none;
+}
+
+.fa-3x {
+    font-size: 4.5em;
+}
+
+.fa-spin {
+    margin-top: 0px;
+}
+
+.row + .row {
+    margin-top: 0px;
+}
+
+.color-red {
+    color: #d37b82;
+    font-family: system-ui;
+}
+
+.select2-container--default.select2-container--disabled span {
+    cursor: not-allowed !important;
+    color: #9E9E9E !important;
+}
+
+.select2-container--default .select2-selection--single {
+    background-color: #fff;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+}
+
+.select2-container--default .select2-results__option--selected {
+    background-color: #fbfbfb;
+   /* color: white;*/
+}
+
+.select2-container--default .select2-results__option--highlighted.select2-results__option--selectable {
+    background-color: #d88a90;
+    color: white;
+}
+
+.select2-container--default.select2-container--disabled .select2-selection--single {
+    background-color: #fafafa;
+    cursor: default;
+}
+
+.select2-container--default .select2-results__option {
+    font-family: system-ui;
+}
+
+/* Change font in the selected option */
+.select2-container--default .select2-selection--single {
+    font-family: system-ui;
+}
+
+    .select2-container--default .select2-selection--single .select2-selection__rendered {
+        line-height: 27px !important;
+    }
+
+.border-filter {
+    padding-top: 9px;
+}
+

@@ -41,11 +41,26 @@ namespace B2B.Models
         public string BIRINCI_BOLGE { get; set; }
         public string IKINCI_BOLGE { get; set; }
         public string UCUNCU_BOLGE { get; set; }
+
         public string AYAK_RENGI { get; set; }
+
         public string BELKIRLENTI_1 { get; set; }
         public string BELKIRLENTI_2 { get; set; }
+
         public string KIRLENT45_1 { get; set; }
         public string KIRLENT45_2 { get; set; }
+        public string KIRLENT45_3 { get; set; }
+
+        public string KIRLENT50_1 { get; set; }
+        public string KIRLENT50_2 { get; set; }
+        public string KIRLENT50_3 { get; set; }
+
+        public string KIRLENT52_1 { get; set; }
+        public string KIRLENT52_2 { get; set; }
+        public string KIRLENT52_3 { get; set; }
+
+        public string ROUNDKIRLENT_1 { get; set; }
+        public string ROUNDKIRLENT_2 { get; set; }
 
 
         [JsonIgnore]

@@ -14,12 +14,10 @@ namespace B2B.Models
         }
 
         public int ID { get; set; }
-        public string MANDT { get; set; }
-        public string SPRAS { get; set; }
         public string KONDM { get; set; }
-        public string BEZEI20 { get; set; }
+        public string VTEXT { get; set; }
 
         [JsonIgnore]
-        public virtual ICollection<Material> Materials { get; set; }
+        public ICollection<Material> Materials { get; set; }
     }
 }

@@ -534,6 +534,10 @@ a {
     margin-left: 15px;
 }
 
+.margin-left-20 {
+    margin-left: 20px;
+}
+
 .control-label {
     color: #222222;
 }
@@ -631,3 +635,19 @@ div.sticky-queue {
     border: 0px solid rgb(189 177 177);
 }
 
+.padding-r-25 {
+    padding-right: 25px;
+}
+
+.padding-l-25 {
+    padding-left: 25px;
+}
+
+.padding-rl-25 {
+    padding-right: 25px;
+    padding-left: 25px;
+}
+
+.padding-t-10{
+    padding-top : 10px;
+}

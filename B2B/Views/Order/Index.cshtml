@@ -1,0 +1,350 @@
+﻿@{
+    ViewBag.Title = "Sipariş Girişi";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="~/Content/shipment.css" rel="stylesheet" />
+<link href="~/Content/order.css" rel="stylesheet" />
+
+<div id="jCrumbs" class="breadCrumb module">
+    <ul>
+        <li>
+            <a href="/Home/Index">
+                <i class="glyphicon glyphicon-home"></i>
+            </a>
+        </li>
+        <li style="background: none;">
+            <span style="width: 30px;"><a href="#" style="width: 80px;">Satış</a></span>
+            <div class="chevronOverlay" style="display: block;"></div>
+        </li>
+        <li>
+            Sipariş Girişi
+        </li>
+    </ul>
+</div>
+
+<input type="hidden" id="hdnLoad" value="0" />
+
+<div class="col-sm-12 col-md-12 col-lg-12 border-filter">
+    <div class="col-sm-2 col-md-2 col-lg-2">
+        <form>
+            <div class="form-group row">
+                <label class="col-form-label color-red">Ödeme Tipi</label>
+                <select id="drpPaymentType"
+                        class="form-control js-example-basic-single"
+                        style="width:80%;">
+                    <option value="0">Seçiniz</option>
+                    <option value="1">Nakit</option>
+                    <option value="2">12 Taksit</option>
+                    <option value="3">18 Taksit</option>
+                </select>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-form-label color-red">Sipariş Tipi</label>
+                <select id="drpOrderType" class="form-control js-example-basic-single"
+                        disabled style="width:80%;">
+                </select>
+            </div>
+        </form>
+    </div>
+
+    <div class="col-sm-2 col-md-2 col-lg-2">
+        <form>
+            <div class="form-group row">
+                <label class="col-form-label color-red">Kullanım Durumu</label>
+                <select id="drpUseCase" class="form-control js-example-basic-single"
+                        disabled
+                        style="width:80%;">
+                </select>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-form-label color-red">Koleksiyon</label>
+                <select id="drpMvgr2" class="form-control js-example-basic-single"
+                        disabled
+                        style="width:80%;">
+                </select>
+            </div>
+        </form>
+    </div>
+
+    <div class="col-sm-2 col-md-2 col-lg-2">
+        <form>
+            <div class="form-group row">
+                <label class="col-form-label color-red">Ana Grup</label>
+                <select id="drpMvgr3"
+                        class="form-control js-example-basic-single"
+                        disabled
+                        style="width:80%;">
+                </select>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-form-label color-red">Ürün Tipi</label>
+                <select id="drpMvgr4" class="form-control js-example-basic-single"
+                        disabled style="width:80%;">
+                </select>
+            </div>
+        </form>
+    </div>
+
+    <div class="col-sm-2 col-md-2 col-lg-2">
+        <form>
+            <div class="form-group row">
+                <label class="col-form-label color-red">Ürün Biçimi</label>
+                <select id="drpMvgr5" class="form-control js-example-basic-single"
+                        disabled
+                        style="width:80%;">
+                </select>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-form-label color-red">Birinci Bölge</label>
+                <select id="drpRegion1"
+                        class="form-control js-example-basic-single"
+                        disabled
+                        style="width:80%;">
+                </select>
+            </div>
+        </form>
+    </div>
+
+    <div class="col-sm-2 col-md-2 col-lg-2">
+        <div class="form-group row">
+            <label class="col-form-label color-red">İkinci Bölge</label>
+            <select id="drpRegion2" class="form-control js-example-basic-single"
+                    disabled style="width:80%;">
+            </select>
+        </div>
+
+
+        <div class="form-group row">
+            <label class="col-form-label color-red">Üçüncü Bölge</label>
+            <select id="drpRegion3" class="form-control js-example-basic-single"
+                    disabled
+                    style="width:80%;">
+            </select>
+        </div>
+    </div>
+
+    <div class="col-sm-2 col-md-2 col-lg-2">
+        <div class="form-group row">
+            <label class="col-form-label color-red">Ayak Rengi</label>
+            <select id="drpLegColor"
+                    class="form-control js-example-basic-single"
+                    disabled
+                    style="width:80%;">
+            </select>
+        </div>
+    </div>
+</div>
+
+<div class="col-sm-12 col-md-12 col-lg-12 padding-left-0 padding-right-0 padding-t-10">
+    <table class="table table-striped table-bordered display nowrap" id="tblMaterial">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Malzeme</th>
+                <th>Malzeme Kısa Metni</th>
+                <th>SD Metni</th>
+
+                @*<th>Ana Grup</th>
+                    <th>Koleksiyon</th>
+                    <th>Ürün Tipi</th>
+                    <th>Ürün Biçimi</th>
+
+                    <th>Birinci Bölge</th>
+                    <th>İkinci Bölge</th>
+                    <th>Üçüncü Bölge</th>
+                    <th>Ayak Rengi</th>
+
+                    <th>Bel Kırlent(1)</th>
+                    <th>Bel Kırlent(2)</th>
+
+                    <th>Kırlent 45(1)</th>
+                    <th>Kırlent 45(2)</th>*@
+            </tr>
+        </thead>
+    </table>
+</div>
+
+<div id="freezeOverlay"></div>
+
+@section Scripts{
+    <script src="~/Scripts/jquery.dataTables.1.13.6.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.js-example-basic-single').select2({
+                placeholder: "Seçiniz",
+                allowClear: true
+            });
+
+            $('#freezeOverlay').hide();
+
+            var table = $('#tblMaterial').DataTable({
+                language: {
+                    url: "@Url.Content("~/Content/tr.json")",
+                    processing: '<i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>',
+                    loadingRecords: ""
+                },
+                processing: true,
+                scrollX: false,
+                fixedHeader: true,
+                autoWidth: false,
+                responsive: true,
+                retrieve: true,
+                displayLength: 17,
+                pagingType: 'full_numbers',
+                ajax:
+                {
+                    url: '@Url.Action("GetMaterial","Order")',
+                    type: "POST",
+                    dataType: 'json',
+                    data: function (d) {
+                        d.IsLoad = $("#hdnLoad").val();
+                        d.UseCaseID = $("#drpUseCase").val();
+                        d.Mvgr2ID = $("#drpMvgr2").val();
+                        d.Mvgr3ID = $("#drpMvgr3").val();
+                        d.Mvgr4ID = $("#drpMvgr4").val();
+                        d.Mvgr5ID = $("#drpMvgr5").val();
+                    },
+                    dataSrc: function (json) {
+                        return json.data;
+                    }
+                },
+                columns: [
+                    { data: 'ID', visible: false },
+                    { data: 'MATNR' },
+                    { data: 'MAKTX' },
+                    { data: 'ZCL_MAKTX' }
+                 ],
+                initComplete: function (settings, json) { }
+            }).on('xhr', function (e, settings, json, xhr) {
+                $('#freezeOverlay').hide();
+            });
+
+            /* ========== get data ========= */
+            fetch('@Url.Action("GetData","Order")',
+                {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json'}
+                })
+                .then(response => response.json())
+                .then(data => {
+                    $('#drpUseCase').select2({
+                        data: data.mGroups.useCases.map(item => ({ id: item.ATZHL, text: item.ATWTB }))
+                    });
+
+                    $('#drpMvgr2').select2({
+                        data: data.mGroups.tvm2ts.map(item => ({ id: item.MVGR2, text: item.BEZEI }))
+                    });
+
+                    $('#drpMvgr3').select2({
+                        data: data.mGroups.tvm3ts.map(item => ({ id: item.MVGR3, text: item.BEZEI }))
+                    });
+
+                    $('#drpMvgr4').select2({
+                        data: data.mGroups.tvm4ts.map(item => ({ id: item.MVGR4, text: item.BEZEI }))
+                    });
+
+                    $('#drpMvgr5').select2({
+                        data: data.mGroups.tvm5ts.map(item => ({ id: item.MVGR5, text: item.BEZEI }))
+                    });
+
+                    $('#drpRegion1').select2({
+                        data: data.mGroups.stoffCodes.map(item => ({ id: item.KUMAS_KOD, text: item.KUMAS_TANIM }))
+                    });
+
+                    $('#drpRegion2').select2({
+                        data: data.mGroups.stoffCodes.map(item => ({ id: item.KUMAS_KOD, text: item.KUMAS_TANIM }))
+                    });
+
+                    $('#drpRegion3').select2({
+                        data: data.mGroups.stoffCodes.map(item => ({ id: item.KUMAS_KOD, text: item.KUMAS_TANIM }))
+                    });
+
+                    $('#drpLegColor').select2({
+                        data: data.mGroups.legColors.map(item => ({ id: item.ATZHL, text: item.ATWTB }))
+                    });
+                })
+                .catch(error => console.error("Error loading data:", error));
+            /* ======================== */
+
+            /* ===== odeme tipi ===== */
+            $('#drpPaymentType').on('select2:select', function (e) {
+                var selectedValue = e.params.data.id;
+                if (selectedValue) {
+                    $("#drpOrderType").empty();
+                    $("#drpOrderType").append(new Option("Seçiniz", "0", false, false));
+
+                    var customer = JSON.parse(sessionStorage.getItem("Customer"));
+                    if (customer.GroupName == 'BAYI') {
+                        $("#drpOrderType").append(new Option("Müşteri Siparişi", "ZSTA", false, false));
+                    }
+                    else {
+                        $("#drpOrderType").append(new Option("Müşteri Siparişi", "ZSAH", false, false));
+                        $("#drpOrderType").append(new Option("Teşhirden Müşteriye", "ZSTH", false, false));
+                        $("#drpOrderType").append(new Option("Teşhire", "ZMNK", false, false));
+                    }
+
+                    $('#drpOrderType').prop('disabled', false);
+                    $("#drpOrderType").trigger("change");
+                }
+            });
+            /* ======================== */
+
+            /* ===== siparis tipi ===== */
+            $('#drpOrderType').on('select2:select', function (e) {
+                var selectedValue = e.params.data.id;
+                if (selectedValue) {
+                    $('#drpUseCase').prop('disabled', false);
+                    $("#drpUseCase").trigger("change");
+                }
+            });
+            /* ======================== */
+
+            /* ===== kullanım durumu ===== */
+            $("#drpUseCase").on('select2:select', function (e) {
+                $('#drpMvgr2').prop('disabled', false);
+                $("#drpMvgr2").trigger("change");
+
+                $("#hdnLoad").val(1);
+                table.ajax.reload(null, false);
+            });
+            /* ======================== */
+
+            /* ===== koleksiyon ===== */
+            $('#drpMvgr2').on('select2:select', function (e) {
+                $('#drpMvgr3').prop('disabled', false);
+                $("#drpMvgr3").trigger("change");
+
+                $('#drpMvgr4').prop('disabled', false);
+                $("#drpMvgr4").trigger("change");
+
+                $('#drpMvgr5').prop('disabled', false);
+                $("#drpMvgr5").trigger("change");
+
+                $('#drpRegion1').prop('disabled', false);
+                $("#drpRegion1").trigger("change");
+
+                $('#drpRegion2').prop('disabled', false);
+                $("#drpRegion2").trigger("change");
+
+                $('#drpRegion3').prop('disabled', false);
+                $("#drpRegion3").trigger("change");
+
+                $('#drpLegColor').prop('disabled', false);
+                $("#drpLegColor").trigger("change");
+                //material tabosunu doldur
+            });
+            /* ======================== */
+        });
+    </script>
+}
+
+
+
+
+
+

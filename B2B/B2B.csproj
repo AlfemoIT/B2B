@@ -308,6 +308,7 @@
     <Compile Include="Controllers\HelpController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LayoutController.cs" />
+    <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\PictureController.cs" />
     <Compile Include="Controllers\PriceController.cs" />
     <Compile Include="Controllers\PriceTicketController.cs" />
@@ -448,6 +449,18 @@
     <Compile Include="Migrations\202503171008273_ChangeStoffCodeTable.cs" />
     <Compile Include="Migrations\202503171008273_ChangeStoffCodeTable.designer.cs">
       <DependentUpon>202503171008273_ChangeStoffCodeTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202503200629311_AddKirlentColumnToMaterial.cs" />
+    <Compile Include="Migrations\202503200629311_AddKirlentColumnToMaterial.designer.cs">
+      <DependentUpon>202503200629311_AddKirlentColumnToMaterial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202503200634317_RemoveMandtToMaterialPrice.cs" />
+    <Compile Include="Migrations\202503200634317_RemoveMandtToMaterialPrice.designer.cs">
+      <DependentUpon>202503200634317_RemoveMandtToMaterialPrice.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202503200637530_RemoveMandtFromTvmt.cs" />
+    <Compile Include="Migrations\202503200637530_RemoveMandtFromTvmt.designer.cs">
+      <DependentUpon>202503200637530_RemoveMandtFromTvmt.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Cawnt.cs" />
@@ -705,6 +718,7 @@
     <Content Include="Content\jquery-ui\Aristo\images\ui-icons_454545_256x240.png" />
     <Content Include="Content\jquery-ui\external\globalize.js" />
     <Content Include="Content\jquery-ui\jquery-ui-1.10.0.custom.min.js" />
+    <Content Include="Content\order.css" />
     <Content Include="Content\select2.min.css" />
     <Content Include="Content\shipment.css" />
     <Content Include="Content\sticky\sticky.css" />
@@ -1059,6 +1073,7 @@
     <Content Include="Views\User\Index.cshtml" />
     <Content Include="Views\User\EditUser.cshtml" />
     <Content Include="Views\User\AddUser.cshtml" />
+    <Content Include="Views\Order\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1190,6 +1205,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202503171008273_ChangeStoffCodeTable.resx">
       <DependentUpon>202503171008273_ChangeStoffCodeTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202503200629311_AddKirlentColumnToMaterial.resx">
+      <DependentUpon>202503200629311_AddKirlentColumnToMaterial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202503200634317_RemoveMandtToMaterialPrice.resx">
+      <DependentUpon>202503200634317_RemoveMandtToMaterialPrice.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202503200637530_RemoveMandtFromTvmt.resx">
+      <DependentUpon>202503200637530_RemoveMandtFromTvmt.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Resource.en-US.resx" />
     <EmbeddedResource Include="Resource.resx">
