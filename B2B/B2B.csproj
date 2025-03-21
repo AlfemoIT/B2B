@@ -466,6 +466,10 @@
     <Compile Include="Migrations\202503200847286_UpdateColumnFromMaterial.designer.cs">
       <DependentUpon>202503200847286_UpdateColumnFromMaterial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202503211340022_AddMaterialPriceTable.cs" />
+    <Compile Include="Migrations\202503211340022_AddMaterialPriceTable.designer.cs">
+      <DependentUpon>202503211340022_AddMaterialPriceTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Cawnt.cs" />
     <Compile Include="Models\Chart\SalesOrderChart.cs" />
@@ -477,6 +481,7 @@
     <Compile Include="Models\KONA.cs" />
     <Compile Include="Models\MARA.cs" />
     <Compile Include="Models\Material.cs" />
+    <Compile Include="Models\MaterialPrice.cs" />
     <Compile Include="Models\MATERIAL_GRUB.cs" />
     <Compile Include="Models\MaterialPriceGroup.cs" />
     <Compile Include="Models\Page.cs" />
@@ -501,6 +506,7 @@
     <Compile Include="Models\UserGroup.cs" />
     <Compile Include="Models\VBAP.cs" />
     <Compile Include="Models\ViewModels\CustomerViewModel.cs" />
+    <Compile Include="Models\ViewModels\MaterialViewModel.cs" />
     <Compile Include="Models\ViewModels\UserViewModel.cs" />
     <Compile Include="Models\ZALF_SUTUNAD_T.cs" />
     <Compile Include="Models\ZALF_S_FIYAT_LIST.cs" />
@@ -1221,6 +1227,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202503200847286_UpdateColumnFromMaterial.resx">
       <DependentUpon>202503200847286_UpdateColumnFromMaterial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202503211340022_AddMaterialPriceTable.resx">
+      <DependentUpon>202503211340022_AddMaterialPriceTable.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Resource.en-US.resx" />
     <EmbeddedResource Include="Resource.resx">

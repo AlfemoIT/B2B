@@ -33,6 +33,7 @@ namespace B2B.Models
         public int? Tvm4tID { get; set; }
         public int? Tvm5tID { get; set; }
         public int? MaterialPriceGroupID { get; set; }
+        public int? MaterialPriceID { get; set; }
 
         public string LVORM { get; set; }    //silme isareti
         public string VMSTA { get; set; }    //Dağıtım zincirine özgü malzeme durumu
@@ -79,5 +80,8 @@ namespace B2B.Models
 
         [JsonIgnore]
         public virtual MaterialPriceGroup MaterialPriceGroup { get; set; }
+
+        [JsonIgnore]
+        public virtual MaterialPrice MaterialPrice { get; set; }
     }
 }

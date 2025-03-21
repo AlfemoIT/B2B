@@ -12,8 +12,9 @@ namespace B2B.Models
         public List<Tvm3t> tvm3ts { get; set; }
         public List<Tvm4t> tvm4ts { get; set; }
         public List<Tvm5t> tvm5ts { get; set; }
-        public List<StoffCode> stoffCodes { get; set; }
+        public List<StoffCode> region1s { get; set; }
+        public List<StoffCode> region2s { get; set; }
+        public List<StoffCode> region3s { get; set; }
         public List<Cawnt> legColors { get; set; }
-        public List<Cawnt> useCases { get; set; }
     }
 }

@@ -17,6 +17,8 @@
 .color-red {
     color: #d37b82;
     font-family: system-ui;
+    font-weight: 500;
+    font-size: 12px;
 }
 
 .select2-container--default.select2-container--disabled span {

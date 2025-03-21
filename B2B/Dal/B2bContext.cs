@@ -11,6 +11,7 @@ namespace B2B.Dal
     {
         public B2bContext() : base("B2bContext")
         {
+            this.Configuration.LazyLoadingEnabled = false;
         }
         public DbSet<User> Users { get; set; }
         public DbSet<UserGroup> UserGroups { get; set; }
