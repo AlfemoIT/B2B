@@ -13,7 +13,7 @@ namespace B2B.Models
             Materials = new List<Material>();
         }
         public int ID { get; set; }
-        public string MATNR { get; set; }
+        public string Matnr { get; set; }
         public string RowType { get; set; }
         public string ListType { get; set; }
         public string Price1 { get; set; }

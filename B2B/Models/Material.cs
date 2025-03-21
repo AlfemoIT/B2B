@@ -10,22 +10,22 @@ namespace B2B.Models
     public class Material
     {
         public int ID { get; set; }
-        public string MATNR { get; set; }
-        public string MATKL { get; set; }
-        public string MAKTX { get; set; }
-        public string ZCL_MAKTX { get; set; }
+        public string Matnr { get; set; }
+        public string Matkl { get; set; }
+        public string Maktx { get; set; }
+        public string ZclMaktx { get; set; }
 
-        public string BRGEW { get; set; }   //brüt agirlik
-        public string NETGW { get; set; }   //net agirlik
-        public string GEWEI { get; set; }   //birim
+        public string Brgew { get; set; }   //brüt agirlik
+        public string Netgw { get; set; }   //net agirlik
+        public string Gewei { get; set; }   //birim
 
-        public string VOLUM { get; set; }
-        public string VOLEH { get; set; }   //hacim birimi
+        public string Volum { get; set; }
+        public string Voleh { get; set; }   //hacim birimi
 
-        public string LAENG { get; set; }   //uzunluk
-        public string BREIT { get; set; }   //genişlik
-        public string HOEHE { get; set; }   //yükseklik
-        public string MEABM { get; set; }   //Uzunluk/genişlik/yükseklik birimi
+        public string Laeng { get; set; }   //uzunluk
+        public string Breit { get; set; }   //genişlik
+        public string Hoehe { get; set; }   //yükseklik
+        public string Meabm { get; set; }   //Uzunluk/genişlik/yükseklik birimi
 
         public int? Tvm1tID { get; set; }
         public int? Tvm2tID { get; set; }
@@ -35,33 +35,33 @@ namespace B2B.Models
         public int? MaterialPriceGroupID { get; set; }
         public int? MaterialPriceID { get; set; }
 
-        public string LVORM { get; set; }    //silme isareti
-        public string VMSTA { get; set; }    //Dağıtım zincirine özgü malzeme durumu
+        public string Lvorm { get; set; }    //silme isareti
+        public string Vmsta { get; set; }    //Dağıtım zincirine özgü malzeme durumu
 
-        public string VSTAT { get; set; }    //Z_KULLANIMDURUM
-        public string BIRINCI_BOLGE { get; set; }
-        public string IKINCI_BOLGE { get; set; }
-        public string UCUNCU_BOLGE { get; set; }
+        public string Vstat { get; set; }    //Z_KULLANIMDURUM
+        public string BirinciBolge { get; set; }
+        public string İkinciBolge { get; set; }
+        public string UcuncuBolge { get; set; }
 
-        public string AYAK_RENGI { get; set; }
+        public string AyakRengi { get; set; }
 
-        public string BELKIRLENTI_1 { get; set; }
-        public string BELKIRLENTI_2 { get; set; }
+        public string Belkirlenti_1 { get; set; }
+        public string Belkirlenti_2 { get; set; }
 
-        public string KIRLENT45_1 { get; set; }
-        public string KIRLENT45_2 { get; set; }
-        public string KIRLENT45_3 { get; set; }
+        public string Kirlent45_1 { get; set; }
+        public string Kirlent45_2 { get; set; }
+        public string Kirlent45_3 { get; set; }
 
-        public string KIRLENT50_1 { get; set; }
-        public string KIRLENT50_2 { get; set; }
-        public string KIRLENT50_3 { get; set; }
+        public string Kirlent50_1 { get; set; }
+        public string Kirlent50_2 { get; set; }
+        public string Kirlent50_3 { get; set; }
 
-        public string KIRLENT52_1 { get; set; }
-        public string KIRLENT52_2 { get; set; }
-        public string KIRLENT52_3 { get; set; }
+        public string Kirlent52_1 { get; set; }
+        public string Kirlent52_2 { get; set; }
+        public string Kirlent52_3 { get; set; }
 
-        public string ROUNDKIRLENT_1 { get; set; }
-        public string ROUNDKIRLENT_2 { get; set; }
+        public string RoundKirlent_1 { get; set; }
+        public string RoundKirlent_2 { get; set; }
 
         [JsonIgnore]
         public virtual Tvm1t Tvm1t { get; set; }

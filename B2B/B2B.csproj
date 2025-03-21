@@ -470,6 +470,10 @@
     <Compile Include="Migrations\202503211340022_AddMaterialPriceTable.designer.cs">
       <DependentUpon>202503211340022_AddMaterialPriceTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202503211402548_ChangeColumnMaterial.cs" />
+    <Compile Include="Migrations\202503211402548_ChangeColumnMaterial.designer.cs">
+      <DependentUpon>202503211402548_ChangeColumnMaterial.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Cawnt.cs" />
     <Compile Include="Models\Chart\SalesOrderChart.cs" />
@@ -1230,6 +1234,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202503211340022_AddMaterialPriceTable.resx">
       <DependentUpon>202503211340022_AddMaterialPriceTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202503211402548_ChangeColumnMaterial.resx">
+      <DependentUpon>202503211402548_ChangeColumnMaterial.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Resource.en-US.resx" />
     <EmbeddedResource Include="Resource.resx">

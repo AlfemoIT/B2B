@@ -44,28 +44,28 @@ namespace B2B.Controllers
                                  from subTvmt5 in g5.DefaultIfEmpty()
 
                                  join r1 in context.StoffCodes.AsEnumerable()
-                                 on material.BIRINCI_BOLGE equals r1.KUMAS_KOD into gr1
+                                 on material.BirinciBolge equals r1.KUMAS_KOD into gr1
                                  from subR1 in gr1.DefaultIfEmpty()
 
                                  join r2 in context.StoffCodes.AsEnumerable()
-                                 on material.IKINCI_BOLGE equals r2.KUMAS_KOD into gr2
+                                 on material.İkinciBolge equals r2.KUMAS_KOD into gr2
                                  from subR2 in gr2.DefaultIfEmpty()
 
                                  join r3 in context.StoffCodes.AsEnumerable()
-                                 on material.UCUNCU_BOLGE equals r3.KUMAS_KOD into gr3
+                                 on material.UcuncuBolge equals r3.KUMAS_KOD into gr3
                                  from subR3 in gr3.DefaultIfEmpty()
 
                                  join legColor in context.Cawnts.AsEnumerable().Where(x => x.ATINN == "AYAKRENGI")
-                                 on material.AYAK_RENGI equals legColor.ATZHL.ToString() into gleg
+                                 on material.AyakRengi equals legColor.ATZHL.ToString() into gleg
                                  from subLeg in gleg.DefaultIfEmpty()
 
-                                 where material.VSTAT == UseCaseID && material.VMSTA != "ZZ" && tvmt2.MVGR2 == Mvgr2
+                                 where material.Vstat == UseCaseID && material.Vmsta != "ZZ" && tvmt2.MVGR2 == Mvgr2
                                  select new MaterialViewModel
                                  {
                                      ID = material.ID,
-                                     MATNR = material.MATNR,
-                                     MAKTX = material.MAKTX,
-                                     ZCL_MAKTX = string.IsNullOrEmpty(material.ZCL_MAKTX) ? material.MAKTX : material.ZCL_MAKTX,
+                                     MATNR = material.Matnr,
+                                     MAKTX = material.Maktx,
+                                     ZCL_MAKTX = string.IsNullOrEmpty(material.ZclMaktx) ? material.Maktx : material.ZclMaktx,
 
                                      MVGR2 = tvmt2.MVGR2,
                                      BEZEI2 = tvmt2.BEZEI,
@@ -153,13 +153,13 @@ namespace B2B.Controllers
             MATERIAL_GRUB mGroups = new MATERIAL_GRUB();
             using (var context = new B2bContext())
             {
-                var materials = context.Materials.Where(x => x.VSTAT == UseCaseID)
+                var materials = context.Materials.Where(x => x.Vstat == UseCaseID)
                                                  .ToList();
 
                 mGroups.tvm2ts = (from material in materials
                                   join collection in context.Mvgr2s.AsEnumerable()
                                   on material.Tvm2tID equals collection.ID
-                                  where material.VMSTA != "ZZ"
+                                  where material.Vmsta != "ZZ"
                                   group material by material.Tvm2tID into g
                                   select new Tvm2t
                                   {
